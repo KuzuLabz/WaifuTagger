@@ -7,7 +7,9 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "build-preview": "eas build --profile preview --platform android --local",
+    "build-dev": "eas build --profile development --platform android --local"
   },
   "dependencies": {
     "expo": "~50.0.7",
