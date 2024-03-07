@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "expo": "~50.0.7",
+    "expo-dev-client": "~3.3.9",
     "expo-document-picker": "~11.10.1",
     "expo-file-system": "~16.0.6",
     "expo-image": "~1.10.6",
