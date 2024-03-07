@@ -15,12 +15,7 @@
       "**/*"
     ],
     "plugins": [
-      [
-        "react-native-fast-tflite",
-        {
-          "enableCoreMLDelegate": true
-        }
-      ],
+      "onnxruntime-react-native",
       [
         "expo-build-properties",
         {

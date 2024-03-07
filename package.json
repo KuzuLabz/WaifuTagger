@@ -21,9 +21,9 @@
     "expo-image-manipulator": "~11.8.0",
     "expo-image-picker": "~14.7.1",
     "expo-status-bar": "~1.11.1",
+    "onnxruntime-react-native": "^1.17.1",
     "react": "18.2.0",
-    "react-native": "0.73.4",
-    "react-native-fast-tflite": "^1.2.0"
+    "react-native": "0.73.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
