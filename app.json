@@ -14,6 +14,26 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "plugins": [
+      [
+        "react-native-fast-tflite",
+        {
+          "enableCoreMLDelegate": true
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+              "useFrameworks": "static",
+              "deploymentTarget": "17.0"
+          },
+          "android": {
+              "useLegacyPackaging": true
+          }
+      }
+      ]
+    ],
     "ios": {
       "supportsTablet": true
     },
