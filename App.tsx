@@ -1,15 +1,13 @@
-import { Buffer } from 'buffer';
 import { Asset } from 'expo-asset';
-import * as DocumentPicker from 'expo-document-picker';
-import * as FileSystem from 'expo-file-system';
+// import * as DocumentPicker from 'expo-document-picker';
+// import * as FileSystem from 'expo-file-system';
 import { Image } from 'expo-image';
-import { manipulateAsync, FlipType, SaveFormat, ImageResult } from 'expo-image-manipulator';
 import * as ImagePicker from 'expo-image-picker';
 import { StatusBar } from 'expo-status-bar';
 import { InferenceSession, Tensor } from 'onnxruntime-react-native';
 import { useRef, useState } from 'react';
-import { ActivityIndicator, Button, Linking, PixelRatio, StyleSheet, Text, View } from 'react-native';
-import { captureRef } from 'react-native-view-shot';
+import { ActivityIndicator, Button, StyleSheet, Text, View } from 'react-native';
+import { toByteArray } from 'react-native-quick-base64';
 
 import tags from './assets/tags.json';
 
@@ -26,12 +24,14 @@ const character_names = character_indexes.map((tag) => tag.name);
 const general_names = general_indexes.map((tag) => tag.name);
 
 const useModel = () => {
+    const [labels, setLabels] = useState<[string, number][]>();
+    const [image, setImage] = useState<string>();
     const [session, setSession] = useState<InferenceSession | null>(null);
     const [loading, setLoading] = useState(false);
 
     const loadModel = async () => {
         setLoading(true);
-        const assets = await Asset.loadAsync([require('./assets/model.onnx')]);
+        const assets = await Asset.loadAsync([require('./assets/model.quant.preproc.onnx')]);
         if (assets[0] && assets[0].localUri) {
             try {
                 console.log('loading');
@@ -54,74 +54,24 @@ const useModel = () => {
         }
     };
 
-    return {
-        session,
-        loading,
-        loadModel,
-        unloadModel,
-    };
-};
-
-function zip(arrays: any[]) {
-    return arrays[0].map(function (_: any, i: string | number) {
-        return arrays.map(function (array) {
-            return array[i];
-        });
-    });
-}
-
-export default function App() {
-    const inputImageRef = useRef<View>(null);
-    const [image, setImage] = useState<ImageResult>();
-    const [imageUri, setImageUri] = useState<string>();
-    const [imgb64, setImgb64] = useState<string>('');
-    const [labels, setLabels] = useState<[string, number][]>();
-    const { loadModel, unloadModel, session, loading } = useModel();
-
-    const resizeImage = async (uri: string) => {
-        // const manipResult = await manipulateAsync(uri, [{ resize: { width: 448, height: 448 } }], {
-        //     compress: 1,
-        //     format: SaveFormat.PNG,
-        //     base64: true,
-        // });
-        const pixelRatio = PixelRatio.get(); // The pixel ratio of the device
-        // pixels * pixelratio = targetPixelCount, so pixels = targetPixelCount / pixelRatio
-        const pixels = 448 / pixelRatio;
-        const result = await captureRef(inputImageRef, {
-            format: 'png',
-            quality: 1,
-            height: pixels,
-            width: pixels,
-        });
-        if (result) {
-            setImageUri(result);
-        }
-        // setImage(manipResult);
-        // if (result) {
-        //     setImgb64(manipResult?.base64);
-        // }
-    };
-
     const pickImage = async () => {
-        // const result = await ImagePicker.launchImageLibraryAsync({
-        //     mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        //     base64: true,
-        //     selectionLimit: 1,
-        // });
-        const result = await Asset.loadAsync([require('./assets/power.jpg')]);
-        if (result[0]?.localUri) {
-            resizeImage(result[0]?.localUri);
+        const result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            base64: true,
+            quality: 1,
+            selectionLimit: 1,
+        });
+        // const result = await Asset.loadAsync([require('./assets/power.jpg')]);
+        if (result.assets && result.assets[0]?.base64) {
+            // resizeImage(result[0]?.localUri);
+            setImage(result.assets[0]?.base64);
         }
     };
 
-    const inferenceImage = async () => {
-        if (session && imgb64) {
-            const bytes = Buffer.from(imgb64, 'base64');
-            const inputData = new Float32Array(448 * 448 * 3);
-            for (let i = 0, len = bytes.length; i < len; i += 4) {
-                inputData[i / 4] = bytes[i + 3] / 255;
-            }
-            const inputTensor = new Tensor('float32', inputData, [1, 448, 448, 3]);
+    const runInference = async () => {
+        if (session && image) {
+            const image_array = toByteArray(image);
+            const inputTensor = new Tensor(image_array, [image_array.length]);
             const feeds = { input: inputTensor };
             const fetches = await session?.run(feeds);
             const output = fetches[session.outputNames[0]];
@@ -137,68 +87,70 @@ export default function App() {
                     'Model inference successfully',
                     `OutputName: ${session.outputNames[0]}`,
                     `output shape: ${output.dims}`,
+                    `first output: ${output.data[0]}`,
                 );
                 // labels = list(zip(self.tag_names, preds[0].astype(float)))
                 const new_labels: [string, number][] = zip([tag_names, output.data]);
                 setLabels(new_labels);
                 console.log('test:', new_labels[0]);
                 console.log('characters:', character_names.length);
-                const character_matches = new_labels.find(
-                    (label) => label[0] === 'power_(chainsaw_man)',
-                );
+                const character_matches = new_labels.filter((label) => label[1] > 0.5);
                 console.log('character matches:', character_matches);
             }
         }
     };
 
+    return {
+        session,
+        image,
+        labels,
+        loading,
+        loadModel,
+        unloadModel,
+        pickImage,
+        runInference,
+    };
+};
+
+function zip(arrays: any[]) {
+    return arrays[0].map(function (_: any, i: string | number) {
+        return arrays.map(function (array) {
+            return array[i];
+        });
+    });
+}
+
+export default function App() {
+    const { loadModel, unloadModel, runInference, pickImage, labels, image, session, loading } = useModel();
+
     return (
         <View style={styles.container}>
             <Text>Session Status: {session ? 'Available' : 'Unavailable'}</Text>
-            <Text>Image Status: {imageUri ? 'loaded' : 'unloaded'}</Text>
+            <Text>Image Status: {image ? 'loaded' : 'unloaded'}</Text>
             {loading && <ActivityIndicator size="large" color="#0000ff" />}
             <Button title="Load Model" onPress={loadModel} />
             <Button title="Unload Model" onPress={unloadModel} />
             <Button title="Pick Image" onPress={pickImage} />
-            {/* {image && (
+            {image && (
                 <Image
-                    source={{ uri: image?.uri }}
+                    source={{ uri: `data:image/png;base64,${image}` }}
                     style={{
-                        width: 200,
-                        height: undefined,
-                        aspectRatio: image?.width / image?.height,
+                        width: undefined,
+                        height: 200,
+                        aspectRatio: 1,
                     }}
                 />
-            )} */}
-            <Button title="Inference Image" onPress={inferenceImage} />
+            )}
+            <Button title="Inference Image" onPress={runInference} />
             {labels ? (
                 <View>
                     <Text>General: {(labels[0][1] * 100).toFixed(2)}%</Text>
                     <Text>Sensitive: {(labels[1][1] * 100).toFixed(2)}%</Text>
                     <Text>Questionable: {(labels[2][1] * 100).toFixed(2)}%</Text>
                     <Text>Explicit: {(labels[3][1] * 100).toFixed(2)}%</Text>
+                    <Text>hatsune miku: {labels.find((label) => label[0] === 'hatsune miku')}</Text>
                 </View>
             ) : null}
-
-            {image && (
-                <View
-                ref={inputImageRef}
-                    style={{
-                        height: 448,
-                        width: 448,
-                        position: 'absolute',
-                        backgroundColor: '#FFF',
-                        bottom: 500,
-                        alignSelf: 'center',
-                        alignItems: 'center',
-                    }}
-                >
-                    <Image
-                        source={{ uri: image?.uri }}
-                        style={{ width: '100%', height: 448 }}
-                        contentFit="contain"
-                    />
-                </View>
-            )}
             <StatusBar style="auto" />
         </View>
     );
@@ -207,7 +159,7 @@ export default function App() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#363636',
         alignItems: 'center',
         justifyContent: 'center',
     },
