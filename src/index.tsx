@@ -1,70 +1,92 @@
 import { Image } from 'expo-image';
-import { StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import useModel from './hooks/useModel';
-import { ActivityIndicator, Button, Headline, ProgressBar, Text } from 'react-native-paper';
+import {
+    Button,
+    Chip,
+    Headline,
+    Icon,
+    IconButton,
+    Portal,
+    ProgressBar,
+    Surface,
+    Text,
+} from 'react-native-paper';
+import LoadingView from './components/loading';
+import ImageSelector from './components/imageSelector';
+import ResultSection from './components/section';
+import TagText from './components/tagText';
+import { InferenceConfigurator, TagInfo } from './components/dialogs';
+import { useState } from 'react';
+import { InferenceTag } from './types';
 
 const Main = () => {
-    const { loadModel, unloadModel, runInference, pickImage, tags, image, session, loading } =
+    const [tagInfoVisible, setTagInfoVisible] = useState(false);
+    const [configVisible, setConfigVisible] = useState(false);
+    const [selectedTag, setSelectedTag] = useState<InferenceTag | null>(null);
+    const { runInference, pickImage, updateConfig, tags, image, loading, inferenceConfig } =
         useModel();
-    return (
-        <View style={styles.container}>
-            {image && (
-                <Image
-                    // source={{ uri: `data:image/png;base64,${image}` }}
-                    source={{ uri: image.uri }}
+
+    const onTagSelect = (tag: InferenceTag) => {
+        setSelectedTag(tag);
+        setTagInfoVisible(true);
+    };
+
+    return loading ? (
+        <LoadingView />
+    ) : (
+        <View style={{ height: '100%' }}>
+            <ScrollView style={{ flex: 1 }}>
+                <ImageSelector onImagePick={pickImage} image={image} />
+                <View
                     style={{
-                        width: undefined,
-                        height: 200,
-                        aspectRatio: image.width / image.height,
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        marginTop: 20,
+                        marginHorizontal: 10,
                     }}
-                />
-            )}
-            <Text>Session Status: {session ? 'Available' : 'Unavailable'} </Text>
-            <Text> Image Status: {image ? 'loaded' : 'unloaded'} </Text>
-            {loading && <ActivityIndicator size="large" />}
-            {session ? (
-                <Button onPress={unloadModel}>Unload Model</Button>
-            ) : (
-                <Button onPress={loadModel}>Load Model</Button>
-            )}
-
-            <Button onPress={pickImage}>Pick Image</Button>
-
-            <Button onPress={() => runInference(0.35, 0.5)}>Predict</Button>
-            {/* <View style={{alignSelf:'flex-start'}}>
-                    <Headline>General</Headline>
-                    <PercentageBar progress={0.6} />
-                </View> */}
-            {tags ? (
-                <View>
-                    {/* <Text>General: {(tags.rating[0].probability * 100).toFixed(2)}%</Text> */}
-                    <Headline> General: {(tags.rating[0].probability * 100).toFixed(0)}% </Headline>
-                    <ProgressBar progress={tags.rating[0].probability} />
-
-                    <Headline>
-                        Sensitive: {(tags.rating[1].probability * 100).toFixed(0)}%{' '}
-                    </Headline>
-                    <ProgressBar progress={tags.rating[1].probability} />
-
-                    <Headline>
-                        Questionable: {(tags.rating[2].probability * 100).toFixed(0)}%{' '}
-                    </Headline>
-                    <ProgressBar progress={tags.rating[2].probability} />
-
-                    <Headline>Explicit: {(tags.rating[3].probability * 100).toFixed(0)}% </Headline>
-                    <ProgressBar progress={tags.rating[3].probability} />
-                    {/* <Text>Sensitive: {(tags.rating[1].probability * 100).toFixed(2)}%</Text>
-                        <Text>Questionable: {(tags.rating[2].probability * 100).toFixed(2)}%</Text>
-                        <Text>Explicit: {(tags.rating[3].probability * 100).toFixed(2)}%</Text> */}
-                    <Text>
-                        {tags.character[0]?.name ?? 'Character unknown'}{' '}
-                        {tags.character[0]
-                            ? (tags.character[0]?.probability * 100).toFixed(2) + ' %'
-                            : ''}
-                    </Text>
-                    <Text> {'\n' + tags.ordered_tags?.join(', ') ?? ''} </Text>
+                >
+                    <Button mode="elevated" onPress={runInference} style={{ flexGrow: 1 }}>
+                        Run Inference
+                    </Button>
+                    <IconButton style={{ flexShrink: 1 }} icon={'tune-vertical-variant'} />
                 </View>
-            ) : null}
+                {tags ? (
+                    <>
+                        <TagText text={tags.ordered_tags.join(', ')} />
+                        <View>
+                            <ResultSection
+                                tags={tags?.character}
+                                title="Character"
+                                onTagSelect={onTagSelect}
+                            />
+                            <ResultSection
+                                tags={tags?.rating}
+                                title="Ratings"
+                                onTagSelect={onTagSelect}
+                            />
+                            <ResultSection
+                                tags={tags?.general}
+                                title="General Tags"
+                                onTagSelect={onTagSelect}
+                            />
+                        </View>
+                    </>
+                ) : null}
+            </ScrollView>
+            <Portal>
+                <TagInfo
+                    visible={tagInfoVisible}
+                    onDismiss={() => setTagInfoVisible(false)}
+                    tag={selectedTag}
+                />
+                <InferenceConfigurator
+                    defaultConfig={inferenceConfig}
+                    onChange={(cf) => updateConfig(cf)}
+                    visible={configVisible}
+                    onDismiss={() => setConfigVisible(false)}
+                />
+            </Portal>
         </View>
     );
 };
@@ -73,8 +95,6 @@ export default Main;
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+        height: '100%',
     },
 });

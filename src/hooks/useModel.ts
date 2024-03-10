@@ -1,21 +1,41 @@
-import { useState } from "react";
+import { useEffect, useState } from 'react';
 import { Asset } from 'expo-asset';
 import * as ImagePicker from 'expo-image-picker';
 import { InferenceSession, Tensor } from 'onnxruntime-react-native';
-import { InferenceTags } from "../types";
-import { toByteArray } from "react-native-quick-base64";
-import { zip } from "../utils";
-import { character_names, general_indexes, general_names, rating_indexes, tag_names } from "../constants";
+import { InferenceTags } from '../types';
+import { toByteArray } from 'react-native-quick-base64';
+import { zip } from '../utils';
+import {
+    character_names,
+    general_indexes,
+    general_names,
+    rating_indexes,
+    tag_names,
+} from '../constants';
+import { InferenceConfig, getConfig, storeConfig, defaultConfig } from '../storage';
 
 const useModel = () => {
     const [labels, setLabels] = useState<[string, number][]>();
     const [image, setImage] = useState<ImagePicker.ImagePickerAsset>();
+    const [isLoaded, setIsLoaded] = useState(false);
     const [session, setSession] = useState<InferenceSession | null>(null);
     const [loading, setLoading] = useState(false);
     const [tags, setTags] = useState<InferenceTags>();
+    const [inferenceConfig, setInferenceConfig] = useState<InferenceConfig>(defaultConfig);
+
+    const setupConfig = async () => {
+        const conf = await getConfig();
+        setInferenceConfig(conf);
+    };
+
+    const updateConfig = async (newConfig: InferenceConfig) => {
+        setInferenceConfig(newConfig);
+        await storeConfig(newConfig);
+    };
 
     const loadModel = async () => {
         setLoading(true);
+        session?.release();
         const assets = await Asset.loadAsync([require('../../assets/model.quant.preproc.onnx')]);
         if (assets[0] && assets[0].localUri) {
             try {
@@ -53,8 +73,8 @@ const useModel = () => {
         }
     };
 
-    const runInference = async (general_threshold = 0.35, char_threshold = 0.8) => {
-        if (session && image?.base64) {
+    const runInference = async () => {
+        if (session && image?.base64 && inferenceConfig) {
             const image_array = toByteArray(image.base64);
             const inputTensor = new Tensor(image_array, [image_array.length]);
             const feeds = { image: inputTensor };
@@ -79,10 +99,14 @@ const useModel = () => {
                 setLabels(new_labels);
                 console.log('test:', new_labels[0]);
                 const general_matches = new_labels.filter(
-                    (label) => label[1] > general_threshold && general_names.includes(label[0]),
+                    (label) =>
+                        label[1] > inferenceConfig.general_threshold &&
+                        general_names.includes(label[0]),
                 );
                 const character_matches = new_labels.filter(
-                    (label) => label[1] > char_threshold && character_names.includes(label[0]),
+                    (label) =>
+                        label[1] > inferenceConfig.character_threshold &&
+                        character_names.includes(label[0]),
                 );
                 console.log('character matches:', character_matches);
                 const infer_tags: InferenceTags = {
@@ -90,24 +114,28 @@ const useModel = () => {
                         ...rt,
                         probability: new_labels.find((label) => label[0] === rt.name)?.[1] ?? 0,
                     })),
-                    general: general_matches.map((gt) => ({
-                        ...(general_indexes.find((gi) => gi.name === gt[0]) ?? {
-                            name: gt[0],
-                            category: 0,
-                            tag_id: 10000002,
-                            count: 0,
-                        }),
-                        probability: gt[1],
-                    })),
-                    character: character_matches.map((ct) => ({
-                        ...(general_indexes.find((ci) => ci.name === ct[0]) ?? {
-                            name: ct[0],
-                            category: 0,
-                            tag_id: 10000002,
-                            count: 0,
-                        }),
-                        probability: ct[1],
-                    })),
+                    general: general_matches
+                        .sort((a, b) => b[1] - a[1])
+                        .map((gt) => ({
+                            ...(general_indexes.find((gi) => gi.name === gt[0]) ?? {
+                                name: gt[0],
+                                category: 0,
+                                tag_id: 10000002,
+                                count: 0,
+                            }),
+                            probability: gt[1],
+                        })),
+                    character: character_matches
+                        .sort((a, b) => b[1] - a[1])
+                        .map((ct) => ({
+                            ...(general_indexes.find((ci) => ci.name === ct[0]) ?? {
+                                name: ct[0],
+                                category: 0,
+                                tag_id: 10000002,
+                                count: 0,
+                            }),
+                            probability: ct[1],
+                        })),
                     ordered_tags: general_matches
                         .sort((a, b) => b[1] - a[1])
                         .map((label) => label[0].replaceAll('_', ' ')),
@@ -118,15 +146,27 @@ const useModel = () => {
         }
     };
 
+    useEffect(() => {
+        if (!isLoaded && !session) {
+            loadModel();
+        }
+    }, [isLoaded]);
+
+    useEffect(() => {
+        setupConfig();
+    }, []);
+
     return {
         session,
         image,
         tags,
         loading,
+        inferenceConfig,
         loadModel,
         unloadModel,
         pickImage,
         runInference,
+        updateConfig,
     };
 };
 
