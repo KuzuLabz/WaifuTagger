@@ -13,9 +13,12 @@
     "build-dev": "eas build --profile development --platform android --local --output ./waifu-detector-dev.apk"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "1.21.0",
+    "@react-native-community/slider": "^4.5.0",
     "expo": "~50.0.7",
     "expo-asset": "~9.0.2",
     "expo-build-properties": "~0.11.1",
+    "expo-clipboard": "~5.0.1",
     "expo-dev-client": "~3.3.9",
     "expo-document-picker": "~11.10.1",
     "expo-file-system": "~16.0.6",
