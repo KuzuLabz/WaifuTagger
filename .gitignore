@@ -37,3 +37,4 @@ yarn-error.*
 # models
 .models/
 .downloads/
+*.onnx
