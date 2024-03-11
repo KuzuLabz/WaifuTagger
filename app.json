@@ -1,7 +1,7 @@
 {
     "expo": {
-        "name": "WaifuDetector",
-        "slug": "WaifuDetector",
+        "name": "WaifuTagger",
+        "slug": "WaifuTagger",
         "version": "1.0.0",
         "orientation": "portrait",
         "icon": "./assets/icon.png",
@@ -36,7 +36,7 @@
                 "foregroundImage": "./assets/adaptive-icon.png",
                 "backgroundColor": "#000"
             },
-            "package": "com.kuzulabz.WaifuDetector"
+            "package": "com.kuzulabz.WaifuTagger"
         },
         "web": {
             "favicon": "./assets/favicon.png"
