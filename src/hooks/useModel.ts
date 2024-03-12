@@ -14,28 +14,32 @@ import {
 	rating_indexes,
 	tag_names,
 } from '../constants';
-import { InferenceConfig, getConfig, storeConfig, defaultConfig } from '../storage';
 import * as FileSystem from 'expo-file-system';
-import { Image } from 'react-native';
+import { Image, ImageChangeEvent } from 'react-native';
 import * as Burnt from 'burnt';
+import { SettingsState, useSettingsStore } from '../store';
+import { ImageColorsResult, getColors } from 'react-native-image-colors';
+import { useShareIntent } from 'expo-share-intent';
+
+const IMAGE_EXTENSIONS = ['image/jpeg', 'image/png'];
 
 const useModel = () => {
+	const { hasShareIntent, error, resetShareIntent, shareIntent } = useShareIntent();
+	const { char_threshold, general_threshold } = useSettingsStore();
 	const [image, setImage] = useState<ImagePicker.ImagePickerAsset>();
+	const [imageColors, setImageColors] = useState<ImageColorsResult>();
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [session, setSession] = useState<InferenceSession | null>(null);
 	const [loading, setLoading] = useState(false);
 	const [isInferLoading, setIsInferLoading] = useState(false);
 	const [tags, setTags] = useState<InferenceTags>();
-	const [inferenceConfig, setInferenceConfig] = useState<InferenceConfig>(defaultConfig);
 
-	const setupConfig = async () => {
-		const conf = await getConfig();
-		setInferenceConfig(conf);
-	};
-
-	const updateConfig = async (newConfig: InferenceConfig) => {
-		setInferenceConfig(newConfig);
-		await storeConfig(newConfig);
+	const changeImageColorMode = async (uri: string, key: string) => {
+		const colors = await getColors(uri, {
+			cache: true,
+			key: key,
+		});
+		setImageColors(colors);
 	};
 
 	const loadModel = async () => {
@@ -70,17 +74,18 @@ const useModel = () => {
 			quality: 1,
 			mediaTypes: ImagePicker.MediaTypeOptions.Images,
 		});
-		if (result.assets && result.assets[0]?.base64) {
-			if (
-				result.assets[0]?.mimeType !== 'image/jpeg' &&
-				result.assets[0]?.mimeType !== 'image/png'
-			) {
+		if (result.assets && result.assets[0]?.base64 && result.assets[0]?.mimeType) {
+			if (!IMAGE_EXTENSIONS.includes(result.assets[0]?.mimeType)) {
 				Burnt.toast({
 					title: 'Image must be PNG or JPG',
 					haptic: 'error',
 					preset: 'error',
 				});
 			} else {
+				changeImageColorMode(
+					`data:${result.assets[0]?.mimeType};base64,${result.assets[0]?.base64}`,
+					result.assets[0].fileName ?? result.assets[0].assetId ?? 'temp',
+				);
 				setImage(result.assets[0]);
 			}
 		}
@@ -93,13 +98,44 @@ const useModel = () => {
 			quality: 1,
 		});
 		if (result.assets && result.assets[0]?.base64) {
+			changeImageColorMode(
+				`data:${result.assets[0]?.mimeType};base64,${result.assets[0]?.base64}`,
+				result.assets[0].fileName ?? result.assets[0].assetId ?? 'temp',
+			);
 			setImage(result.assets[0]);
 		}
 	};
 
+	const onImagePaste = async (e: ImageChangeEvent) => {
+		const { uri, linkUri, mime, data } = e.nativeEvent;
+		const link = linkUri ?? uri;
+		// FileSystem.
+		// const result = await FileSystem.downloadAsync(
+		// 	link,
+		// 	FileSystem.cacheDirectory + (link.split('/')?.at(-1) ?? 'temp.jpg'),
+		// );
+		// console.log('LocalURI:', result.uri);
+		if (mime && !IMAGE_EXTENSIONS.includes(mime)) {
+			Burnt.toast({
+				title: 'Image must be PNG or JPG',
+				haptic: 'error',
+				preset: 'error',
+			});
+		} else if (data && link && mime) {
+			Image.getSize(`data:${mime};base64,${data}`, (w, h) => {
+				setImage({
+					uri: `data:${mime};base64,${data}`,
+					width: w,
+					height: h,
+					base64: data.replaceAll('\n', ''),
+				});
+			});
+			changeImageColorMode(`data:${mime};base64,${data}`, linkUri ?? uri ?? 'temp');
+		}
+	};
+
 	const loadFromUrl = async (url: string) => {
-		// const result = await FileSystem.downloadAsync(url, FileSystem.cacheDirectory + 'temp.jpg');
-		const [{ localUri }] = await Asset.loadAsync(url);
+		const [{ localUri, name }] = await Asset.loadAsync(url);
 		const base64 = localUri
 			? await FileSystem.readAsStringAsync(localUri, {
 					encoding: 'base64',
@@ -114,6 +150,7 @@ const useModel = () => {
 					base64: base64,
 				});
 			});
+			changeImageColorMode(url, name ?? 'temp');
 		}
 	};
 
@@ -121,9 +158,9 @@ const useModel = () => {
 		if (!session) {
 			await loadModel();
 		}
-		if (session && image?.base64 && inferenceConfig) {
+		if (session && image?.base64) {
 			setIsInferLoading(true);
-			const image_array = toByteArray(image.base64);
+			const image_array = toByteArray(image.base64.trim());
 			const inputTensor = new Tensor(image_array, [image_array.length]);
 			const feeds = { image: inputTensor };
 			const fetches = await session?.run(feeds);
@@ -134,14 +171,10 @@ const useModel = () => {
 			} else {
 				const new_labels: [string, number][] = zip([tag_names, output.data]);
 				const general_matches = new_labels.filter(
-					(label) =>
-						label[1] > inferenceConfig.general_threshold &&
-						general_names.includes(label[0]),
+					(label) => label[1] > general_threshold && general_names.includes(label[0]),
 				);
 				const character_matches = new_labels.filter(
-					(label) =>
-						label[1] > inferenceConfig.character_threshold &&
-						character_names.includes(label[0]),
+					(label) => label[1] > char_threshold && character_names.includes(label[0]),
 				);
 				const infer_tags: InferenceTags = {
 					rating: rating_indexes.map((rt) => ({
@@ -181,14 +214,21 @@ const useModel = () => {
 				setTags(infer_tags);
 			}
 			setIsInferLoading(false);
+		} else {
+			setIsInferLoading(false);
 		}
 	};
+
+	useEffect(() => {
+		if (hasShareIntent) {
+			console.log('Share Intent:', shareIntent.files);
+		}
+	}, [hasShareIntent]);
 
 	useEffect(() => {
 		if (!session) {
 			loadModel();
 		}
-		setupConfig();
 	}, []);
 
 	return {
@@ -196,13 +236,13 @@ const useModel = () => {
 		image,
 		tags,
 		loading,
-		inferenceConfig,
 		isInferLoading,
+		imageColors,
+		onImagePaste,
 		pickImage,
 		takePicture,
 		loadFromUrl,
 		runInference,
-		updateConfig,
 	};
 };
 
