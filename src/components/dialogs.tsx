@@ -88,16 +88,6 @@ export const TagInfo = ({ tag, visible, onDismiss }: TagInfoProps) => {
 	);
 };
 
-const androidColorModes: (keyof AndroidImageColors)[] = [
-	'average',
-	'dominant',
-	'vibrant',
-	'darkVibrant',
-	'lightVibrant',
-	'darkMuted',
-	'lightMuted',
-	'muted',
-];
 export const InferenceConfigurator = ({ visible, onDismiss }: BasicDialogProps) => {
 	const { colors } = useTheme();
 	const { char_threshold, general_threshold, updateThresholds } = useSettingsStore();
@@ -123,7 +113,7 @@ export const InferenceConfigurator = ({ visible, onDismiss }: BasicDialogProps) 
 			<Dialog.Content>
 				<List.Item
 					title={'Character Tag Threshold'}
-					description={newConfig.char_threshold.toFixed(2)}
+					description={(newConfig.char_threshold * 100).toFixed(0) + ' %'}
 				/>
 				<Slider
 					step={0.05}
@@ -138,7 +128,7 @@ export const InferenceConfigurator = ({ visible, onDismiss }: BasicDialogProps) 
 				/>
 				<List.Item
 					title={'General Tag Threshold'}
-					description={newConfig.general_threshold.toFixed(2)}
+					description={(newConfig.general_threshold * 100).toFixed(0) + ' %'}
 				/>
 				<Slider
 					step={0.05}
@@ -207,7 +197,21 @@ export const AppInfo = ({ visible, onDismiss }: BasicDialogProps) => {
 	);
 };
 
-export const AppSettings = ({ visible, onDismiss }: BasicDialogProps) => {
+const androidColorModes: (keyof AndroidImageColors)[] = [
+	'average',
+	'dominant',
+	'vibrant',
+	'darkVibrant',
+	'lightVibrant',
+	'darkMuted',
+	'lightMuted',
+	'muted',
+];
+export const AppSettings = ({
+	visible,
+	onDismiss,
+	updateTheme,
+}: BasicDialogProps & { updateTheme: (mode: keyof AndroidImageColors) => void }) => {
 	const { colorMode, updateColorMode } = useSettingsStore();
 
 	return (
@@ -223,7 +227,10 @@ export const AppSettings = ({ visible, onDismiss }: BasicDialogProps) => {
 						<Chip
 							key={idx}
 							selected={mode === colorMode}
-							onPress={() => updateColorMode(mode)}
+							onPress={() => {
+								updateColorMode(mode);
+								updateTheme(mode);
+							}}
 							style={{ margin: 5 }}
 						>
 							{mode}
@@ -231,6 +238,9 @@ export const AppSettings = ({ visible, onDismiss }: BasicDialogProps) => {
 					))}
 				</ScrollView>
 			</Dialog.Content>
+			<Dialog.Actions>
+				<Button onPress={onDismiss}>Close</Button>
+			</Dialog.Actions>
 		</Dialog>
 	);
 };

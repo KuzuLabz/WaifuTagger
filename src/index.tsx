@@ -19,7 +19,7 @@ import ImageSelector from './components/imageSelector';
 import ResultSection from './components/section';
 import TagText from './components/tagText';
 import { AppInfo, AppSettings, InferenceConfigurator, TagInfo } from './components/dialogs';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { InferenceTag } from './types';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Footer from './components/footer';
@@ -27,6 +27,7 @@ import Constants from 'expo-constants';
 import { useSettingsStore } from './store';
 
 const Main = ({ updateTheme }: { updateTheme: (sourceColor: string) => void }) => {
+	const scrollRef = useRef<ScrollView>(null);
 	const { colorMode } = useSettingsStore();
 
 	const [tagInfoVisible, setTagInfoVisible] = useState(false);
@@ -48,7 +49,7 @@ const Main = ({ updateTheme }: { updateTheme: (sourceColor: string) => void }) =
 		image,
 		loading,
 		isInferLoading,
-	} = useModel();
+	} = useModel(scrollRef.current);
 
 	const onTagSelect = (tag: InferenceTag) => {
 		setSelectedTag(tag);
@@ -75,7 +76,11 @@ const Main = ({ updateTheme }: { updateTheme: (sourceColor: string) => void }) =
 				<Appbar.Content title={Constants.expoConfig?.name} />
 				<Appbar.Action icon={'cog-outline'} onPress={() => setAppSettingsVisible(true)} />
 			</Appbar.Header>
-			<ScrollView contentContainerStyle={{ flexGrow: 1 }} keyboardDismissMode="on-drag">
+			<ScrollView
+				ref={scrollRef}
+				contentContainerStyle={{ flexGrow: 1 }}
+				keyboardDismissMode="on-drag"
+			>
 				<View style={{ height: '100%' }}>
 					<ImageSelector
 						onImagePick={pickImage}
@@ -164,6 +169,7 @@ const Main = ({ updateTheme }: { updateTheme: (sourceColor: string) => void }) =
 				<AppSettings
 					visible={appSettingsVisible}
 					onDismiss={() => setAppSettingsVisible(false)}
+					updateTheme={(mode) => (imageColors ? updateTheme(imageColors[mode]) : null)}
 				/>
 			</Portal>
 		</View>

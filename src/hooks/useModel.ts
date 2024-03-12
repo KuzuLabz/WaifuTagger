@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { RefObject, useEffect, useState } from 'react';
 import { Asset } from 'expo-asset';
 import * as ImagePicker from 'expo-image-picker';
 import { InferenceSession, Tensor } from 'onnxruntime-react-native';
@@ -15,20 +15,19 @@ import {
 	tag_names,
 } from '../constants';
 import * as FileSystem from 'expo-file-system';
-import { Image, ImageChangeEvent } from 'react-native';
+import { Image, ImageChangeEvent, ScrollView } from 'react-native';
 import * as Burnt from 'burnt';
 import { SettingsState, useSettingsStore } from '../store';
 import { ImageColorsResult, getColors } from 'react-native-image-colors';
-import { useShareIntent } from 'expo-share-intent';
+import { ShareIntent, useShareIntent } from 'expo-share-intent';
 
 const IMAGE_EXTENSIONS = ['image/jpeg', 'image/png'];
 
-const useModel = () => {
+const useModel = (scrollview: ScrollView | null) => {
 	const { hasShareIntent, error, resetShareIntent, shareIntent } = useShareIntent();
 	const { char_threshold, general_threshold } = useSettingsStore();
 	const [image, setImage] = useState<ImagePicker.ImagePickerAsset>();
 	const [imageColors, setImageColors] = useState<ImageColorsResult>();
-	const [isLoaded, setIsLoaded] = useState(false);
 	const [session, setSession] = useState<InferenceSession | null>(null);
 	const [loading, setLoading] = useState(false);
 	const [isInferLoading, setIsInferLoading] = useState(false);
@@ -219,9 +218,39 @@ const useModel = () => {
 		}
 	};
 
+	const handleShareIntent = async (intent: ShareIntent) => {
+		if (intent.files && FileSystem.cacheDirectory) {
+			const file = intent.files[0];
+			const fileUri = FileSystem.cacheDirectory + file.fileName;
+			await FileSystem.copyAsync({ from: file.path, to: fileUri });
+			const base64 = await FileSystem.readAsStringAsync(fileUri, {
+				encoding: 'base64',
+			});
+			if (file.type && !IMAGE_EXTENSIONS.includes(file.type)) {
+				Burnt.toast({
+					title: 'Image must be PNG or JPG',
+					haptic: 'error',
+					preset: 'error',
+				});
+			} else if (base64) {
+				Image.getSize(`data:${file.type};base64,${base64}`, (w, h) => {
+					setImage({
+						uri: `data:${file.type};base64,${base64}`,
+						width: w,
+						height: h,
+						base64: base64.replaceAll('\n', ''),
+					});
+				});
+				changeImageColorMode(`data:${file.type};base64,${base64}`, file.fileName ?? 'temp');
+				scrollview?.scrollTo({ y: 0, animated: true });
+			}
+		}
+	};
+
 	useEffect(() => {
-		if (hasShareIntent) {
-			console.log('Share Intent:', shareIntent.files);
+		if (hasShareIntent && shareIntent.files) {
+			handleShareIntent(shareIntent);
+			resetShareIntent();
 		}
 	}, [hasShareIntent]);
 
