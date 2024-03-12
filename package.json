@@ -1,6 +1,6 @@
 {
   "onnxruntimeExtensionsEnabled": "true",
-  "name": "waifudetector",
+  "name": "waifutagger",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "format": "prettier --check ./src",
     "format-fix": "prettier --write ./src",
     "build-preview": "eas build --profile preview --platform android --local",
-    "build-dev": "eas build --profile development --platform android --local --output ./waifu-detector-dev.apk"
+    "build-dev": "eas build --profile development --platform android --local --output ./waifu-tagger-dev.apk"
   },
   "dependencies": {
     "@pchmn/expo-material3-theme": "^1.3.2",
