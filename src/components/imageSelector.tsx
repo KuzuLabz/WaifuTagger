@@ -25,7 +25,6 @@ const ImageSelector = ({ image, isLoading, onImagePick }: ImageSelectorProps) =>
 				alignItems: 'center',
 				justifyContent: 'center',
 				flexDirection: 'row',
-				marginTop: top + 15,
 			}}
 		>
 			{image ? (
