@@ -5,7 +5,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
 	...config,
 	owner: 'kuzulabz',
 	name: IS_DEV ? 'WaifuTagger Dev' : 'WaifuTagger',
-	slug: 'WaifuTagger',
+	slug: 'WaifuDetector',
 	version: '1.0.0',
 	orientation: 'portrait',
 	icon: './assets/icon.png',
