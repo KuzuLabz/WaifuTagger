@@ -20,6 +20,18 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
 	plugins: [
 		'onnxruntime-react-native',
 		[
+			'expo-share-intent',
+			{
+				// iosActivationRules: {
+				// 	NSExtensionActivationSupportsWebURLWithMaxCount: 1,
+				// 	NSExtensionActivationSupportsWebPageWithMaxCount: 1,
+				// 	NSExtensionActivationSupportsImageWithMaxCount: 1,
+				// 	NSExtensionActivationSupportsMovieWithMaxCount: 1,
+				// },
+				androidIntentFilters: ['image/png', 'image/jpg', 'image/jpeg'],
+			},
+		],
+		[
 			'expo-build-properties',
 			{
 				ios: {
