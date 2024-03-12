@@ -3,6 +3,7 @@ const IS_DEV = process.env.APP_VARIANT === 'development';
 
 export default ({ config }: ConfigContext): ExpoConfig => ({
 	...config,
+	owner: 'kuzulabz',
 	name: IS_DEV ? 'WaifuTagger Dev' : 'WaifuTagger',
 	slug: 'WaifuTagger',
 	version: '1.0.0',
