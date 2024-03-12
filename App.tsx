@@ -1,3 +1,4 @@
+import 'react-native-image-keyboard';
 import { StatusBar } from 'expo-status-bar';
 import { MD3DarkTheme, MD3LightTheme, PaperProvider } from 'react-native-paper';
 import Main from './src';
@@ -9,7 +10,7 @@ import { useEffect, useMemo } from 'react';
 const App = () => {
 	const colorScheme = useColorScheme();
 	// If the device is not compatible, it will return a theme based on the fallback source color (optional, default to #6750A4)
-	const { theme } = useMaterial3Theme({ fallbackSourceColor: '#3E8260' });
+	const { theme, updateTheme } = useMaterial3Theme({ fallbackSourceColor: '#3E8260' });
 
 	const paperTheme = useMemo(
 		() =>
@@ -19,13 +20,9 @@ const App = () => {
 		[colorScheme, theme],
 	);
 
-	useEffect(() => {
-		console.log(colorScheme);
-	}, [colorScheme]);
-
 	return (
 		<PaperProvider theme={paperTheme}>
-			<Main />
+			<Main updateTheme={updateTheme} />
 			<StatusBar style="light" />
 			<Toaster position="bottom-right" />
 		</PaperProvider>
