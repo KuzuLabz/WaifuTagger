@@ -1,22 +1,25 @@
 import {
 	ActivityIndicator,
 	Button,
+	Chip,
 	Dialog,
 	Divider,
 	IconButton,
 	List,
+	Menu,
 	Text,
 	useTheme,
 } from 'react-native-paper';
 import { InferenceTag } from '../types';
-import { Linking, View } from 'react-native';
+import { Linking, ScrollView, View } from 'react-native';
 import { IconSource } from 'react-native-paper/lib/typescript/components/Icon';
 import { useEffect, useState } from 'react';
 import Slider from '@react-native-community/slider';
-import { InferenceConfig } from '../storage';
 import { kaomojis } from '../constants';
-import Constants from 'expo-constants';
-import { copyToClipboard } from '../utils';
+import { copyToClipboard, openBrowser } from '../utils';
+import { SettingsState, ThresholdSettings, useSettingsStore } from '../store';
+import { useAppTheme } from '../theme';
+import { AndroidImageColors } from 'react-native-image-colors/build/types';
 
 type BasicDialogProps = {
 	visible: boolean;
@@ -45,6 +48,7 @@ type TagInfoProps = BasicDialogProps & {
 	tag: InferenceTag | null;
 };
 export const TagInfo = ({ tag, visible, onDismiss }: TagInfoProps) => {
+	const { colors } = useAppTheme();
 	const [loading, setLoading] = useState(false);
 
 	if (!tag) return null;
@@ -60,6 +64,22 @@ export const TagInfo = ({ tag, visible, onDismiss }: TagInfoProps) => {
 			</Dialog.Title>
 			<Dialog.Content>
 				<TagInfoSection icon="identifier" text={tag.tag_id} />
+				<TagInfoSection
+					icon="label-percent-outline"
+					text={(tag.probability * 100).toFixed(2) + ' %'}
+				/>
+				{/* <TagInfoSection icon="information" text={} /> */}
+				<Button
+					mode="contained-tonal"
+					onPress={() =>
+						openBrowser(`https://danbooru.donmai.us/wiki_pages/${tag.name}`, {
+							toolbarColor: colors.surfaceContainer,
+							showTitle: true,
+						})
+					}
+				>
+					View Wiki
+				</Button>
 			</Dialog.Content>
 			<Dialog.Actions>
 				<Button onPress={onDismiss}>Done</Button>
@@ -68,31 +88,42 @@ export const TagInfo = ({ tag, visible, onDismiss }: TagInfoProps) => {
 	);
 };
 
-type InferenceConfiguratorProps = BasicDialogProps & {
-	onChange: (config: InferenceConfig) => void;
-	defaultConfig: InferenceConfig;
-};
-export const InferenceConfigurator = ({
-	visible,
-	onDismiss,
-	defaultConfig,
-	onChange,
-}: InferenceConfiguratorProps) => {
+const androidColorModes: (keyof AndroidImageColors)[] = [
+	'average',
+	'dominant',
+	'vibrant',
+	'darkVibrant',
+	'lightVibrant',
+	'darkMuted',
+	'lightMuted',
+	'muted',
+];
+export const InferenceConfigurator = ({ visible, onDismiss }: BasicDialogProps) => {
 	const { colors } = useTheme();
-	const [newConfig, setNewConfig] = useState<InferenceConfig>(defaultConfig);
+	const { char_threshold, general_threshold, updateThresholds } = useSettingsStore();
+	const [newConfig, setNewConfig] = useState<ThresholdSettings>({
+		char_threshold,
+		general_threshold,
+	});
 
 	const onSave = () => {
-		onChange(newConfig);
+		updateThresholds(newConfig);
 		onDismiss();
 	};
 
+	useEffect(() => {
+		if (visible) {
+			setNewConfig({ char_threshold, general_threshold });
+		}
+	}, [visible]);
+
 	return (
 		<Dialog visible={visible} onDismiss={onDismiss}>
-			<Dialog.Title>Inference Settings</Dialog.Title>
+			<Dialog.Title>Configure Inference</Dialog.Title>
 			<Dialog.Content>
 				<List.Item
 					title={'Character Tag Threshold'}
-					description={newConfig.character_threshold.toFixed(2)}
+					description={newConfig.char_threshold.toFixed(2)}
 				/>
 				<Slider
 					step={0.05}
@@ -100,9 +131,9 @@ export const InferenceConfigurator = ({
 					maximumValue={1}
 					thumbTintColor={colors.primary}
 					minimumTrackTintColor={colors.primaryContainer}
-					value={newConfig.character_threshold}
+					value={newConfig.char_threshold}
 					onValueChange={(val) =>
-						setNewConfig((prev) => ({ ...prev, character_threshold: val }))
+						setNewConfig((prev) => ({ ...prev, char_threshold: val }))
 					}
 				/>
 				<List.Item
@@ -133,7 +164,7 @@ export const AppInfo = ({ visible, onDismiss }: BasicDialogProps) => {
 	const { colors } = useTheme();
 	return (
 		<Dialog visible={visible} onDismiss={onDismiss}>
-			<Dialog.Title>{Constants.expoConfig?.name}</Dialog.Title>
+			<Dialog.Title>About</Dialog.Title>
 			<Dialog.Content>
 				<View>
 					<Text>
@@ -166,14 +197,40 @@ export const AppInfo = ({ visible, onDismiss }: BasicDialogProps) => {
 						{'!'}
 					</Text>
 					<Divider style={{ marginVertical: 20 }} />
-					<Text style={{ fontWeight: '900' }}>
-						This model only accepts PNG and JPEG images.
-					</Text>
+					<Text style={{ fontWeight: '900' }}>Only PNG and JPEG images can be used.</Text>
 				</View>
 			</Dialog.Content>
 			<Dialog.Actions>
 				<Button onPress={onDismiss}>Close</Button>
 			</Dialog.Actions>
+		</Dialog>
+	);
+};
+
+export const AppSettings = ({ visible, onDismiss }: BasicDialogProps) => {
+	const { colorMode, updateColorMode } = useSettingsStore();
+
+	return (
+		<Dialog visible={visible} onDismiss={onDismiss}>
+			<Dialog.Title>Settings</Dialog.Title>
+			<Dialog.Content>
+				<List.Item
+					title={'Dynamic Theme Mode'}
+					description={'Theme color is based on selected image color mode'}
+				/>
+				<ScrollView horizontal showsHorizontalScrollIndicator={false}>
+					{androidColorModes.map((mode, idx) => (
+						<Chip
+							key={idx}
+							selected={mode === colorMode}
+							onPress={() => updateColorMode(mode)}
+							style={{ margin: 5 }}
+						>
+							{mode}
+						</Chip>
+					))}
+				</ScrollView>
+			</Dialog.Content>
 		</Dialog>
 	);
 };
