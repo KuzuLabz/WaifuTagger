@@ -1,5 +1,5 @@
 import { RefObject, useEffect, useState } from 'react';
-import { Asset } from 'expo-asset';
+import { Asset, useAssets } from 'expo-asset';
 import * as ImagePicker from 'expo-image-picker';
 import { InferenceSession, Tensor } from 'onnxruntime-react-native';
 import { InferenceTags } from '../types';
@@ -24,12 +24,13 @@ import { ShareIntent, useShareIntent } from 'expo-share-intent';
 const IMAGE_EXTENSIONS = ['image/jpeg', 'image/png'];
 
 const useModel = (scrollview: ScrollView | null) => {
+	const [assets] = useAssets([require('../../assets/models/model.quant.preproc.onnx')]);
 	const { hasShareIntent, error, resetShareIntent, shareIntent } = useShareIntent();
 	const { char_threshold, general_threshold } = useSettingsStore();
 	const [image, setImage] = useState<ImagePicker.ImagePickerAsset>();
 	const [imageColors, setImageColors] = useState<ImageColorsResult>();
 	const [session, setSession] = useState<InferenceSession | null>(null);
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState(true);
 	const [isInferLoading, setIsInferLoading] = useState(false);
 	const [tags, setTags] = useState<InferenceTags>();
 
@@ -44,9 +45,9 @@ const useModel = (scrollview: ScrollView | null) => {
 	const loadModel = async () => {
 		setLoading(true);
 		session?.release();
-		const assets = await Asset.loadAsync([
-			require('../../assets/models/model.quant.preproc.onnx'),
-		]);
+		// const assets = await Asset.loadAsync([
+		// 	require('../../assets/models/model.quant.preproc.onnx'),
+		// ]);
 		if (assets[0] && assets[0].localUri) {
 			try {
 				const model: InferenceSession = await InferenceSession.create(assets[0].localUri);
@@ -255,10 +256,10 @@ const useModel = (scrollview: ScrollView | null) => {
 	}, [hasShareIntent]);
 
 	useEffect(() => {
-		if (!session) {
+		if (!session && assets?.length > 0) {
 			loadModel();
 		}
-	}, []);
+	}, [assets]);
 
 	return {
 		session,

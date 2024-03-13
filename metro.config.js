@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 // Learn more https://docs.expo.io/guides/customizing-metro
 const { getDefaultConfig } = require('expo/metro-config');
 
@@ -10,4 +9,4 @@ config.resolver.assetExts.push(
 	'onnx',
 );
 
-config.resolver.assetExts.module.exports = config;
+module.exports = config;
