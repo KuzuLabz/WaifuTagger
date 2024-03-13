@@ -12,8 +12,10 @@
     "lint-fix": "eslint ./src/**/*.tsx --fix",
     "format": "prettier --check ./src",
     "format-fix": "prettier --write ./src",
-    "build-preview": "eas build --profile preview --platform android --local",
-    "build-dev": "eas build --profile development --platform android --local --output ./waifu-tagger-dev.apk"
+    "build-preview": "eas build --profile preview --platform android ",
+    "build-dev": "eas build --profile development --platform android",
+    "build-preview-local": "eas build --profile preview --platform android --local --output ./waifu-tagger.apk",
+    "build-dev-local": "eas build --profile development --platform android --local --output ./waifu-tagger-dev.apk"
   },
   "dependencies": {
     "@pchmn/expo-material3-theme": "^1.3.2",
