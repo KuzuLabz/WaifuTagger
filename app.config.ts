@@ -16,7 +16,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
 		resizeMode: 'contain',
 		backgroundColor: '#000',
 	},
-	assetBundlePatterns: ['**/*'],
+	assetBundlePatterns: ['assets/models/*', 'assets/*'],
 	plugins: [
 		'onnxruntime-react-native',
 		[
@@ -43,6 +43,12 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
 				},
 			},
 		],
+		[
+			'expo-updates',
+			{
+				username: 'kuzulabz',
+			},
+		],
 	],
 	ios: {
 		supportsTablet: true,
@@ -52,6 +58,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
 			foregroundImage: './assets/adaptive-icon.png',
 			backgroundColor: '#000',
 		},
+
 		package: IS_DEV ? 'com.kuzulabz.WaifuTaggerDev' : 'com.kuzulabz.WaifuTagger',
 	},
 	web: {
