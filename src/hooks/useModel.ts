@@ -1,10 +1,10 @@
-import { RefObject, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Asset } from 'expo-asset';
 import * as ImagePicker from 'expo-image-picker';
 import { InferenceSession, Tensor } from 'onnxruntime-react-native';
 import { InferenceTags } from '../types';
 import { toByteArray } from 'react-native-quick-base64';
-import { zip } from '../utils';
+import { toastImageError, zip } from '../utils';
 import {
 	character_indexes,
 	character_names,
@@ -17,14 +17,14 @@ import {
 import * as FileSystem from 'expo-file-system';
 import { Image, ImageChangeEvent, ScrollView } from 'react-native';
 import * as Burnt from 'burnt';
-import { SettingsState, useSettingsStore } from '../store';
+import { useSettingsStore } from '../store';
 import { ImageColorsResult, getColors } from 'react-native-image-colors';
 import { ShareIntent, useShareIntent } from 'expo-share-intent';
 
 const IMAGE_EXTENSIONS = ['image/jpeg', 'image/png'];
 
 const useModel = (scrollview: ScrollView | null) => {
-	const { hasShareIntent, error, resetShareIntent, shareIntent } = useShareIntent();
+	const { hasShareIntent, resetShareIntent, shareIntent } = useShareIntent();
 	const { char_threshold, general_threshold } = useSettingsStore();
 	const [image, setImage] = useState<ImagePicker.ImagePickerAsset>();
 	const [imageColors, setImageColors] = useState<ImageColorsResult>();
@@ -44,16 +44,9 @@ const useModel = (scrollview: ScrollView | null) => {
 	const loadModel = async () => {
 		setLoading(true);
 		session?.release();
+		// eslint-disable-next-line @typescript-eslint/no-var-requires
 		const modelPath = require('../../assets/models/model.quant.preproc.onnx');
 		const assets = await Asset.loadAsync(modelPath);
-		// console.log('Asset:', asset);
-		// if (!asset.downloaded) {
-		// 	asset = await asset.downloadAsync();
-		// 	console.log('Asset Download:', asset);
-		// }
-		// const assets = await Asset.loadAsync([
-		// 	require('../../assets/models/model.quant.preproc.onnx'),
-		// ]);
 		if (assets && assets[0].localUri) {
 			try {
 				const model: InferenceSession = await InferenceSession.create(assets[0].localUri);
@@ -82,11 +75,7 @@ const useModel = (scrollview: ScrollView | null) => {
 		});
 		if (result.assets && result.assets[0]?.base64 && result.assets[0]?.mimeType) {
 			if (!IMAGE_EXTENSIONS.includes(result.assets[0]?.mimeType)) {
-				Burnt.toast({
-					title: 'Image must be PNG or JPG',
-					haptic: 'error',
-					preset: 'error',
-				});
+				toastImageError();
 			} else {
 				changeImageColorMode(
 					`data:${result.assets[0]?.mimeType};base64,${result.assets[0]?.base64}`,
@@ -115,18 +104,8 @@ const useModel = (scrollview: ScrollView | null) => {
 	const onImagePaste = async (e: ImageChangeEvent) => {
 		const { uri, linkUri, mime, data } = e.nativeEvent;
 		const link = linkUri ?? uri;
-		// FileSystem.
-		// const result = await FileSystem.downloadAsync(
-		// 	link,
-		// 	FileSystem.cacheDirectory + (link.split('/')?.at(-1) ?? 'temp.jpg'),
-		// );
-		// console.log('LocalURI:', result.uri);
 		if (mime && !IMAGE_EXTENSIONS.includes(mime)) {
-			Burnt.toast({
-				title: 'Image must be PNG or JPG',
-				haptic: 'error',
-				preset: 'error',
-			});
+			toastImageError();
 		} else if (data && link && mime) {
 			Image.getSize(`data:${mime};base64,${data}`, (w, h) => {
 				setImage({
@@ -234,11 +213,7 @@ const useModel = (scrollview: ScrollView | null) => {
 				encoding: 'base64',
 			});
 			if (file.type && !IMAGE_EXTENSIONS.includes(file.type)) {
-				Burnt.toast({
-					title: 'Image must be PNG or JPG',
-					haptic: 'error',
-					preset: 'error',
-				});
+				toastImageError();
 			} else if (base64) {
 				Image.getSize(`data:${file.type};base64,${base64}`, (w, h) => {
 					setImage({
