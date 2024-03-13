@@ -44,8 +44,8 @@ const useModel = (scrollview: ScrollView | null) => {
 	const loadModel = async () => {
 		setLoading(true);
 		session?.release();
-		const wt_model = require('../../assets/models/model.quant.preproc.onnx');
-		const asset = Asset.fromModule(wt_model);
+		const modelPath = require('../../assets/models/model.quant.preproc.onnx');
+		const assets = await Asset.loadAsync(modelPath);
 		// console.log('Asset:', asset);
 		// if (!asset.downloaded) {
 		// 	asset = await asset.downloadAsync();
@@ -54,9 +54,9 @@ const useModel = (scrollview: ScrollView | null) => {
 		// const assets = await Asset.loadAsync([
 		// 	require('../../assets/models/model.quant.preproc.onnx'),
 		// ]);
-		if (asset && asset.localUri) {
+		if (assets && assets[0].localUri) {
 			try {
-				const model: InferenceSession = await InferenceSession.create(asset.localUri);
+				const model: InferenceSession = await InferenceSession.create(assets[0].localUri);
 				setSession(model);
 			} catch (e) {
 				console.error(e);
