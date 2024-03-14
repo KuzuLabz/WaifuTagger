@@ -15,7 +15,7 @@ import { Linking, ScrollView, View } from 'react-native';
 import { IconSource } from 'react-native-paper/lib/typescript/components/Icon';
 import { useEffect, useState } from 'react';
 import Slider from '@react-native-community/slider';
-import { kaomojis } from '../constants';
+import { booru_url, kaomojis } from '../constants';
 import { copyToClipboard, openBrowser } from '../utils';
 import { SettingsState, ThresholdSettings, useSettingsStore } from '../store';
 import { useAppTheme } from '../theme';
@@ -72,7 +72,7 @@ export const TagInfo = ({ tag, visible, onDismiss }: TagInfoProps) => {
 				<Button
 					mode="contained-tonal"
 					onPress={() =>
-						openBrowser(`https://danbooru.donmai.us/wiki_pages/${tag.name}`, {
+						openBrowser(`${booru_url}/wiki_pages/${tag.name}`, {
 							toolbarColor: colors.surfaceContainer,
 							showTitle: true,
 						})
