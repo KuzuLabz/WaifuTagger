@@ -21,7 +21,7 @@ import { useSettingsStore } from '../store';
 import { ImageColorsResult, getColors } from 'react-native-image-colors';
 import { ShareIntent, useShareIntent } from 'expo-share-intent';
 
-const IMAGE_EXTENSIONS = ['image/jpeg', 'image/png'];
+const IMAGE_EXTENSIONS = ['image/jpeg', 'image/png', 'png', 'jpg', 'jpeg'];
 
 const useModel = (scrollview: ScrollView | null) => {
 	const { hasShareIntent, resetShareIntent, shareIntent } = useShareIntent();
@@ -120,7 +120,11 @@ const useModel = (scrollview: ScrollView | null) => {
 	};
 
 	const loadFromUrl = async (url: string) => {
-		const [{ localUri, name }] = await Asset.loadAsync(url);
+		const [{ localUri, name, type }] = await Asset.loadAsync(url);
+		if (!IMAGE_EXTENSIONS.includes(type)) {
+			toastImageError();
+			return;
+		}
 		const base64 = localUri
 			? await FileSystem.readAsStringAsync(localUri, {
 					encoding: 'base64',
@@ -136,6 +140,7 @@ const useModel = (scrollview: ScrollView | null) => {
 				});
 			});
 			changeImageColorMode(url, name ?? 'temp');
+			return;
 		}
 	};
 
