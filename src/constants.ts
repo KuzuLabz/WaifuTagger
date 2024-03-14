@@ -1,4 +1,5 @@
 import WD_TAGS from '../assets/tags.json';
+import Constants, { ExecutionEnvironment } from 'expo-constants';
 
 const rating_indexes = WD_TAGS.filter((tag) => tag.category === 9);
 const general_indexes = WD_TAGS.filter((tag) => tag.category === 0);
@@ -29,6 +30,12 @@ const kaomojis = [
 	'||_||',
 ];
 
+// Return safebooru if on app store
+const booru_url =
+	Constants.executionEnvironment === ExecutionEnvironment.StoreClient
+		? 'https://safebooru.donmai.us'
+		: 'https://danbooru.donmai.us';
+
 export {
 	rating_indexes,
 	general_indexes,
@@ -37,4 +44,5 @@ export {
 	character_names,
 	general_names,
 	kaomojis,
+	booru_url,
 };
