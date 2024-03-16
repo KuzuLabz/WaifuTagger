@@ -40,6 +40,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
 				},
 				android: {
 					useLegacyPackaging: true,
+					enableProguardInReleaseBuilds: true,
 				},
 			},
 		],
