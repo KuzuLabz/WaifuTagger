@@ -1,8 +1,9 @@
 import { View, Pressable, useWindowDimensions } from 'react-native';
-import { ActivityIndicator, Icon, Text } from 'react-native-paper';
+import { ActivityIndicator, Button } from 'react-native-paper';
 import * as ImagePicker from 'expo-image-picker';
 import { Image } from 'expo-image';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useAppTheme } from '../theme';
 
 type ImageSelectorProps = {
 	image?: ImagePicker.ImagePickerAsset;
@@ -10,37 +11,43 @@ type ImageSelectorProps = {
 	isLoading?: boolean;
 };
 const ImageSelector = ({ image, isLoading, onImagePick }: ImageSelectorProps) => {
+	const { colors } = useAppTheme();
 	const { top } = useSafeAreaInsets();
 	const { height, width } = useWindowDimensions();
 	return (
 		<Pressable
 			onPress={onImagePick}
 			style={{
-				height: height * 0.35,
+				height: height / 3,
+				alignSelf: 'center',
 				width: '100%',
-				borderWidth: 2,
-				borderColor: image ? 'transparent' : '#FFF',
-				borderRadius: 12,
-				borderStyle: 'dashed',
+				// borderWidth: 2,
+				// borderColor: image ? 'transparent' : '#FFF',
+				// borderColor: colors.outlineVariant,
+				// borderRadius: 12,
+				borderStyle: 'solid',
 				alignItems: 'center',
 				justifyContent: 'center',
 				flexDirection: 'row',
 			}}
 		>
 			{image ? (
-				<Image
-					// source={{ uri: `data:image/png;base64,${image}` }}
-					source={{ uri: image.uri }}
-					style={{
-						width: undefined,
-						height: '100%',
-						aspectRatio: image.width / image.height,
-					}}
-				/>
+				<View style={{ height: '100%', justifyContent: 'center' }}>
+					<Image
+						source={{ uri: image.uri }}
+						style={{
+							width: '100%',
+							height: image.width > image.height ? undefined : '100%', // if width is greater than height, image will fill height so return undefined
+							aspectRatio: image.width / image.height,
+						}}
+						contentFit="contain"
+					/>
+				</View>
 			) : (
 				<>
-					<Icon source="upload" size={24} />
-					<Text variant="titleMedium">Upload Image</Text>
+					<Button mode="text" icon={'upload'}>
+						Upload Image
+					</Button>
 				</>
 			)}
 			{isLoading && (
