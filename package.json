@@ -16,7 +16,7 @@
     "build-dev": "eas build --profile development --platform android",
     "build-preview-local": "eas build --profile preview --platform android --local --output ./waifu-tagger.apk",
     "build-dev-local": "eas build --profile development --platform android --local --output ./waifu-tagger-dev.apk",
-    "build-production-local": "eas build --profile production --platform android --local --output ./waifu-tagger.aab"
+    "build-prod-local": "eas build --profile production --platform android --local --output ./waifu-tagger.aab"
   },
   "dependencies": {
     "@pchmn/expo-material3-theme": "^1.3.2",
