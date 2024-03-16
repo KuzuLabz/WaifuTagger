@@ -1,17 +1,12 @@
-import { Image } from 'expo-image';
-import { ImageChangeEvent, ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import useModel from './hooks/useModel';
 import {
 	Appbar,
 	Button,
-	Chip,
-	Headline,
-	Icon,
+	Divider,
 	IconButton,
 	Portal,
-	ProgressBar,
 	Surface,
-	Text,
 	TextInput,
 } from 'react-native-paper';
 import LoadingView from './components/loading';
@@ -21,7 +16,6 @@ import TagText from './components/tagText';
 import { AppInfo, AppSettings, InferenceConfigurator, TagInfo } from './components/dialogs';
 import { useEffect, useRef, useState } from 'react';
 import { InferenceTag } from './types';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Footer from './components/footer';
 import Constants from 'expo-constants';
 import { useSettingsStore } from './store';
@@ -67,7 +61,7 @@ const Main = ({ updateTheme }: { updateTheme: (sourceColor: string) => void }) =
 	return loading ? (
 		<LoadingView />
 	) : (
-		<View style={{ height: '100%' }}>
+		<Surface style={{ height: '100%' }}>
 			<Appbar.Header mode="center-aligned">
 				<Appbar.Action
 					icon={'information-outline'}
@@ -87,6 +81,7 @@ const Main = ({ updateTheme }: { updateTheme: (sourceColor: string) => void }) =
 						image={image}
 						isLoading={isInferLoading}
 					/>
+					<Divider bold />
 					<View
 						style={{
 							flexDirection: 'row',
@@ -120,7 +115,11 @@ const Main = ({ updateTheme }: { updateTheme: (sourceColor: string) => void }) =
 							marginHorizontal: 10,
 						}}
 					>
-						<Button mode="elevated" onPress={runInference} style={{ flexGrow: 1 }}>
+						<Button
+							mode="contained-tonal"
+							onPress={runInference}
+							style={{ flexGrow: 1 }}
+						>
 							Run Inference
 						</Button>
 						<IconButton
@@ -172,7 +171,7 @@ const Main = ({ updateTheme }: { updateTheme: (sourceColor: string) => void }) =
 					updateTheme={(mode) => (imageColors ? updateTheme(imageColors[mode]) : null)}
 				/>
 			</Portal>
-		</View>
+		</Surface>
 	);
 };
 
