@@ -23,7 +23,7 @@ const App = () => {
 	return (
 		<PaperProvider theme={paperTheme}>
 			<Main updateTheme={updateTheme} />
-			<StatusBar style="light" />
+			<StatusBar style="auto" />
 			<Toaster position="bottom-right" />
 		</PaperProvider>
 	);
