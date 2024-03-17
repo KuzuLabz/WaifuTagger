@@ -31,10 +31,9 @@ const kaomojis = [
 ];
 
 // Return safebooru if on app store
-const booru_url =
-	Constants.executionEnvironment === ExecutionEnvironment.StoreClient
-		? 'https://safebooru.donmai.us'
-		: 'https://danbooru.donmai.us';
+const booru_url = Constants.expoConfig.extra.isStore
+	? 'https://safebooru.donmai.us'
+	: 'https://danbooru.donmai.us';
 
 export {
 	rating_indexes,

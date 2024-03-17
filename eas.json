@@ -14,9 +14,16 @@
 			}
 		},
 		"preview": {
+			"env": {
+				"APP_VARIANT": "preview"
+			},
 			"distribution": "internal"
 		},
-		"production": {}
+		"production": {
+			"env": {
+				"APP_VARIANT": "store"
+			}
+		}
 	},
 	"submit": {
 		"production": {}

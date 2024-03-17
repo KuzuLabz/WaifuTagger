@@ -1,5 +1,6 @@
 import { ExpoConfig, ConfigContext } from 'expo/config';
 const IS_DEV = process.env.APP_VARIANT === 'development';
+const IS_STORE = process.env.APP_VARIANT === 'store';
 
 export default ({ config }: ConfigContext): ExpoConfig => ({
 	...config,
@@ -59,7 +60,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
 			foregroundImage: './assets/adaptive-icon.png',
 			backgroundColor: '#000',
 		},
-		versionCode: 1.1,
+		versionCode: 3,
 		package: IS_DEV ? 'com.kuzulabz.WaifuTaggerDev' : 'com.kuzulabz.WaifuTagger',
 	},
 	web: {
@@ -69,5 +70,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
 		eas: {
 			projectId: '3cb39eec-898a-4a8e-a82d-fe95c9d7dfc2',
 		},
+		isStore: IS_STORE,
 	},
 });
