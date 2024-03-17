@@ -3,7 +3,14 @@ import { IconButton, Text } from 'react-native-paper';
 
 const Footer = () => {
 	return (
-		<View style={{ justifyContent: 'flex-end', alignItems: 'center', marginTop: 50 }}>
+		<View
+			style={{
+				justifyContent: 'flex-end',
+				alignItems: 'center',
+				marginTop: 50,
+				paddingBottom: 10,
+			}}
+		>
 			<View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
 				<IconButton
 					icon="earth"
