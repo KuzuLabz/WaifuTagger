@@ -32,13 +32,12 @@ const ImageSelector = ({ image, isLoading, onImagePick }: ImageSelectorProps) =>
 			}}
 		>
 			{image ? (
-				<View style={{ height: '100%', justifyContent: 'center' }}>
+				<View style={{ flex: 1 }}>
 					<Image
 						source={{ uri: image.uri }}
 						style={{
 							width: '100%',
-							height: image.width > image.height ? undefined : '100%', // if width is greater than height, image will fill height so return undefined
-							aspectRatio: image.width / image.height,
+							height: '100%',
 						}}
 						contentFit="contain"
 					/>
