@@ -4,9 +4,6 @@
 <a href="https://huggingface.co/Smashinfries/wd-convnext-tagger-v3-mobile" target="_blank">
     <img alt="Hugging Face" src="https://img.shields.io/badge/%F0%9F%A4%97%20Model%20Card-ffc107?color=ffc107&logoColor=white" />
 </a>
-<a href="https://play.google.com/apps/testing/com.kuzulabz.WaifuTagger" target="_blank">
-    <img alt="Hugging Face" src="https://img.shields.io/badge/Google Play-Join Beta-Test?logo=googleplay" />
-</a>
 <a href="https://github.com/KuzuLabz/WaifuTagger/releases/latest" target="_blank">
     <img alt="Hugging Face" src="https://img.shields.io/badge/Android-Release-Release?logo=android" />
 </a>
@@ -14,10 +11,8 @@
 
 Run SmilingWolfs [wd-convnext-tagger-v3](https://huggingface.co/SmilingWolf/wd-convnext-tagger-v3) model on mobile!
 
-## 🎉 Google Play Closed Beta
-The app is currently in closed beta and needs testers! You can join the beta [here](https://play.google.com/apps/testing/com.kuzulabz.WaifuTagger) or from the Google Play button above. 
-
-*Due to new Google Play policies, 20 testers are needed for 14 days before the app can go public.*
+## 🎉 Google Play Store
+Google has proven they hate indie devs, so I won't be uploading anything there. I am considering F-Droid though. 
 
 ## 🎮 Platforms
 Android is currently supported! 
