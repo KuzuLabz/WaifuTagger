@@ -1,33 +1,39 @@
-import { ScrollView, StyleSheet, View } from 'react-native';
+import { Platform, ScrollView, StatusBar, View } from 'react-native';
 import useModel from './hooks/useModel';
-import {
-	Appbar,
-	Button,
-	Divider,
-	IconButton,
-	Portal,
-	Surface,
-	TextInput,
-} from 'react-native-paper';
+import { Appbar, Button, Divider, IconButton, Portal, Text, TextInput } from 'react-native-paper';
 import LoadingView from './components/loading';
 import ImageSelector from './components/imageSelector';
 import ResultSection from './components/section';
 import TagText from './components/tagText';
-import { AppInfo, AppSettings, InferenceConfigurator, TagInfo } from './components/dialogs';
 import { useEffect, useRef, useState } from 'react';
 import { InferenceTag } from './types';
 import Footer from './components/footer';
 import Constants from 'expo-constants';
-import { useSettingsStore } from './store';
+import { useSettingsStore } from './store/settings';
+import { AppSettings } from './components/dialogs/appSettings';
+import { TagInfo } from './components/dialogs/tagInfo';
+import { InferenceConfigurator } from './components/dialogs/inferConfig';
+import { AppInfo } from './components/dialogs/appInfo';
+import { useAppTheme } from './theme';
+import { ScrollViewStyled } from './components/scrollview';
+import { Image } from 'expo-image';
+import { LevelView } from './components/levelView';
+import { StatsDialog } from './components/dialogs/stats';
+import { useStatsStore } from './store/stats';
+import Color from 'color';
+import { useTags } from './hooks/useTags';
 
 const Main = ({ updateTheme }: { updateTheme: (sourceColor: string) => void }) => {
 	const scrollRef = useRef<ScrollView>(null);
 	const { colorMode } = useSettingsStore();
+	const { isEnabled: isRankEnabled } = useStatsStore();
+	const { colors } = useAppTheme();
 
 	const [tagInfoVisible, setTagInfoVisible] = useState(false);
 	const [configVisible, setConfigVisible] = useState(false);
 	const [appInfoVisible, setAppInfoVisible] = useState(false);
 	const [appSettingsVisible, setAppSettingsVisible] = useState(false);
+	const [statVisible, setStatVisible] = useState(false);
 
 	const [url, setUrl] = useState('');
 
@@ -37,13 +43,14 @@ const Main = ({ updateTheme }: { updateTheme: (sourceColor: string) => void }) =
 		pickImage,
 		takePicture,
 		loadFromUrl,
-		onImagePaste,
+		isInferDisabled,
 		imageColors,
 		tags,
 		image,
 		loading,
 		isInferLoading,
 	} = useModel(scrollRef.current);
+	const { characterTags, generalTags } = useTags(tags);
 
 	const onTagSelect = (tag: InferenceTag) => {
 		setSelectedTag(tag);
@@ -52,35 +59,98 @@ const Main = ({ updateTheme }: { updateTheme: (sourceColor: string) => void }) =
 
 	useEffect(() => {
 		if (imageColors) {
-			if (imageColors.platform === 'android') {
-				updateTheme(imageColors[colorMode]);
-			}
+			updateTheme(imageColors[colorMode]);
 		}
 	}, [imageColors]);
 
 	return loading ? (
 		<LoadingView />
 	) : (
-		<Surface style={{ height: '100%' }}>
-			<Appbar.Header mode="center-aligned">
-				<Appbar.Action
-					icon={'information-outline'}
-					onPress={() => setAppInfoVisible(true)}
-				/>
-				<Appbar.Content title={Constants.expoConfig?.name} />
-				<Appbar.Action icon={'cog-outline'} onPress={() => setAppSettingsVisible(true)} />
-			</Appbar.Header>
-			<ScrollView
+		<View
+			// @ts-expect-error: 100vh is web only
+			style={{
+				backgroundColor: colors.surface,
+				height: Platform.select({ web: '100vh', native: '100%' }),
+			}}
+		>
+			<ScrollViewStyled
 				ref={scrollRef}
 				contentContainerStyle={{ flexGrow: 1 }}
 				keyboardDismissMode="on-drag"
+				stickyHeaderIndices={[0]}
+				stickyHeaderHiddenOnScroll
 			>
-				<View style={{ height: '100%' }}>
+				<Appbar.Header
+					mode="center-aligned"
+					style={[
+						Platform.select({
+							web: {
+								width: '100%',
+								backgroundColor: Color(colors.surface).alpha(0.4).rgb().string(),
+								backdropFilter: 'blur(10px)',
+							},
+							native: undefined,
+						}),
+					]}
+				>
+					<Appbar.Action
+						icon={'information-outline'}
+						onPress={() =>
+							Platform.OS === 'web' || Platform.OS === 'ios'
+								? setAppInfoVisible(true)
+								: null
+						}
+						onPressIn={() =>
+							Platform.OS === 'android' ? setAppInfoVisible(true) : null
+						}
+					/>
+					<Appbar.Content
+						title={
+							<View style={{ flexDirection: 'row', alignItems: 'center' }}>
+								<Image
+									pointerEvents="none"
+									source={require('../assets/adaptive-icon.png')}
+									style={{ height: 32, aspectRatio: 1 }}
+								/>
+								<Text variant="titleLarge" selectable={false}>
+									{Constants.expoConfig?.name}
+								</Text>
+							</View>
+						}
+					/>
+					{isRankEnabled && (
+						<Appbar.Action
+							icon={'trophy-variant-outline'}
+							onPress={() =>
+								Platform.OS === 'web' || Platform.OS === 'ios'
+									? setStatVisible(true)
+									: null
+							}
+							onPressIn={() =>
+								Platform.OS === 'android' ? setStatVisible(true) : null
+							}
+						/>
+					)}
+					<Appbar.Action
+						icon={'cog-outline'}
+						onPress={() =>
+							Platform.OS === 'web' || Platform.OS === 'ios'
+								? setAppSettingsVisible(true)
+								: null
+						}
+						onPressIn={() =>
+							Platform.OS === 'android' ? setAppSettingsVisible(true) : null
+						}
+					/>
+				</Appbar.Header>
+				<View style={{ flex: 1 }}>
 					<ImageSelector
 						onImagePick={pickImage}
 						image={image}
 						isLoading={isInferLoading}
+						rank={tags?.rank}
 					/>
+					<LevelView isLoading={isInferLoading} />
 					<Divider bold />
 					<View
 						style={{
@@ -95,8 +165,7 @@ const Main = ({ updateTheme }: { updateTheme: (sourceColor: string) => void }) =
 							label={'Image URL'}
 							value={url}
 							onChangeText={(text) => setUrl(text)}
-							onImageChange={onImagePaste}
-							style={{ marginLeft: 10, flex: 1 }}
+							style={{ marginHorizontal: 10, flex: 1 }}
 							autoFocus={false}
 							right={
 								url.length > 0 && (
@@ -105,7 +174,9 @@ const Main = ({ updateTheme }: { updateTheme: (sourceColor: string) => void }) =
 							}
 							onSubmitEditing={(e) => loadFromUrl(e.nativeEvent.text)}
 						/>
-						<IconButton icon="camera" onPress={takePicture} />
+						{Platform.OS !== 'web' && (
+							<IconButton icon="camera" onPress={takePicture} />
+						)}
 					</View>
 					<View
 						style={{
@@ -119,6 +190,7 @@ const Main = ({ updateTheme }: { updateTheme: (sourceColor: string) => void }) =
 							mode="contained-tonal"
 							onPress={runInference}
 							style={{ flexGrow: 1 }}
+							disabled={isInferDisabled && isRankEnabled}
 						>
 							Run Inference
 						</Button>
@@ -130,10 +202,12 @@ const Main = ({ updateTheme }: { updateTheme: (sourceColor: string) => void }) =
 					</View>
 					{tags ? (
 						<>
-							<TagText text={tags.ordered_tags.join(', ')} />
+							<TagText
+								tags={{ ...tags, character: characterTags, general: generalTags }}
+							/>
 							<View>
 								<ResultSection
-									tags={tags?.character}
+									tags={characterTags}
 									title="Character"
 									onTagSelect={onTagSelect}
 								/>
@@ -143,8 +217,8 @@ const Main = ({ updateTheme }: { updateTheme: (sourceColor: string) => void }) =
 									onTagSelect={onTagSelect}
 								/>
 								<ResultSection
-									tags={tags?.general}
-									title={`General Tags`}
+									tags={generalTags}
+									title={`General`}
 									onTagSelect={onTagSelect}
 								/>
 							</View>
@@ -153,8 +227,23 @@ const Main = ({ updateTheme }: { updateTheme: (sourceColor: string) => void }) =
 					<View style={{ flex: 1 }} />
 					<Footer />
 				</View>
-			</ScrollView>
+			</ScrollViewStyled>
+			<View
+				style={{
+					position: 'absolute',
+					top: 0,
+					width: '100%',
+					height: StatusBar.currentHeight,
+					backgroundColor: colors.surface,
+				}}
+			/>
+
 			<Portal>
+				<AppSettings
+					visible={appSettingsVisible}
+					onDismiss={() => setAppSettingsVisible(false)}
+					updateTheme={(mode) => (imageColors ? updateTheme(imageColors[mode]) : null)}
+				/>
 				<TagInfo
 					visible={tagInfoVisible}
 					onDismiss={() => setTagInfoVisible(false)}
@@ -164,21 +253,11 @@ const Main = ({ updateTheme }: { updateTheme: (sourceColor: string) => void }) =
 					visible={configVisible}
 					onDismiss={() => setConfigVisible(false)}
 				/>
+				<StatsDialog visible={statVisible} onDismiss={() => setStatVisible(false)} />
 				<AppInfo visible={appInfoVisible} onDismiss={() => setAppInfoVisible(false)} />
-				<AppSettings
-					visible={appSettingsVisible}
-					onDismiss={() => setAppSettingsVisible(false)}
-					updateTheme={(mode) => (imageColors ? updateTheme(imageColors[mode]) : null)}
-				/>
 			</Portal>
-		</Surface>
+		</View>
 	);
 };
 
 export default Main;
-
-const styles = StyleSheet.create({
-	container: {
-		height: '100%',
-	},
-});

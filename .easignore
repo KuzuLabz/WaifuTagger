@@ -37,6 +37,10 @@ yarn-error.*
 # models
 .models/
 .downloads/
+assets/models/model_quantized.onnx
 
 # apks
 *.apk
+
+# desktop
+desktop/

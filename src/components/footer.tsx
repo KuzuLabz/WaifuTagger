@@ -5,10 +5,12 @@ const Footer = () => {
 	return (
 		<View
 			style={{
+				flex: 1,
 				justifyContent: 'flex-end',
 				alignItems: 'center',
 				marginTop: 50,
 				paddingBottom: 10,
+				height: '100%',
 			}}
 		>
 			<View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
@@ -18,10 +20,10 @@ const Footer = () => {
 				/>
 				<IconButton
 					icon="github"
-					onPress={() => Linking.openURL('https://github.com/KuzuLabz')}
+					onPress={() => Linking.openURL('https://github.com/KuzuLabz/WaifuTagger')}
 				/>
 			</View>
-			<Text>Created by KuzuLabz ❤️</Text>
+			<Text selectable={false}>Created by KuzuLabz ❤️</Text>
 		</View>
 	);
 };

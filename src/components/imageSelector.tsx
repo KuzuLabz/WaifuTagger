@@ -1,34 +1,44 @@
 import { View, Pressable, useWindowDimensions } from 'react-native';
-import { ActivityIndicator, Button } from 'react-native-paper';
+import { ActivityIndicator, Button, Chip, Text } from 'react-native-paper';
 import * as ImagePicker from 'expo-image-picker';
 import { Image } from 'expo-image';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useAppTheme } from '../theme';
+import { BlurView } from 'expo-blur';
+import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
+import { RankInfo } from '../types';
+import { useStatsStore } from '../store/stats';
+
+const RankChip = ({ rank }: { rank: RankInfo }) => {
+	return (
+		<Chip compact mode="flat" elevated textStyle={{ fontWeight: '900' }}>
+			{rank.rank} <Text variant="labelSmall">+ {rank.xp}</Text>
+		</Chip>
+	);
+};
 
 type ImageSelectorProps = {
 	image?: ImagePicker.ImagePickerAsset;
+	rank?: RankInfo;
 	onImagePick: () => void;
 	isLoading?: boolean;
 };
-const ImageSelector = ({ image, isLoading, onImagePick }: ImageSelectorProps) => {
-	const { colors } = useAppTheme();
-	const { top } = useSafeAreaInsets();
+const ImageSelector = ({ image, rank, isLoading, onImagePick }: ImageSelectorProps) => {
 	const { height, width } = useWindowDimensions();
+	const { isEnabled } = useStatsStore();
+
 	return (
 		<Pressable
 			onPress={onImagePick}
 			style={{
-				height: height / 3,
+				height: height / 3 + 16,
 				alignSelf: 'center',
 				width: '100%',
-				// borderWidth: 2,
-				// borderColor: image ? 'transparent' : '#FFF',
-				// borderColor: colors.outlineVariant,
-				// borderRadius: 12,
 				borderStyle: 'solid',
 				alignItems: 'center',
 				justifyContent: 'center',
 				flexDirection: 'row',
+				overflow: 'hidden',
+				// @ts-expect-error: Wails specific
+				'--wails-drop-target': 'drop',
 			}}
 		>
 			{image ? (
@@ -37,31 +47,46 @@ const ImageSelector = ({ image, isLoading, onImagePick }: ImageSelectorProps) =>
 						source={{ uri: image.uri }}
 						style={{
 							width: '100%',
-							height: '100%',
+							height: height / 3,
+							paddingVertical: 8,
 						}}
 						contentFit="contain"
 					/>
 				</View>
 			) : (
 				<>
-					<Button mode="text" icon={'upload'}>
+					<Button mode="text" icon={'upload'} onPress={onImagePick}>
 						Upload Image
 					</Button>
 				</>
 			)}
 			{isLoading && (
-				<View
-					style={{
-						position: 'absolute',
-						height: '100%',
-						width: width,
-						backgroundColor: 'rgba(0,0,0,0.7)',
-						alignItems: 'center',
-						justifyContent: 'center',
-					}}
+				<BlurView
+					intensity={50}
+					tint="systemChromeMaterialDark"
+					experimentalBlurMethod={'dimezisBlurView'}
+					style={[
+						{
+							position: 'absolute',
+							height: '101%',
+							width: width,
+							alignItems: 'center',
+							justifyContent: 'center',
+							backgroundColor: 'transparent',
+						},
+					]}
 				>
 					<ActivityIndicator />
-				</View>
+				</BlurView>
+			)}
+			{rank && isEnabled && (
+				<Animated.View
+					entering={FadeIn}
+					exiting={FadeOut}
+					style={{ position: 'absolute', bottom: 5, right: 5 }}
+				>
+					<RankChip rank={rank} />
+				</Animated.View>
 			)}
 		</Pressable>
 	);

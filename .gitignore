@@ -41,3 +41,10 @@ yarn-error.*
 
 # apks
 *.apk
+
+# desktop
+desktop/build/bin
+desktop/frontend/web-build
+
+# config
+.vscode

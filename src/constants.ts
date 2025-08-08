@@ -1,5 +1,6 @@
 import WD_TAGS from '../assets/tags.json';
-import Constants, { ExecutionEnvironment } from 'expo-constants';
+import Constants from 'expo-constants';
+import { Rank } from './types';
 
 const rating_indexes = WD_TAGS.filter((tag) => tag.category === 9);
 const general_indexes = WD_TAGS.filter((tag) => tag.category === 0);
@@ -44,4 +45,14 @@ export {
 	general_names,
 	kaomojis,
 	booru_url,
+};
+
+export const rankExp: { [key in Rank]: number } = {
+	F: 100,
+	E: 150,
+	D: 200,
+	C: 250,
+	B: 300,
+	A: 400,
+	S: 500,
 };

@@ -1,29 +1,38 @@
-import 'react-native-image-keyboard';
 import { StatusBar } from 'expo-status-bar';
 import { MD3DarkTheme, MD3LightTheme, PaperProvider } from 'react-native-paper';
-import Main from './src';
 import { Toaster } from 'burnt/web';
-import { useColorScheme } from 'react-native';
+import { Platform } from 'react-native';
 import { useMaterial3Theme } from '@pchmn/expo-material3-theme';
-import { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
+import { useSettingsStore } from './src/store/settings';
+import Main from './src';
 
 const App = () => {
-	const colorScheme = useColorScheme();
-	// If the device is not compatible, it will return a theme based on the fallback source color (optional, default to #6750A4)
+	const { darkMode } = useSettingsStore();
 	const { theme, updateTheme } = useMaterial3Theme({ fallbackSourceColor: '#3E8260' });
 
 	const paperTheme = useMemo(
 		() =>
-			colorScheme === 'dark'
-				? { ...MD3DarkTheme, colors: theme.dark }
-				: { ...MD3LightTheme, colors: theme.light },
-		[colorScheme, theme],
+			darkMode
+				? { ...MD3DarkTheme, colors: { ...MD3DarkTheme.colors, ...theme.dark } }
+				: { ...MD3LightTheme, colors: { ...MD3LightTheme.colors, ...theme.light } },
+		[darkMode, theme],
 	);
 
 	return (
 		<PaperProvider theme={paperTheme}>
+			<React.Fragment>
+				{Platform.OS === 'web' ? (
+					<style type="text/css">{`
+					@font-face {
+					font-family: 'MaterialDesignIcons';
+					src: url(${require('./assets/fonts/MaterialDesignIcons.ttf')}) format('truetype');
+					}
+				`}</style>
+				) : null}
+			</React.Fragment>
 			<Main updateTheme={updateTheme} />
-			<StatusBar style="auto" />
+			<StatusBar style={darkMode ? 'light' : 'dark'} translucent />
 			<Toaster position="bottom-right" />
 		</PaperProvider>
 	);

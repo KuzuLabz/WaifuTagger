@@ -1,6 +1,4 @@
-import { View } from 'react-native';
 import { ActivityIndicator, Surface, Text } from 'react-native-paper';
-import Constants from 'expo-constants';
 import { useAppTheme } from '../theme';
 
 const LoadingView = () => {
@@ -11,11 +9,13 @@ const LoadingView = () => {
 				flex: 1,
 				justifyContent: 'center',
 				alignItems: 'center',
-				// backgroundColor: theme.colors.background,
+				gap: 12,
 			}}
 		>
 			<ActivityIndicator size="large" />
-			<Text theme={theme}>Booting up {Constants.expoConfig?.name}</Text>
+			<Text theme={theme} selectable={false}>
+				Loading model...
+			</Text>
 		</Surface>
 	);
 };

@@ -1,5 +1,6 @@
 import { ExpoConfig, ConfigContext } from 'expo/config';
 const IS_DEV = process.env.APP_VARIANT === 'development';
+// const IS_DEV = true;
 const IS_STORE = process.env.APP_VARIANT === 'store';
 
 export default ({ config }: ConfigContext): ExpoConfig => ({
@@ -7,11 +8,14 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
 	owner: 'kuzulabz',
 	name: IS_DEV ? 'WaifuTagger Dev' : 'WaifuTagger',
 	slug: 'WaifuDetector',
-	version: '1.0.0',
+	scheme: IS_DEV ? 'waifutaggerdev' : 'waifutagger',
+	version: '2.0.0',
 	orientation: 'portrait',
 	icon: './assets/icon.png',
 	userInterfaceStyle: 'automatic',
 	backgroundColor: '#000',
+	newArchEnabled: true,
+	platforms: ['android', 'web'],
 	splash: {
 		image: './assets/splash.png',
 		resizeMode: 'contain',
@@ -23,12 +27,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
 		[
 			'expo-share-intent',
 			{
-				// iosActivationRules: {
-				// 	NSExtensionActivationSupportsWebURLWithMaxCount: 1,
-				// 	NSExtensionActivationSupportsWebPageWithMaxCount: 1,
-				// 	NSExtensionActivationSupportsImageWithMaxCount: 1,
-				// 	NSExtensionActivationSupportsMovieWithMaxCount: 1,
-				// },
 				androidIntentFilters: ['image/png', 'image/jpg', 'image/jpeg'],
 			},
 		],
@@ -56,6 +54,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
 		supportsTablet: true,
 	},
 	android: {
+		edgeToEdgeEnabled: true,
 		adaptiveIcon: {
 			foregroundImage: './assets/adaptive-icon.png',
 			backgroundColor: '#000',
@@ -65,6 +64,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
 	},
 	web: {
 		favicon: './assets/favicon.png',
+		bundler: 'webpack',
 	},
 	extra: {
 		eas: {

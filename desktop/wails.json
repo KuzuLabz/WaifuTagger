@@ -1,0 +1,18 @@
+{
+  "$schema": "https://wails.io/schemas/config.v2.json",
+  "name": "WaifuTagger",
+  "outputfilename": "WaifuTagger",
+  "frontend:dir": "../",
+  "frontend:install": "bun i",
+  "frontend:dev:watcher": "bun run web",
+  "frontend:dev:serverUrl": "http://10.0.0.14:19006",
+  "wailsjsdir": "../src",
+  "author": {
+    "name": "KuzuLabz",
+    "email": "kuzulabz@gmail.com"
+  },
+  "info": {
+    "productVersion": "2.0.0",
+    "companyName": "KuzuLabz"
+  }
+}
