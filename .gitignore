@@ -48,3 +48,5 @@ desktop/frontend/web-build
 
 # config
 .vscode
+
+.builds/

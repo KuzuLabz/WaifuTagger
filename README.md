@@ -5,16 +5,24 @@
     <img alt="Android" src="https://img.shields.io/badge/Android-Release-Release?logo=android" />
 </a>
 <a href="https://github.com/KuzuLabz/WaifuTagger/releases/latest" target="_blank">
-    <img alt="Windows" src="https://img.shields.io/badge/Desktop-Release-%23654FF0?logo=webassembly" />
+    <img alt="Desktop" src="https://img.shields.io/badge/Desktop-Release-%23654FF0?logo=webassembly" />
+</a>
+<a href="https://kuzulabz.itch.io/waifutagger" target="_blank">
+    <img alt="Itchdotio" src="https://img.shields.io/badge/Itch.io-Release-%23FA5C5C?logo=itchdotio" />
 </a>
 
 Run SmilingWolfs [WD Convnext Tagger v3](https://huggingface.co/SmilingWolf/wd-convnext-tagger-v3) model on mobile and [WD SwinV2 Tagger v3](https://huggingface.co/p1atdev/wd-swinv2-tagger-v3-hf) on desktop!
+
 
 ## 🎮 Platforms
 Android and Desktop (Windows, MacOS, Linux)
 
 ## 💾 Download
 Take a look at the latest [release](https://github.com/KuzuLabz/WaifuTagger/releases/latest)!
+
+<a href="https://kuzulabz.itch.io/waifutagger" target="_blank">
+    <img alt="Itchdotio" style="height: 80px" src="https://static.itch.io/images/badge.svg" />
+</a>
 
 ## 🤗 Model
 #### Mobile
