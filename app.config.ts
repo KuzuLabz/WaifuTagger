@@ -9,13 +9,13 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
 	name: IS_DEV ? 'WaifuTagger Dev' : 'WaifuTagger',
 	slug: 'WaifuDetector',
 	scheme: IS_DEV ? 'waifutaggerdev' : 'waifutagger',
-	version: '2.0.0',
+	version: '2.1.0',
 	orientation: 'portrait',
 	icon: './assets/icon.png',
 	userInterfaceStyle: 'automatic',
 	backgroundColor: '#000',
 	newArchEnabled: true,
-	platforms: ['android', 'web'],
+	platforms: ['android', 'ios', 'web'],
 	splash: {
 		image: './assets/splash.png',
 		resizeMode: 'contain',
@@ -24,6 +24,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
 	assetBundlePatterns: ['assets/models/*', 'assets/*'],
 	plugins: [
 		'onnxruntime-react-native',
+		'expo-asset',
+		'expo-web-browser',
 		[
 			'expo-share-intent',
 			{
