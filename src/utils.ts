@@ -1,7 +1,7 @@
 import * as Clipboard from 'expo-clipboard';
 import * as WebBrowser from 'expo-web-browser';
 import * as Burnt from 'burnt';
-import { Platform } from 'react-native';
+import { Platform, Share } from 'react-native';
 import { GetImageMD5 } from './wailsjs/go/main/App';
 import * as Crypto from 'expo-crypto';
 
@@ -53,4 +53,8 @@ export const getImageHash = async (base64String: string): Promise<string | null>
 		hash = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.MD5, base64Data);
 	}
 	return hash;
+};
+
+export const shareText = async (text: string) => {
+    await Share.share({message: text});
 };
