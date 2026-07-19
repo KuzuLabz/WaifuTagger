@@ -8,6 +8,7 @@ import { useAppTheme } from '../../theme';
 import { DialogStyled } from './dialog';
 import { booru_url, kaomojis } from '../../constants';
 import { Button } from '../common/button';
+import { useLingui } from '@lingui/react/macro';
 
 const TagInfoSection = ({
 	icon,
@@ -32,6 +33,7 @@ type TagInfoProps = BasicDialogProps & {
 };
 export const TagInfo = ({ tag, visible, onDismiss }: TagInfoProps) => {
 	const { colors } = useAppTheme();
+    const { t } = useLingui();
 
 	if (!tag) return null;
 
@@ -64,12 +66,12 @@ export const TagInfo = ({ tag, visible, onDismiss }: TagInfoProps) => {
 						})
 					}
 				>
-					View Wiki
+					{t`View Wiki`}
 				</Button>
 			</Dialog.Content>
 			<Dialog.Actions>
 				<Button androidVariant="borderless" webVariant="text" onPress={onDismiss}>
-					Done
+					{t`Done`}
 				</Button>
 			</Dialog.Actions>
 		</DialogStyled>

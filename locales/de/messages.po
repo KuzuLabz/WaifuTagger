@@ -1,0 +1,140 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-07-18 23:25-0500\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: de\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/components/dialogs/appInfo.tsx:88
+msgid "About"
+msgstr "Über"
+
+#: src/components/dialogs/appSettings.tsx:82
+msgid "Auto Inference"
+msgstr "Automatische Inferenz"
+
+#: src/components/dialogs/appInfo.tsx:38
+msgid "Based on SmilingWolfs"
+msgstr "Basierend auf SmilingWolfs"
+
+#: src/components/section.tsx:19
+msgid "Character"
+msgstr "Charakter"
+
+#: src/components/dialogs/appInfo.tsx:98
+#: src/components/dialogs/appSettings.tsx:130
+msgid "Close"
+msgstr "Schließen"
+
+#: src/components/tagText.tsx:127
+msgid "Copy text"
+msgstr "Text kopieren"
+
+#: src/components/footer.tsx:29
+msgid "Created by KuzuLabz"
+msgstr "Erstellt von KuzuLabz"
+
+#: src/components/dialogs/appSettings.tsx:93
+msgid "Dark mode"
+msgstr "Dunkelmodus"
+
+#: src/components/dialogs/stats.tsx:91
+#: src/components/dialogs/tagInfo.tsx:74
+msgid "Done"
+msgstr "Fertig"
+
+#: src/components/dialogs/appSettings.tsx:107
+msgid "Dynamic Theme Mode"
+msgstr "Dynamischer Themenmodus"
+
+#: src/components/section.tsx:21
+msgid "General"
+msgstr "Allgemein"
+
+#: src/components/dialogs/appInfo.tsx:65
+msgid "huggingface.co"
+msgstr "huggingface.co"
+
+#: src/components/dialogs/appInfo.tsx:63
+msgid "If you would like to know more about the optimized model, check out the model card at "
+msgstr "Wenn Sie mehr über das optimierte Modell erfahren möchten, sehen Sie sich die Modellkarte unter "
+
+#: src/components/dialogs/stats.tsx:54
+msgid "Level"
+msgstr "Level"
+
+#: src/components/dialogs/stats.tsx:53
+msgid "Level Info"
+msgstr "Level-Informationen"
+
+#: src/components/loading.tsx:20
+msgid "Loading model..."
+msgstr "Modell wird geladen..."
+
+#: src/components/dialogs/appInfo.tsx:60
+msgid "model"
+msgstr "Modell"
+
+#: src/components/section.tsx:61
+msgid "No Results"
+msgstr "Keine Ergebnisse"
+
+#: src/components/dialogs/appInfo.tsx:93
+msgid "Only PNG and JPEG images can be used."
+msgstr "Es können nur PNG- und JPEG-Bilder verwendet werden."
+
+#: src/components/dialogs/appSettings.tsx:87
+msgid "Rank Mode"
+msgstr "Rang-Modus"
+
+#: src/components/section.tsx:20
+msgid "Ratings"
+msgstr "Bewertungen"
+
+#: src/components/dialogs/stats.tsx:86
+msgid "Reset"
+msgstr "Zurücksetzen"
+
+#: src/index.tsx:203
+msgid "Run Inference"
+msgstr "Inferenz ausführen"
+
+#: src/components/dialogs/appSettings.tsx:79
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: src/components/tagText.tsx:126
+msgid "Share"
+msgstr "Teilen"
+
+#: src/components/tagText.tsx:32
+msgid "Tags"
+msgstr "Tags"
+
+#: src/components/dialogs/appSettings.tsx:108
+msgid "Theme color is based on selected image color mode"
+msgstr "Die Themenfarbe basiert auf dem gewählten Farbmodus des Bildes"
+
+#: src/components/dialogs/appInfo.tsx:54
+msgid "This app uses an optimized version of SmilingWolfs"
+msgstr "Diese App verwendet eine optimierte Version von SmilingWolfs"
+
+#: src/components/dialogs/appInfo.tsx:31
+msgid "This app uses p1atdev's quantized"
+msgstr "Diese App verwendet die quantisierte Version von p1atdev"
+
+#: src/components/imageSelector.tsx:61
+msgid "Upload Image"
+msgstr "Bild hochladen"
+
+#: src/components/dialogs/tagInfo.tsx:69
+msgid "View Wiki"
+msgstr "Wiki ansehen"

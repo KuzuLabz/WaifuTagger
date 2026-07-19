@@ -4,6 +4,7 @@ import { Linking, Platform, View } from 'react-native';
 import { BasicDialogProps } from './types';
 import { DialogStyled } from './dialog';
 import { Button } from '../common/button';
+import { useLingui } from '@lingui/react/macro';
 
 type LinkTextProps = {
 	label: string;
@@ -23,17 +24,18 @@ const LinkText = ({ label, url, linkColor }: LinkTextProps) => {
 };
 
 const WebDescription = ({ linkColor }: { linkColor: string }) => {
+    const { t } = useLingui();
 	return (
 		<>
 			<Text>
-				{"This app uses p1atdev's quantized "}
+				{t`This app uses p1atdev's quantized` + ' '}
 				<LinkText
 					label="WD SwinV2 Tagger v3"
 					url="https://huggingface.co/p1atdev/wd-swinv2-tagger-v3-hf"
 					linkColor={linkColor}
 				/>{' '}
 				model {'('}
-				{'Based on SmilingWolfs '}
+				{t`Based on SmilingWolfs` + ' '}
 				<LinkText
 					label="model"
 					url="https://huggingface.co/SmilingWolf/wd-swinv2-tagger-v3"
@@ -45,22 +47,22 @@ const WebDescription = ({ linkColor }: { linkColor: string }) => {
 	);
 };
 const MobileDescription = ({ linkColor }: { linkColor: string }) => {
+    const { t } = useLingui();
 	return (
 		<>
 			<Text>
-				This app uses an optimized version of SmilingWolfs{' '}
+				{t`This app uses an optimized version of SmilingWolfs` + ' '}
 				<LinkText
 					label="wd-convnext-tagger-v3"
 					url="https://huggingface.co/SmilingWolf/wd-convnext-tagger-v3"
 					linkColor={linkColor}
 				/>{' '}
-				model.
+				{t`model`}.
 			</Text>
 			<Text>
-				{'\n'}If you would like to know more about the optimized model, check out the model
-				card{' '}
+                {'\n' + t`If you would like to know more about the optimized model, check out the model card at ` + ' '}
 				<LinkText
-					label="here"
+					label={t`huggingface.co`}
 					url="https://huggingface.co/Smashinfries/wd-convnext-tagger-v3-mobile"
 					linkColor={linkColor}
 				/>
@@ -79,19 +81,21 @@ const Description = ({ linkColor }: { linkColor: string }) => {
 
 export const AppInfo = ({ visible, onDismiss }: BasicDialogProps) => {
 	const { colors } = useAppTheme();
+    const { t } = useLingui();
+
 	return (
 		<DialogStyled visible={visible} onDismiss={onDismiss}>
-			<Dialog.Title selectable={false}>About</Dialog.Title>
+			<Dialog.Title selectable={false}>{t`About`}</Dialog.Title>
 			<Dialog.Content>
 				<View>
 					<Description linkColor={colors.primary} />
 					<Divider style={{ marginVertical: 20 }} />
-					<Text style={{ fontWeight: '900' }}>Only PNG and JPEG images can be used.</Text>
+					<Text style={{ fontWeight: '900' }}>{t`Only PNG and JPEG images can be used.`}</Text>
 				</View>
 			</Dialog.Content>
 			<Dialog.Actions>
 				<Button androidVariant="borderless" webVariant="text" onPress={onDismiss}>
-					Close
+					{t`Close`}
 				</Button>
 			</Dialog.Actions>
 		</DialogStyled>

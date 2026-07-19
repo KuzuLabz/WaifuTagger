@@ -1,7 +1,10 @@
+import { useLingui } from '@lingui/react/macro';
 import { Linking, View } from 'react-native';
 import { IconButton, Text } from 'react-native-paper';
 
 const Footer = () => {
+    const { t } = useLingui();
+    
 	return (
 		<View
 			style={{
@@ -23,7 +26,7 @@ const Footer = () => {
 					onPress={() => Linking.openURL('https://github.com/KuzuLabz/WaifuTagger')}
 				/>
 			</View>
-			<Text selectable={false}>Created by KuzuLabz ❤️</Text>
+			<Text selectable={false}>{t`Created by KuzuLabz`} ❤️</Text>
 		</View>
 	);
 };

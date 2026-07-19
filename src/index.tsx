@@ -22,65 +22,73 @@ import { StatsDialog } from './components/dialogs/stats';
 import { useStatsStore } from './store/stats';
 import Color from 'color';
 import { useTags } from './hooks/useTags';
+import { useLingui } from "@lingui/react/macro";
+import { RootHeader } from './components/header';
 
 const Main = ({ updateTheme }: { updateTheme: (sourceColor: string) => void }) => {
-	const scrollRef = useRef<ScrollView>(null);
-	const { colorMode } = useSettingsStore();
-	const { isEnabled: isRankEnabled } = useStatsStore();
-	const { colors } = useAppTheme();
+    const { colorMode } = useSettingsStore();
+    const { isEnabled: isRankEnabled } = useStatsStore();
+    const { colors } = useAppTheme();
+    const { t } = useLingui();
 
-	const [tagInfoVisible, setTagInfoVisible] = useState(false);
-	const [configVisible, setConfigVisible] = useState(false);
-	const [appInfoVisible, setAppInfoVisible] = useState(false);
-	const [appSettingsVisible, setAppSettingsVisible] = useState(false);
-	const [statVisible, setStatVisible] = useState(false);
+    const [tagInfoVisible, setTagInfoVisible] = useState(false);
+    const [configVisible, setConfigVisible] = useState(false);
+    const [appInfoVisible, setAppInfoVisible] = useState(false);
+    const [appSettingsVisible, setAppSettingsVisible] = useState(false);
+    const [statVisible, setStatVisible] = useState(false);
 
-	const [url, setUrl] = useState('');
+    const [url, setUrl] = useState('');
 
-	const [selectedTag, setSelectedTag] = useState<InferenceTag | null>(null);
-	const {
-		runInference,
-		pickImage,
-		takePicture,
-		loadFromUrl,
-		isInferDisabled,
-		imageColors,
-		tags,
-		image,
-		loading,
-		isInferLoading,
-	} = useModel(scrollRef.current);
-	const { characterTags, generalTags } = useTags(tags);
+    const [selectedTag, setSelectedTag] = useState<InferenceTag | null>(null);
+    const {
+        runInference,
+        pickImage,
+        takePicture,
+        loadFromUrl,
+        isInferDisabled,
+        imageColors,
+        tags,
+        image,
+        loading,
+        isInferLoading,
+        scrollRef
+    } = useModel();
+    const { characterTags, generalTags } = useTags(tags);
 
-	const onTagSelect = (tag: InferenceTag) => {
-		setSelectedTag(tag);
-		setTagInfoVisible(true);
-	};
+    const onTagSelect = (tag: InferenceTag) => {
+        setSelectedTag(tag);
+        setTagInfoVisible(true);
+    };
 
-	useEffect(() => {
-		if (imageColors) {
-			updateTheme(imageColors[colorMode]);
-		}
-	}, [imageColors]);
+    useEffect(() => {
+        if (imageColors) {
+            updateTheme(imageColors[colorMode]);
+        }
+    }, [imageColors]);
 
-	return loading ? (
-		<LoadingView />
-	) : (
-		<View
-			// @ts-expect-error: 100vh is web only
-			style={{
-				backgroundColor: colors.surface,
-				height: Platform.select({ web: '100vh', native: '100%' }),
-			}}
-		>
-			<ScrollViewStyled
-				ref={scrollRef}
-				contentContainerStyle={{ flexGrow: 1 }}
-				keyboardDismissMode="on-drag"
-				stickyHeaderIndices={[0]}
-				stickyHeaderHiddenOnScroll
-			>
-				<Appbar.Header
+    return loading ? (
+        <LoadingView />
+    ) : (
+        <View
+            // @ts-expect-error: 100vh is web only
+            style={{
+                backgroundColor: colors.surface,
+                height: Platform.select({ web: '100vh', native: '100%' }),
+            }}
+        >
+            <ScrollViewStyled
+                ref={scrollRef}
+                contentContainerStyle={{ flexGrow: 1 }}
+                keyboardDismissMode="on-drag"
+                stickyHeaderIndices={[0]}
+                stickyHeaderHiddenOnScroll
+            >
+                <RootHeader 
+                    onAppInfoPress={() => setAppInfoVisible(true)} 
+                    onSettingsPress={() => setAppSettingsVisible(true)} 
+                    onStatsPress={() => setStatVisible(true)} 
+                />
+                {/* <Appbar.Header
 					mode="center-aligned"
 					style={[
 						Platform.select({
@@ -142,122 +150,122 @@ const Main = ({ updateTheme }: { updateTheme: (sourceColor: string) => void }) =
 							Platform.OS === 'android' ? setAppSettingsVisible(true) : null
 						}
 					/>
-				</Appbar.Header>
-				<View style={{ flex: 1 }}>
-					<ImageSelector
-						onImagePick={pickImage}
-						image={image}
-						isLoading={isInferLoading}
-						rank={tags?.rank}
-					/>
-					<LevelView isLoading={isInferLoading} />
-					<Divider bold />
-					<View
-						style={{
-							flexDirection: 'row',
-							marginTop: 15,
-							width: '100%',
-							alignItems: 'center',
-						}}
-					>
-						<TextInput
-							mode="outlined"
-							label={'Image URL'}
-							value={url}
-							onChangeText={(text) => setUrl(text)}
-							style={{ marginHorizontal: 10, flex: 1 }}
-							autoFocus={false}
-							right={
-								url.length > 0 && (
-									<TextInput.Icon icon="close" onPress={() => setUrl('')} />
-								)
-							}
-							onSubmitEditing={(e) => loadFromUrl(e.nativeEvent.text)}
-						/>
-						{Platform.OS !== 'web' && (
-							<IconButton icon="camera" onPress={takePicture} />
-						)}
-					</View>
-					<View
-						style={{
-							flexDirection: 'row',
-							alignItems: 'center',
-							marginTop: 20,
-							marginHorizontal: 10,
-						}}
-					>
-						<Button
-							mode="contained-tonal"
-							onPress={runInference}
-							style={{ flexGrow: 1 }}
-							disabled={isInferDisabled && isRankEnabled}
-						>
-							Run Inference
-						</Button>
-						<IconButton
-							style={{ flexShrink: 1 }}
-							icon={'tune-vertical-variant'}
-							onPress={() => setConfigVisible(true)}
-						/>
-					</View>
-					{tags ? (
-						<>
-							<TagText
-								tags={{ ...tags, character: characterTags, general: generalTags }}
-							/>
-							<View>
-								<ResultSection
-									tags={characterTags}
-									title="Character"
-									onTagSelect={onTagSelect}
-								/>
-								<ResultSection
-									tags={tags?.rating}
-									title="Ratings"
-									onTagSelect={onTagSelect}
-								/>
-								<ResultSection
-									tags={generalTags}
-									title={`General`}
-									onTagSelect={onTagSelect}
-								/>
-							</View>
-						</>
-					) : null}
-					<View style={{ flex: 1 }} />
-					<Footer />
-				</View>
-			</ScrollViewStyled>
-			<View
-				style={{
-					position: 'absolute',
-					top: 0,
-					width: '100%',
-					height: StatusBar.currentHeight,
-					backgroundColor: colors.surface,
-				}}
-			/>
+				</Appbar.Header> */}
+                <View style={{ flex: 1 }}>
+                    <ImageSelector
+                        onImagePick={pickImage}
+                        image={image}
+                        isLoading={isInferLoading}
+                        rank={tags?.rank}
+                    />
+                    <LevelView isLoading={isInferLoading} />
+                    <Divider bold />
+                    <View
+                        style={{
+                            flexDirection: 'row',
+                            marginTop: 15,
+                            width: '100%',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <TextInput
+                            mode="outlined"
+                            label={'Image URL'}
+                            value={url}
+                            onChangeText={(text) => setUrl(text)}
+                            style={{ marginHorizontal: 10, flex: 1 }}
+                            autoFocus={false}
+                            right={
+                                url.length > 0 && (
+                                    <TextInput.Icon icon="close" onPress={() => setUrl('')} />
+                                )
+                            }
+                            onSubmitEditing={(e) => loadFromUrl(e.nativeEvent.text)}
+                        />
+                        {Platform.OS !== 'web' && (
+                            <IconButton icon="camera" onPress={takePicture} />
+                        )}
+                    </View>
+                    <View
+                        style={{
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            marginTop: 20,
+                            marginHorizontal: 10,
+                        }}
+                    >
+                        <Button
+                            mode="contained-tonal"
+                            onPress={runInference}
+                            style={{ flexGrow: 1 }}
+                            disabled={isInferDisabled && isRankEnabled}
+                        >
+                            {t`Run Inference`}
+                        </Button>
+                        <IconButton
+                            style={{ flexShrink: 1 }}
+                            icon={'tune-vertical-variant'}
+                            onPress={() => setConfigVisible(true)}
+                        />
+                    </View>
+                    {tags ? (
+                        <>
+                            <TagText
+                                tags={{ ...tags, character: characterTags, general: generalTags }}
+                            />
+                            <View>
+                                <ResultSection
+                                    tags={characterTags}
+                                    title={"Character"}
+                                    onTagSelect={onTagSelect}
+                                />
+                                <ResultSection
+                                    tags={tags?.rating}
+                                    title="Ratings"
+                                    onTagSelect={onTagSelect}
+                                />
+                                <ResultSection
+                                    tags={generalTags}
+                                    title={`General`}
+                                    onTagSelect={onTagSelect}
+                                />
+                            </View>
+                        </>
+                    ) : null}
+                    <View style={{ flex: 1 }} />
+                    <Footer />
+                </View>
+            </ScrollViewStyled>
+            <View
+                style={{
+                    position: 'absolute',
+                    top: 0,
+                    width: '100%',
+                    height: StatusBar.currentHeight,
+                    backgroundColor: colors.surface,
+                }}
+            />
 
-			<Portal>
-				<AppSettings
-					visible={appSettingsVisible}
-					onDismiss={() => setAppSettingsVisible(false)}
-					updateTheme={(mode) => (imageColors ? updateTheme(imageColors[mode]) : null)}
-				/>
-				<TagInfo
-					visible={tagInfoVisible}
-					onDismiss={() => setTagInfoVisible(false)}
-					tag={selectedTag}
-				/>
-				<InferenceConfigurator
-					visible={configVisible}
-					onDismiss={() => setConfigVisible(false)}
-				/>
-				<StatsDialog visible={statVisible} onDismiss={() => setStatVisible(false)} />
-				<AppInfo visible={appInfoVisible} onDismiss={() => setAppInfoVisible(false)} />
-			</Portal>
-		</View>
-	);
+            <Portal>
+                <AppSettings
+                    visible={appSettingsVisible}
+                    onDismiss={() => setAppSettingsVisible(false)}
+                    updateTheme={(mode) => (imageColors ? updateTheme(imageColors[mode]) : null)}
+                />
+                <TagInfo
+                    visible={tagInfoVisible}
+                    onDismiss={() => setTagInfoVisible(false)}
+                    tag={selectedTag}
+                />
+                <InferenceConfigurator
+                    visible={configVisible}
+                    onDismiss={() => setConfigVisible(false)}
+                />
+                <StatsDialog visible={statVisible} onDismiss={() => setStatVisible(false)} />
+                <AppInfo visible={appInfoVisible} onDismiss={() => setAppInfoVisible(false)} />
+            </Portal>
+        </View>
+    );
 };
 
 export default Main;

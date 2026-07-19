@@ -6,6 +6,7 @@ import { BlurView } from 'expo-blur';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { RankInfo } from '../types';
 import { useStatsStore } from '../store/stats';
+import { useLingui } from '@lingui/react/macro';
 
 const RankChip = ({ rank }: { rank: RankInfo }) => {
 	return (
@@ -24,6 +25,7 @@ type ImageSelectorProps = {
 const ImageSelector = ({ image, rank, isLoading, onImagePick }: ImageSelectorProps) => {
 	const { height, width } = useWindowDimensions();
 	const { isEnabled } = useStatsStore();
+    const { t } = useLingui();
 
 	return (
 		<Pressable
@@ -56,7 +58,7 @@ const ImageSelector = ({ image, rank, isLoading, onImagePick }: ImageSelectorPro
 			) : (
 				<>
 					<Button mode="text" icon={'upload'} onPress={onImagePick}>
-						Upload Image
+						{t`Upload Image`}
 					</Button>
 				</>
 			)}
@@ -64,7 +66,6 @@ const ImageSelector = ({ image, rank, isLoading, onImagePick }: ImageSelectorPro
 				<BlurView
 					intensity={50}
 					tint="systemChromeMaterialDark"
-					experimentalBlurMethod={'dimezisBlurView'}
 					style={[
 						{
 							position: 'absolute',

@@ -3,9 +3,14 @@ import { MD3DarkTheme, MD3LightTheme, PaperProvider } from 'react-native-paper';
 import { Toaster } from 'burnt/web';
 import { Platform } from 'react-native';
 import { useMaterial3Theme } from '@pchmn/expo-material3-theme';
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useSettingsStore } from './src/store/settings';
 import Main from './src';
+import { getLocales } from 'expo-localization';
+import { i18n } from "@lingui/core";
+import { I18nProvider, TransRenderProps } from "@lingui/react";
+import { dynamicActivate } from './src/locale';
+
 
 const App = () => {
 	const { darkMode } = useSettingsStore();
@@ -19,22 +24,28 @@ const App = () => {
 		[darkMode, theme],
 	);
 
+    useEffect(() => {
+        dynamicActivate(getLocales()[0].languageCode);
+    },[]);
+
 	return (
-		<PaperProvider theme={paperTheme}>
-			<React.Fragment>
-				{Platform.OS === 'web' ? (
-					<style type="text/css">{`
-					@font-face {
-					font-family: 'MaterialDesignIcons';
-					src: url(${require('./assets/fonts/MaterialDesignIcons.ttf')}) format('truetype');
-					}
-				`}</style>
-				) : null}
-			</React.Fragment>
-			<Main updateTheme={updateTheme} />
-			<StatusBar style={darkMode ? 'light' : 'dark'} translucent />
-			<Toaster position="bottom-right" />
-		</PaperProvider>
+        <I18nProvider i18n={i18n}>
+            <PaperProvider theme={paperTheme}>
+                <React.Fragment>
+                    {Platform.OS === 'web' ? (
+                        <style type="text/css">{`
+                        @font-face {
+                        font-family: 'MaterialDesignIcons';
+                        src: url(${require('./assets/fonts/MaterialDesignIcons.ttf')}) format('truetype');
+                        }
+                    `}</style>
+                    ) : null}
+                </React.Fragment>
+                <Main updateTheme={updateTheme} />
+                <StatusBar style={darkMode ? 'light' : 'dark'} />
+                <Toaster position="bottom-right" />
+            </PaperProvider>
+        </I18nProvider>
 	);
 };
 

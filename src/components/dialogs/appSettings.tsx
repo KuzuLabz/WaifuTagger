@@ -8,6 +8,7 @@ import { Button } from '../common/button';
 import { ListItemSwitch } from '../common/switch';
 import { WindowSetDarkTheme, WindowSetLightTheme } from '../../wailsjs/runtime/runtime';
 import { useStatsStore } from '../../store/stats';
+import { useLingui } from '@lingui/react/macro';
 
 const androidColorModes: (keyof AndroidImageColors)[] = [
 	'average',
@@ -71,24 +72,25 @@ export const AppSettings = ({
 }: BasicDialogProps & { updateTheme: (mode: keyof AndroidImageColors) => void }) => {
 	const { colorMode, darkMode, autoInfer, updateSettings } = useSettingsStore();
 	const { isEnabled: isRankEnabled, setIsEnabled: setIsRankEnabled } = useStatsStore();
+    const { t } = useLingui();
 
 	return (
 		<DialogStyled visible={visible} onDismiss={onDismiss}>
-			<Dialog.Title selectable={false}>Settings</Dialog.Title>
+			<Dialog.Title selectable={false}>{t`Settings`}</Dialog.Title>
 			<Dialog.Content>
 				<ListItemSwitch
-					title={'Auto Inference'}
+					title={t`Auto Inference`}
 					value={autoInfer}
 					onValueChange={(val) => updateSettings({ autoInfer: val })}
 				/>
 				<ListItemSwitch
-					title={'Rank Mode'}
+					title={t`Rank Mode`}
 					value={isRankEnabled}
 					onValueChange={(val) => setIsRankEnabled(val)}
 				/>
 				<Divider />
 				<ListItemSwitch
-					title={'Dark mode'}
+					title={t`Dark mode`}
 					value={darkMode}
 					onValueChange={(val) => {
 						updateSettings({ darkMode: val });
@@ -102,8 +104,8 @@ export const AppSettings = ({
 					}}
 				/>
 				<List.Item
-					title={'Dynamic Theme Mode'}
-					description={'Theme color is based on selected image color mode'}
+					title={t`Dynamic Theme Mode`}
+					description={t`Theme color is based on selected image color mode`}
 				/>
 				{Platform.OS === 'web' ? (
 					<View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 12 }}>
@@ -125,7 +127,7 @@ export const AppSettings = ({
 			</Dialog.Content>
 			<Dialog.Actions>
 				<Button androidVariant="borderless" webVariant="text" onPress={onDismiss}>
-					Close
+					{t`Close`}
 				</Button>
 			</Dialog.Actions>
 		</DialogStyled>

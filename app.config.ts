@@ -14,18 +14,15 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
 	icon: './assets/icon.png',
 	userInterfaceStyle: 'automatic',
 	backgroundColor: '#000',
-	newArchEnabled: true,
 	platforms: ['android', 'ios', 'web'],
-	splash: {
-		image: './assets/splash.png',
-		resizeMode: 'contain',
-		backgroundColor: '#000',
-	},
 	assetBundlePatterns: ['assets/models/*', 'assets/*'],
 	plugins: [
 		'onnxruntime-react-native',
 		'expo-asset',
+        'expo-image',
+        'expo-status-bar',
 		'expo-web-browser',
+        'expo-localization',
 		[
 			'expo-share-intent',
 			{
@@ -51,12 +48,22 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
 				username: 'kuzulabz',
 			},
 		],
+        [
+            'expo-splash-screen',
+            {
+                "backgroundColor": "#232323",
+                "image": './assets/splash.png',
+                "dark": {
+                    "backgroundColor": "#000000"
+                },
+                "imageWidth": 200
+            }
+        ]
 	],
 	ios: {
 		supportsTablet: true,
 	},
 	android: {
-		edgeToEdgeEnabled: true,
 		adaptiveIcon: {
 			foregroundImage: './assets/adaptive-icon.png',
 			backgroundColor: '#000',

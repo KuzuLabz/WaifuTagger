@@ -6,6 +6,7 @@ import { useStatsStore } from '../../store/stats';
 import { ScrollViewStyled } from '../scrollview';
 import { View } from 'react-native';
 import { useAppTheme } from '../../theme';
+import { useLingui } from '@lingui/react/macro';
 
 const StatListItem = ({
 	title,
@@ -29,6 +30,7 @@ export const StatsDialog = ({ visible, onDismiss }: BasicDialogProps) => {
 	const { colors } = useAppTheme();
 	const { levelInfo, totalInfers, ranksInferred, isEnabled, resetStats, resetLevels } =
 		useStatsStore();
+    const { t } = useLingui();
 
 	const onDone = () => {
 		onDismiss();
@@ -48,8 +50,8 @@ export const StatsDialog = ({ visible, onDismiss }: BasicDialogProps) => {
 			<Dialog.Title selectable={false}>Statistics</Dialog.Title>
 			<Dialog.ScrollArea>
 				<ScrollViewStyled scrollbarStyle={{ railColor: colors.elevation.level3 }}>
-					<List.Section title="Level Info">
-						<StatListItem title="Level" stat={levelInfo.level} />
+					<List.Section title={t`Level Info`}>
+						<StatListItem title={t`Level`} stat={levelInfo.level} />
 						<StatListItem
 							title="XP"
 							stat={`${levelInfo.xp} -> ${levelInfo.levelXpCap} (Lvl. ${levelInfo.level + 1})`}
@@ -81,12 +83,12 @@ export const StatsDialog = ({ visible, onDismiss }: BasicDialogProps) => {
 			<Dialog.Actions>
 				<View style={{ flex: 1, alignItems: 'flex-start' }}>
 					<Button webVariant="text" androidVariant="borderless" onPress={onReset}>
-						Reset
+						{t`Reset`}
 					</Button>
 				</View>
 
 				<Button webVariant="text" androidVariant="borderless" onPress={onDone}>
-					Done
+					{t`Done`}
 				</Button>
 			</Dialog.Actions>
 		</DialogStyled>

@@ -12,6 +12,10 @@ config.resolver.assetExts.push(
 	'wasm',
 );
 
+config.transformer.babelTransformerPath = require.resolve("@lingui/metro-transformer/expo");
+
+config.resolver.sourceExts.push('po', 'pot');
+
 config.resolver.unstable_conditionNames = ['browser', 'require', 'react-native'];
 
 module.exports = config;

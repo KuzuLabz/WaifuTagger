@@ -1,10 +1,11 @@
 import { Text, Surface, IconButton, Chip, Tooltip, Menu } from 'react-native-paper';
-import { copyToClipboard } from '../utils';
+import { copyToClipboard, shareText } from '../utils';
 import { Platform, Share, StyleSheet, View } from 'react-native';
 import { useFormattedText } from '../hooks/useFormattedText';
 import { InferenceTags, TextFormat } from '../types';
 import { useAppTheme } from '../theme';
 import { useState } from 'react';
+import { useLingui } from '@lingui/react/macro';
 
 type IconActionViewProps = {
 	text?: string;
@@ -25,7 +26,11 @@ const IconActionView = ({
 	toggleRating,
 }: IconActionViewProps) => {
 	const { colors } = useAppTheme();
+    const { t } = useLingui();
 	const [isVis, setIsVis] = useState(false);
+
+    const tagCount = `${text.split(',').length} ` + t`Tags`;
+
 	return Platform.select<React.JSX.Element>({
 		web: (
 			<>
@@ -33,7 +38,7 @@ const IconActionView = ({
 					style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', gap: 8 }}
 				>
 					<Chip compact mode="outlined">
-						{`${text.split(',').length} Tags`}
+						{tagCount}
 					</Chip>
 					<Tooltip title="Format" leaveTouchDelay={100}>
 						<Chip
@@ -66,7 +71,7 @@ const IconActionView = ({
 				/>
 				<IconButton
 					icon="share-variant"
-					onPress={() => Share.share({ message: text })}
+					onPress={() => shareText(text)}
 					style={{ alignSelf: 'flex-end' }}
 				/>
 				<IconButton
@@ -82,7 +87,7 @@ const IconActionView = ({
 					style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', gap: 8 }}
 				>
 					<Chip compact mode="outlined">
-						{`${text.split(',').length} Tags`}
+						{tagCount}
 					</Chip>
 					<Tooltip title="Format" leaveTouchDelay={100}>
 						<Chip
@@ -118,8 +123,8 @@ const IconActionView = ({
 					onDismiss={() => setIsVis(false)}
 					anchor={<IconButton icon={'dots-vertical'} onPress={() => setIsVis(true)} />}
 				>
-					<Menu.Item title={'Share'} leadingIcon={'share-variant'} />
-					<Menu.Item title={'Copy text'} leadingIcon={'content-copy'} />
+					<Menu.Item title={t`Share`} leadingIcon={'share-variant'} onPress={() => shareText(text)} />
+					<Menu.Item title={t`Copy text`} leadingIcon={'content-copy'} onPress={() => copyToClipboard(text)} />
 				</Menu>
 			</>
 		),
