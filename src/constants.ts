@@ -36,6 +36,8 @@ const booru_url = Constants.expoConfig.extra.isStore
 	? 'https://safebooru.donmai.us'
 	: 'https://danbooru.donmai.us';
 
+const IMAGE_EXTENSIONS = ['image/jpeg', 'image/png', 'png', 'jpg', 'jpeg'];
+
 export {
 	rating_indexes,
 	general_indexes,
@@ -45,6 +47,7 @@ export {
 	general_names,
 	kaomojis,
 	booru_url,
+    IMAGE_EXTENSIONS
 };
 
 export const rankExp: { [key in Rank]: number } = {

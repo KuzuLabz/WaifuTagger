@@ -13,10 +13,9 @@ import { getResults } from '../parse';
 import { OnFileDrop, OnFileDropOff } from '../wailsjs/runtime/runtime';
 import { getImageTensor } from '../web/process';
 import { useStatsStore } from '../store/stats';
+import { IMAGE_EXTENSIONS } from '../constants';
 
 env.wasm.proxy = true;
-
-const IMAGE_EXTENSIONS = ['image/jpeg', 'image/png', 'png', 'jpg', 'jpeg'];
 
 const bufferToB64 = (buffer: ArrayBuffer) => {
 	return new Promise<string>((resolve, reject) => {

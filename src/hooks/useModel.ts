@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Asset } from 'expo-asset';
 import * as ImagePicker from 'expo-image-picker';
 import { InferenceTags, SelectedImage } from '../types';
 import { toByteArray } from 'react-native-quick-base64';
 import { getBase64Uri, getImageHash, toastImageError } from '../utils';
-import * as FileSystem from 'expo-file-system';
 import { Image, ScrollView } from 'react-native';
+import { Directory, File, Paths } from 'expo-file-system';
 import * as Burnt from 'burnt';
 import { ImageColorsResult, getColors } from 'react-native-image-colors';
 import { ShareIntent, useShareIntent } from 'expo-share-intent';
@@ -13,8 +13,7 @@ import { InferenceSession, Tensor } from '../onnx';
 import { getResults } from '../parse';
 import { useStatsStore } from '../store/stats';
 import { useSettingsStore } from '../store/settings';
-
-const IMAGE_EXTENSIONS = ['image/jpeg', 'image/png', 'png', 'jpg', 'jpeg'];
+import { IMAGE_EXTENSIONS } from '../constants';
 
 const getModelUri = async (): Promise<string | null> => {
 	const assets = await Asset.loadAsync(require('../../assets/models/model.quant.preproc.onnx'));
@@ -26,7 +25,8 @@ const getModelUri = async (): Promise<string | null> => {
 	}
 };
 
-const useModel = (scrollview: ScrollView | null) => {
+const useModel = () => {
+    const scrollRef = useRef<ScrollView>(null);
 	const { hasShareIntent, resetShareIntent, shareIntent } = useShareIntent();
 	const { autoInfer } = useSettingsStore();
 	const { addXp } = useStatsStore();
@@ -136,20 +136,17 @@ const useModel = (scrollview: ScrollView | null) => {
 	// };
 
 	const loadFromUrl = async (url: string) => {
-		const [{ localUri, name, height, width, type }] = await Asset.loadAsync(url);
-		if (!IMAGE_EXTENSIONS.includes(type)) {
+        const imgDir = new Directory(Paths.cache);
+        const imgFile = await File.downloadFileAsync(url, imgDir);
+		// const [{ localUri, name, height, width, type }] = await Asset.loadAsync(url);
+		if (!IMAGE_EXTENSIONS.includes(imgFile.type)) {
 			toastImageError();
 			return;
 		}
-		const base64 = localUri
-			? await FileSystem.readAsStringAsync(localUri, {
-				encoding: FileSystem.EncodingType.Base64,
-			})
-			: null;
-		if (localUri && base64) {
-			onImageSelect({ uri: localUri, base64: base64, height, width, fileName: name });
-			return;
-		}
+		const base64 = await imgFile.base64();
+        const imgSize = await Image.getSize(imgFile.uri);
+		onImageSelect({ uri: imgFile.uri, base64: base64, fileName: imgFile.name, ...imgSize });
+		return;
 	};
 
 	const runInference = async () => {
@@ -181,31 +178,26 @@ const useModel = (scrollview: ScrollView | null) => {
 	};
 
 	const handleShareIntent = async (intent: ShareIntent) => {
-		try {
-			if (intent.files && FileSystem.cacheDirectory) {
-				const file = intent.files[0];
-				const fileUri = FileSystem.cacheDirectory + file.fileName;
-				if (fileUri !== file.path) {
-					await FileSystem.copyAsync({ from: file.path, to: fileUri });
-				}
-				const base64 = await FileSystem.readAsStringAsync(fileUri, {
-					encoding: 'base64',
-				});
-				if (file.mimeType && !IMAGE_EXTENSIONS.includes(file.mimeType)) {
-					toastImageError();
-				} else if (base64) {
-					onImageSelect({
-						uri: getBase64Uri(base64, file.mimeType),
-						fileName: file.fileName,
-						width: file.width,
-						height: file.height,
-					});
-					scrollview?.scrollTo({ y: 0, animated: true });
-				}
-			}
-		} catch (e) {
-			console.warn(e);
-		}
+        if (intent.files) {
+            const file = intent.files[0];
+            const intentFile = new File(file.path);
+            const cacheFile = new File(Paths.cache, file.fileName);
+            if (cacheFile.uri !== file.path) {
+                await intentFile.copy(cacheFile);
+            }
+            const base64 = await cacheFile.base64();
+            if (file.mimeType && !IMAGE_EXTENSIONS.includes(file.mimeType)) {
+                toastImageError();
+            } else if (base64) {
+                onImageSelect({
+                    uri: getBase64Uri(base64, file.mimeType),
+                    fileName: file.fileName,
+                    width: file.width,
+                    height: file.height,
+                });
+                scrollRef.current?.scrollTo({ y: 0, animated: true });
+            }
+        }
 	};
 
 	useEffect(() => {
@@ -213,7 +205,6 @@ const useModel = (scrollview: ScrollView | null) => {
 			handleShareIntent(shareIntent);
 			resetShareIntent();
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [hasShareIntent]);
 
 	useEffect(() => {
@@ -224,7 +215,6 @@ const useModel = (scrollview: ScrollView | null) => {
 
 	useEffect(() => {
 		loadModel();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return {
@@ -234,6 +224,7 @@ const useModel = (scrollview: ScrollView | null) => {
 		isInferLoading,
 		imageColors,
 		isInferDisabled: prevHash === image?.md5,
+        scrollRef,
 		pickImage,
 		takePicture,
 		loadFromUrl,
