@@ -13,6 +13,16 @@
 
 Run SmilingWolfs [WD Convnext Tagger v3](https://huggingface.co/SmilingWolf/wd-convnext-tagger-v3) model on mobile and [WD SwinV2 Tagger v3](https://huggingface.co/p1atdev/wd-swinv2-tagger-v3-hf) on desktop!
 
+## Version 2.1
+An upcoming version for WaifuTagger! This update will be released the week of 08/02.
+
+Version 2.1 is almost an entire rewrite. Here are a few highlights:
+- Both mobile and desktop now use a quantized `wd-swinv2-tagger-v3`.
+- Desktop has been migrated to Rust (Tauri v2). ONNX is now running natively instead of through WASM.
+- In-app updates. Always know when an update is available!
+- Improved dynamic theming.
+- App translations: English, Japanese, Chinese, French, German, Spanish.
+- Many bug fixes and UI tweaks.
 
 ## 🎮 Platforms
 Android and Desktop (Windows, MacOS, Linux)
