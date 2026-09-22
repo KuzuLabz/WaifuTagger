@@ -1,17 +1,22 @@
-import { useEffect, useMemo, useState } from 'react';
 import { InferenceTags } from '../types';
-import { useSettingsStore } from '../store/settings';
+import { useModelsStore } from '../store/models';
+import { INIT_THRESHOLDS, MAX_TAGS } from '../constants';
 
-export const useTags = (fullTags?: InferenceTags) => {
-	const { char_threshold, general_threshold } = useSettingsStore();
-	const gTags = useMemo(
-		() => fullTags?.general.filter((tag) => tag.probability >= general_threshold),
-		[fullTags?.general, general_threshold],
-	);
-	const cTags = useMemo(
-		() => fullTags?.character.filter((tag) => tag.probability >= char_threshold),
-		[char_threshold, fullTags?.character],
-	);
+export const useTags = (inferenceTags?: InferenceTags) => {
+	const thresholds = useModelsStore((state) => state.selected ? state.settings[state.selected.type]?.thresholds ?? INIT_THRESHOLDS : null);
+    const maxTags = useModelsStore((state) => state.selected ? state.settings[state.selected.type]?.maxTags ?? MAX_TAGS : null);
 
-	return { generalTags: gTags, characterTags: cTags };
+    const general = inferenceTags?.general.filter((tag, idx) => tag.probability >= thresholds?.general && idx < maxTags);
+    const character = inferenceTags?.character.filter((tag) => tag.probability >= thresholds?.character);
+    const copyright = inferenceTags?.copyright.filter((tag) => tag.probability >= thresholds?.copyright);
+    const artist = inferenceTags?.artist.filter((tag) => tag.probability >= thresholds?.artist);
+    const meta = inferenceTags?.meta.filter((tag) => tag.probability >= thresholds?.meta);
+    const year = inferenceTags?.year.filter((tag) => tag.probability >= thresholds?.year);
+
+
+    if (!inferenceTags) {
+        return null;
+    }
+
+	return { general, character, copyright, artist, meta, year, rating: inferenceTags?.rating, rank: inferenceTags?.rank };
 };

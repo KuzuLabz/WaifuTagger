@@ -1,62 +1,85 @@
-import { useEffect, useState } from 'react';
-import { InferenceTags, TextFormat } from '../types';
-import { TextSettings, useSettingsStore } from '../store/settings';
+import { InferenceTag, InferenceTags, TagCategoryType, TextFormat } from '../types';
+import { SettingsState, useSettingsStore } from '../store/settings';
 
-const getFormattedText = (tags: InferenceTags, config: TextSettings) => {
-	const initTags = [
-		...(config.includeCharacter ? tags.character.map((char) => `${char.name}`) : []),
-		...tags.general.map((tag) => `${tag.name}`),
-		...(config.includeRating ? [`${tags.rating[0].name}`] : []),
-	];
-	switch (config.textFormat) {
-		case 'space':
-			return initTags.map((tag) => tag.replaceAll('_', ' '));
-		case 'underscore':
-			return initTags.map((tag) => tag.replaceAll(' ', '_'));
-		case 'prompt':
-			return initTags.map((tag) =>
-				tag.replaceAll('(', '\\(').replaceAll(')', '\\)').replaceAll('_', ' '),
-			);
-	}
+const FORMATS: TextFormat[] = ['space', 'underscore', 'prompt'];
+const FORMAT_RULES: Record<TextFormat, (label: string) => string> = {
+    prompt: (label) => label.replace(/[_]/g, ' ').replace(/[()]/g, '\\$&'),
+    space: (label) => label.replace(/_/g, ' '),
+    underscore: (label) => label.replace(/ /g, '_'),
 };
 
-export const useFormattedText = (tags: InferenceTags) => {
-	const { textFormat, includeCharacter, includeRating, updateSettings } = useSettingsStore();
-	const [text, setText] = useState('');
+const processTags = (
+    tags: InferenceTags,
+    order: SettingsState['categoryOrder'],
+    included: SettingsState['included'],
+    textFormat: TextFormat
+) => {
+    if (!tags) {
+        return { formattedTags: null, text: '' };
+    }
 
-	const toggleChar = () => {
-		updateSettings({ includeCharacter: !includeCharacter });
-	};
+    const rankByCategory: Record<string, number> = {};
+    for (let i = 0; i < order.length; i++) {
+        rankByCategory[order[i].category] = i;
+    }
 
-	const toggleRating = () => {
-		updateSettings({ includeRating: !includeRating });
-	};
+    const transformLabel = FORMAT_RULES[textFormat] ?? ((label) => label);
+    const formattedTags = {} as Record<TagCategoryType, InferenceTag[]>;
+    const textLabels: string[] = [];
 
-	const setFormat = () => {
-		const formats: TextFormat[] = ['space', 'underscore', 'prompt'];
-		const currentIndex = formats.findIndex((val) => textFormat === val);
-		const nextIndex = currentIndex + 1 > formats.length - 1 ? 0 : currentIndex + 1;
-		updateSettings({ textFormat: formats[nextIndex] });
-	};
+    const categories = Object.keys(tags).filter(
+        (cat) => cat !== 'rank' && included[cat as TagCategoryType]
+    );
 
-	const getTagText = () => {
-		if (tags) {
-			const newTags = getFormattedText(tags, { textFormat, includeCharacter, includeRating });
-			setText(newTags.join(', '));
-		}
-	};
+    categories.sort((a, b) => {
+        const aIndex = rankByCategory[a] ?? Number.MAX_SAFE_INTEGER;
+        const bIndex = rankByCategory[b] ?? Number.MAX_SAFE_INTEGER;
+        return aIndex - bIndex;
+    });
 
-	useEffect(() => {
-		getTagText();
-	}, [tags, textFormat, includeCharacter, includeRating]);
+    for (const cat of categories) {
+        const categoryTags = tags[cat as TagCategoryType];
+        if (!categoryTags) continue;
 
-	return {
-		text,
-		format: textFormat,
-		includeCharacter,
-		includeRating,
-		setFormat,
-		toggleChar,
-		toggleRating,
-	};
+        const formattedCategoryTags: InferenceTag[] = new Array(categoryTags.length);
+        for (let i = 0; i < categoryTags.length; i++) {
+            const tag = categoryTags[i];
+            const newLabel = transformLabel(tag.label);
+            
+            formattedCategoryTags[i] = { ...tag, label: newLabel };
+            textLabels.push(newLabel);
+        }
+
+        formattedTags[cat as TagCategoryType] = formattedCategoryTags;
+    }
+
+    return {
+        formattedTags,
+        text: textLabels.join(', '),
+    };
+};
+
+export const useFormattedTags = (tags: InferenceTags) => {
+    const textFormat = useSettingsStore((state) => state.textFormat);
+    const included = useSettingsStore((state) => state.included);
+    const order = useSettingsStore((state) => state.categoryOrder);
+    const updateSettings = useSettingsStore((state) => state.updateSettings);
+
+    if (!tags) {
+        return { formattedTags: null, text: '', setFormat: () => {} };
+    }
+
+    const { formattedTags, text } = processTags(tags, order, included, textFormat);
+
+    const setFormat = () => {
+        const currentIndex = FORMATS.indexOf(textFormat);
+        const nextIndex = (currentIndex + 1) % FORMATS.length;
+        updateSettings({ textFormat: FORMATS[nextIndex] });
+    };
+
+    return {
+        formattedTags,
+        text,
+        setFormat,
+    };
 };
