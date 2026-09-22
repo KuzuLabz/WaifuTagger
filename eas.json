@@ -14,6 +14,7 @@
 			}
 		},
 		"preview": {
+            "bun": "1.4.0",
 			"env": {
 				"APP_VARIANT": "preview"
 			},
