@@ -9,24 +9,37 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
 	name: IS_DEV ? 'WaifuTagger Dev' : 'WaifuTagger',
 	slug: 'WaifuDetector',
 	scheme: IS_DEV ? 'waifutaggerdev' : 'waifutagger',
-	version: '2.1.0',
+	version: '3.0.0',
 	orientation: 'portrait',
 	icon: './assets/icon.png',
 	userInterfaceStyle: 'automatic',
 	backgroundColor: '#000',
 	platforms: ['android', 'ios', 'web'],
-	assetBundlePatterns: ['assets/models/*', 'assets/*'],
 	plugins: [
 		'onnxruntime-react-native',
 		'expo-asset',
         'expo-image',
+        'expo-font',
         'expo-status-bar',
 		'expo-web-browser',
         'expo-localization',
+        'expo-router',
+        'react-native-nitro-device-info',
+        '@kesha-antonov/react-native-background-downloader',
+        'react-native-legal',
 		[
-			'expo-share-intent',
+			'expo-sharing',
 			{
-				androidIntentFilters: ['image/png', 'image/jpg', 'image/jpeg'],
+                ios: {
+                    enabled: true,
+                    activationRule: {
+                        supportsImageWithMaxCount: 1
+                    }
+                },
+                android: {
+                    enabled: true,
+                    singleShareMimeTypes: ['image/png', 'image/jpg', 'image/jpeg'],
+                }
 			},
 		],
 		[
@@ -38,7 +51,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
 				},
 				android: {
 					useLegacyPackaging: true,
-					// enableProguardInReleaseBuilds: true, // this will crash the app on inference :(
+                    minSdkVersion: 26,
 				},
 			},
 		],
@@ -62,18 +75,24 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
 	],
 	ios: {
 		supportsTablet: true,
+        bundleIdentifier: IS_DEV ? 'com.kuzulabz.WaifuTaggerDev' : 'com.kuzulabz.WaifuTagger'
 	},
 	android: {
 		adaptiveIcon: {
 			foregroundImage: './assets/adaptive-icon.png',
 			backgroundColor: '#000',
 		},
+        permissions: IS_STORE ? undefined : ['android.permission.REQUEST_INSTALL_PACKAGES'],
+        blockedPermissions: [
+            'android.permission.RECORD_AUDIO'
+        ],
 		versionCode: 4,
 		package: IS_DEV ? 'com.kuzulabz.WaifuTaggerDev' : 'com.kuzulabz.WaifuTagger',
 	},
 	web: {
 		favicon: './assets/favicon.png',
-		bundler: 'webpack',
+		bundler: 'metro',
+        output: 'single'
 	},
 	extra: {
 		eas: {
@@ -81,4 +100,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
 		},
 		isStore: IS_STORE,
 	},
+    experiments: {
+        inlineModules: {
+            watchedDirectories: ["src/modules"]
+        }
+    }
 });
