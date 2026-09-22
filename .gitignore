@@ -1,5 +1,7 @@
 # Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
+.env
+
 # dependencies
 node_modules/
 
@@ -50,3 +52,4 @@ desktop/frontend/web-build
 .vscode
 
 .builds/
+latest.json
