@@ -1,0 +1,48 @@
+diff --git a/node_modules/onnxruntime-react-native/.bun-tag-c6236f1b08b71ab9 b/.bun-tag-c6236f1b08b71ab9
+new file mode 100644
+index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+diff --git a/android/CMakeLists.txt b/android/CMakeLists.txt
+index 2f814e871ad773c46a958c99ac5efc90d8e64357..5643840e1d93b90c694c43787f852673a543a397 100644
+--- a/android/CMakeLists.txt
++++ b/android/CMakeLists.txt
+@@ -1,5 +1,5 @@
+ project(OnnxruntimeJSI)
+-cmake_minimum_required(VERSION 3.9.0)
++cmake_minimum_required(VERSION 3.13)
+ 
+ set(PACKAGE_NAME "onnxruntime-react-native")
+ set(BUILD_DIR ${CMAKE_SOURCE_DIR}/build)
+@@ -97,3 +97,5 @@ target_link_libraries(
+   ${log-lib} # <-- Logcat logger
+   android # <-- Android JNI core
+ )
++
++target_link_options(onnxruntimejsi PRIVATE "-Wl,-z,max-page-size=16384")
+\ No newline at end of file
+diff --git a/android/build.gradle b/android/build.gradle
+index 41b43599a9af6ef1c170047d39db1f3baa6ca682..c8d62e8308d551d3c42a078ec6054cc44c6267f3 100644
+--- a/android/build.gradle
++++ b/android/build.gradle
+@@ -66,7 +66,12 @@ boolean ortExtensionsEnabled = readPackageJsonField('onnxruntimeExtensionsEnable
+ boolean useQnn = readPackageJsonField('onnxruntimeUseQnn') == "true"
+ 
+ def REACT_NATIVE_VERSION = ['node', '--print', "JSON.parse(require('fs').readFileSync(require.resolve('react-native/package.json'), 'utf-8')).version"].execute(null, rootDir).text.trim()
+-def REACT_NATIVE_MINOR_VERSION = REACT_NATIVE_VERSION.split("\\.")[1].toInteger()
++def versionParts = REACT_NATIVE_VERSION.split("\\.")
++if (versionParts.length < 2) {
++  throw new GradleException("Invalid React Native version format: ${REACT_NATIVE_VERSION}. Expected format: major.minor[.patch]")
++}
++def REACT_NATIVE_MAJOR_VERSION = versionParts[0].toInteger()
++def REACT_NATIVE_MINOR_VERSION = versionParts[1].toInteger()
+ 
+ android {
+ // This is needed by the new AndroidManifestNew.xml
+@@ -247,7 +252,7 @@ dependencies {
+     extractLibs "com.microsoft.onnxruntime:onnxruntime-android:latest.integration@aar"
+   }
+ 
+-  if (VersionNumber.parse(REACT_NATIVE_VERSION) < VersionNumber.parse("0.71")) {
++  if (REACT_NATIVE_MAJOR_VERSION == 0 && REACT_NATIVE_MINOR_VERSION < 71) {
+     extractLibs "com.facebook.fbjni:fbjni:+:headers"
+     extractLibs "com.facebook.fbjni:fbjni:+"
+   }

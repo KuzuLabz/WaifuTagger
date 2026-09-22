@@ -1,0 +1,192 @@
+diff --git a/node_modules/@expo/ui/.bun-tag-3dd413d0f2e38b13 b/.bun-tag-3dd413d0f2e38b13
+new file mode 100644
+index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+diff --git a/src/universal/FieldGroup/FieldGroup.android.tsx b/src/universal/FieldGroup/FieldGroup.android.tsx
+index d200e25ee7485f10aea2fb1333eb65db71af9e13..5b2d20be3b71ff825f4775a0260673f6bf8c8086 100644
+--- a/src/universal/FieldGroup/FieldGroup.android.tsx
++++ b/src/universal/FieldGroup/FieldGroup.android.tsx
+@@ -14,6 +14,7 @@ import { transformToModifiers } from '../transformStyle';
+ export function FieldGroup({
+   children,
+   style,
++  sectionItemColor,
+   onAppear,
+   onDisappear,
+   disabled,
+@@ -34,7 +35,7 @@ export function FieldGroup({
+       verticalArrangement={{ spacedBy: 24 }}
+       contentPadding={{ start: 16, end: 16, top: 16, bottom: 16 }}
+       modifiers={modifiers}>
+-      {groupFieldGroupChildren(children)}
++      {groupFieldGroupChildren(children, sectionItemColor)}
+     </LazyColumn>
+   );
+ }
+diff --git a/src/universal/FieldGroup/FieldGroup.tsx b/src/universal/FieldGroup/FieldGroup.tsx
+index 5832c4cfd4c010653a28dc83fa2fcb761ecff86e..44d5dd76568ba65cc94c2412b7dba75bdfc3fe0f 100644
+--- a/src/universal/FieldGroup/FieldGroup.tsx
++++ b/src/universal/FieldGroup/FieldGroup.tsx
+@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
+ export function FieldGroup({
+   children,
+   style,
++  sectionItemColor,
+   onAppear,
+   onDisappear,
+   hidden = false,
+diff --git a/src/universal/FieldGroup/FieldSection.android.tsx b/src/universal/FieldGroup/FieldSection.android.tsx
+index b1f49f455eccfe56463556f07990edbba06856f1..5c2b04d8410b00888d6c9b4df30dd57125fa7851 100644
+--- a/src/universal/FieldGroup/FieldSection.android.tsx
++++ b/src/universal/FieldGroup/FieldSection.android.tsx
+@@ -4,7 +4,7 @@ import {
+   ListItem,
+   useMaterialColors,
+ } from '@expo/ui/jetpack-compose';
+-import { clip, fillMaxWidth, padding, Shapes } from '@expo/ui/jetpack-compose/modifiers';
++import { clickable, clip, fillMaxWidth, padding, Shapes } from '@expo/ui/jetpack-compose/modifiers';
+ 
+ import { extractFieldSectionSlots } from './FieldSectionSlots';
+ import { getFieldItemPosition, type FieldItemPosition, type FieldSectionProps } from './types';
+@@ -22,11 +22,13 @@ export function FieldSection({
+   children,
+   title,
+   style,
++  onPress,
+   onAppear,
+   onDisappear,
+   disabled,
+   hidden,
+   testID,
++  itemContainerColor,
+   titleUppercase = false,
+   modifiers: extraModifiers,
+ }: FieldSectionProps) {
+@@ -67,8 +69,8 @@ export function FieldSection({
+             return (
+               <ListItem
+                 key={index}
+-                colors={{ containerColor: colors.surfaceContainer }}
+-                modifiers={[fillMaxWidth(), clip(Shapes.RoundedCorner(cornerRadii(position)))]}>
++                colors={{ containerColor: itemContainerColor ?? colors.surfaceContainer }}
++                modifiers={[clickable(() => onPress?.(index), {indication: !!onPress}), fillMaxWidth(), clip(Shapes.RoundedCorner(cornerRadii(position)))]}>
+                 <ListItem.HeadlineContent>{child}</ListItem.HeadlineContent>
+               </ListItem>
+             );
+diff --git a/src/universal/FieldGroup/FieldSection.tsx b/src/universal/FieldGroup/FieldSection.tsx
+index ab30f97e0cbb832456c8fda08dde2a1d7b2b8c90..2b647e6dec2f68a420a1a4191d325290fd5651a1 100644
+--- a/src/universal/FieldGroup/FieldSection.tsx
++++ b/src/universal/FieldGroup/FieldSection.tsx
+@@ -1,5 +1,5 @@
+ import { Fragment } from 'react';
+-import { StyleSheet, Text, View } from 'react-native';
++import { Pressable, StyleSheet, Text, View } from 'react-native';
+ 
+ import { extractFieldSectionSlots } from './FieldSectionSlots';
+ import type { FieldSectionProps } from './types';
+@@ -61,8 +61,10 @@ export function FieldSection({
+   children,
+   title,
+   style,
++  itemContainerColor,
+   onAppear,
+   onDisappear,
++  onPress,
+   hidden,
+   testID,
+   titleUppercase = false,
+@@ -84,7 +86,7 @@ export function FieldSection({
+         <View style={styles.card}>
+           {rows.map((child, index) => (
+             <Fragment key={index}>
+-              <View style={styles.rowWrapper}>{child}</View>
++              <Pressable onPress={onPress ? () => onPress?.(index) : undefined} style={styles.rowWrapper}>{child}</Pressable>
+               {index < rows.length - 1 ? <View role="separator" style={styles.divider} /> : null}
+             </Fragment>
+           ))}
+diff --git a/src/universal/FieldGroup/groupChildren.tsx b/src/universal/FieldGroup/groupChildren.tsx
+index 82672192451faacde34312b33c6200ccb6c2e412..3130a466622201ac1428ee1d68bb83278976d160 100644
+--- a/src/universal/FieldGroup/groupChildren.tsx
++++ b/src/universal/FieldGroup/groupChildren.tsx
+@@ -1,21 +1,17 @@
+-import { Children, Fragment, isValidElement, type ReactElement, type ReactNode } from 'react';
++import { Children, cloneElement, Fragment, isValidElement, type ReactElement, type ReactNode } from 'react';
+ 
+ import { FieldSection } from './FieldSection';
+ 
+-/**
+- * Mirrors SwiftUI `Form`'s behavior of treating direct non-`Section` children
+- * as rows in an implicit section. Consecutive non-[`FieldGroup.Section`](#fieldgroupsection)
+- * children are collected and wrapped in a synthetic section so they pick up
+- * the same rounded-corner grouped styling as explicit sections.
+- */
+-export function groupFieldGroupChildren(children: ReactNode): ReactNode[] {
++export function groupFieldGroupChildren(children: ReactNode, sectionItemColor?: string): ReactNode[] {
+   const result: ReactNode[] = [];
+   let buffered: ReactNode[] = [];
+ 
+   const flush = () => {
+     if (buffered.length === 0) return;
+     result.push(
+-      <FieldSection key={`__implicit-section-${result.length}__`}>{buffered}</FieldSection>
++      <FieldSection key={`__implicit-section-${result.length}__`} itemContainerColor={sectionItemColor}>
++        {buffered}
++      </FieldSection>
+     );
+     buffered = [];
+   };
+@@ -26,14 +22,20 @@ export function groupFieldGroupChildren(children: ReactNode): ReactNode[] {
+     }
+     if (isSectionElement(child)) {
+       flush();
+-      result.push(child);
++      // Clone explicit section to pass sectionItemColor if not explicitly provided on the element
++      const sectionProps = child.props as { itemContainerColor?: string };
++      result.push(
++        cloneElement(child, {
++            // @ts-expect-error
++          itemContainerColor: sectionProps.itemContainerColor ?? sectionItemColor,
++        })
++      );
+       return;
+     }
+     if (isValidElement(child) && child.type === Fragment) {
+-      // Recurse into fragments so users can group explicit sections + rows
+-      // without the fragment itself being treated as a row.
++      // Recurse into fragments, passing down sectionItemColor
+       const fragmentProps = child.props as { children?: ReactNode };
+-      const nested = groupFieldGroupChildren(fragmentProps.children);
++      const nested = groupFieldGroupChildren(fragmentProps.children, sectionItemColor);
+       nested.forEach((nestedChild) => {
+         if (isSectionElement(nestedChild)) {
+           flush();
+diff --git a/src/universal/FieldGroup/types.ts b/src/universal/FieldGroup/types.ts
+index 53be4f8aa00f335e0e56cd3bf8bc5bcf30a504b9..e68ad9e6732f25cbbca23a7ef64b609cc868bc98 100644
+--- a/src/universal/FieldGroup/types.ts
++++ b/src/universal/FieldGroup/types.ts
+@@ -33,13 +33,15 @@ export interface FieldGroupProps extends UniversalBaseProps {
+    * sections, matching SwiftUI `Form` behavior.
+    */
+   children?: React.ReactNode;
++
++  sectionItemColor?: string
+ }
+ 
+ /**
+  * Props for the [`FieldGroup.Section`](#fieldgroupsection) component, a
+  * grouped list of rows within a [`FieldGroup`](#fieldgroup).
+  */
+-export interface FieldSectionProps extends UniversalBaseProps {
++export interface FieldSectionProps extends Omit<UniversalBaseProps, 'onPress'> {
+   /**
+    * The rows of the section, optionally interleaved with a single
+    * `<FieldGroup.SectionHeader>` and/or `<FieldGroup.SectionFooter>` child
+@@ -62,6 +64,9 @@ export interface FieldSectionProps extends UniversalBaseProps {
+    * @default false
+    */
+   titleUppercase?: boolean;
++
++  itemContainerColor?: string;
++  onPress?: (index: number) => void;
+ }
+ 
+ /**
