@@ -1,11 +1,16 @@
-import { StyleProp, ViewStyle } from 'react-native';
-import { ListItemProps } from 'react-native-paper';
-
-export type SwitchProps = {
-	value: boolean;
-	onValueChange?: (value: boolean) => void;
-	style?: StyleProp<ViewStyle>;
-	disabled?: boolean;
+export type NativeSwitchProps = {
+    label?: string; 
+    value: boolean; 
+    onValueChange?: (val: boolean) => void;
+    slot?: string;
+    hosted?: boolean;
 };
 
-export type ListItemSwitchProps = SwitchProps & ListItemProps;
+export type ListSwitchProps = {
+    title: string; 
+    value: boolean; 
+    isFirst?: boolean;
+    isLast?: boolean;
+    hosted?: boolean;
+    onValueChange?: (val: boolean) => void
+};

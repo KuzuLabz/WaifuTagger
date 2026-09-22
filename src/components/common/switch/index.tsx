@@ -1,27 +1,18 @@
-import { Switch as ExpoSwitch, SwitchSwitchVariantProps } from '@expo/ui/jetpack-compose';
-import { List } from 'react-native-paper';
-import { ListItemSwitchProps, SwitchProps } from './types';
-import { useAppTheme } from '../../../theme';
+import { M3eSwitch } from '@m3e/react/switch';
+import { M3eListAction } from "@m3e/react/list";
+import { ListSwitchProps, NativeSwitchProps } from "./types";
 
-export const Switch = (props: SwitchProps) => {
-	const { colors } = useAppTheme();
-	const switchColors: SwitchSwitchVariantProps['elementColors'] = {
-		uncheckedTrackColor: colors.surfaceContainerHighest,
-		uncheckedThumbColor: colors.outline,
-		checkedTrackColor: colors.primary,
-		checkedThumbColor: colors.onPrimary,
-	};
-
-	return <ExpoSwitch {...props} variant="switch" elementColors={switchColors} />;
+export const NativeSwitch = ({value, slot, onValueChange}:NativeSwitchProps) => {
+    return(
+        <M3eSwitch checked={value} slot={slot} onClick={() => onValueChange(!value)} />
+    );
 };
 
-export const ListItemSwitch = ({ value, onValueChange, ...itemProps }: ListItemSwitchProps) => {
-	return (
-		<List.Item
-			{...itemProps}
-			right={(props) => (
-				<Switch style={[props.style]} value={value} onValueChange={onValueChange} />
-			)}
-		/>
-	);
+export const ListSwitch = ({title, value, onValueChange}: ListSwitchProps) => {
+    return(
+        <M3eListAction onClick={() => onValueChange(!value)}>
+            {title}
+            <NativeSwitch slot="trailing" value={value} onValueChange={onValueChange} />
+        </M3eListAction>
+    );
 };
