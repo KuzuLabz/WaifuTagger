@@ -1,8 +1,9 @@
-import WD_TAGS from '../assets/tags.json';
+import { Endpoints } from '@octokit/types';
+import ModelList from './model-list.json';
+
+export type Platform = 'desktop' | 'mobile' | 'web';
 
 export type Rank = 'S' | 'A' | 'B' | 'C' | 'D' | 'E' | 'F';
-
-export type RawTag = (typeof WD_TAGS)[0];
 
 export type RankInfo = {
 	rank: Rank;
@@ -12,34 +13,43 @@ export type RankInfo = {
 
 export type Ratings = 'general' | 'sensitive' | 'questionable' | 'explicit';
 
-export type ProbTag = RawTag & {
+export enum TagCategories {
+    'general' = 0,
+    'artist' = 1,
+    'copyright' = 3,
+    'character' = 4,
+    'meta' = 5,
+    'year' = 6,
+    'rating' = 9
+}
+export type TagCategoryType = keyof typeof TagCategories;
+
+export type InferenceTag = {
+    label: string;
 	probability: number;
-};
-export type InferenceTag = ProbTag & {
-	rank?: RankInfo;
-};
-
-export type ProbTags = {
-	rating: ProbTag[];
-	general: ProbTag[];
-	character: ProbTag[];
+    count: number;
+    rank?: Omit<RankInfo, 'xp'>
 };
 
-export type InferenceTags = {
-	rating: InferenceTag[];
-	general: InferenceTag[];
-	character: InferenceTag[];
-	rank: RankInfo;
-};
+export type InferenceTags = Record<TagCategoryType, InferenceTag[]> & {rank?: RankInfo};
 
-export type SelectedImage = {
-	uri: string;
-	height: number;
-	width: number;
-	base64?: string;
-	fileName?: string;
-	mimeType?: string;
-	md5?: string;
-};
+/**
+ * "0": [label, category, count]
+ */
+export type RawTags = Record<string, [string, number, number]>;
 
 export type TextFormat = 'space' | 'underscore' | 'prompt';
+
+export type GithubReleaseResponse =
+	Endpoints['GET /repos/{owner}/{repo}/releases/latest']['response']['data'];
+
+export type ModelTags = Record<string, [string, number, number]>;
+
+
+// Model List
+export type ModelListCatalog = typeof ModelList
+export type SupportedModels = Exclude<keyof ModelListCatalog, '$schema'>;
+export type ModelEntry = ModelListCatalog[SupportedModels];
+export type ModelVariant = ModelEntry['variants'][VariantType];
+export type VariantType = keyof ModelEntry['variants'];
+export type ModelKey = `${string}:${VariantType}`;
