@@ -1,0 +1,75 @@
+{
+    "$schema": "./model-list.schema.json",
+    "wd-convnext-tagger-v3": {
+        "name": "WD Convnext Tagger v3",
+        "creator": "SmilingWolf",
+        "license": "Apache 2.0",
+        "categories": ["character", "general", "rating"],
+        "minThreshold": 0.27,
+        "tags": "https://huggingface.co/Smashinfries/wd-convnext-tagger-v3-mobile/resolve/main/tags.json",
+        "links": {
+            "mobileUrl": "https://huggingface.co/Smashinfries/wd-convnext-tagger-v3-onnx-mobile",
+            "sourceUrl": "https://huggingface.co/SmilingWolf/wd-convnext-tagger-v3"
+        },
+        "variants": {
+            "QUINT8": {
+                "filename": "wd_convnext_tagger_v3_quint8_mobile.onnx",
+                "url": "https://huggingface.co/Smashinfries/wd-convnext-tagger-v3-mobile/resolve/main/wd-convnext-tagger-v3-quint8-mobile.onnx",
+                "size": "106 MB"
+            },
+            "FP16": {
+                "filename": "wd-convnext-tagger-v3-fp16-mobile.onnx",
+                "url": "https://huggingface.co/Smashinfries/wd-convnext-tagger-v3-mobile/resolve/main/wd-convnext-tagger-v3-fp16-mobile.onnx",
+                "size": "188 MB"
+            }
+        }
+    },
+    "wd-swinv2-tagger-v3": {
+        "name": "WD Swinv2 Tagger v3",
+        "creator": "SmilingWolf",
+        "license": "Apache 2.0",
+        "categories": ["character", "general", "rating"],
+        "minThreshold": 0.27,
+        "tags": "https://huggingface.co/Smashinfries/wd-swinv2-tagger-v3-onnx-mobile/resolve/main/tags.json",
+        "links": {
+            "mobileUrl": "https://huggingface.co/Smashinfries/wd-swinv2-tagger-v3-onnx-mobile",
+            "sourceUrl": "https://huggingface.co/SmilingWolf/wd-swinv2-tagger-v3"
+        },
+        "variants": {
+            "QUINT8": {
+                "filename": "wd-swinv2-tagger-v3-quint8-mobile.onnx",
+                "url": "https://huggingface.co/Smashinfries/wd-swinv2-tagger-v3-onnx-mobile/resolve/main/wd-swinv2-tagger-v3-quint8-mobile.onnx",
+                "size": "167 MB"
+            },
+            "FP16": {
+                "filename": "wd-swinv2-tagger-v3-fp16-mobile.onnx",
+                "url": "https://huggingface.co/Smashinfries/wd-swinv2-tagger-v3-onnx-mobile/resolve/main/wd-swinv2-tagger-v3-fp16-mobile.onnx",
+                "size": "224 MB"
+            }
+        }
+    },
+    "camie-tagger-v2": {
+        "name": "Camie Tagger v2",
+        "creator": "Camais03",
+        "license": "GPL 3.0",
+        "categories": ["artist", "character", "copyright", "general", "meta", "rating", "year"],
+        "minThreshold": 0.49,
+        "tags": "https://huggingface.co/Smashinfries/camie-tagger-v2-onnx-quant/resolve/main/tags.json",
+        "links": {
+            "mobileUrl": "https://huggingface.co/Smashinfries/camie-tagger-v2-onnx-mobile",
+            "sourceUrl": "https://huggingface.co/Camais03/camie-tagger-v2"
+        },
+        "variants": {
+            "QUINT8": {
+                "filename": "camie-tagger-v2-quint8-mobile.onnx",
+                "url": "https://huggingface.co/Smashinfries/camie-tagger-v2-onnx-mobile/resolve/main/camie-tagger-v2-quint8-mobile.onnx",
+                "size": "196 MB"
+            },
+            "FP16": {
+                "filename": "camie-tagger-v2-fp16-mobile.onnx",
+                "url": "https://huggingface.co/Smashinfries/camie-tagger-v2-onnx-mobile/resolve/main/camie-tagger-v2-fp16-mobile.onnx",
+                "size": "377 MB"
+            }
+        }
+    }
+}

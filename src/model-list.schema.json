@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Model List Schema",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "$id": {
+      "type": "string"
+    }
+  },
+  "$defs": {
+    "variant": {
+      "type": "object",
+      "properties": {
+        "filename": { "type": "string" },
+        "url": { "type": "string", "format": "uri" },
+        "size": { "type": "string" }
+      },
+      "required": ["filename", "url", "size"],
+      "additionalProperties": false
+    },
+    "model": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "creator": { "type": "string" },
+        "minThreshold": { "type": "number" },
+        "tags": { "type": "string", "format": "uri" },
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["artist", "character", "copyright", "general", "meta", "rating", "year"]
+          },
+          "uniqueItems": true
+        },
+        "license": { "type": "string" },
+        "links": {
+          "type": "object",
+          "properties": {
+            "mobileUrl": { "type": "string", "format": "uri" },
+            "sourceUrl": { "type": "string", "format": "uri" }
+          },
+          "required": ["mobileUrl", "sourceUrl"],
+          "additionalProperties": false
+        },
+        "variants": {
+          "type": "object",
+          "propertyNames": {
+            "enum": ["QUINT", "QUINT8", "FP16", "FP32"]
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/variant"
+          }
+        }
+      },
+      "required": ["name", "creator", "license", "minThreshold", "tags", "categories", "links", "variants"],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": {
+    "$ref": "#/$defs/model"
+  }
+}
