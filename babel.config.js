@@ -9,6 +9,6 @@ module.exports = function (api) {
 				},
 			],
 		],
-		plugins: ['@babel/plugin-proposal-export-namespace-from', 'react-native-reanimated/plugin', "@lingui/babel-plugin-lingui-macro"],
+		plugins: ["@lingui/babel-plugin-lingui-macro", 'react-native-worklets/plugin'],
 	};
 };
