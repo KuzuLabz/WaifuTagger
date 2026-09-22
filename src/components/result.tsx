@@ -2,7 +2,7 @@ import { Platform, View, ViewStyle } from 'react-native';
 import { Divider, ProgressBar, Text, useTheme } from 'react-native-paper';
 import { InferenceTag } from '../types';
 
-const Result = ({ name, probability, rank }: InferenceTag) => {
+const Result = ({ label, probability, rank }: InferenceTag) => {
 	const { colors } = useTheme();
 	return (
 		<View
@@ -27,7 +27,12 @@ const Result = ({ name, probability, rank }: InferenceTag) => {
 					alignItems: 'center',
 				}}
 			>
-				<Text variant="titleMedium">{name}</Text>
+				<Text variant="titleMedium" style={{justifyContent: 'center'}}>
+                    {label}
+                </Text>
+                {rank && <View style={{paddingHorizontal: 6, paddingVertical: 2, justifyContent: 'center', backgroundColor: colors.backdrop, marginLeft: 6, borderRadius: 6}}>
+                        <Text variant='labelMedium'>{rank.rank}</Text>
+                    </View>}
 				<View style={{ flex: 1, justifyContent: 'center', marginHorizontal: 10 }}>
 					<Divider style={{ backgroundColor: colors.primary }} />
 				</View>
