@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2026-07-18 23:25-0500\n"
+"POT-Creation-Date: 2026-09-19 17:12-0500\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,128 +13,469 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/components/dialogs/appInfo.tsx:88
+#. placeholder {0}: tagData.length
+#: src/components/tagText.tsx:314
+msgid "{0} Tags"
+msgstr "{0} Tags"
+
+#: src/app/models.tsx:291
+msgid "{recVariant} is recommended for your device."
+msgstr "{recVariant} wird für Ihr Gerät empfohlen."
+
+#: src/components/content/settings.tsx:217
 msgid "About"
 msgstr "Über"
 
-#: src/components/dialogs/appSettings.tsx:82
-msgid "Auto Inference"
+#: src/app/(dialogs)/updateChecker.native.tsx:31
+#: src/app/(dialogs)/updateChecker.native.tsx:93
+#: src/app/(dialogs)/updateChecker.tsx:20
+msgid "App Update"
+msgstr "App-Update"
+
+#: src/hooks/translations/useCategoryTitles.ts:8
+msgid "Artist"
+msgstr "Künstler"
+
+#: src/components/content/settings.tsx:195
+msgid "Auto inference"
 msgstr "Automatische Inferenz"
 
-#: src/components/dialogs/appInfo.tsx:38
-msgid "Based on SmilingWolfs"
-msgstr "Basierend auf SmilingWolfs"
+#: src/app/(dialogs)/config.tsx:54
+#: src/components/common/alert.android.tsx:38
+msgid "Cancel"
+msgstr "Abbrechen"
 
-#: src/components/section.tsx:19
+#: src/app/categories.tsx:39
+#: src/components/content/settings.tsx:188
+msgid "Categories"
+msgstr "Kategorien"
+
+#: src/components/content/settings.tsx:187
+msgid "Change model"
+msgstr "Modell wechseln"
+
+#: src/app/models.tsx:261
+msgid "Change model directory"
+msgstr "Modellverzeichnis ändern"
+
+#: src/hooks/translations/useCategoryTitles.ts:9
 msgid "Character"
 msgstr "Charakter"
 
-#: src/components/dialogs/appInfo.tsx:98
-#: src/components/dialogs/appSettings.tsx:130
+#: src/components/content/settings.tsx:198
+msgid "Check for updates on startup"
+msgstr "Beim Start nach Updates suchen"
+
+#: src/app/(dialogs)/settings.tsx:13
 msgid "Close"
 msgstr "Schließen"
 
-#: src/components/tagText.tsx:127
+#: src/hooks/translations/useThemeVariantNames.ts:8
+msgid "Content"
+msgstr "Inhalt"
+
+#: src/utils/utils.ts:42
+msgid "Copied to Clipboard"
+msgstr "In die Zwischenablage kopiert"
+
+#: src/components/input.tsx:46
+msgid "Copy"
+msgstr "Kopieren"
+
+#: src/components/tagText.tsx:165
 msgid "Copy text"
 msgstr "Text kopieren"
 
-#: src/components/footer.tsx:29
-msgid "Created by KuzuLabz"
-msgstr "Erstellt von KuzuLabz"
+#: src/hooks/translations/useCategoryTitles.ts:10
+msgid "Copyright"
+msgstr "Urheberrecht"
 
-#: src/components/dialogs/appSettings.tsx:93
+#: src/components/footer.tsx:30
+msgid "Created by KuzuLabz ❤️"
+msgstr "Erstellt von KuzuLabz ❤️"
+
+#: src/components/content/settings.tsx:204
 msgid "Dark mode"
 msgstr "Dunkelmodus"
 
-#: src/components/dialogs/stats.tsx:91
-#: src/components/dialogs/tagInfo.tsx:74
+#: src/app/models.tsx:191
+msgid "Deselect"
+msgstr "Auswahl aufheben"
+
+#: src/app/(dialogs)/stats.tsx:30
+#: src/app/(dialogs)/tag.tsx:30
 msgid "Done"
 msgstr "Fertig"
 
-#: src/components/dialogs/appSettings.tsx:107
-msgid "Dynamic Theme Mode"
-msgstr "Dynamischer Themenmodus"
+#: src/app/models.tsx:191
+msgid "Download"
+msgstr "Herunterladen"
 
-#: src/components/section.tsx:21
+#: src/utils/selector/index.tauri.ts:117
+msgid "Error loading URL"
+msgstr "Fehler beim Laden der URL"
+
+#: src/components/content/settings.tsx:190
+msgid "Execution Provider"
+msgstr "Ausführungsanbieter"
+
+#: src/hooks/translations/useThemeVariantNames.ts:9
+msgid "Expressive"
+msgstr "Ausdrucksstark"
+
+#: src/utils/fs.tauri.ts:98
+msgid "Failed to delete {type}"
+msgstr "{type} konnte nicht gelöscht werden"
+
+#: src/utils/fs.tauri.ts:49
+msgid "Failed to download model!"
+msgstr "Modell konnte nicht heruntergeladen werden!"
+
+#: src/onnx.tauri.ts:102
+#: src/onnx.tauri.ts:107
+#: src/onnx.ts:171
+msgid "Failed to inference!"
+msgstr "Inferenz fehlgeschlagen!"
+
+#: src/utils/selector/index.native.ts:26
+msgid "Failed to load image!"
+msgstr "Bild konnte nicht geladen werden!"
+
+#: src/utils/fs.tauri.ts:74
+msgid "Failed to open directory."
+msgstr "Verzeichnis konnte nicht geöffnet werden."
+
+#: src/hooks/translations/useThemeVariantNames.ts:10
+msgid "Fidelity"
+msgstr "Treue"
+
+#: src/hooks/translations/useThemeVariantNames.ts:11
+msgid "Fruit Salad"
+msgstr "Obstsalat"
+
+#: src/components/content/settings.tsx:193
+#: src/hooks/translations/useCategoryTitles.ts:11
 msgid "General"
 msgstr "Allgemein"
 
-#: src/components/dialogs/appInfo.tsx:65
-msgid "huggingface.co"
-msgstr "huggingface.co"
+#: src/app/categories.tsx:43
+msgid "Hide empty"
+msgstr "Leere ausblenden"
 
-#: src/components/dialogs/appInfo.tsx:63
-msgid "If you would like to know more about the optimized model, check out the model card at "
-msgstr "Wenn Sie mehr über das optimierte Modell erfahren möchten, sehen Sie sich die Modellkarte unter "
+#: src/components/content/stats.tsx:43
+msgid "Image Ranks"
+msgstr "Bild-Ränge"
 
-#: src/components/dialogs/stats.tsx:54
+#: src/components/input.tsx:63
+msgid "Image URL"
+msgstr "Bild-URL"
+
+#: src/components/language.native.tsx:41
+#: src/components/language.tsx:36
+msgid "Language"
+msgstr "Sprache"
+
+#: src/components/content/stats.tsx:35
 msgid "Level"
 msgstr "Level"
 
-#: src/components/dialogs/stats.tsx:53
+#: src/components/content/stats.tsx:34
 msgid "Level Info"
-msgstr "Level-Informationen"
+msgstr "Level-Info"
 
-#: src/components/loading.tsx:20
-msgid "Loading model..."
-msgstr "Modell wird geladen..."
+#. placeholder {0}: MODEL_CATALOG[selected.type].name
+#: src/components/loading.tsx:29
+msgid "Loading {0}"
+msgstr "{0} wird geladen"
 
-#: src/components/dialogs/appInfo.tsx:60
-msgid "model"
+#: src/components/levelView.tsx:55
+msgid "Lvl."
+msgstr "Lvl."
+
+#: src/app/(dialogs)/config.native.tsx:114
+msgid "Max General Tags"
+msgstr "Max. allgemeine Tags"
+
+#: src/app/(dialogs)/config.native.tsx:76
+#: src/app/(dialogs)/config.tsx:64
+msgid "Max tags"
+msgstr "Max. Tags"
+
+#: src/components/content/settings.tsx:106
+msgid "Memory"
+msgstr "Speicher"
+
+#: src/hooks/translations/useCategoryTitles.ts:12
+msgid "Meta"
+msgstr "Meta"
+
+#: src/app/(dialogs)/config.native.tsx:88
+#: src/app/(dialogs)/config.tsx:75
+msgid "Minimum thresholds"
+msgstr "Mindestschwellenwerte"
+
+#: src/app/(dialogs)/config.native.tsx:117
+msgid "Minimum Thresholds"
+msgstr "Mindestschwellenwerte"
+
+#: src/app/models.tsx:97
+msgid "Model"
 msgstr "Modell"
+
+#: src/onnx.ts:135
+msgid "Model is too large for this device."
+msgstr "Das Modell ist zu groß für dieses Gerät."
+
+#: src/app/models.tsx:249
+msgid "Model Manager"
+msgstr "Modell-Manager"
+
+#: src/onnx.tauri.ts:31
+#: src/onnx.ts:109
+msgid "Model not found!"
+msgstr "Modell nicht gefunden!"
+
+#: src/app/(dialogs)/config.native.tsx:59
+#: src/app/(dialogs)/config.native.tsx:112
+#: src/app/(dialogs)/config.tsx:46
+msgid "Model Settings"
+msgstr "Modell-Einstellungen"
+
+#: src/components/content/settings.tsx:185
+msgid "Models"
+msgstr "Modelle"
+
+#: src/hooks/translations/useThemeVariantNames.ts:12
+msgid "Monochrome"
+msgstr "Monochrom"
+
+#: src/hooks/translations/useThemeVariantNames.ts:13
+msgid "Neutral"
+msgstr "Neutral"
 
 #: src/components/section.tsx:61
 msgid "No Results"
 msgstr "Keine Ergebnisse"
 
-#: src/components/dialogs/appInfo.tsx:93
-msgid "Only PNG and JPEG images can be used."
-msgstr "Es können nur PNG- und JPEG-Bilder verwendet werden."
+#: src/components/content/settings.tsx:68
+msgid "No update available"
+msgstr "Kein Update verfügbar"
 
-#: src/components/dialogs/appSettings.tsx:87
-msgid "Rank Mode"
+#: src/app/models.tsx:272
+msgid "Open model directory"
+msgstr "Modellverzeichnis öffnen"
+
+#: src/app/licenses.tsx:137
+#: src/components/content/settings.tsx:221
+msgid "Open source licenses"
+msgstr "Open-Source-Lizenzen"
+
+#: src/components/input.tsx:46
+msgid "Paste"
+msgstr "Einfügen"
+
+#: src/app/models.tsx:256
+msgid "Please download and select a model to get started!"
+msgstr "Bitte laden Sie ein Modell herunter und wählen Sie es aus, um zu beginnen!"
+
+#: src/components/content/settings.tsx:189
+msgid "Prefer GPU"
+msgstr "GPU bevorzugen"
+
+#: src/components/content/settings.tsx:222
+msgid "Privacy policy"
+msgstr "Datenschutzerklärung"
+
+#: src/app/(dialogs)/tag.tsx:34
+msgid "Probability"
+msgstr "Wahrscheinlichkeit"
+
+#: src/utils/selector/index.tauri.ts:126
+msgid "Processing image..."
+msgstr "Bild wird verarbeitet..."
+
+#: src/components/tagText.tsx:192
+msgid "Prompt"
+msgstr "Prompt"
+
+#: src/hooks/translations/useThemeVariantNames.ts:14
+msgid "Rainbow"
+msgstr "Regenbogen"
+
+#: src/components/content/settings.tsx:109
+msgid "RAM - App usage"
+msgstr "RAM - App-Nutzung"
+
+#: src/app/(dialogs)/tag.tsx:40
+msgid "Rank"
+msgstr "Rang"
+
+#: src/components/content/settings.tsx:196
+msgid "Rank mode"
 msgstr "Rang-Modus"
 
-#: src/components/section.tsx:20
-msgid "Ratings"
-msgstr "Bewertungen"
+#: src/hooks/translations/useCategoryTitles.ts:13
+msgid "Rating"
+msgstr "Bewertung"
 
-#: src/components/dialogs/stats.tsx:86
+#: src/app/(dialogs)/config.native.tsx:70
+#: src/app/(dialogs)/config.native.tsx:134
+#: src/app/(dialogs)/config.tsx:49
+#: src/app/(dialogs)/stats.native.tsx:25
+#: src/app/(dialogs)/stats.tsx:30
+#: src/components/header.tsx:89
 msgid "Reset"
 msgstr "Zurücksetzen"
 
-#: src/index.tsx:203
+#: src/app/(dialogs)/stats.native.tsx:23
+msgid "Reset progress?"
+msgstr "Fortschritt zurücksetzen?"
+
+#: src/app/(app)/index.tsx:123
 msgid "Run Inference"
 msgstr "Inferenz ausführen"
 
-#: src/components/dialogs/appSettings.tsx:79
+#: src/app/(dialogs)/config.native.tsx:65
+#: src/app/(dialogs)/config.native.tsx:133
+#: src/app/(dialogs)/config.tsx:58
+msgid "Save"
+msgstr "Speichern"
+
+#: src/app/models.tsx:191
+msgid "Select"
+msgstr "Auswählen"
+
+#: src/app/(dialogs)/settings.native.tsx:15
+#: src/app/(dialogs)/settings.tsx:12
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: src/components/tagText.tsx:126
+#: src/components/tagText.tsx:157
 msgid "Share"
 msgstr "Teilen"
 
-#: src/components/tagText.tsx:32
-msgid "Tags"
-msgstr "Tags"
+#: src/app/(dialogs)/updateChecker.native.tsx:44
+#: src/app/(dialogs)/updateChecker.native.tsx:107
+#: src/app/(dialogs)/updateChecker.tsx:22
+msgid "Skip"
+msgstr "Überspringen"
 
-#: src/components/dialogs/appSettings.tsx:108
-msgid "Theme color is based on selected image color mode"
-msgstr "Die Themenfarbe basiert auf dem gewählten Farbmodus des Bildes"
+#: src/app/models.tsx:105
+msgid "Source"
+msgstr "Quelle"
 
-#: src/components/dialogs/appInfo.tsx:54
-msgid "This app uses an optimized version of SmilingWolfs"
-msgstr "Diese App verwendet eine optimierte Version von SmilingWolfs"
+#: src/components/footer.tsx:27
+msgid "Source code"
+msgstr "Quellcode"
 
-#: src/components/dialogs/appInfo.tsx:31
-msgid "This app uses p1atdev's quantized"
-msgstr "Diese App verwendet die quantisierte Version von p1atdev"
+#: src/components/tagText.tsx:193
+msgid "Space"
+msgstr "Leerzeichen"
 
-#: src/components/imageSelector.tsx:61
+#: src/app/(dialogs)/stats.native.tsx:19
+#: src/app/(dialogs)/stats.tsx:28
+msgid "Statistics"
+msgstr "Statistiken"
+
+#: src/app/models.tsx:277
+msgid "Storage"
+msgstr "Speicher"
+
+#: src/components/tagText.tsx:196
+msgid "Styled"
+msgstr "Formatiert"
+
+#: src/app/(dialogs)/tag.tsx:46
+msgid "Tag count"
+msgstr "Anzahl der Tags"
+
+#: src/components/tagText.tsx:202
+#~ msgid "Tags"
+#~ msgstr "Tags"
+
+#: src/components/tagText.tsx:196
+msgid "Text"
+msgstr "Text"
+
+#: src/components/content/settings.tsx:202
+msgid "Theme"
+msgstr "Design"
+
+#: src/components/content/settings.tsx:206
+msgid "Theme mode"
+msgstr "Design-Modus"
+
+#: src/app/(dialogs)/stats.native.tsx:24
+msgid "This will wipe all progress."
+msgstr "Dadurch wird der gesamte Fortschritt gelöscht."
+
+#: src/hooks/translations/useThemeVariantNames.ts:15
+msgid "Tonal Spot"
+msgstr "Tonaler Akzent"
+
+#: src/components/content/stats.tsx:42
+msgid "Total Inferences"
+msgstr "Gesamte Inferenzen"
+
+#: src/components/content/stats.tsx:41
+msgid "Trackers"
+msgstr "Tracker"
+
+#: src/components/tagText.tsx:194
+msgid "Underscore"
+msgstr "Unterstrich"
+
+#: src/app/models.tsx:281
+msgid "Unknown"
+msgstr "Unbekannt"
+
+#: src/app/(dialogs)/updateChecker.native.tsx:38
+#: src/app/(dialogs)/updateChecker.native.tsx:106
+#: src/app/(dialogs)/updateChecker.tsx:22
+msgid "Update"
+msgstr "Aktualisieren"
+
+#: src/components/content/settings.tsx:220
+msgid "Update history"
+msgstr "Versionsverlauf"
+
+#: src/components/imageSelector.tsx:80
 msgid "Upload Image"
 msgstr "Bild hochladen"
 
-#: src/components/dialogs/tagInfo.tsx:69
+#: src/components/content/settings.tsx:197
+msgid "Use external browser"
+msgstr "Externen Browser verwenden"
+
+#: src/components/content/settings.tsx:75
+msgid "Version"
+msgstr "Version"
+
+#: src/hooks/translations/useThemeVariantNames.ts:16
+msgid "Vibrant"
+msgstr "Lebhaft"
+
+#: src/app/licenses.tsx:53
+msgid "View license"
+msgstr "Lizenz anzeigen"
+
+#: src/app/(dialogs)/tag.tsx:62
 msgid "View Wiki"
-msgstr "Wiki ansehen"
+msgstr "Wiki anzeigen"
+
+#: src/app/licenses.tsx:49
+msgid "Website"
+msgstr "Website"
+
+#. placeholder {0}: tag.label
+#: src/app/(dialogs)/tag.tsx:58
+msgid "Wiki - {0}"
+msgstr "Wiki - {0}"
+
+#: src/components/content/stats.tsx:37
+msgid "XP"
+msgstr "XP"
+
+#: src/hooks/translations/useCategoryTitles.ts:14
+msgid "Year"
+msgstr "Jahr"

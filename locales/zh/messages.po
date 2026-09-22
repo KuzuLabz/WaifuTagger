@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2026-07-19 17:35-0500\n"
+"POT-Creation-Date: 2026-09-19 17:32-0500\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,128 +13,469 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/components/dialogs/appInfo.tsx:88
+#. placeholder {0}: tagData.length
+#: src/components/tagText.tsx:314
+msgid "{0} Tags"
+msgstr "{0} 个标签"
+
+#: src/app/models.tsx:291
+msgid "{recVariant} is recommended for your device."
+msgstr "推荐适用于您设备的版本为 {recVariant}。"
+
+#: src/components/content/settings.tsx:217
 msgid "About"
 msgstr "关于"
 
-#: src/components/dialogs/appSettings.tsx:82
-msgid "Auto Inference"
+#: src/app/(dialogs)/updateChecker.native.tsx:31
+#: src/app/(dialogs)/updateChecker.native.tsx:93
+#: src/app/(dialogs)/updateChecker.tsx:20
+msgid "App Update"
+msgstr "应用更新"
+
+#: src/hooks/translations/useCategoryTitles.ts:8
+msgid "Artist"
+msgstr "画师"
+
+#: src/components/content/settings.tsx:195
+msgid "Auto inference"
 msgstr "自动推理"
 
-#: src/components/dialogs/appInfo.tsx:38
-msgid "Based on SmilingWolfs"
-msgstr "基于 SmilingWolfs"
+#: src/app/(dialogs)/config.tsx:54
+#: src/components/common/alert.android.tsx:38
+msgid "Cancel"
+msgstr "取消"
 
-#: src/components/section.tsx:19
+#: src/app/categories.tsx:39
+#: src/components/content/settings.tsx:188
+msgid "Categories"
+msgstr "分类"
+
+#: src/components/content/settings.tsx:187
+msgid "Change model"
+msgstr "更换模型"
+
+#: src/app/models.tsx:261
+msgid "Change model directory"
+msgstr "更改模型目录"
+
+#: src/hooks/translations/useCategoryTitles.ts:9
 msgid "Character"
 msgstr "角色"
 
-#: src/components/dialogs/appInfo.tsx:98
-#: src/components/dialogs/appSettings.tsx:130
+#: src/components/content/settings.tsx:198
+msgid "Check for updates on startup"
+msgstr "启动时检查更新"
+
+#: src/app/(dialogs)/settings.tsx:13
 msgid "Close"
 msgstr "关闭"
 
-#: src/components/tagText.tsx:127
+#: src/hooks/translations/useThemeVariantNames.ts:8
+msgid "Content"
+msgstr "内容"
+
+#: src/utils/utils.ts:42
+msgid "Copied to Clipboard"
+msgstr "已复制到剪贴板"
+
+#: src/components/input.tsx:46
+msgid "Copy"
+msgstr "复制"
+
+#: src/components/tagText.tsx:165
 msgid "Copy text"
 msgstr "复制文本"
 
-#: src/components/footer.tsx:29
-msgid "Created by KuzuLabz"
-msgstr "由 KuzuLabz 制作"
+#: src/hooks/translations/useCategoryTitles.ts:10
+msgid "Copyright"
+msgstr "作品/版权"
 
-#: src/components/dialogs/appSettings.tsx:93
+#: src/components/footer.tsx:30
+msgid "Created by KuzuLabz ❤️"
+msgstr "由 KuzuLabz 创建❤️"
+
+#: src/components/content/settings.tsx:204
 msgid "Dark mode"
 msgstr "深色模式"
 
-#: src/components/dialogs/stats.tsx:91
-#: src/components/dialogs/tagInfo.tsx:74
+#: src/app/models.tsx:191
+msgid "Deselect"
+msgstr "取消选择"
+
+#: src/app/(dialogs)/stats.tsx:30
+#: src/app/(dialogs)/tag.tsx:30
 msgid "Done"
 msgstr "完成"
 
-#: src/components/dialogs/appSettings.tsx:107
-msgid "Dynamic Theme Mode"
-msgstr "动态主题模式"
+#: src/app/models.tsx:191
+msgid "Download"
+msgstr "下载"
 
-#: src/components/section.tsx:21
+#: src/utils/selector/index.tauri.ts:117
+msgid "Error loading URL"
+msgstr "加载 URL 出错"
+
+#: src/components/content/settings.tsx:190
+msgid "Execution Provider"
+msgstr "执行提供程序"
+
+#: src/hooks/translations/useThemeVariantNames.ts:9
+msgid "Expressive"
+msgstr "表现力"
+
+#: src/utils/fs.tauri.ts:98
+msgid "Failed to delete {type}"
+msgstr "删除 {type} 失败"
+
+#: src/utils/fs.tauri.ts:49
+msgid "Failed to download model!"
+msgstr "模型下载失败！"
+
+#: src/onnx.tauri.ts:102
+#: src/onnx.tauri.ts:107
+#: src/onnx.ts:171
+msgid "Failed to inference!"
+msgstr "推理失败！"
+
+#: src/utils/selector/index.native.ts:26
+msgid "Failed to load image!"
+msgstr "图片加载失败！"
+
+#: src/utils/fs.tauri.ts:74
+msgid "Failed to open directory."
+msgstr "无法打开目录。"
+
+#: src/hooks/translations/useThemeVariantNames.ts:10
+msgid "Fidelity"
+msgstr "高保真"
+
+#: src/hooks/translations/useThemeVariantNames.ts:11
+msgid "Fruit Salad"
+msgstr "水果沙拉"
+
+#: src/components/content/settings.tsx:193
+#: src/hooks/translations/useCategoryTitles.ts:11
 msgid "General"
-msgstr "通用"
+msgstr "常规"
 
-#: src/components/dialogs/appInfo.tsx:65
-msgid "huggingface.co"
-msgstr "huggingface.co"
+#: src/app/categories.tsx:43
+msgid "Hide empty"
+msgstr "隐藏空白项"
 
-#: src/components/dialogs/appInfo.tsx:63
-msgid "If you would like to know more about the optimized model, check out the model card at "
-msgstr "如果您想了解更多关于该优化模型的信息，请查看模型卡片："
+#: src/components/content/stats.tsx:43
+msgid "Image Ranks"
+msgstr "图片排名"
 
-#: src/components/dialogs/stats.tsx:54
+#: src/components/input.tsx:63
+msgid "Image URL"
+msgstr "图片 URL"
+
+#: src/components/language.native.tsx:41
+#: src/components/language.tsx:36
+msgid "Language"
+msgstr "语言"
+
+#: src/components/content/stats.tsx:35
 msgid "Level"
 msgstr "等级"
 
-#: src/components/dialogs/stats.tsx:53
+#: src/components/content/stats.tsx:34
 msgid "Level Info"
 msgstr "等级信息"
 
-#: src/components/loading.tsx:20
-msgid "Loading model..."
-msgstr "正在加载模型..."
+#. placeholder {0}: MODEL_CATALOG[selected.type].name
+#: src/components/loading.tsx:29
+msgid "Loading {0}"
+msgstr "正在加载 {0}"
 
-#: src/components/dialogs/appInfo.tsx:60
-msgid "model"
+#: src/components/levelView.tsx:55
+msgid "Lvl."
+msgstr "Lv."
+
+#: src/app/(dialogs)/config.native.tsx:114
+msgid "Max General Tags"
+msgstr "常规标签最大数量"
+
+#: src/app/(dialogs)/config.native.tsx:76
+#: src/app/(dialogs)/config.tsx:64
+msgid "Max tags"
+msgstr "最大标签数"
+
+#: src/components/content/settings.tsx:106
+msgid "Memory"
+msgstr "内存"
+
+#: src/hooks/translations/useCategoryTitles.ts:12
+msgid "Meta"
+msgstr "元数据"
+
+#: src/app/(dialogs)/config.native.tsx:88
+#: src/app/(dialogs)/config.tsx:75
+msgid "Minimum thresholds"
+msgstr "最小阈值"
+
+#: src/app/(dialogs)/config.native.tsx:117
+msgid "Minimum Thresholds"
+msgstr "最小阈值"
+
+#: src/app/models.tsx:97
+msgid "Model"
 msgstr "模型"
+
+#: src/onnx.ts:135
+msgid "Model is too large for this device."
+msgstr "模型对于此设备来说过大。"
+
+#: src/app/models.tsx:249
+msgid "Model Manager"
+msgstr "模型管理器"
+
+#: src/onnx.tauri.ts:31
+#: src/onnx.ts:109
+msgid "Model not found!"
+msgstr "未找到模型！"
+
+#: src/app/(dialogs)/config.native.tsx:59
+#: src/app/(dialogs)/config.native.tsx:112
+#: src/app/(dialogs)/config.tsx:46
+msgid "Model Settings"
+msgstr "模型设置"
+
+#: src/components/content/settings.tsx:185
+msgid "Models"
+msgstr "模型"
+
+#: src/hooks/translations/useThemeVariantNames.ts:12
+msgid "Monochrome"
+msgstr "单色"
+
+#: src/hooks/translations/useThemeVariantNames.ts:13
+msgid "Neutral"
+msgstr "中性"
 
 #: src/components/section.tsx:61
 msgid "No Results"
 msgstr "无结果"
 
-#: src/components/dialogs/appInfo.tsx:93
-msgid "Only PNG and JPEG images can be used."
-msgstr "仅支持 PNG 和 JPEG 格式的图片。"
+#: src/components/content/settings.tsx:68
+msgid "No update available"
+msgstr "暂无可用更新"
 
-#: src/components/dialogs/appSettings.tsx:87
-msgid "Rank Mode"
-msgstr "排序模式"
+#: src/app/models.tsx:272
+msgid "Open model directory"
+msgstr "打开模型目录"
 
-#: src/components/section.tsx:20
-msgid "Ratings"
-msgstr "评分"
+#: src/app/licenses.tsx:137
+#: src/components/content/settings.tsx:221
+msgid "Open source licenses"
+msgstr "开源许可证"
 
-#: src/components/dialogs/stats.tsx:86
+#: src/components/input.tsx:46
+msgid "Paste"
+msgstr "粘贴"
+
+#: src/app/models.tsx:256
+msgid "Please download and select a model to get started!"
+msgstr "请先下载并选择一个模型以开始使用！"
+
+#: src/components/content/settings.tsx:189
+msgid "Prefer GPU"
+msgstr "优先使用 GPU"
+
+#: src/components/content/settings.tsx:222
+msgid "Privacy policy"
+msgstr "隐私政策"
+
+#: src/app/(dialogs)/tag.tsx:34
+msgid "Probability"
+msgstr "概率"
+
+#: src/utils/selector/index.tauri.ts:126
+msgid "Processing image..."
+msgstr "正在处理图片..."
+
+#: src/components/tagText.tsx:192
+msgid "Prompt"
+msgstr "提示词"
+
+#: src/hooks/translations/useThemeVariantNames.ts:14
+msgid "Rainbow"
+msgstr "彩虹"
+
+#: src/components/content/settings.tsx:109
+msgid "RAM - App usage"
+msgstr "内存 - 应用占用"
+
+#: src/app/(dialogs)/tag.tsx:40
+msgid "Rank"
+msgstr "排名"
+
+#: src/components/content/settings.tsx:196
+msgid "Rank mode"
+msgstr "排名模式"
+
+#: src/hooks/translations/useCategoryTitles.ts:13
+msgid "Rating"
+msgstr "分级"
+
+#: src/app/(dialogs)/config.native.tsx:70
+#: src/app/(dialogs)/config.native.tsx:134
+#: src/app/(dialogs)/config.tsx:49
+#: src/app/(dialogs)/stats.native.tsx:25
+#: src/app/(dialogs)/stats.tsx:30
+#: src/components/header.tsx:89
 msgid "Reset"
 msgstr "重置"
 
-#: src/index.tsx:203
+#: src/app/(dialogs)/stats.native.tsx:23
+msgid "Reset progress?"
+msgstr "重置进度？"
+
+#: src/app/(app)/index.tsx:123
 msgid "Run Inference"
 msgstr "运行推理"
 
-#: src/components/dialogs/appSettings.tsx:79
+#: src/app/(dialogs)/config.native.tsx:65
+#: src/app/(dialogs)/config.native.tsx:133
+#: src/app/(dialogs)/config.tsx:58
+msgid "Save"
+msgstr "保存"
+
+#: src/app/models.tsx:191
+msgid "Select"
+msgstr "选择"
+
+#: src/app/(dialogs)/settings.native.tsx:15
+#: src/app/(dialogs)/settings.tsx:12
 msgid "Settings"
 msgstr "设置"
 
-#: src/components/tagText.tsx:126
+#: src/components/tagText.tsx:157
 msgid "Share"
 msgstr "分享"
 
-#: src/components/tagText.tsx:32
-msgid "Tags"
-msgstr "标签"
+#: src/app/(dialogs)/updateChecker.native.tsx:44
+#: src/app/(dialogs)/updateChecker.native.tsx:107
+#: src/app/(dialogs)/updateChecker.tsx:22
+msgid "Skip"
+msgstr "跳过"
 
-#: src/components/dialogs/appSettings.tsx:108
-msgid "Theme color is based on selected image color mode"
-msgstr "主题颜色基于所选图片的色彩模式"
+#: src/app/models.tsx:105
+msgid "Source"
+msgstr "来源"
 
-#: src/components/dialogs/appInfo.tsx:54
-msgid "This app uses an optimized version of SmilingWolfs"
-msgstr "本应用使用了 SmilingWolfs 的优化版本"
+#: src/components/footer.tsx:27
+msgid "Source code"
+msgstr "源代码"
 
-#: src/components/dialogs/appInfo.tsx:31
-msgid "This app uses p1atdev's quantized"
-msgstr "本应用使用了 p1atdev 的量化版本"
+#: src/components/tagText.tsx:193
+msgid "Space"
+msgstr "空格"
 
-#: src/components/imageSelector.tsx:61
+#: src/app/(dialogs)/stats.native.tsx:19
+#: src/app/(dialogs)/stats.tsx:28
+msgid "Statistics"
+msgstr "统计数据"
+
+#: src/app/models.tsx:277
+msgid "Storage"
+msgstr "存储"
+
+#: src/components/tagText.tsx:196
+msgid "Styled"
+msgstr "样式化"
+
+#: src/app/(dialogs)/tag.tsx:46
+msgid "Tag count"
+msgstr "标签数量"
+
+#: src/components/tagText.tsx:202
+#~ msgid "Tags"
+#~ msgstr "标签"
+
+#: src/components/tagText.tsx:196
+msgid "Text"
+msgstr "文本"
+
+#: src/components/content/settings.tsx:202
+msgid "Theme"
+msgstr "主题"
+
+#: src/components/content/settings.tsx:206
+msgid "Theme mode"
+msgstr "主题模式"
+
+#: src/app/(dialogs)/stats.native.tsx:24
+msgid "This will wipe all progress."
+msgstr "这将清除所有进度。"
+
+#: src/hooks/translations/useThemeVariantNames.ts:15
+msgid "Tonal Spot"
+msgstr "色调斑点"
+
+#: src/components/content/stats.tsx:42
+msgid "Total Inferences"
+msgstr "总推理次数"
+
+#: src/components/content/stats.tsx:41
+msgid "Trackers"
+msgstr "追踪器"
+
+#: src/components/tagText.tsx:194
+msgid "Underscore"
+msgstr "下划线"
+
+#: src/app/models.tsx:281
+msgid "Unknown"
+msgstr "未知"
+
+#: src/app/(dialogs)/updateChecker.native.tsx:38
+#: src/app/(dialogs)/updateChecker.native.tsx:106
+#: src/app/(dialogs)/updateChecker.tsx:22
+msgid "Update"
+msgstr "更新"
+
+#: src/components/content/settings.tsx:220
+msgid "Update history"
+msgstr "更新历史"
+
+#: src/components/imageSelector.tsx:80
 msgid "Upload Image"
 msgstr "上传图片"
 
-#: src/components/dialogs/tagInfo.tsx:69
+#: src/components/content/settings.tsx:197
+msgid "Use external browser"
+msgstr "使用外部浏览器"
+
+#: src/components/content/settings.tsx:75
+msgid "Version"
+msgstr "版本"
+
+#: src/hooks/translations/useThemeVariantNames.ts:16
+msgid "Vibrant"
+msgstr "鲜艳"
+
+#: src/app/licenses.tsx:53
+msgid "View license"
+msgstr "查看许可证"
+
+#: src/app/(dialogs)/tag.tsx:62
 msgid "View Wiki"
-msgstr "查看维基"
+msgstr "查看 Wiki"
+
+#: src/app/licenses.tsx:49
+msgid "Website"
+msgstr "网站"
+
+#. placeholder {0}: tag.label
+#: src/app/(dialogs)/tag.tsx:58
+msgid "Wiki - {0}"
+msgstr "Wiki - {0}"
+
+#: src/components/content/stats.tsx:37
+msgid "XP"
+msgstr "XP"
+
+#: src/hooks/translations/useCategoryTitles.ts:14
+msgid "Year"
+msgstr "年份"

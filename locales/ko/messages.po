@@ -1,11 +1,11 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2026-09-19 17:26-0500\n"
+"POT-Creation-Date: 2026-09-19 17:32-0500\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
-"Language: es\n"
+"Language: ko\n"
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: \n"
@@ -16,307 +16,307 @@ msgstr ""
 #. placeholder {0}: tagData.length
 #: src/components/tagText.tsx:314
 msgid "{0} Tags"
-msgstr "{0} etiquetas"
+msgstr "태그 {0}개"
 
 #: src/app/models.tsx:291
 msgid "{recVariant} is recommended for your device."
-msgstr "Se recomienda {recVariant} para tu dispositivo."
+msgstr "{recVariant}이(가) 기기에 권장됩니다."
 
 #: src/components/content/settings.tsx:217
 msgid "About"
-msgstr "Acerca de"
+msgstr "정보"
 
 #: src/app/(dialogs)/updateChecker.native.tsx:31
 #: src/app/(dialogs)/updateChecker.native.tsx:93
 #: src/app/(dialogs)/updateChecker.tsx:20
 msgid "App Update"
-msgstr "Actualización de la aplicación"
+msgstr "앱 업데이트"
 
 #: src/hooks/translations/useCategoryTitles.ts:8
 msgid "Artist"
-msgstr "Artista"
+msgstr "작가"
 
 #: src/components/content/settings.tsx:195
 msgid "Auto inference"
-msgstr "Inferencia automática"
+msgstr "자동 추론"
 
 #: src/app/(dialogs)/config.tsx:54
 #: src/components/common/alert.android.tsx:38
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr "취소"
 
 #: src/app/categories.tsx:39
 #: src/components/content/settings.tsx:188
 msgid "Categories"
-msgstr "Categorías"
+msgstr "카테고리"
 
 #: src/components/content/settings.tsx:187
 msgid "Change model"
-msgstr "Cambiar modelo"
+msgstr "모델 변경"
 
 #: src/app/models.tsx:261
 msgid "Change model directory"
-msgstr "Cambiar directorio de modelos"
+msgstr "모델 디렉터리 변경"
 
 #: src/hooks/translations/useCategoryTitles.ts:9
 msgid "Character"
-msgstr "Personaje"
+msgstr "캐릭터"
 
 #: src/components/content/settings.tsx:198
 msgid "Check for updates on startup"
-msgstr "Buscar actualizaciones al iniciar"
+msgstr "시작 시 업데이트 확인"
 
 #: src/app/(dialogs)/settings.tsx:13
 msgid "Close"
-msgstr "Cerrar"
+msgstr "닫기"
 
 #: src/hooks/translations/useThemeVariantNames.ts:8
 msgid "Content"
-msgstr "Contenido"
+msgstr "콘텐츠"
 
 #: src/utils/utils.ts:42
 msgid "Copied to Clipboard"
-msgstr "Copiado al portapapeles"
+msgstr "클립보드에 복사되었습니다"
 
 #: src/components/input.tsx:46
 msgid "Copy"
-msgstr "Copiar"
+msgstr "복사"
 
 #: src/components/tagText.tsx:165
 msgid "Copy text"
-msgstr "Copiar texto"
+msgstr "텍스트 복사"
 
 #: src/hooks/translations/useCategoryTitles.ts:10
 msgid "Copyright"
-msgstr "Derechos de autor"
+msgstr "저작권 / 원작"
 
 #: src/components/footer.tsx:30
 msgid "Created by KuzuLabz ❤️"
-msgstr "Creado por KuzuLabz ❤️"
+msgstr "KuzuLabz가 제작함 ❤️"
 
 #: src/components/content/settings.tsx:204
 msgid "Dark mode"
-msgstr "Modo oscuro"
+msgstr "다크 모드"
 
 #: src/app/models.tsx:191
 msgid "Deselect"
-msgstr "Deseleccionar"
+msgstr "선택 해제"
 
 #: src/app/(dialogs)/stats.tsx:30
 #: src/app/(dialogs)/tag.tsx:30
 msgid "Done"
-msgstr "Listo"
+msgstr "완료"
 
 #: src/app/models.tsx:191
 msgid "Download"
-msgstr "Descargar"
+msgstr "다운로드"
 
 #: src/utils/selector/index.tauri.ts:117
 msgid "Error loading URL"
-msgstr "Error al cargar la URL"
+msgstr "URL을 로드하는 중 오류 발생"
 
 #: src/components/content/settings.tsx:190
 msgid "Execution Provider"
-msgstr "Proveedor de ejecución"
+msgstr "실행 공급자"
 
 #: src/hooks/translations/useThemeVariantNames.ts:9
 msgid "Expressive"
-msgstr "Expresivo"
+msgstr "익스프레시브"
 
 #: src/utils/fs.tauri.ts:98
 msgid "Failed to delete {type}"
-msgstr "Error al eliminar {type}"
+msgstr "{type} 삭제에 실패했습니다"
 
 #: src/utils/fs.tauri.ts:49
 msgid "Failed to download model!"
-msgstr "¡Error al descargar el modelo!"
+msgstr "모델 다운로드에 실패했습니다!"
 
 #: src/onnx.tauri.ts:102
 #: src/onnx.tauri.ts:107
 #: src/onnx.ts:171
 msgid "Failed to inference!"
-msgstr "¡Error al ejecutar la inferencia!"
+msgstr "추론에 실패했습니다!"
 
 #: src/utils/selector/index.native.ts:26
 msgid "Failed to load image!"
-msgstr "¡Error al cargar la imagen!"
+msgstr "이미지를 불러오는 데 실패했습니다!"
 
 #: src/utils/fs.tauri.ts:74
 msgid "Failed to open directory."
-msgstr "Error al abrir el directorio."
+msgstr "디렉터리를 열지 못했습니다."
 
 #: src/hooks/translations/useThemeVariantNames.ts:10
 msgid "Fidelity"
-msgstr "Fidelidad"
+msgstr "피델리티"
 
 #: src/hooks/translations/useThemeVariantNames.ts:11
 msgid "Fruit Salad"
-msgstr "Ensalada de frutas"
+msgstr "프루트 샐러드"
 
 #: src/components/content/settings.tsx:193
 #: src/hooks/translations/useCategoryTitles.ts:11
 msgid "General"
-msgstr "General"
+msgstr "일반"
 
 #: src/app/categories.tsx:43
 msgid "Hide empty"
-msgstr "Ocultar vacíos"
+msgstr "비어있는 항목 숨기기"
 
 #: src/components/content/stats.tsx:43
 msgid "Image Ranks"
-msgstr "Rangos de imágenes"
+msgstr "이미지 순위"
 
 #: src/components/input.tsx:63
 msgid "Image URL"
-msgstr "URL de la imagen"
+msgstr "이미지 URL"
 
 #: src/components/language.native.tsx:41
 #: src/components/language.tsx:36
 msgid "Language"
-msgstr "Idioma"
+msgstr "언어"
 
 #: src/components/content/stats.tsx:35
 msgid "Level"
-msgstr "Nivel"
+msgstr "레벨"
 
 #: src/components/content/stats.tsx:34
 msgid "Level Info"
-msgstr "Información de nivel"
+msgstr "레벨 정보"
 
 #. placeholder {0}: MODEL_CATALOG[selected.type].name
 #: src/components/loading.tsx:29
 msgid "Loading {0}"
-msgstr "Cargando {0}"
+msgstr "{0} 불러오는 중"
 
 #: src/components/levelView.tsx:55
 msgid "Lvl."
-msgstr "Nivel"
+msgstr "Lv."
 
 #: src/app/(dialogs)/config.native.tsx:114
 msgid "Max General Tags"
-msgstr "Etiquetas generales máximas"
+msgstr "최대 일반 태그 수"
 
 #: src/app/(dialogs)/config.native.tsx:76
 #: src/app/(dialogs)/config.tsx:64
 msgid "Max tags"
-msgstr "Etiquetas máximas"
+msgstr "최대 태그 수"
 
 #: src/components/content/settings.tsx:106
 msgid "Memory"
-msgstr "Memoria"
+msgstr "메모리"
 
 #: src/hooks/translations/useCategoryTitles.ts:12
 msgid "Meta"
-msgstr "Meta"
+msgstr "메타"
 
 #: src/app/(dialogs)/config.native.tsx:88
 #: src/app/(dialogs)/config.tsx:75
 msgid "Minimum thresholds"
-msgstr "Umbrales mínimos"
+msgstr "최소 임계값"
 
 #: src/app/(dialogs)/config.native.tsx:117
 msgid "Minimum Thresholds"
-msgstr "Umbrales Mínimos"
+msgstr "최소 임계값"
 
 #: src/app/models.tsx:97
 msgid "Model"
-msgstr "Modelo"
+msgstr "모델"
 
 #: src/onnx.ts:135
 msgid "Model is too large for this device."
-msgstr "El modelo es demasiado grande para este dispositivo."
+msgstr "모델이 이 기기에 너무 큽니다."
 
 #: src/app/models.tsx:249
 msgid "Model Manager"
-msgstr "Gestor de modelos"
+msgstr "모델 관리자"
 
 #: src/onnx.tauri.ts:31
 #: src/onnx.ts:109
 msgid "Model not found!"
-msgstr "¡Modelo no encontrado!"
+msgstr "모델을 찾을 수 없습니다!"
 
 #: src/app/(dialogs)/config.native.tsx:59
 #: src/app/(dialogs)/config.native.tsx:112
 #: src/app/(dialogs)/config.tsx:46
 msgid "Model Settings"
-msgstr "Configuración del modelo"
+msgstr "모델 설정"
 
 #: src/components/content/settings.tsx:185
 msgid "Models"
-msgstr "Modelos"
+msgstr "모델"
 
 #: src/hooks/translations/useThemeVariantNames.ts:12
 msgid "Monochrome"
-msgstr "Monocromo"
+msgstr "모노크롬"
 
 #: src/hooks/translations/useThemeVariantNames.ts:13
 msgid "Neutral"
-msgstr "Neutral"
+msgstr "뉴트럴"
 
 #: src/components/section.tsx:61
 msgid "No Results"
-msgstr "Sin resultados"
+msgstr "결과 없음"
 
 #: src/components/content/settings.tsx:68
 msgid "No update available"
-msgstr "No hay actualizaciones disponibles"
+msgstr "사용 가능한 업데이트가 없습니다"
 
 #: src/app/models.tsx:272
 msgid "Open model directory"
-msgstr "Abrir directorio de modelos"
+msgstr "모델 디렉터리 열기"
 
 #: src/app/licenses.tsx:137
 #: src/components/content/settings.tsx:221
 msgid "Open source licenses"
-msgstr "Licencias de código abierto"
+msgstr "오픈 소스 라이선스"
 
 #: src/components/input.tsx:46
 msgid "Paste"
-msgstr "Pegar"
+msgstr "붙여넣기"
 
 #: src/app/models.tsx:256
 msgid "Please download and select a model to get started!"
-msgstr "¡Descarga y selecciona un modelo para comenzar!"
+msgstr "시작하려면 모델을 다운로드하고 선택해 주세요!"
 
 #: src/components/content/settings.tsx:189
 msgid "Prefer GPU"
-msgstr "Preferir GPU"
+msgstr "GPU 우선 사용"
 
 #: src/components/content/settings.tsx:222
 msgid "Privacy policy"
-msgstr "Política de privacidad"
+msgstr "개인정보 처리방침"
 
 #: src/app/(dialogs)/tag.tsx:34
 msgid "Probability"
-msgstr "Probabilidad"
+msgstr "확률"
 
 #: src/utils/selector/index.tauri.ts:126
 msgid "Processing image..."
-msgstr "Procesando imagen..."
+msgstr "이미지 처리 중..."
 
 #: src/components/tagText.tsx:192
 msgid "Prompt"
-msgstr "Prompt"
+msgstr "프롬프트"
 
 #: src/hooks/translations/useThemeVariantNames.ts:14
 msgid "Rainbow"
-msgstr "Arcoíris"
+msgstr "레인보우"
 
 #: src/components/content/settings.tsx:109
 msgid "RAM - App usage"
-msgstr "RAM - Uso de la aplicación"
+msgstr "RAM - 앱 사용량"
 
 #: src/app/(dialogs)/tag.tsx:40
 msgid "Rank"
-msgstr "Rango"
+msgstr "순위"
 
 #: src/components/content/settings.tsx:196
 msgid "Rank mode"
-msgstr "Modo de clasificación"
+msgstr "순위 모드"
 
 #: src/hooks/translations/useCategoryTitles.ts:13
 msgid "Rating"
-msgstr "Clasificación"
+msgstr "등급"
 
 #: src/app/(dialogs)/config.native.tsx:70
 #: src/app/(dialogs)/config.native.tsx:134
@@ -325,152 +325,152 @@ msgstr "Clasificación"
 #: src/app/(dialogs)/stats.tsx:30
 #: src/components/header.tsx:89
 msgid "Reset"
-msgstr "Restablecer"
+msgstr "초기화"
 
 #: src/app/(dialogs)/stats.native.tsx:23
 msgid "Reset progress?"
-msgstr "¿Restablecer progreso?"
+msgstr "진행 상황을 초기화하시겠습니까?"
 
 #: src/app/(app)/index.tsx:123
 msgid "Run Inference"
-msgstr "Ejecutar inferencia"
+msgstr "추론 실행"
 
 #: src/app/(dialogs)/config.native.tsx:65
 #: src/app/(dialogs)/config.native.tsx:133
 #: src/app/(dialogs)/config.tsx:58
 msgid "Save"
-msgstr "Guardar"
+msgstr "저장"
 
 #: src/app/models.tsx:191
 msgid "Select"
-msgstr "Seleccionar"
+msgstr "선택"
 
 #: src/app/(dialogs)/settings.native.tsx:15
 #: src/app/(dialogs)/settings.tsx:12
 msgid "Settings"
-msgstr "Configuración"
+msgstr "설정"
 
 #: src/components/tagText.tsx:157
 msgid "Share"
-msgstr "Compartir"
+msgstr "공유"
 
 #: src/app/(dialogs)/updateChecker.native.tsx:44
 #: src/app/(dialogs)/updateChecker.native.tsx:107
 #: src/app/(dialogs)/updateChecker.tsx:22
 msgid "Skip"
-msgstr "Omitir"
+msgstr "건너뛰기"
 
 #: src/app/models.tsx:105
 msgid "Source"
-msgstr "Fuente"
+msgstr "출처"
 
 #: src/components/footer.tsx:27
 msgid "Source code"
-msgstr "Código fuente"
+msgstr "소스 코드"
 
 #: src/components/tagText.tsx:193
 msgid "Space"
-msgstr "Espacio"
+msgstr "공백"
 
 #: src/app/(dialogs)/stats.native.tsx:19
 #: src/app/(dialogs)/stats.tsx:28
 msgid "Statistics"
-msgstr "Estadísticas"
+msgstr "통계"
 
 #: src/app/models.tsx:277
 msgid "Storage"
-msgstr "Almacenamiento"
+msgstr "저장공간"
 
 #: src/components/tagText.tsx:196
 msgid "Styled"
-msgstr "Estilizado"
+msgstr "스타일 적용"
 
 #: src/app/(dialogs)/tag.tsx:46
 msgid "Tag count"
-msgstr "Cantidad de etiquetas"
+msgstr "태그 개수"
 
 #: src/components/tagText.tsx:202
 #~ msgid "Tags"
-#~ msgstr "Etiquetas"
+#~ msgstr "태그"
 
 #: src/components/tagText.tsx:196
 msgid "Text"
-msgstr "Texto"
+msgstr "텍스트"
 
 #: src/components/content/settings.tsx:202
 msgid "Theme"
-msgstr "Tema"
+msgstr "테마"
 
 #: src/components/content/settings.tsx:206
 msgid "Theme mode"
-msgstr "Modo del tema"
+msgstr "테마 모드"
 
 #: src/app/(dialogs)/stats.native.tsx:24
 msgid "This will wipe all progress."
-msgstr "Esto borrará todo el progreso."
+msgstr "모든 진행 상황이 삭제됩니다."
 
 #: src/hooks/translations/useThemeVariantNames.ts:15
 msgid "Tonal Spot"
-msgstr "Punto tonal"
+msgstr "토널 스팟"
 
 #: src/components/content/stats.tsx:42
 msgid "Total Inferences"
-msgstr "Inferencias totales"
+msgstr "총 추론 횟수"
 
 #: src/components/content/stats.tsx:41
 msgid "Trackers"
-msgstr "Rastreadores"
+msgstr "추적기"
 
 #: src/components/tagText.tsx:194
 msgid "Underscore"
-msgstr "Guion bajo"
+msgstr "언더스코어"
 
 #: src/app/models.tsx:281
 msgid "Unknown"
-msgstr "Desconocido"
+msgstr "알 수 없음"
 
 #: src/app/(dialogs)/updateChecker.native.tsx:38
 #: src/app/(dialogs)/updateChecker.native.tsx:106
 #: src/app/(dialogs)/updateChecker.tsx:22
 msgid "Update"
-msgstr "Actualizar"
+msgstr "업데이트"
 
 #: src/components/content/settings.tsx:220
 msgid "Update history"
-msgstr "Historial de actualizaciones"
+msgstr "업데이트 내역"
 
 #: src/components/imageSelector.tsx:80
 msgid "Upload Image"
-msgstr "Subir imagen"
+msgstr "이미지 업로드"
 
 #: src/components/content/settings.tsx:197
 msgid "Use external browser"
-msgstr "Usar navegador externo"
+msgstr "외부 브라우저 사용"
 
 #: src/components/content/settings.tsx:75
 msgid "Version"
-msgstr "Versión"
+msgstr "버전"
 
 #: src/hooks/translations/useThemeVariantNames.ts:16
 msgid "Vibrant"
-msgstr "Vibrante"
+msgstr "바이브런트"
 
 #: src/app/licenses.tsx:53
 msgid "View license"
-msgstr "Ver licencia"
+msgstr "라이선스 보기"
 
 #: src/app/(dialogs)/tag.tsx:62
 msgid "View Wiki"
-msgstr "Ver Wiki"
+msgstr "위키 보기"
 
 #: src/app/licenses.tsx:49
 msgid "Website"
-msgstr "Sitio web"
+msgstr "웹사이트"
 
 #. placeholder {0}: tag.label
 #: src/app/(dialogs)/tag.tsx:58
 msgid "Wiki - {0}"
-msgstr "Wiki - {0}"
+msgstr "위키 - {0}"
 
 #: src/components/content/stats.tsx:37
 msgid "XP"
@@ -478,4 +478,4 @@ msgstr "XP"
 
 #: src/hooks/translations/useCategoryTitles.ts:14
 msgid "Year"
-msgstr "Año"
+msgstr "연도"

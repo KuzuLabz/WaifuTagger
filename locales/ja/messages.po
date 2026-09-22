@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2026-07-19 17:32-0500\n"
+"POT-Creation-Date: 2026-09-19 17:32-0500\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,128 +13,469 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/components/dialogs/appInfo.tsx:88
+#. placeholder {0}: tagData.length
+#: src/components/tagText.tsx:314
+msgid "{0} Tags"
+msgstr "{0} 個のタグ"
+
+#: src/app/models.tsx:291
+msgid "{recVariant} is recommended for your device."
+msgstr "{recVariant} はお使いのデバイスに推奨されています。"
+
+#: src/components/content/settings.tsx:217
 msgid "About"
 msgstr "アプリについて"
 
-#: src/components/dialogs/appSettings.tsx:82
-msgid "Auto Inference"
+#: src/app/(dialogs)/updateChecker.native.tsx:31
+#: src/app/(dialogs)/updateChecker.native.tsx:93
+#: src/app/(dialogs)/updateChecker.tsx:20
+msgid "App Update"
+msgstr "アプリのアップデート"
+
+#: src/hooks/translations/useCategoryTitles.ts:8
+msgid "Artist"
+msgstr "絵師"
+
+#: src/components/content/settings.tsx:195
+msgid "Auto inference"
 msgstr "自動推論"
 
-#: src/components/dialogs/appInfo.tsx:38
-msgid "Based on SmilingWolfs"
-msgstr "SmilingWolfsのモデルをベースにしています"
+#: src/app/(dialogs)/config.tsx:54
+#: src/components/common/alert.android.tsx:38
+msgid "Cancel"
+msgstr "キャンセル"
 
-#: src/components/section.tsx:19
+#: src/app/categories.tsx:39
+#: src/components/content/settings.tsx:188
+msgid "Categories"
+msgstr "カテゴリ"
+
+#: src/components/content/settings.tsx:187
+msgid "Change model"
+msgstr "モデルを変更"
+
+#: src/app/models.tsx:261
+msgid "Change model directory"
+msgstr "モデルディレクトリを変更"
+
+#: src/hooks/translations/useCategoryTitles.ts:9
 msgid "Character"
 msgstr "キャラクター"
 
-#: src/components/dialogs/appInfo.tsx:98
-#: src/components/dialogs/appSettings.tsx:130
+#: src/components/content/settings.tsx:198
+msgid "Check for updates on startup"
+msgstr "起動時に更新を確認"
+
+#: src/app/(dialogs)/settings.tsx:13
 msgid "Close"
 msgstr "閉じる"
 
-#: src/components/tagText.tsx:127
+#: src/hooks/translations/useThemeVariantNames.ts:8
+msgid "Content"
+msgstr "コンテンツ"
+
+#: src/utils/utils.ts:42
+msgid "Copied to Clipboard"
+msgstr "クリップボードにコピーしました"
+
+#: src/components/input.tsx:46
+msgid "Copy"
+msgstr "コピー"
+
+#: src/components/tagText.tsx:165
 msgid "Copy text"
 msgstr "テキストをコピー"
 
-#: src/components/footer.tsx:29
-msgid "Created by KuzuLabz"
-msgstr "KuzuLabzにより作成"
+#: src/hooks/translations/useCategoryTitles.ts:10
+msgid "Copyright"
+msgstr "元ネタ・作品名"
 
-#: src/components/dialogs/appSettings.tsx:93
+#: src/components/footer.tsx:30
+msgid "Created by KuzuLabz ❤️"
+msgstr "作成者: KuzuLabz ❤️"
+
+#: src/components/content/settings.tsx:204
 msgid "Dark mode"
 msgstr "ダークモード"
 
-#: src/components/dialogs/stats.tsx:91
-#: src/components/dialogs/tagInfo.tsx:74
+#: src/app/models.tsx:191
+msgid "Deselect"
+msgstr "選択解除"
+
+#: src/app/(dialogs)/stats.tsx:30
+#: src/app/(dialogs)/tag.tsx:30
 msgid "Done"
 msgstr "完了"
 
-#: src/components/dialogs/appSettings.tsx:107
-msgid "Dynamic Theme Mode"
-msgstr "動的テーマモード"
+#: src/app/models.tsx:191
+msgid "Download"
+msgstr "ダウンロード"
 
-#: src/components/section.tsx:21
+#: src/utils/selector/index.tauri.ts:117
+msgid "Error loading URL"
+msgstr "URLの読み込みエラー"
+
+#: src/components/content/settings.tsx:190
+msgid "Execution Provider"
+msgstr "実行プロバイダー"
+
+#: src/hooks/translations/useThemeVariantNames.ts:9
+msgid "Expressive"
+msgstr "エクスプレッシブ"
+
+#: src/utils/fs.tauri.ts:98
+msgid "Failed to delete {type}"
+msgstr "{type} の削除に失敗しました"
+
+#: src/utils/fs.tauri.ts:49
+msgid "Failed to download model!"
+msgstr "モデルのダウンロードに失敗しました！"
+
+#: src/onnx.tauri.ts:102
+#: src/onnx.tauri.ts:107
+#: src/onnx.ts:171
+msgid "Failed to inference!"
+msgstr "推論に失敗しました！"
+
+#: src/utils/selector/index.native.ts:26
+msgid "Failed to load image!"
+msgstr "画像の読み込みに失敗しました！"
+
+#: src/utils/fs.tauri.ts:74
+msgid "Failed to open directory."
+msgstr "ディレクトリを開けませんでした。"
+
+#: src/hooks/translations/useThemeVariantNames.ts:10
+msgid "Fidelity"
+msgstr "フィデリティ"
+
+#: src/hooks/translations/useThemeVariantNames.ts:11
+msgid "Fruit Salad"
+msgstr "フルーツサラダ"
+
+#: src/components/content/settings.tsx:193
+#: src/hooks/translations/useCategoryTitles.ts:11
 msgid "General"
 msgstr "一般"
 
-#: src/components/dialogs/appInfo.tsx:65
-msgid "huggingface.co"
-msgstr "huggingface.co"
+#: src/app/categories.tsx:43
+msgid "Hide empty"
+msgstr "空の項目を非表示"
 
-#: src/components/dialogs/appInfo.tsx:63
-msgid "If you would like to know more about the optimized model, check out the model card at "
-msgstr "最適化されたモデルの詳細については、以下のモデルカードをご覧ください: "
+#: src/components/content/stats.tsx:43
+msgid "Image Ranks"
+msgstr "画像ランク"
 
-#: src/components/dialogs/stats.tsx:54
+#: src/components/input.tsx:63
+msgid "Image URL"
+msgstr "画像URL"
+
+#: src/components/language.native.tsx:41
+#: src/components/language.tsx:36
+msgid "Language"
+msgstr "言語"
+
+#: src/components/content/stats.tsx:35
 msgid "Level"
 msgstr "レベル"
 
-#: src/components/dialogs/stats.tsx:53
+#: src/components/content/stats.tsx:34
 msgid "Level Info"
 msgstr "レベル情報"
 
-#: src/components/loading.tsx:20
-msgid "Loading model..."
-msgstr "モデルを読み込み中..."
+#. placeholder {0}: MODEL_CATALOG[selected.type].name
+#: src/components/loading.tsx:29
+msgid "Loading {0}"
+msgstr "{0} を読み込み中"
 
-#: src/components/dialogs/appInfo.tsx:60
-msgid "model"
+#: src/components/levelView.tsx:55
+msgid "Lvl."
+msgstr "Lv."
+
+#: src/app/(dialogs)/config.native.tsx:114
+msgid "Max General Tags"
+msgstr "一般タグの最大数"
+
+#: src/app/(dialogs)/config.native.tsx:76
+#: src/app/(dialogs)/config.tsx:64
+msgid "Max tags"
+msgstr "最大タグ数"
+
+#: src/components/content/settings.tsx:106
+msgid "Memory"
+msgstr "メモリ"
+
+#: src/hooks/translations/useCategoryTitles.ts:12
+msgid "Meta"
+msgstr "メタ"
+
+#: src/app/(dialogs)/config.native.tsx:88
+#: src/app/(dialogs)/config.tsx:75
+msgid "Minimum thresholds"
+msgstr "最小しきい値"
+
+#: src/app/(dialogs)/config.native.tsx:117
+msgid "Minimum Thresholds"
+msgstr "最小しきい値"
+
+#: src/app/models.tsx:97
+msgid "Model"
 msgstr "モデル"
+
+#: src/onnx.ts:135
+msgid "Model is too large for this device."
+msgstr "モデルがこのデバイスに対して大きすぎます。"
+
+#: src/app/models.tsx:249
+msgid "Model Manager"
+msgstr "モデルマネージャー"
+
+#: src/onnx.tauri.ts:31
+#: src/onnx.ts:109
+msgid "Model not found!"
+msgstr "モデルが見つかりません！"
+
+#: src/app/(dialogs)/config.native.tsx:59
+#: src/app/(dialogs)/config.native.tsx:112
+#: src/app/(dialogs)/config.tsx:46
+msgid "Model Settings"
+msgstr "モデル設定"
+
+#: src/components/content/settings.tsx:185
+msgid "Models"
+msgstr "モデル"
+
+#: src/hooks/translations/useThemeVariantNames.ts:12
+msgid "Monochrome"
+msgstr "モノクローム"
+
+#: src/hooks/translations/useThemeVariantNames.ts:13
+msgid "Neutral"
+msgstr "ニュートラル"
 
 #: src/components/section.tsx:61
 msgid "No Results"
-msgstr "結果なし"
+msgstr "結果がありません"
 
-#: src/components/dialogs/appInfo.tsx:93
-msgid "Only PNG and JPEG images can be used."
-msgstr "PNGおよびJPEG画像のみ使用可能です。"
+#: src/components/content/settings.tsx:68
+msgid "No update available"
+msgstr "利用可能なアップデートはありません"
 
-#: src/components/dialogs/appSettings.tsx:87
-msgid "Rank Mode"
+#: src/app/models.tsx:272
+msgid "Open model directory"
+msgstr "モデルディレクトリを開く"
+
+#: src/app/licenses.tsx:137
+#: src/components/content/settings.tsx:221
+msgid "Open source licenses"
+msgstr "オープンソースライセンス"
+
+#: src/components/input.tsx:46
+msgid "Paste"
+msgstr "貼り付け"
+
+#: src/app/models.tsx:256
+msgid "Please download and select a model to get started!"
+msgstr "開始するにはモデルをダウンロードして選択してください！"
+
+#: src/components/content/settings.tsx:189
+msgid "Prefer GPU"
+msgstr "GPUを優先"
+
+#: src/components/content/settings.tsx:222
+msgid "Privacy policy"
+msgstr "プライバシーポリシー"
+
+#: src/app/(dialogs)/tag.tsx:34
+msgid "Probability"
+msgstr "確率"
+
+#: src/utils/selector/index.tauri.ts:126
+msgid "Processing image..."
+msgstr "画像を処理中..."
+
+#: src/components/tagText.tsx:192
+msgid "Prompt"
+msgstr "プロンプト"
+
+#: src/hooks/translations/useThemeVariantNames.ts:14
+msgid "Rainbow"
+msgstr "レインボー"
+
+#: src/components/content/settings.tsx:109
+msgid "RAM - App usage"
+msgstr "RAM - アプリ使用量"
+
+#: src/app/(dialogs)/tag.tsx:40
+msgid "Rank"
+msgstr "ランク"
+
+#: src/components/content/settings.tsx:196
+msgid "Rank mode"
 msgstr "ランクモード"
 
-#: src/components/section.tsx:20
-msgid "Ratings"
-msgstr "評価"
+#: src/hooks/translations/useCategoryTitles.ts:13
+msgid "Rating"
+msgstr "レーティング"
 
-#: src/components/dialogs/stats.tsx:86
+#: src/app/(dialogs)/config.native.tsx:70
+#: src/app/(dialogs)/config.native.tsx:134
+#: src/app/(dialogs)/config.tsx:49
+#: src/app/(dialogs)/stats.native.tsx:25
+#: src/app/(dialogs)/stats.tsx:30
+#: src/components/header.tsx:89
 msgid "Reset"
 msgstr "リセット"
 
-#: src/index.tsx:203
+#: src/app/(dialogs)/stats.native.tsx:23
+msgid "Reset progress?"
+msgstr "進捗をリセットしますか？"
+
+#: src/app/(app)/index.tsx:123
 msgid "Run Inference"
 msgstr "推論を実行"
 
-#: src/components/dialogs/appSettings.tsx:79
+#: src/app/(dialogs)/config.native.tsx:65
+#: src/app/(dialogs)/config.native.tsx:133
+#: src/app/(dialogs)/config.tsx:58
+msgid "Save"
+msgstr "保存"
+
+#: src/app/models.tsx:191
+msgid "Select"
+msgstr "選択"
+
+#: src/app/(dialogs)/settings.native.tsx:15
+#: src/app/(dialogs)/settings.tsx:12
 msgid "Settings"
 msgstr "設定"
 
-#: src/components/tagText.tsx:126
+#: src/components/tagText.tsx:157
 msgid "Share"
 msgstr "共有"
 
-#: src/components/tagText.tsx:32
-msgid "Tags"
-msgstr "タグ"
+#: src/app/(dialogs)/updateChecker.native.tsx:44
+#: src/app/(dialogs)/updateChecker.native.tsx:107
+#: src/app/(dialogs)/updateChecker.tsx:22
+msgid "Skip"
+msgstr "スキップ"
 
-#: src/components/dialogs/appSettings.tsx:108
-msgid "Theme color is based on selected image color mode"
-msgstr "テーマカラーは選択した画像のカラーモードに基づいています"
+#: src/app/models.tsx:105
+msgid "Source"
+msgstr "ソース"
 
-#: src/components/dialogs/appInfo.tsx:54
-msgid "This app uses an optimized version of SmilingWolfs"
-msgstr "このアプリはSmilingWolfsの最適化版を使用しています"
+#: src/components/footer.tsx:27
+msgid "Source code"
+msgstr "ソースコード"
 
-#: src/components/dialogs/appInfo.tsx:31
-msgid "This app uses p1atdev's quantized"
-msgstr "このアプリはp1atdevのquantizedを使用しています"
+#: src/components/tagText.tsx:193
+msgid "Space"
+msgstr "スペース"
 
-#: src/components/imageSelector.tsx:61
+#: src/app/(dialogs)/stats.native.tsx:19
+#: src/app/(dialogs)/stats.tsx:28
+msgid "Statistics"
+msgstr "統計"
+
+#: src/app/models.tsx:277
+msgid "Storage"
+msgstr "ストレージ"
+
+#: src/components/tagText.tsx:196
+msgid "Styled"
+msgstr "スタイル付き"
+
+#: src/app/(dialogs)/tag.tsx:46
+msgid "Tag count"
+msgstr "タグ数"
+
+#: src/components/tagText.tsx:202
+#~ msgid "Tags"
+#~ msgstr "タグ"
+
+#: src/components/tagText.tsx:196
+msgid "Text"
+msgstr "テキスト"
+
+#: src/components/content/settings.tsx:202
+msgid "Theme"
+msgstr "テーマ"
+
+#: src/components/content/settings.tsx:206
+msgid "Theme mode"
+msgstr "テーマモード"
+
+#: src/app/(dialogs)/stats.native.tsx:24
+msgid "This will wipe all progress."
+msgstr "すべての進捗が消去されます。"
+
+#: src/hooks/translations/useThemeVariantNames.ts:15
+msgid "Tonal Spot"
+msgstr "トーンスポット"
+
+#: src/components/content/stats.tsx:42
+msgid "Total Inferences"
+msgstr "総推論数"
+
+#: src/components/content/stats.tsx:41
+msgid "Trackers"
+msgstr "トラッカー"
+
+#: src/components/tagText.tsx:194
+msgid "Underscore"
+msgstr "アンダースコア"
+
+#: src/app/models.tsx:281
+msgid "Unknown"
+msgstr "不明"
+
+#: src/app/(dialogs)/updateChecker.native.tsx:38
+#: src/app/(dialogs)/updateChecker.native.tsx:106
+#: src/app/(dialogs)/updateChecker.tsx:22
+msgid "Update"
+msgstr "アップデート"
+
+#: src/components/content/settings.tsx:220
+msgid "Update history"
+msgstr "更新履歴"
+
+#: src/components/imageSelector.tsx:80
 msgid "Upload Image"
 msgstr "画像をアップロード"
 
-#: src/components/dialogs/tagInfo.tsx:69
+#: src/components/content/settings.tsx:197
+msgid "Use external browser"
+msgstr "外部ブラウザを使用"
+
+#: src/components/content/settings.tsx:75
+msgid "Version"
+msgstr "バージョン"
+
+#: src/hooks/translations/useThemeVariantNames.ts:16
+msgid "Vibrant"
+msgstr "バイブラント"
+
+#: src/app/licenses.tsx:53
+msgid "View license"
+msgstr "ライセンスを表示"
+
+#: src/app/(dialogs)/tag.tsx:62
 msgid "View Wiki"
 msgstr "Wikiを表示"
+
+#: src/app/licenses.tsx:49
+msgid "Website"
+msgstr "ウェブサイト"
+
+#. placeholder {0}: tag.label
+#: src/app/(dialogs)/tag.tsx:58
+msgid "Wiki - {0}"
+msgstr "Wiki - {0}"
+
+#: src/components/content/stats.tsx:37
+msgid "XP"
+msgstr "XP"
+
+#: src/hooks/translations/useCategoryTitles.ts:14
+msgid "Year"
+msgstr "年"
