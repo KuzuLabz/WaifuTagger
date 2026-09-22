@@ -1,6 +1,7 @@
 import { useLingui } from '@lingui/react/macro';
-import { Linking, View } from 'react-native';
+import { View } from 'react-native';
 import { IconButton, Text } from 'react-native-paper';
+import { openBrowser } from '../utils/utils';
 
 const Footer = () => {
     const { t } = useLingui();
@@ -19,14 +20,14 @@ const Footer = () => {
 			<View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
 				<IconButton
 					icon="earth"
-					onPress={() => Linking.openURL('https://www.kuzulabz.com/')}
+					onPress={() => openBrowser('https://www.kuzulabz.com/', undefined, 'KuzuLabz')}
 				/>
 				<IconButton
 					icon="github"
-					onPress={() => Linking.openURL('https://github.com/KuzuLabz/WaifuTagger')}
+					onPress={() => openBrowser('https://github.com/KuzuLabz/WaifuTagger', undefined, t`Source code`)}
 				/>
 			</View>
-			<Text selectable={false}>{t`Created by KuzuLabz`} ❤️</Text>
+			<Text selectable={false}>{t`Created by KuzuLabz ❤️`}</Text>
 		</View>
 	);
 };
