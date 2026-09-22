@@ -22,7 +22,8 @@
 		"production": {
 			"env": {
 				"APP_VARIANT": "store"
-			}
+			},
+            "distribution": "store"
 		}
 	},
 	"submit": {

@@ -42,5 +42,12 @@ assets/models/model_quantized.onnx
 # apks
 *.apk
 
+# builds
+.builds/
+
 # desktop
-desktop/
+src-tauri/
+legacy-desktop/
+
+android/
+ios/
