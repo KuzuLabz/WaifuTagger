@@ -1,17 +1,16 @@
 import { Platform, ScrollView, ScrollViewProps } from 'react-native';
-import { useAppTheme } from '../theme';
-import { LegacyRef } from 'react';
+import { Ref } from 'react';
+import { useAppTheme } from '../providers/theme';
 
 export const ScrollViewStyled = (
 	props: ScrollViewProps & {
-		ref?: LegacyRef<ScrollView>;
+		ref?: Ref<ScrollView>;
 		scrollbarStyle?: { railColor?: string; barColor?: string };
 	},
 ) => {
 	const { colors } = useAppTheme();
 	return (
 		<ScrollView
-			ref={props.ref}
 			{...props}
 			showsVerticalScrollIndicator={Platform.OS === 'web' ? true : false}
 			style={[
@@ -19,7 +18,9 @@ export const ScrollViewStyled = (
 				{
 					// @ts-expect-error
 					scrollbarColor: `${props.scrollbarStyle?.barColor ?? colors.onSurfaceVariant} ${props.scrollbarStyle?.railColor ?? colors.surface}`,
-				},
+                    scrollBehavior: 'smooth',
+                    willChange: 'transform, scroll-position',
+                },
 			]}
 		/>
 	);
