@@ -2,11 +2,11 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { InferenceTag, Rank } from '../types';
-import { rankExp } from '../constants';
+import { RANK_XP } from '../constants';
 
 const config = {
 	baseExp: 1200,
-	rankExp: rankExp,
+	rankExp: RANK_XP,
 };
 
 export type LevelInfo = {
@@ -26,6 +26,7 @@ export type StatsActions = {
 	addXp: (rank: Rank, rating?: InferenceTag[]) => boolean;
 	resetLevels: () => void;
 	resetStats: () => void;
+    reset: () => void;
 	setIsEnabled: (isToggled: boolean) => void;
 };
 
@@ -85,6 +86,9 @@ export const useStatsStore = create<StatsState & StatsActions>()(
 					ranksInferred: initialState.ranksInferred,
 				});
 			},
+            reset() {
+                set(initialState);
+            },
 			setIsEnabled(isToggled) {
 				set((state) => ({ ...state, isEnabled: isToggled }));
 			},
