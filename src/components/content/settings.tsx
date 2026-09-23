@@ -90,6 +90,8 @@ const MemoryViewer = () => {
 
     const preferGpu = useSettingsStore(state => state.preferGpu);
 
+    const platform = getCurrentPlatform();
+
     const onCheckMemory = async() => {
         const info = await getMemoryInfo();
         setMemoryInfo(info);
@@ -101,6 +103,11 @@ const MemoryViewer = () => {
             return () => null;
         }, []),
     );
+
+    // TODO: Remove with inline module fix
+    if (platform === 'mobile') {
+        return null;
+    }
 
     return(
         <PaperList.Section title={t`Memory`} titleStyle={{color: colors.primary}}>
