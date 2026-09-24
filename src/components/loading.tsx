@@ -11,6 +11,8 @@ const LoadingView = () => {
     const selected = useModelsStore(state => state.selected);
     const { t } = useLingui();
 
+    const modelName = selected?.type ? MODEL_CATALOG[selected.type]?.name ?? '' : '';
+
     if (!selected) {
         return null;
     }
@@ -26,7 +28,7 @@ const LoadingView = () => {
 			}}
 		>
 			<CircularProgress hosted={Platform.OS !== 'web'} value={0} indeterminate matchContents />
-            <Text>{t`Loading ${MODEL_CATALOG[selected.type].name}`}</Text>
+            <Text>{t`Loading ${modelName}`}</Text>
 		</View>
 	);
 };
