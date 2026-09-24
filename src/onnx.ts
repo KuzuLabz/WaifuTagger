@@ -85,7 +85,7 @@ function prepareImageBufferForONNX(
     return rgb;
 }
 
-const executionProviders = Platform.select<SessionOptions['executionProviders']>({android: ['nnapi', 'xnnpack', 'cpu'], ios: ['coreml', 'xnnpack', 'cpu']});
+const executionProviders = Platform.select<SessionOptions['executionProviders']>({android: ['xnnpack', 'cpu'], ios: ['coreml', 'xnnpack', 'cpu']});
 
 class SessionManager {
     public isLoaded: boolean = false;
@@ -125,7 +125,7 @@ class SessionManager {
             }
             this.tags = await tagFile.json();
 
-            this.session = await InferenceSession.create(modelUri, { executionProviders: executionProviders, graphOptimizationLevel: 'disabled' });
+            this.session = await InferenceSession.create(modelUri, { executionProviders: executionProviders, graphOptimizationLevel: 'extended' });
             this.currentType = selected;
             this.isLoaded = true;
             useImageStore.setState({currentHash: undefined});
