@@ -9,13 +9,13 @@ import { ListItem } from '../list';
 import { ListSwitchProps, NativeSwitchProps } from './types';
 import { ReactNode } from 'react';
 
-export const NativeSwitch = ({ label, value, hosted, onValueChange}:NativeSwitchProps) => {
-    const { colors } = useAppTheme();
-
-    const Parent = ({children}: {children: ReactNode}) =>  
-            hosted 
+const Parent = ({children, isHosted}: {isHosted?: boolean; children: ReactNode}) =>  
+            isHosted 
             ? <Host matchContents>{children}</Host>
             : <>{children}</>;
+
+export const NativeSwitch = ({ label, value, hosted, onValueChange}:NativeSwitchProps) => {
+    const { colors } = useAppTheme();
 
     if (Platform.OS === 'ios') {
         return(
@@ -26,7 +26,7 @@ export const NativeSwitch = ({ label, value, hosted, onValueChange}:NativeSwitch
     }
 
     return(
-        <Parent>
+        <Parent isHosted={hosted}>
             <Row verticalAlignment="center" horizontalArrangement={{ spacedBy: 8 }}>
                 {label && <Text modifiers={[weight(1)]}>{label}</Text>}
                 <Switch 
@@ -52,7 +52,10 @@ export const ListSwitch = ({title, value, isFirst, isLast, onValueChange}: ListS
             title={title}
             isFirst={isFirst}
             isLast={isLast}
-            trailing={<NativeSwitch value={value} onValueChange={(val) => onValueChange(val)} hosted />}
+            // trailing={<NativeSwitch value={value} onValueChange={(val) => onValueChange(val)} hosted />}
+            trailing={
+                    <NativeSwitch value={value} onValueChange={onValueChange} hosted />
+            }
         />
     );
 };

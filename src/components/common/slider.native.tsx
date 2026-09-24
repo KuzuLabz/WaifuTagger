@@ -6,6 +6,11 @@ import { useAppTheme } from '../../providers/theme';
 import { fillMaxWidth, weight } from '@expo/ui/jetpack-compose/modifiers';
 import { ReactNode } from 'react';
 
+const Parent = ({children, isHosted}: {isHosted?: boolean; children: ReactNode}) =>  
+    isHosted 
+    ? <Host matchContents>{children}</Host>
+    : <>{children}</>;
+
 type NativeSliderProps = {
     value: number;
     step: number;
@@ -19,17 +24,12 @@ type NativeSliderProps = {
 export const NativeSlider = ({ value, max, min, step, fractionDigits = 2, showValue = true, hosted, onValueChange }: NativeSliderProps) => {
     const { colors } = useAppTheme();
 
-    const Parent = ({children}: {children: ReactNode}) =>  
-                hosted 
-                ? <Host matchContents>{children}</Host>
-                : <>{children}</>;
-
     if (Platform.OS === 'ios') {
         return 
     }
     
     return(
-        <Parent>
+        <Parent isHosted={hosted}>
             <Row spacing={12} alignment='center'>
                 {Platform.select({
                     android: 
@@ -60,13 +60,8 @@ export const NativeSlider = ({ value, max, min, step, fractionDigits = 2, showVa
 export const ListSlider = ({ title, fractionDigits = 2, hosted, ...props }: NativeSliderProps & { title: string }) => {
     const { colors } = useAppTheme();
 
-    const Parent = ({children}: {children: ReactNode}) =>  
-                hosted 
-                ? <Host matchContents={{vertical: true}}>{children}</Host>
-                : <>{children}</>;
-
     return(
-        <Parent>
+        <Parent isHosted={hosted}>
             <Column spacing={6}> 
                 <Text textStyle={{color: colors.onSurface}} style={{paddingTop: 12}}>{title}</Text>
                 <NativeSlider {...props} fractionDigits={fractionDigits} />
