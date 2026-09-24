@@ -8,6 +8,15 @@ import { GithubReleaseResponse } from '../../types';
 import { REPO_URL } from '../../constants';
 
 const app_name = 'waifutagger';
+const PLAY_STORE_INSTALLERS = new Set([
+    'com.android.vending',
+    'com.google.android.finsky',
+]);
+
+const getIsInstalledFromPlayStore = () => {
+    const installer = DeviceInfoModule.installerPackageName;
+    return !!installer && PLAY_STORE_INSTALLERS.has(installer);
+};
 
 export const launchAPK = async (destination: string) => {
     const file = new File(destination);
@@ -49,13 +58,14 @@ const checkStoreUpdate = async () => {
 };
 
 export const AppUpdater: AppUpdaterType = {
-    checkForUpdate:  async () => {
-        const isSideloaded = DeviceInfoModule.installerPackageName === 'unknown';
-        if (isSideloaded) {
+    checkForUpdate: async () => {
+        const installedFromPlayStore = getIsInstalledFromPlayStore();
+
+        if (!installedFromPlayStore) {
             return await checkLocalUpdate();
-        } else {
-            return await checkStoreUpdate();
         }
+
+        return await checkStoreUpdate();
     },
     startUpdate: async (url, version, onStart, onProgress, onComplete) => {
         const jobId = `${app_name}${version.replaceAll('.', '-')}`;
