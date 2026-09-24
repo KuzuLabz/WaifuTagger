@@ -17,6 +17,8 @@ const TagDialog = () => {
     const { t } = useLingui();
     const isRankEnabled = useStatsStore(state => state.isEnabled);
 
+    const label = tag?.label ?? '';
+
 	if (!tag) return null;
 
 	return (
@@ -52,10 +54,10 @@ const TagDialog = () => {
             <Button
                 mode="contained-tonal"
                 onPress={() =>
-                    openBrowser(`${BOORU_URL}/wiki_pages/${tag.label}`, {
+                    openBrowser(`${BOORU_URL}/wiki_pages/${label}`, {
                         toolbarColor: colors.surfaceContainer,
                         showTitle: true,
-                    }, t`Wiki - ${tag.label}`)
+                    }, t`Wiki - ${label}`)
                 }
                 style={{marginTop: 6}}
             >
