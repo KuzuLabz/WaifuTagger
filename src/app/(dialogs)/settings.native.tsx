@@ -11,7 +11,7 @@ const SettingsScreen = () => {
     const { t } = useLingui();
     
     return(
-        <ScrollViewStyled style={{flex: 1, backgroundColor: colors.background}}>
+        <ScrollViewStyled style={{flex: 1, backgroundColor: colors.background}} contentContainerStyle={{paddingBottom: 12}}>
             <Stack.Screen options={{ header: () => <PaperHeader title={t`Settings`} back />}} />
             <View style={{padding: 12}}>
                 <SettingsContent />
