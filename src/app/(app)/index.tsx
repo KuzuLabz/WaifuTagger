@@ -56,6 +56,7 @@ const App = () => {
     ) : (
         <WebThemeProvider>
             <SafeAreaView
+                // @ts-expect-error
                 style={{
                     backgroundColor: colors.surface,
                     height: Platform.select({ web: '100vh', native: '100%' }),
