@@ -15,7 +15,8 @@ const LANGUAGES = {
     'fr': 'Français',
     'ja': '日本語',
     'ko': '한국인',
-    'zh': '中国人'
+    'zh-CN': '简体中文',
+    'zh-TW': '繁體中文'
 };
 
 const TAGS_FILENAME = 'tags.json';
