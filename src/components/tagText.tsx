@@ -278,7 +278,9 @@ const TagText = ({ tags, isLoading }: TagTextProps) => {
           textColor: CATEGORY_COLORS[theme][cat as TagCategoryType]?.color ?? colors.onSurface,
           bgColor: CATEGORY_COLORS[theme][cat as TagCategoryType]?.backgroundColor ?? colors.surfaceContainer,
         }))
-      ) : null;
+      ) : [];
+
+    const tagLength = tagData.length;
 
 	return (
 		<View style={{paddingBottom: 12}}>
@@ -311,7 +313,7 @@ const TagText = ({ tags, isLoading }: TagTextProps) => {
                 {Platform.OS !== 'web' && 
                     <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingTop: 12}}>
                         <View style={{paddingLeft: 10}}>
-                            <Text variant='labelLarge' style={{color: colors.onSurface}}>{t`${tagData.length} Tags`}</Text>
+                            <Text variant='labelLarge' style={{color: colors.onSurface}}>{t`${tagLength} Tags`}</Text>
                         </View>
                         <View style={{flexDirection: 'row'}}>
                             <IconButton icon={'share-variant'} onPress={() => shareText(text)} />
