@@ -23,11 +23,21 @@ import { type as osType } from '@tauri-apps/plugin-os';
 import { getCurrentPlatform } from "../../utils/platform";
 import { PaperIcon } from "../common/icon/paperIcon";
 import { PRIVACY_POLICY_URL, RELEASES_URL } from "../../constants";
+import { Variant } from "@material/material-color-utilities";
+import { MaterialColor, MaterialColorOptions } from "material-color-react-native";
+import { useContrastNames } from "../../hooks/translations/useContrastNames";
 
+const ExpressiveStyles = [Variant.TONAL_SPOT, Variant.NEUTRAL, Variant.VIBRANT, Variant.EXPRESSIVE];
 const ThemeModeSelection = () => {
-    const { colorMode, updateTheme } = useThemeStore();
+    const colorSpec = useThemeStore(state => state.colorSpec);
+    const colorMode = useThemeStore(state => state.colorMode);
+    const updateTheme = useThemeStore(state => state.updateTheme);
 
     const variantNames = useThemeVariantNames();
+
+    const onModeSelect = (mode: string) => {
+        updateTheme({colorMode: Number(mode)});
+    };
 
     return (
         <>
@@ -37,12 +47,39 @@ const ThemeModeSelection = () => {
                     mode={Number(mode) === colorMode ? "flat" : 'outlined'}
                     selected={Number(mode) === colorMode}
                     onPress={() => {
-                        updateTheme({colorMode: Number(mode)});
+                        onModeSelect(mode);
+                    }}
+                    style={{ margin: 5 }}
+                    textStyle={{ textTransform: 'capitalize' }}
+                    disabled={colorSpec === '2025' && !ExpressiveStyles.includes(Number(mode))}
+                >
+                    {variantNames[mode]}
+                </Chip>
+            ))}
+        </>
+    );
+};
+
+const ContrastSelection = () => {
+    const contrast = useThemeStore(state => state.contrast);
+    const updateTheme = useThemeStore(state => state.updateTheme);
+
+    const options = useContrastNames();
+
+    return(
+        <>
+            {Object.keys(options).filter((o) => Platform.OS === 'web' ? o !== 'REDUCED' : o).map((c, idx) => (
+                <Chip
+                    key={idx}
+                    mode={MaterialColor.ContrastLevelPresets[c] === contrast ? "flat" : 'outlined'}
+                    selected={MaterialColor.ContrastLevelPresets[c] === contrast}
+                    onPress={() => {
+                        updateTheme({contrast: MaterialColor.ContrastLevelPresets[c]});
                     }}
                     style={{ margin: 5 }}
                     textStyle={{ textTransform: 'capitalize' }}
                 >
-                    {variantNames[mode]}
+                    {options[c]}
                 </Chip>
             ))}
         </>
@@ -157,6 +194,7 @@ export const SettingsContent = () => {
 
     // theme
     const darkMode = useThemeStore(state => state.darkMode);
+    const colorSpec = useThemeStore(state => state.colorSpec);
     const updateTheme = useThemeStore(state => state.updateTheme);
 
     // rank
@@ -180,6 +218,11 @@ export const SettingsContent = () => {
     const onDarkMode = (val: boolean) => {
         updateTheme({darkMode: val});
         getCurrentPlatform() === 'desktop' && setTheme(val ? 'dark' : 'light');
+    };
+
+    const onColorSpec = (val: boolean) => {
+        const spec: MaterialColorOptions['specVersion'] = val ? '2025' : '2021';
+        useThemeStore.setState((state) => ({...state, colorSpec: spec, colorMode: (val && !ExpressiveStyles.includes(state.colorMode)) ? Variant.EXPRESSIVE : state.colorMode}))
     };
 
     const onLicense = () => {
@@ -209,6 +252,7 @@ export const SettingsContent = () => {
             <PaperList.Section title={t`Theme`} titleStyle={{color: colors.primary}}>
                 <List>
                     <ListSwitch title={t`Dark mode`} value={darkMode} onValueChange={onDarkMode} />
+                    <ListSwitch title={t`Expressive palette`} value={colorSpec === '2025'} onValueChange={onColorSpec} />
                     <ListItem
                         title={t`Theme mode`}
                         mode="item"
@@ -217,6 +261,15 @@ export const SettingsContent = () => {
                                 <ThemeModeSelection />
                             </View>
                         } 
+                    />
+                    <ListItem 
+                        title={t`Contrast`}
+                        mode={'item'}
+                        description={
+                            <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6, paddingTop: 6 }}>
+                                <ContrastSelection />
+                            </View>
+                        }
                     />
                 </List>
             </PaperList.Section>
