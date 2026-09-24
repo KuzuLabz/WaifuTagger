@@ -7,7 +7,8 @@ const loaders: Record<string, () => Promise<any>> = {
     fr: () => import('../locales/fr/messages'),
     ja: () => import('../locales/ja/messages'),
     ko: () => import('../locales/ko/messages'),
-    zh: () => import('../locales/zh/messages')
+    "zh-CN": () => import('../locales/zh-CN/messages'),
+    "zh-TW": () => import('../locales/zh-TW/messages')
 };
 
 export const dynamicActivate = async (locale: string) => {
