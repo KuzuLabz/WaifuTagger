@@ -13,16 +13,15 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#. placeholder {0}: tagData.length
-#: src/components/tagText.tsx:314
-msgid "{0} Tags"
-msgstr "{0} 個のタグ"
-
 #: src/app/models.tsx:291
 msgid "{recVariant} is recommended for your device."
 msgstr "{recVariant} はお使いのデバイスに推奨されています。"
 
-#: src/components/content/settings.tsx:217
+#: src/components/tagText.tsx:316
+msgid "{tagLength} Tags"
+msgstr "{tagLength} 個のタグ"
+
+#: src/components/content/settings.tsx:277
 msgid "About"
 msgstr "アプリについて"
 
@@ -36,7 +35,7 @@ msgstr "アプリのアップデート"
 msgid "Artist"
 msgstr "絵師"
 
-#: src/components/content/settings.tsx:195
+#: src/components/content/settings.tsx:245
 msgid "Auto inference"
 msgstr "自動推論"
 
@@ -46,11 +45,11 @@ msgid "Cancel"
 msgstr "キャンセル"
 
 #: src/app/categories.tsx:39
-#: src/components/content/settings.tsx:188
+#: src/components/content/settings.tsx:238
 msgid "Categories"
 msgstr "カテゴリ"
 
-#: src/components/content/settings.tsx:187
+#: src/components/content/settings.tsx:237
 msgid "Change model"
 msgstr "モデルを変更"
 
@@ -62,7 +61,7 @@ msgstr "モデルディレクトリを変更"
 msgid "Character"
 msgstr "キャラクター"
 
-#: src/components/content/settings.tsx:198
+#: src/components/content/settings.tsx:248
 msgid "Check for updates on startup"
 msgstr "起動時に更新を確認"
 
@@ -73,6 +72,10 @@ msgstr "閉じる"
 #: src/hooks/translations/useThemeVariantNames.ts:8
 msgid "Content"
 msgstr "コンテンツ"
+
+#: src/components/content/settings.tsx:266
+msgid "Contrast"
+msgstr "コントラスト"
 
 #: src/utils/utils.ts:42
 msgid "Copied to Clipboard"
@@ -94,16 +97,20 @@ msgstr "元ネタ・作品名"
 msgid "Created by KuzuLabz ❤️"
 msgstr "作成者: KuzuLabz ❤️"
 
-#: src/components/content/settings.tsx:204
+#: src/components/content/settings.tsx:254
 msgid "Dark mode"
 msgstr "ダークモード"
+
+#: src/hooks/translations/useContrastNames.ts:9
+msgid "Default"
+msgstr "デフォルト"
 
 #: src/app/models.tsx:191
 msgid "Deselect"
 msgstr "選択解除"
 
 #: src/app/(dialogs)/stats.tsx:30
-#: src/app/(dialogs)/tag.tsx:30
+#: src/app/(dialogs)/tag.tsx:32
 msgid "Done"
 msgstr "完了"
 
@@ -115,13 +122,17 @@ msgstr "ダウンロード"
 msgid "Error loading URL"
 msgstr "URLの読み込みエラー"
 
-#: src/components/content/settings.tsx:190
+#: src/components/content/settings.tsx:240
 msgid "Execution Provider"
 msgstr "実行プロバイダー"
 
 #: src/hooks/translations/useThemeVariantNames.ts:9
 msgid "Expressive"
 msgstr "エクスプレッシブ"
+
+#: src/components/content/settings.tsx:255
+msgid "Expressive palette"
+msgstr "表現豊かなパレット"
 
 #: src/utils/fs.tauri.ts:98
 msgid "Failed to delete {type}"
@@ -153,7 +164,7 @@ msgstr "フィデリティ"
 msgid "Fruit Salad"
 msgstr "フルーツサラダ"
 
-#: src/components/content/settings.tsx:193
+#: src/components/content/settings.tsx:243
 #: src/hooks/translations/useCategoryTitles.ts:11
 msgid "General"
 msgstr "一般"
@@ -161,6 +172,10 @@ msgstr "一般"
 #: src/app/categories.tsx:43
 msgid "Hide empty"
 msgstr "空の項目を非表示"
+
+#: src/hooks/translations/useContrastNames.ts:12
+msgid "High"
+msgstr "高"
 
 #: src/components/content/stats.tsx:43
 msgid "Image Ranks"
@@ -183,10 +198,9 @@ msgstr "レベル"
 msgid "Level Info"
 msgstr "レベル情報"
 
-#. placeholder {0}: MODEL_CATALOG[selected.type].name
-#: src/components/loading.tsx:29
-msgid "Loading {0}"
-msgstr "{0} を読み込み中"
+#: src/components/loading.tsx:31
+msgid "Loading {modelName}"
+msgstr "{modelName} を読み込み中"
 
 #: src/components/levelView.tsx:55
 msgid "Lvl."
@@ -201,7 +215,11 @@ msgstr "一般タグの最大数"
 msgid "Max tags"
 msgstr "最大タグ数"
 
-#: src/components/content/settings.tsx:106
+#: src/hooks/translations/useContrastNames.ts:11
+msgid "Medium"
+msgstr "中"
+
+#: src/components/content/settings.tsx:150
 msgid "Memory"
 msgstr "メモリ"
 
@@ -241,7 +259,7 @@ msgstr "モデルが見つかりません！"
 msgid "Model Settings"
 msgstr "モデル設定"
 
-#: src/components/content/settings.tsx:185
+#: src/components/content/settings.tsx:235
 msgid "Models"
 msgstr "モデル"
 
@@ -257,7 +275,7 @@ msgstr "ニュートラル"
 msgid "No Results"
 msgstr "結果がありません"
 
-#: src/components/content/settings.tsx:68
+#: src/components/content/settings.tsx:105
 msgid "No update available"
 msgstr "利用可能なアップデートはありません"
 
@@ -266,7 +284,7 @@ msgid "Open model directory"
 msgstr "モデルディレクトリを開く"
 
 #: src/app/licenses.tsx:137
-#: src/components/content/settings.tsx:221
+#: src/components/content/settings.tsx:281
 msgid "Open source licenses"
 msgstr "オープンソースライセンス"
 
@@ -278,15 +296,15 @@ msgstr "貼り付け"
 msgid "Please download and select a model to get started!"
 msgstr "開始するにはモデルをダウンロードして選択してください！"
 
-#: src/components/content/settings.tsx:189
+#: src/components/content/settings.tsx:239
 msgid "Prefer GPU"
 msgstr "GPUを優先"
 
-#: src/components/content/settings.tsx:222
+#: src/components/content/settings.tsx:282
 msgid "Privacy policy"
 msgstr "プライバシーポリシー"
 
-#: src/app/(dialogs)/tag.tsx:34
+#: src/app/(dialogs)/tag.tsx:36
 msgid "Probability"
 msgstr "確率"
 
@@ -302,21 +320,25 @@ msgstr "プロンプト"
 msgid "Rainbow"
 msgstr "レインボー"
 
-#: src/components/content/settings.tsx:109
+#: src/components/content/settings.tsx:153
 msgid "RAM - App usage"
 msgstr "RAM - アプリ使用量"
 
-#: src/app/(dialogs)/tag.tsx:40
+#: src/app/(dialogs)/tag.tsx:42
 msgid "Rank"
 msgstr "ランク"
 
-#: src/components/content/settings.tsx:196
+#: src/components/content/settings.tsx:246
 msgid "Rank mode"
 msgstr "ランクモード"
 
 #: src/hooks/translations/useCategoryTitles.ts:13
 msgid "Rating"
 msgstr "レーティング"
+
+#: src/hooks/translations/useContrastNames.ts:10
+msgid "Reduced"
+msgstr "低"
 
 #: src/app/(dialogs)/config.native.tsx:70
 #: src/app/(dialogs)/config.native.tsx:134
@@ -331,7 +353,7 @@ msgstr "リセット"
 msgid "Reset progress?"
 msgstr "進捗をリセットしますか？"
 
-#: src/app/(app)/index.tsx:123
+#: src/app/(app)/index.tsx:124
 msgid "Run Inference"
 msgstr "推論を実行"
 
@@ -385,23 +407,19 @@ msgstr "ストレージ"
 msgid "Styled"
 msgstr "スタイル付き"
 
-#: src/app/(dialogs)/tag.tsx:46
+#: src/app/(dialogs)/tag.tsx:48
 msgid "Tag count"
 msgstr "タグ数"
-
-#: src/components/tagText.tsx:202
-#~ msgid "Tags"
-#~ msgstr "タグ"
 
 #: src/components/tagText.tsx:196
 msgid "Text"
 msgstr "テキスト"
 
-#: src/components/content/settings.tsx:202
+#: src/components/content/settings.tsx:252
 msgid "Theme"
 msgstr "テーマ"
 
-#: src/components/content/settings.tsx:206
+#: src/components/content/settings.tsx:257
 msgid "Theme mode"
 msgstr "テーマモード"
 
@@ -435,7 +453,7 @@ msgstr "不明"
 msgid "Update"
 msgstr "アップデート"
 
-#: src/components/content/settings.tsx:220
+#: src/components/content/settings.tsx:280
 msgid "Update history"
 msgstr "更新履歴"
 
@@ -443,11 +461,11 @@ msgstr "更新履歴"
 msgid "Upload Image"
 msgstr "画像をアップロード"
 
-#: src/components/content/settings.tsx:197
+#: src/components/content/settings.tsx:247
 msgid "Use external browser"
 msgstr "外部ブラウザを使用"
 
-#: src/components/content/settings.tsx:75
+#: src/components/content/settings.tsx:112
 msgid "Version"
 msgstr "バージョン"
 
@@ -459,7 +477,7 @@ msgstr "バイブラント"
 msgid "View license"
 msgstr "ライセンスを表示"
 
-#: src/app/(dialogs)/tag.tsx:62
+#: src/app/(dialogs)/tag.tsx:64
 msgid "View Wiki"
 msgstr "Wikiを表示"
 
@@ -467,10 +485,9 @@ msgstr "Wikiを表示"
 msgid "Website"
 msgstr "ウェブサイト"
 
-#. placeholder {0}: tag.label
-#: src/app/(dialogs)/tag.tsx:58
-msgid "Wiki - {0}"
-msgstr "Wiki - {0}"
+#: src/app/(dialogs)/tag.tsx:60
+msgid "Wiki - {label}"
+msgstr "Wiki - {label}"
 
 #: src/components/content/stats.tsx:37
 msgid "XP"

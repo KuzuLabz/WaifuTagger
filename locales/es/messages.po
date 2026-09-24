@@ -13,16 +13,15 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#. placeholder {0}: tagData.length
-#: src/components/tagText.tsx:314
-msgid "{0} Tags"
-msgstr "{0} etiquetas"
-
 #: src/app/models.tsx:291
 msgid "{recVariant} is recommended for your device."
 msgstr "Se recomienda {recVariant} para tu dispositivo."
 
-#: src/components/content/settings.tsx:217
+#: src/components/tagText.tsx:316
+msgid "{tagLength} Tags"
+msgstr "{tagLength} etiquetas"
+
+#: src/components/content/settings.tsx:277
 msgid "About"
 msgstr "Acerca de"
 
@@ -36,7 +35,7 @@ msgstr "Actualización de la aplicación"
 msgid "Artist"
 msgstr "Artista"
 
-#: src/components/content/settings.tsx:195
+#: src/components/content/settings.tsx:245
 msgid "Auto inference"
 msgstr "Inferencia automática"
 
@@ -46,11 +45,11 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #: src/app/categories.tsx:39
-#: src/components/content/settings.tsx:188
+#: src/components/content/settings.tsx:238
 msgid "Categories"
 msgstr "Categorías"
 
-#: src/components/content/settings.tsx:187
+#: src/components/content/settings.tsx:237
 msgid "Change model"
 msgstr "Cambiar modelo"
 
@@ -62,7 +61,7 @@ msgstr "Cambiar directorio de modelos"
 msgid "Character"
 msgstr "Personaje"
 
-#: src/components/content/settings.tsx:198
+#: src/components/content/settings.tsx:248
 msgid "Check for updates on startup"
 msgstr "Buscar actualizaciones al iniciar"
 
@@ -73,6 +72,10 @@ msgstr "Cerrar"
 #: src/hooks/translations/useThemeVariantNames.ts:8
 msgid "Content"
 msgstr "Contenido"
+
+#: src/components/content/settings.tsx:266
+msgid "Contrast"
+msgstr "Contraste"
 
 #: src/utils/utils.ts:42
 msgid "Copied to Clipboard"
@@ -94,16 +97,20 @@ msgstr "Derechos de autor"
 msgid "Created by KuzuLabz ❤️"
 msgstr "Creado por KuzuLabz ❤️"
 
-#: src/components/content/settings.tsx:204
+#: src/components/content/settings.tsx:254
 msgid "Dark mode"
 msgstr "Modo oscuro"
+
+#: src/hooks/translations/useContrastNames.ts:9
+msgid "Default"
+msgstr "Predeterminado"
 
 #: src/app/models.tsx:191
 msgid "Deselect"
 msgstr "Deseleccionar"
 
 #: src/app/(dialogs)/stats.tsx:30
-#: src/app/(dialogs)/tag.tsx:30
+#: src/app/(dialogs)/tag.tsx:32
 msgid "Done"
 msgstr "Listo"
 
@@ -115,13 +122,17 @@ msgstr "Descargar"
 msgid "Error loading URL"
 msgstr "Error al cargar la URL"
 
-#: src/components/content/settings.tsx:190
+#: src/components/content/settings.tsx:240
 msgid "Execution Provider"
 msgstr "Proveedor de ejecución"
 
 #: src/hooks/translations/useThemeVariantNames.ts:9
 msgid "Expressive"
 msgstr "Expresivo"
+
+#: src/components/content/settings.tsx:255
+msgid "Expressive palette"
+msgstr "Paleta expresiva"
 
 #: src/utils/fs.tauri.ts:98
 msgid "Failed to delete {type}"
@@ -153,7 +164,7 @@ msgstr "Fidelidad"
 msgid "Fruit Salad"
 msgstr "Ensalada de frutas"
 
-#: src/components/content/settings.tsx:193
+#: src/components/content/settings.tsx:243
 #: src/hooks/translations/useCategoryTitles.ts:11
 msgid "General"
 msgstr "General"
@@ -161,6 +172,10 @@ msgstr "General"
 #: src/app/categories.tsx:43
 msgid "Hide empty"
 msgstr "Ocultar vacíos"
+
+#: src/hooks/translations/useContrastNames.ts:12
+msgid "High"
+msgstr "Alto"
 
 #: src/components/content/stats.tsx:43
 msgid "Image Ranks"
@@ -183,10 +198,9 @@ msgstr "Nivel"
 msgid "Level Info"
 msgstr "Información de nivel"
 
-#. placeholder {0}: MODEL_CATALOG[selected.type].name
-#: src/components/loading.tsx:29
-msgid "Loading {0}"
-msgstr "Cargando {0}"
+#: src/components/loading.tsx:31
+msgid "Loading {modelName}"
+msgstr "Cargando {modelName}"
 
 #: src/components/levelView.tsx:55
 msgid "Lvl."
@@ -201,7 +215,11 @@ msgstr "Etiquetas generales máximas"
 msgid "Max tags"
 msgstr "Etiquetas máximas"
 
-#: src/components/content/settings.tsx:106
+#: src/hooks/translations/useContrastNames.ts:11
+msgid "Medium"
+msgstr "Medio"
+
+#: src/components/content/settings.tsx:150
 msgid "Memory"
 msgstr "Memoria"
 
@@ -241,7 +259,7 @@ msgstr "¡Modelo no encontrado!"
 msgid "Model Settings"
 msgstr "Configuración del modelo"
 
-#: src/components/content/settings.tsx:185
+#: src/components/content/settings.tsx:235
 msgid "Models"
 msgstr "Modelos"
 
@@ -257,7 +275,7 @@ msgstr "Neutral"
 msgid "No Results"
 msgstr "Sin resultados"
 
-#: src/components/content/settings.tsx:68
+#: src/components/content/settings.tsx:105
 msgid "No update available"
 msgstr "No hay actualizaciones disponibles"
 
@@ -266,7 +284,7 @@ msgid "Open model directory"
 msgstr "Abrir directorio de modelos"
 
 #: src/app/licenses.tsx:137
-#: src/components/content/settings.tsx:221
+#: src/components/content/settings.tsx:281
 msgid "Open source licenses"
 msgstr "Licencias de código abierto"
 
@@ -278,15 +296,15 @@ msgstr "Pegar"
 msgid "Please download and select a model to get started!"
 msgstr "¡Descarga y selecciona un modelo para comenzar!"
 
-#: src/components/content/settings.tsx:189
+#: src/components/content/settings.tsx:239
 msgid "Prefer GPU"
 msgstr "Preferir GPU"
 
-#: src/components/content/settings.tsx:222
+#: src/components/content/settings.tsx:282
 msgid "Privacy policy"
 msgstr "Política de privacidad"
 
-#: src/app/(dialogs)/tag.tsx:34
+#: src/app/(dialogs)/tag.tsx:36
 msgid "Probability"
 msgstr "Probabilidad"
 
@@ -302,21 +320,25 @@ msgstr "Prompt"
 msgid "Rainbow"
 msgstr "Arcoíris"
 
-#: src/components/content/settings.tsx:109
+#: src/components/content/settings.tsx:153
 msgid "RAM - App usage"
 msgstr "RAM - Uso de la aplicación"
 
-#: src/app/(dialogs)/tag.tsx:40
+#: src/app/(dialogs)/tag.tsx:42
 msgid "Rank"
 msgstr "Rango"
 
-#: src/components/content/settings.tsx:196
+#: src/components/content/settings.tsx:246
 msgid "Rank mode"
 msgstr "Modo de clasificación"
 
 #: src/hooks/translations/useCategoryTitles.ts:13
 msgid "Rating"
 msgstr "Clasificación"
+
+#: src/hooks/translations/useContrastNames.ts:10
+msgid "Reduced"
+msgstr "Reducido"
 
 #: src/app/(dialogs)/config.native.tsx:70
 #: src/app/(dialogs)/config.native.tsx:134
@@ -331,7 +353,7 @@ msgstr "Restablecer"
 msgid "Reset progress?"
 msgstr "¿Restablecer progreso?"
 
-#: src/app/(app)/index.tsx:123
+#: src/app/(app)/index.tsx:124
 msgid "Run Inference"
 msgstr "Ejecutar inferencia"
 
@@ -385,23 +407,19 @@ msgstr "Almacenamiento"
 msgid "Styled"
 msgstr "Estilizado"
 
-#: src/app/(dialogs)/tag.tsx:46
+#: src/app/(dialogs)/tag.tsx:48
 msgid "Tag count"
 msgstr "Cantidad de etiquetas"
-
-#: src/components/tagText.tsx:202
-#~ msgid "Tags"
-#~ msgstr "Etiquetas"
 
 #: src/components/tagText.tsx:196
 msgid "Text"
 msgstr "Texto"
 
-#: src/components/content/settings.tsx:202
+#: src/components/content/settings.tsx:252
 msgid "Theme"
 msgstr "Tema"
 
-#: src/components/content/settings.tsx:206
+#: src/components/content/settings.tsx:257
 msgid "Theme mode"
 msgstr "Modo del tema"
 
@@ -435,7 +453,7 @@ msgstr "Desconocido"
 msgid "Update"
 msgstr "Actualizar"
 
-#: src/components/content/settings.tsx:220
+#: src/components/content/settings.tsx:280
 msgid "Update history"
 msgstr "Historial de actualizaciones"
 
@@ -443,11 +461,11 @@ msgstr "Historial de actualizaciones"
 msgid "Upload Image"
 msgstr "Subir imagen"
 
-#: src/components/content/settings.tsx:197
+#: src/components/content/settings.tsx:247
 msgid "Use external browser"
 msgstr "Usar navegador externo"
 
-#: src/components/content/settings.tsx:75
+#: src/components/content/settings.tsx:112
 msgid "Version"
 msgstr "Versión"
 
@@ -459,7 +477,7 @@ msgstr "Vibrante"
 msgid "View license"
 msgstr "Ver licencia"
 
-#: src/app/(dialogs)/tag.tsx:62
+#: src/app/(dialogs)/tag.tsx:64
 msgid "View Wiki"
 msgstr "Ver Wiki"
 
@@ -467,10 +485,9 @@ msgstr "Ver Wiki"
 msgid "Website"
 msgstr "Sitio web"
 
-#. placeholder {0}: tag.label
-#: src/app/(dialogs)/tag.tsx:58
-msgid "Wiki - {0}"
-msgstr "Wiki - {0}"
+#: src/app/(dialogs)/tag.tsx:60
+msgid "Wiki - {label}"
+msgstr "Wiki - {label}"
 
 #: src/components/content/stats.tsx:37
 msgid "XP"
