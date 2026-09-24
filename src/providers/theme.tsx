@@ -12,8 +12,19 @@ import { Toaster } from "burnt/web";
 import { useThemeStore } from "../store/theme";
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-    const { darkMode, colorMode, color } = useThemeStore();
-    const colorTheme = useMaterialColor(color, { isDark: darkMode, variant: colorMode, platform: 'phone', specVersion: '2025'});
+    const darkMode = useThemeStore((state) => state.darkMode);
+    const colorMode = useThemeStore((state) => state.colorMode);
+    const color = useThemeStore((state) => state.color);
+    const colorSpec = useThemeStore((state) => state.colorSpec);
+    const contrast = useThemeStore((state) => state.contrast);
+
+    const colorTheme = useMaterialColor(color, { 
+        isDark: darkMode, 
+        variant: colorMode, 
+        platform: 'phone', 
+        contrastLevel: contrast, 
+        specVersion: colorSpec
+    });
 
     const themeColors = PaperColorAdapter.fromMaterialColor(colorTheme);
 

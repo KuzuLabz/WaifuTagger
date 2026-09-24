@@ -252,7 +252,7 @@ export const SettingsContent = () => {
             <PaperList.Section title={t`Theme`} titleStyle={{color: colors.primary}}>
                 <List>
                     <ListSwitch title={t`Dark mode`} value={darkMode} onValueChange={onDarkMode} />
-                    <ListSwitch title={t`Expressive palette`} value={colorSpec === '2025'} onValueChange={onColorSpec} />
+                    {Platform.OS !== 'web' && <ListSwitch title={t`Expressive palette`} value={colorSpec === '2025'} onValueChange={onColorSpec} />}
                     <ListItem
                         title={t`Theme mode`}
                         mode="item"
