@@ -125,7 +125,7 @@ class SessionManager {
             }
             this.tags = await tagFile.json();
 
-            this.session = await InferenceSession.create(modelUri, { executionProviders: executionProviders, graphOptimizationLevel: 'all' });
+            this.session = await InferenceSession.create(modelUri, { executionProviders: executionProviders, graphOptimizationLevel: 'disabled' });
             this.currentType = selected;
             this.isLoaded = true;
             useImageStore.setState({currentHash: undefined});
