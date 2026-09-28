@@ -35,7 +35,8 @@
         }
       ]
     },
-    "core:app:allow-set-app-theme",
+    "process:allow-restart",
+    "core:window:allow-set-theme",
     "vnidrop-share:default",
     "core:webview:allow-create-webview-window",
     "opener:default",
