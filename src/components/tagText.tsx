@@ -39,7 +39,7 @@ const CATEGORY_CONFIG: CategoryConfig[] = [
     {
         key: 'copyright',
         getIcon: () => 'copyright',
-        getIconColor: (theme) => CATEGORY_COLORS[theme].copyright[theme === 'dark' ? 'color' : 'backgroundColor'],
+        getIconColor: (theme) => CATEGORY_COLORS[theme].copyright.color,
         getContainerColor: (theme) => CATEGORY_COLORS[theme].copyright.backgroundColor,
     },
     {
@@ -142,7 +142,7 @@ const ControlBar = ({ text, categories }: ControlBarProps) => {
                             onPress={() => toggleIncluded(key)}
                             selected={isSelected}
                             disabled={!isCategoryActive}
-                            iconColor={getIconColor(theme, colors, isSelected)}
+                            iconColor={isSelected && isCategoryActive ? getIconColor(theme, colors, isSelected) : colors.onSurface}
                             containerColor={isSelected && isCategoryActive ? getContainerColor(theme, colors, isSelected) : undefined}
                             style={{ alignSelf: 'flex-end' }}
                         />
