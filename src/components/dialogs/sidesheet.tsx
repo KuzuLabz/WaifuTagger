@@ -34,7 +34,7 @@ export const SideSheet = ({ title, children, isPresented, scrollable, actions, a
                     <Animated.View entering={FadeIn} exiting={FadeOut} style={{ height: '100%', width: '100%', backgroundColor: 'rgba(0,0,0,0.4)' }} />
                 </Pressable>
                 {isPresented && 
-                <Animated.View entering={entering} exiting={exiting} style={{ height: height - bottom - 24, width: '45%', backgroundColor: colors.surfaceContainerLow, borderRadius: 24, marginVertical: 16, marginTop: top + 16, marginRight: 16}}>
+                <Animated.View entering={entering} exiting={exiting} style={{ height: height - bottom - 24, width: '45%', overflow: 'hidden', backgroundColor: colors.surfaceContainerLow, borderRadius: 24, marginVertical: 16, marginTop: top + 16, marginRight: 16}}>
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 24, paddingTop: 24 }}>
                         <Text variant="titleLarge">{title}</Text>
                         <IconButton icon="close" onPress={onDismiss} />
