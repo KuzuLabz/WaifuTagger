@@ -1,19 +1,10 @@
 import { M3eSlider, M3eSliderThumb } from '@m3e/react/slider';
 import { Text } from 'react-native-paper';
 import { Row } from '@expo/ui';
-import { useAppTheme } from '../../providers/theme';
+import { useAppTheme } from '../../../providers/theme';
 import { M3eListItem } from '@m3e/react/list';
+import { ListSliderProps, NativeSliderProps } from './types';
 
-type NativeSliderProps = {
-    value: number;
-    step?: number;
-    min: number;
-    max: number;
-    showValue?: boolean;
-    fractionDigits?: number;
-    hosted?: boolean;
-    onValueChange: (val: number) => void;
-};
 export const NativeSlider = ({ value, step, min, max, showValue = true, fractionDigits = 2, onValueChange }: NativeSliderProps) => {
     const { colors } = useAppTheme();
     return (
@@ -25,8 +16,6 @@ export const NativeSlider = ({ value, step, min, max, showValue = true, fraction
         </Row>
     )
 };
-
-type ListSliderProps = {title: string} & NativeSliderProps;
 
 export const ListSlider = ({ title, fractionDigits = 2, ...props }: ListSliderProps) => {
     return (
