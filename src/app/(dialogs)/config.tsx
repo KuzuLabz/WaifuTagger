@@ -9,6 +9,10 @@ import { useSettingsStore } from "../../store/settings";
 import { List } from "../../components/common/list";
 import { List as PaperList } from 'react-native-paper'
 import { useCategoryTitles } from "../../hooks/translations/useCategoryTitles";
+import { useWindowWidthClass, WindowWidthClass } from "../../hooks/useWindowWidthClass";
+import { SideSheet } from "../../components/dialogs/sidesheet";
+import { router } from "expo-router";
+import { WebThemeProvider } from "../../providers/webTheme";
 
 const ConfigDialog = () => {
     const { t } = useLingui();
@@ -18,6 +22,7 @@ const ConfigDialog = () => {
     const updateSettings = useModelsStore(state => state.updateSettings);
     const [newConfig, setNewConfig] = useState(settings[selected.type]);
     const cats = useCategoryTitles();
+    const sizeClass = useWindowWidthClass();
 
     const updateThreshold = (type: keyof ModelSettings['thresholds'], value: number) => {
         setNewConfig((prev) => ({...prev, thresholds: { ...prev.thresholds, [type]: value } }));
@@ -32,12 +37,63 @@ const ConfigDialog = () => {
     };
 
     const onClose = () => {
+        router.back()
         setNewConfig(settings[selected.type]);
     };
 
     const onReset = () => {
         setNewConfig({ thresholds: {...INIT_THRESHOLDS, general: MODEL_CATALOG[selected.type].minThreshold}, maxTags: MAX_TAGS });
     };
+
+    if (sizeClass !== WindowWidthClass.Compact) {
+            return(
+                <SideSheet
+                    title={t`Model Settings`} 
+                    isPresented={true}
+                    onDismiss={onClose}
+                    scrollable
+                    actions={[
+                        {
+                            title: t`Save`,
+                            onPress: onSave,
+                            mode: 'contained'
+                        },
+                        {
+                            title: t`Reset`,
+                            onPress: onReset
+                        }
+                    ]}
+                >
+                    <PaperList.Section title={t`Max tags`}>
+                        <List>
+                            <ListSlider 
+                                title={cats.general} 
+                                value={newConfig.maxTags ?? MAX_TAGS} 
+                                hosted
+                                min={20} max={80} fractionDigits={0} 
+                                step={1}
+                                onValueChange={(v) => updateMaxTags(v)} 
+                            />
+                        </List>
+                    </PaperList.Section>
+                    <PaperList.Section title={t`Minimum thresholds`}>
+                        <List>
+                            {categoryOrder.map((c, idx) => c.enabled && (
+                                <ListSlider
+                                    key={idx}
+                                    hosted
+                                    title={cats[c.category]}
+                                    value={newConfig.thresholds[c.category]}
+                                    min={0.25} max={1}
+                                    step={0.01}
+                                    onValueChange={(val) => updateThreshold(c.category, parseFloat(val.toFixed(2)))}
+                                />
+                            ))}
+                        </List>
+                    </PaperList.Section>
+                </SideSheet>
+            );
+        }
 
     return (
         <Dialog 
