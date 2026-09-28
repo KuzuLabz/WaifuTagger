@@ -9,7 +9,7 @@ import { useAppTheme } from "../../providers/theme";
 import { router, useFocusEffect } from "expo-router";
 import { List, ListItem } from "../common/list";
 import { LanguageList } from "../language";
-import { setTheme } from '@tauri-apps/api/app';
+import { getCurrentWindow } from '@tauri-apps/api/window';
 import Constants from 'expo-constants';
 import { useThemeVariantNames } from "../../hooks/translations/useThemeVariantNames";
 import { useCallback, useState } from "react";
@@ -217,7 +217,10 @@ export const SettingsContent = () => {
 
     const onDarkMode = (val: boolean) => {
         updateTheme({darkMode: val});
-        getCurrentPlatform() === 'desktop' && setTheme(val ? 'dark' : 'light');
+        if (getCurrentPlatform() === 'desktop') {
+            getCurrentWindow().setTheme(val ? 'dark' : 'light');
+            document.documentElement.style.colorScheme = val ? 'dark' : 'light';
+        }
     };
 
     const onColorSpec = (val: boolean) => {
