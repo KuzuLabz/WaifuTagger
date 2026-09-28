@@ -18,15 +18,15 @@
         "@react-native-vector-icons/common": "^13.0.1",
         "@react-native-vector-icons/get-image": "^13.0.0",
         "@react-native-vector-icons/material-design-icons": "^13.1.2",
-        "@tauri-apps/api": "^2.11.1",
+        "@tauri-apps/api": "^2.12.0",
         "@tauri-apps/plugin-clipboard-manager": "~2",
         "@tauri-apps/plugin-dialog": "~2",
-        "@tauri-apps/plugin-fs": "~2",
-        "@tauri-apps/plugin-http": "~2",
+        "@tauri-apps/plugin-fs": "~2.6.0",
+        "@tauri-apps/plugin-http": "~2.7.0",
         "@tauri-apps/plugin-opener": "~2",
         "@tauri-apps/plugin-os": "~2",
         "@tauri-apps/plugin-process": "~2",
-        "@tauri-apps/plugin-updater": "~2",
+        "@tauri-apps/plugin-updater": "^2.13.0",
         "@uiw/react-markdown-preview": "^5.2.1",
         "@vnidrop/tauri-plugin-share": "^1.0.0-rc.2",
         "burnt": "^0.13.0",
@@ -520,7 +520,7 @@
 
     "@sinclair/typebox": ["@sinclair/typebox@0.27.12", "", {}, "sha512-hhyNJ+nbR6ZR7pToHvllEFun9TL0sbL+tk/ON75lo+Xas054uez98qRbsuNt7MBCyZKK4+8Yli/OAGZhmfBZ/g=="],
 
-    "@tauri-apps/api": ["@tauri-apps/api@2.11.1", "", {}, "sha512-M2FPuYND2m+wh5hfW9ZpSdxMPdEJovPBWwoHJmwUpysTYNHaOkVFN419m/K0LIgjb/7KU2vBgsUepJWugQCvAA=="],
+    "@tauri-apps/api": ["@tauri-apps/api@2.12.0", "", {}, "sha512-fUSxFX8VABYe9W9K5ROdEaKVkNUFRcMSRofjruvaxztXA+I0XnQHcYHF8m/a6iExRUxsUf0HsFWhPBuH9IgzJw=="],
 
     "@tauri-apps/cli": ["@tauri-apps/cli@2.11.5", "", { "optionalDependencies": { "@tauri-apps/cli-darwin-arm64": "2.11.5", "@tauri-apps/cli-darwin-x64": "2.11.5", "@tauri-apps/cli-linux-arm-gnueabihf": "2.11.5", "@tauri-apps/cli-linux-arm64-gnu": "2.11.5", "@tauri-apps/cli-linux-arm64-musl": "2.11.5", "@tauri-apps/cli-linux-riscv64-gnu": "2.11.5", "@tauri-apps/cli-linux-x64-gnu": "2.11.5", "@tauri-apps/cli-linux-x64-musl": "2.11.5", "@tauri-apps/cli-win32-arm64-msvc": "2.11.5", "@tauri-apps/cli-win32-ia32-msvc": "2.11.5", "@tauri-apps/cli-win32-x64-msvc": "2.11.5" }, "bin": { "tauri": "tauri.js" } }, "sha512-YbeJ6tctNoo40purO4u3Eeo3RVqmsjJr0NoKQRu+4pvO4gMLzkjta7x0k96SxSLmx+rQ+8um1ThOlw+HLpgFug=="],
 
@@ -550,9 +550,9 @@
 
     "@tauri-apps/plugin-dialog": ["@tauri-apps/plugin-dialog@2.7.3", "", { "dependencies": { "@tauri-apps/api": "^2.11.0" } }, "sha512-CRgE+7TP4tvq9MjBU6f04NLTFIqVMLKHk3hAqlhil00ngK9ACTrXPH3oHpKMProxILodd3YjBoKbMwSI4IEcfA=="],
 
-    "@tauri-apps/plugin-fs": ["@tauri-apps/plugin-fs@2.5.2", "", { "dependencies": { "@tauri-apps/api": "^2.11.0" } }, "sha512-XXvMSnFiob+G1H+YHCDf+bzWVumseQuEIhzpbOJzevUfL4k0U+sTApZWJHpoLiamggnVPJm5dJ5sDsniRyWxlg=="],
+    "@tauri-apps/plugin-fs": ["@tauri-apps/plugin-fs@2.6.0", "", { "dependencies": { "@tauri-apps/api": "^2.12.0" } }, "sha512-MhBAZ4rryd+h9fijd/GWDfArqiAeGI0ZNduV4wuRyUVI6wDZ+oDBY7atqtoXKDwlTUVSvpvmWJAY0ehQd/v6Uw=="],
 
-    "@tauri-apps/plugin-http": ["@tauri-apps/plugin-http@2.6.1", "", { "dependencies": { "@tauri-apps/api": "^2.11.0" } }, "sha512-9gtfe6eOaVKofASoMZ4Ph8E6vDYnpUTbMXrLt4FkXPzC5+O+wnGqJ9fz2koSPYcQt10bb3cx5qHkU0AU1l8tcQ=="],
+    "@tauri-apps/plugin-http": ["@tauri-apps/plugin-http@2.7.0", "", { "dependencies": { "@tauri-apps/api": "^2.12.0" } }, "sha512-sddZpYeqONDQn2lYobLG1aw0+swN0k4GLNruqAZ8nnHKo38FBaxyf9AFd3+KAVDZHCKQEZDpSn5Tnfq7+f3vKA=="],
 
     "@tauri-apps/plugin-opener": ["@tauri-apps/plugin-opener@2.5.5", "", { "dependencies": { "@tauri-apps/api": "^2.11.0" } }, "sha512-xvzGai5aQds8j8R8RsUK/lW6pGG50YgOYIPLzvkqmkwAj7dfySOD7sGtejRzvVdMmv1EQfKVEFh1MvmDp8QR0g=="],
 
@@ -560,7 +560,7 @@
 
     "@tauri-apps/plugin-process": ["@tauri-apps/plugin-process@2.3.1", "", { "dependencies": { "@tauri-apps/api": "^2.8.0" } }, "sha512-nCa4fGVaDL/B9ai03VyPOjfAHRHSBz5v6F/ObsB73r/dA3MHHhZtldaDMIc0V/pnUw9ehzr2iEG+XkSEyC0JJA=="],
 
-    "@tauri-apps/plugin-updater": ["@tauri-apps/plugin-updater@2.12.0", "", { "dependencies": { "@tauri-apps/api": "^2.11.0" } }, "sha512-74+g7rSIHXQje3ttR6tYap3FJP/UtZqqYxGVF9EE0Kpz0YADxHX2Ynw/eIlNPMy9D1aG+F8oBosT+6nphSa8Og=="],
+    "@tauri-apps/plugin-updater": ["@tauri-apps/plugin-updater@2.13.0", "", { "dependencies": { "@tauri-apps/api": "^2.12.0" } }, "sha512-9iwTSOlxMPZGI6M84Nd00rv6g+xERo8g4GDvG9cazOao+HjdIHZYCcvkvSP6JGn7Z50/R8t2jbR+PxQxf2qKMQ=="],
 
     "@tybys/wasm-util": ["@tybys/wasm-util@0.10.4", "", { "dependencies": { "tslib": "^2.4.0" } }, "sha512-W3c4gRigFS0T/Ma4qIYF3GDAc5AQdHb1yL5znJT1Zv1YaD9Kitx656wBjvr19qbiosmZT8lWDM5BEMynUqX65A=="],
 
