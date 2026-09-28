@@ -14,6 +14,7 @@ import { PixelFormat } from 'react-native-nitro-image/lib/typescript/specs/Image
 import { router } from 'expo-router';
 import { getModelKey } from './utils/utils';
 import { sendToast } from './utils/toast';
+import { DeviceInfoModule } from 'react-native-nitro-device-info';
 
 function prepareImageBufferForONNX(
   pixelArray: Uint8Array,
@@ -125,7 +126,13 @@ class SessionManager {
             }
             this.tags = await tagFile.json();
 
-            this.session = await InferenceSession.create(modelUri, { executionProviders: executionProviders, graphOptimizationLevel: 'extended' });
+            this.session = await InferenceSession.create(
+                modelUri, 
+                { 
+                    executionProviders: DeviceInfoModule.isEmulator ? ['cpu'] : executionProviders, 
+                    graphOptimizationLevel: 'basic' 
+                }
+            );
             this.currentType = selected;
             this.isLoaded = true;
             useImageStore.setState({currentHash: undefined});
