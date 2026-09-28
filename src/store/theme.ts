@@ -21,9 +21,9 @@ type ThemeAction = {
 
 const initialState: ThemeState = {
 	darkMode: Appearance.getColorScheme() === 'dark',
-	colorMode: Variant.FIDELITY,
+	colorMode: Variant.VIBRANT,
     color: '#3E8260',
-    colorSpec: '2021',
+    colorSpec: '2025',
     contrast: MaterialColor.ContrastLevelPresets.DEFAULT
 };
 

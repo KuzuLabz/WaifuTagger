@@ -49,7 +49,7 @@ const initialState: SettingsState = {
 	lastOpenedDir: '',
     autoUpdate: true,
     extBrowser: true,
-    preferGpu: false,
+    preferGpu: true,
     executionProvider: 'CPU',
     hideEmptyCategory: false,
     categoryOrder: [
