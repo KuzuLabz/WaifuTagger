@@ -91,7 +91,7 @@ const getImageFromLocalPath = async (path: string): Promise<SelectedImage> => {
 export const ImageController: ImageControllerType = {
     fromImageDialog: async () => {
         try {
-            const filePath = await open({defaultPath: useSettingsStore.getState().lastOpenedDir});
+            const filePath = await open({defaultPath: useSettingsStore.getState().lastOpenedDir, filters: [{name: 'Image File', extensions: ['png', 'jpg', 'jpeg', 'webp']}]});
             if (!filePath) {
                 return;
             }
