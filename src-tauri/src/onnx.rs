@@ -105,37 +105,37 @@ pub async fn load_model(
             //     }
             // }
 
-            #[cfg(feature = "nvrtx")]
-            if attempted_provider == "CPU" && ep::NVRTX::default().is_available()? {
-                match ep::NVRTX::default().register(&mut builder) {
-                    Ok(_) => attempted_provider = "TensorRT RTX".to_string(),
-                    Err(e) => println!("NVRTX registration failed: {:?}", e),
-                }
-            }
-
-            #[cfg(feature = "tensorrt")]
-            if attempted_provider == "CPU" && ep::TensorRT::default().is_available()? {
-                match ep::TensorRT::default().register(&mut builder) {
-                    Ok(_) => attempted_provider = "TensorRT".to_string(),
-                    Err(e) => println!("TensorRT registration failed: {:?}", e),
-                }
-            }
-
-            // #[cfg(feature = "webgpu")]
-            // if attempted_provider == "CPU" && ep::WebGPU::default().is_available()? {
-            //     match ep::WebGPU::default().register(&mut builder) {
-            //         Ok(_) => attempted_provider = "WebGPU".to_string(),
-            //         Err(e) => println!("WebGPU registration failed: {:?}", e),
+            // #[cfg(feature = "nvrtx")]
+            // if attempted_provider == "CPU" && ep::NVRTX::default().is_available()? {
+            //     match ep::NVRTX::default().register(&mut builder) {
+            //         Ok(_) => attempted_provider = "TensorRT RTX".to_string(),
+            //         Err(e) => println!("NVRTX registration failed: {:?}", e),
             //     }
             // }
 
-            #[cfg(feature = "directml")]
-            if attempted_provider == "CPU" && ep::DirectML::default().is_available()? {
-                match ep::DirectML::default().register(&mut builder) {
-                    Ok(_) => attempted_provider = "DirectML".to_string(),
-                    Err(e) => println!("DirectML registration failed: {:?}", e),
+            // #[cfg(feature = "tensorrt")]
+            // if attempted_provider == "CPU" && ep::TensorRT::default().is_available()? {
+            //     match ep::TensorRT::default().register(&mut builder) {
+            //         Ok(_) => attempted_provider = "TensorRT".to_string(),
+            //         Err(e) => println!("TensorRT registration failed: {:?}", e),
+            //     }
+            // }
+
+            #[cfg(feature = "webgpu")]
+            if attempted_provider == "CPU" && ep::WebGPU::default().is_available()? {
+                match ep::WebGPU::default().register(&mut builder) {
+                    Ok(_) => attempted_provider = "WebGPU".to_string(),
+                    Err(e) => println!("WebGPU registration failed: {:?}", e),
                 }
             }
+
+            // #[cfg(feature = "directml")]
+            // if attempted_provider == "CPU" && ep::DirectML::default().is_available()? {
+            //     match ep::DirectML::default().register(&mut builder) {
+            //         Ok(_) => attempted_provider = "DirectML".to_string(),
+            //         Err(e) => println!("DirectML registration failed: {:?}", e),
+            //     }
+            // }
 
             #[cfg(feature = "coreml")]
             if attempted_provider == "CPU" && ep::CoreML::default().is_available()? {
