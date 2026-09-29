@@ -1,22 +1,17 @@
 // import { check } from '@tauri-apps/plugin-updater';
 // import { relaunch } from '@tauri-apps/plugin-process';
 import { AppUpdaterType } from './types';
-import { REPO_URL } from '../../constants';
+import { RELEASES_URL, REPO_URL } from '../../constants';
 import { GithubReleaseResponse } from '../../types';
+import { getLatestGithubRelease } from './common';
+import { openBrowser } from '../utils';
 
 export const AppUpdater: AppUpdaterType = {
     checkForUpdate: async () => {
-        // const update = await check();
-        const update = { version: 3.0 };
-        if (update) {
-            const response = await fetch(REPO_URL + '/releases/latest');
-            const data = await response.json() as GithubReleaseResponse;
-            console.log(`Update ${update.version} is available!`);
-            return { body: data.body, version: data.tag_name, url: data.assets_url }
-        }
-        return null;
+        return await getLatestGithubRelease();
     },
     startUpdate: async (_url, _version, onStart, onProgress, onComplete) => {
+        await openBrowser(RELEASES_URL + '/latest', undefined, 'WaifuTagger Release');
         // const update = await check();
         // if (update) {
         //     console.log(

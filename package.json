@@ -37,7 +37,6 @@
     "@tauri-apps/plugin-opener": "~2",
     "@tauri-apps/plugin-os": "~2.4.0",
     "@tauri-apps/plugin-process": "~2.4.0",
-    "@tauri-apps/plugin-updater": "^2.13.0",
     "@uiw/react-markdown-preview": "^5.2.1",
     "@vnidrop/tauri-plugin-share": "^1.0.0-rc.2",
     "burnt": "^0.13.0",

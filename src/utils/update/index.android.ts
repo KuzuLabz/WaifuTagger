@@ -1,11 +1,9 @@
 import { Directory, File, Paths } from 'expo-file-system';
 import { startActivityAsync } from 'expo-intent-launcher';
 import { AppUpdaterType } from './types';
-import Constants from 'expo-constants';
 import { completeHandler, createDownloadTask } from '@kesha-antonov/react-native-background-downloader';
 import { DeviceInfoModule } from 'react-native-nitro-device-info';
-import { GithubReleaseResponse } from '../../types';
-import { REPO_URL } from '../../constants';
+import { getLatestGithubRelease } from './common';
 
 const app_name = 'waifutagger';
 const PLAY_STORE_INSTALLERS = new Set([
@@ -32,26 +30,6 @@ export const launchAPK = async (destination: string) => {
     }
 };
 
-
-const checkLocalUpdate = async() => {
-    const response = await fetch(REPO_URL + '/releases/latest');
-    const data = await response.json() as GithubReleaseResponse;
-    const newestVersion = data?.tag_name ?? null;
-
-    if (newestVersion && newestVersion !== Constants?.expoConfig?.version) {
-        const apkAsset = data.assets.find((asset) => asset.name.includes('.apk'));
-        if (!apkAsset) {
-            return null;
-        }
-        return {
-            version: newestVersion,
-            body: data.body,
-            url: apkAsset.browser_download_url
-        };
-    } else {
-        return null;
-    }
-};
 const checkStoreUpdate = async () => {
     // TODO
     return null;
@@ -62,7 +40,7 @@ export const AppUpdater: AppUpdaterType = {
         const installedFromPlayStore = getIsInstalledFromPlayStore();
 
         if (!installedFromPlayStore) {
-            return await checkLocalUpdate();
+            return await getLatestGithubRelease();
         }
 
         return await checkStoreUpdate();

@@ -30,7 +30,7 @@ const UpdateSideSheet = ({body, progress, onUpdate}: {body: string; progress: nu
         <SideSheet 
             title={t`App Update`} 
             isPresented={present} 
-            actionHeader={progress === undefined && <ProgressBar hosted value={progress} indeterminate={true} />} 
+            // actionHeader={progress === undefined && <ProgressBar hosted value={progress} indeterminate={true} />} 
             scrollable
             onDismiss={onDismiss}
             actions={[
@@ -66,7 +66,6 @@ const UpdateDialog = () => {
     const onDismiss = () => {
         setIsPresented(false);
 
-        // wait for sheet animation
         (new Promise(resolve => setTimeout(resolve, 100))).then(() => {
             router.back();
         });
