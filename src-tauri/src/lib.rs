@@ -480,6 +480,7 @@ pub fn run() {
         .plugin(tauri_plugin_http::init())
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_vnidrop_share::init())
+        .plugin(tauri_plugin_prevent_default::debug())
         .manage(onnx::AppState {
             session: Mutex::new(None).into(),
         })

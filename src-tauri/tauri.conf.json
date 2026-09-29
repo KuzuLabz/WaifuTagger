@@ -10,6 +10,7 @@
         "beforeBuildCommand": "bun run build:web"
     },
     "app": {
+        "withGlobalTauri": true,
         "windows": [
             {
                 "title": "WaifuTagger",
