@@ -8,7 +8,6 @@
   "permissions": [
     "core:default",
     "dialog:default",
-    "updater:default",
     "process:default",
     "clipboard-manager:allow-read-image",
     "clipboard-manager:allow-read-text",
