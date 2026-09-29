@@ -14,6 +14,7 @@ import { getModelKey } from "../utils/utils";
 import { useSettingsStore } from "../store/settings";
 import { ModelKey } from "../types";
 import { DeviceInfoModule } from "react-native-nitro-device-info";
+import { useGlobalDrop } from "../hooks/useGlobalDrop";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -26,6 +27,7 @@ const dialogScreenOptions: NativeStackNavigationOptions = {
 const RootLayout = () => {
     const [fontsLoaded] = useFonts({ RobotoFlex_400Regular });
     const [langLoaded, setLangLoaded] = useState(false);
+    useGlobalDrop();
 
     useEffect(() => {
         dynamicActivate(useSettingsStore.getState().language).then(() => setLangLoaded(true));
