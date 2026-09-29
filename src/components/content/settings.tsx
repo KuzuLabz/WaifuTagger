@@ -239,7 +239,7 @@ export const SettingsContent = () => {
                 <List>
                     <ListItem title={t`Change model`} onPress={onChangeModel} />
                     <ListItem title={t`Categories`} onPress={onCategoryOrder} />
-                    {Platform.OS === 'web' && <ListSwitch title={t`Prefer GPU`} value={preferGpu} onValueChange={(val) => updateSettings({preferGpu: val})} />}
+                    {Platform.OS === 'web' && platform !== 'linux' && <ListSwitch title={t`Prefer GPU`} value={preferGpu} onValueChange={(val) => updateSettings({preferGpu: val})} />}
                     {Platform.OS === 'web' && <ListItem title={t`Execution Provider`} description={execProvider} mode="item" />}
                 </List>
             </PaperList.Section>
