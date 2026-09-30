@@ -13,7 +13,7 @@ export const getMemoryInfo = async (): Promise<MemoryInfo | null> => {
     const appMemory = await getAppMemory();
     const vram = await getVramInfo();
     return {
-        ram: {
+        ram: info && appMemory && {
             free: info.free_ram,
             total: info.total_ram,
             used: info.used_ram,
