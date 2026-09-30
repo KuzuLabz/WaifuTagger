@@ -43,23 +43,25 @@ export const useDragDrop = () => {
             const dt = e.dataTransfer;
             const uri = dt.getData('text/html').match(/(file:\/\/[^\s"'<>]+|https?:\/\/[^\s"'<>]+)/i)[0];
             const files = Array.from(dt.files);
-            if (files && files.length > 0) {
-                const file = files[0];
-                const localPath:string = (file as any).path || file.name;
-                ImageController.fromDrop(localPath.replace('file://', ''));
-                return;
-            } else {
-                console.log('No files!');
-            }
-
             if (uri) {
                 if (uri.startsWith('http')) {
                     ImageController.fromUrl(uri);
                 } else if (uri.startsWith('file://')) {
                     ImageController.fromDrop(uri.replace('file://', ''));
                 }
+                setIsHovered(false);
+                return;
             }
 
+            if (files && files.length > 0) {
+                const file = files[0];
+                const localPath:string = (file as any).path || file.name;
+                ImageController.fromDrop(localPath.replace('file://', ''));
+                setIsHovered(false);
+                return;
+            } else {
+                console.log('No files!');
+            }
             setIsHovered(false);
         };
 
