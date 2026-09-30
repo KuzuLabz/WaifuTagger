@@ -70,7 +70,6 @@ const getClipboardUrl = async (): Promise<string | null> => {
 const getSelectedImageData = async (arrayBuffer: ArrayBuffer, fileName?: string) => {
     try {
         const uri = getImageBlob(arrayBuffer);
-        console.log(uri);
         const hash = await getHash(arrayBuffer);
         return { uri, fileName, hash }
     } catch (e) {
@@ -109,7 +108,6 @@ export const ImageController: ImageControllerType = {
     fromUrl: async (url) => {
         try {
             const img = await getRemoteImage(url);
-            console.log(img.byteLength);
             const data = await getSelectedImageData(img, url.split('/').at(-1) ?? 'temp');
             useImageStore.getState().setSelectedImage(data, url);
         } catch (e) {
@@ -124,7 +122,6 @@ export const ImageController: ImageControllerType = {
                 return;
             }
             sendToast({title: t`Processing image...`, preset: 'none', duration: 2});
-            console.log('Filepath:', filePath);
             const data = await getImageFromLocalPath(filePath);
             useImageStore.getState().setSelectedImage(data, filePath);
             useSettingsStore.getState().updateLastOpenedDir(filePath);
