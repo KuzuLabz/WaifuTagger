@@ -5,7 +5,7 @@ import { dynamicActivate } from '../locale';
 import { ThemeProvider } from "../providers/theme";
 import { RootHeader } from "../components/header";
 import React, { useEffect, useState } from "react";
-import { Platform } from "react-native";
+import { Appearance, Platform } from "react-native";
 import { useFonts, RobotoFlex_400Regular } from '@expo-google-fonts/roboto-flex';
 import { syncDownloads, verifyModels } from "../utils/fs";
 import { useModelsStore } from "../store/models";
@@ -15,6 +15,8 @@ import { useSettingsStore } from "../store/settings";
 import { ModelKey } from "../types";
 import { DeviceInfoModule } from "react-native-nitro-device-info";
 import { useGlobalDrop } from "../hooks/useGlobalDrop";
+import { getCurrentWindow } from "@tauri-apps/api/window";
+import { useThemeStore } from "../store/theme";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -30,6 +32,11 @@ const RootLayout = () => {
     useGlobalDrop();
 
     useEffect(() => {
+        if (Platform.OS === 'web') {
+            const theme = useThemeStore.getState().darkMode ? 'dark' : 'light';
+            getCurrentWindow().setTheme(theme);
+            document.documentElement.style.colorScheme = theme;
+        }
         dynamicActivate(useSettingsStore.getState().language).then(() => setLangLoaded(true));
     }, []);
 
