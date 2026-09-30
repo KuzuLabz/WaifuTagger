@@ -76,6 +76,11 @@ const RootLayout = () => {
                                     src: url(${require('@react-native-vector-icons/material-design-icons/fonts/MaterialDesignIcons.ttf')}) format('truetype');
                                     }
                                 `}</style>
+                                <style>{`
+                                    div, span, input, textarea {
+                                        font-family: 'RobotoFlex_400Regular', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                                    }
+                                `}</style>
                             </>
                         ) : null}
                     </React.Fragment>
