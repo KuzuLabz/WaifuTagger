@@ -137,7 +137,7 @@ pub async fn load_model(
                 }
             }
 
-            #[cfg(feature = "coreml")]
+            #[cfg(target_os = "macos")]
             if attempted_provider == "CPU" && ep::CoreML::default().is_available()? {
                 match ep::CoreML::default().register(&mut builder) {
                     Ok(_) => attempted_provider = "CoreML".to_string(),
