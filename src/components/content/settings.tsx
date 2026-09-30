@@ -51,7 +51,7 @@ const ThemeModeSelection = () => {
                     }}
                     style={{ margin: 5 }}
                     textStyle={{ textTransform: 'capitalize' }}
-                    disabled={colorSpec === '2025' && !ExpressiveStyles.includes(Number(mode))}
+                    disabled={colorSpec === '2025' && Platform.OS !== 'web' && !ExpressiveStyles.includes(Number(mode))}
                 >
                     {variantNames[mode]}
                 </Chip>
@@ -152,7 +152,7 @@ const MemoryViewer = () => {
                 <ListItem
                     title={t`RAM - App usage`}
                     mode="action"
-                    description={`${memoryInfo ? formatBytes(memoryInfo.ram.appUsed).join(' ') : ''}`} 
+                    description={`${memoryInfo ? formatBytes(memoryInfo.ram?.appUsed).join(' ') : ''}`} 
                     onPress={onCheckMemory}
                     trailing={<PaperIcon name="autorenew" slot="trailing" />}
                 />
@@ -161,18 +161,18 @@ const MemoryViewer = () => {
                     mode="item"
                     description={
                         <View style={{gap: 6}}>
-                            <Text variant="labelMedium" style={{color: colors.onSurfaceVariant}}>{memoryInfo ? `${formatBytes(memoryInfo.ram.used)[0]} / ${formatBytes(memoryInfo.ram.total).join(' ')}` : ''}</Text>
-                            <ProgressBar hosted value={memoryInfo?.ram.used ?? 0} indeterminate={!memoryInfo} max={memoryInfo?.ram.total} variant="linear"  />
+                            <Text variant="labelMedium" style={{color: colors.onSurfaceVariant}}>{memoryInfo ? `${formatBytes(memoryInfo.ram?.used)[0]} / ${formatBytes(memoryInfo.ram?.total).join(' ')}` : ''}</Text>
+                            <ProgressBar hosted value={memoryInfo?.ram?.used ?? 0} indeterminate={!memoryInfo} max={memoryInfo?.ram?.total} variant="linear"  />
                         </View>
                     } 
                 />
-                {preferGpu && <ListItem
+                {preferGpu && memoryInfo?.vram && <ListItem
                     title="GPU"
                     mode="item"
                     description={
                         <View style={{gap: 6}}>
-                            <Text variant="labelMedium" style={{color: colors.onSurfaceVariant}}>{memoryInfo ? `${formatBytes(memoryInfo.vram.used)[0]} / ${formatBytes(memoryInfo.vram.total).join(' ')}` : ''}</Text>
-                            <ProgressBar hosted value={memoryInfo?.vram.used ?? 0} indeterminate={!memoryInfo} max={memoryInfo?.vram.total} variant="linear"  />
+                            <Text variant="labelMedium" style={{color: colors.onSurfaceVariant}}>{memoryInfo ? `${formatBytes(memoryInfo.vram?.used)[0]} / ${formatBytes(memoryInfo.vram?.total).join(' ')}` : ''}</Text>
+                            <ProgressBar hosted value={memoryInfo?.vram?.used ?? 0} indeterminate={!memoryInfo} max={memoryInfo?.vram?.total} variant="linear"  />
                         </View>
                     } 
                 />}
@@ -280,9 +280,9 @@ export const SettingsContent = () => {
             <PaperList.Section title={t`About`} titleStyle={{color: colors.primary}}>
                 <List>
                     <UpdateListItem />
-                    <ListItem title={t`Update history`} onPress={() => openBrowser(RELEASES_URL)} />
+                    <ListItem title={t`Update history`} onPress={() => openBrowser(RELEASES_URL, undefined, 'WaifuTagger - Releases')} />
                     {Platform.OS !== 'web' && <ListItem title={t`Open source licenses`} onPress={onLicense} />}
-                    <ListItem title={t`Privacy policy`} onPress={() => openBrowser(PRIVACY_POLICY_URL)} />
+                    <ListItem title={t`Privacy policy`} onPress={() => openBrowser(PRIVACY_POLICY_URL, undefined, 'WaifuTagger - Privacy Policy')} />
                 </List>
             </PaperList.Section>
         </View>
