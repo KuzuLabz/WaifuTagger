@@ -206,12 +206,12 @@ export const SettingsContent = () => {
     const platform = Platform.OS === 'web' ? osType() : null;
 
     const onChangeModel = () => {
-        router.back();
+        Platform.OS === 'web' && router.back();
         router.navigate('models');
     };
 
     const onCategoryOrder = () => {
-        router.back();
+        Platform.OS === 'web' && router.back();
         router.navigate('categories');
     };
 
@@ -229,7 +229,7 @@ export const SettingsContent = () => {
     };
 
     const onLicense = () => {
-        router.back();
+        Platform.OS === 'web' && router.back();
         router.navigate('licenses')
     };
 
