@@ -131,5 +131,5 @@ export const getBytesToGigabytes = (bytes: number) => {
     return bytes / (1024 * 1024 * 1024);
 };
 export const formatBytes = (bytes: number) => {
-    return filesize(bytes, { output: 'array' });
+    return isNaN(bytes) ? [] : filesize(bytes, { output: 'array' });
 };
