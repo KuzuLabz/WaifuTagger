@@ -47,6 +47,7 @@ yarn-error.*
 # desktop
 desktop/build/bin
 desktop/frontend/web-build
+directml_sdk
 
 # config
 .vscode
