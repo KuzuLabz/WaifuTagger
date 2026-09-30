@@ -129,7 +129,7 @@ pub async fn load_model(
             //     }
             // }
 
-            #[cfg(feature = "directml")]
+            #[cfg(target_os = "windows")]
             if attempted_provider == "CPU" && ep::DirectML::default().is_available()? {
                 match ep::DirectML::default().register(&mut builder) {
                     Ok(_) => attempted_provider = "DirectML".to_string(),
