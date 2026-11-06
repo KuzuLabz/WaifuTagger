@@ -14,6 +14,7 @@ import { getModelKey } from "../utils/utils";
 import { useSettingsStore } from "../store/settings";
 import { ModelKey } from "../types";
 import { DeviceInfoModule } from "react-native-nitro-device-info";
+import { ImageController } from "../utils/selector";
 import { useGlobalDrop } from "../hooks/useGlobalDrop";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { useThemeStore } from "../store/theme";
@@ -38,6 +39,16 @@ const RootLayout = () => {
             document.documentElement.style.colorScheme = theme;
         }
         dynamicActivate(useSettingsStore.getState().language).then(() => setLangLoaded(true));
+    }, []);
+
+    useEffect(() => {
+        const handlePaste = (event: KeyboardEvent) => {
+            if (event.ctrlKey && event.key === 'v') {
+                ImageController.fromPaste();
+            }
+        };
+        window.addEventListener('keydown', handlePaste);
+        return () => window.removeEventListener('keydown', handlePaste);
     }, []);
 
     useEffect(() => {
@@ -92,7 +103,7 @@ const RootLayout = () => {
                         ) : null}
                     </React.Fragment>
                     <Stack id="root" screenOptions={{ headerShown: false }}>
-                        <Stack.Screen name="(app)" options={{ headerShown: true, headerTransparent: true, header: () => <RootHeader /> }} />
+                        <Stack.Screen name="(app)" options={{ headerShown: true, headerTransparent: false, header: () => <RootHeader /> }} />
                         <Stack.Screen name="models" />
                         <Stack.Screen name="licenses" />
                         <Stack.Screen name="categories" options={{ headerShown: true }} />

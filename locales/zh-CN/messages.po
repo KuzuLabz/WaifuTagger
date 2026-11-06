@@ -21,13 +21,12 @@ msgstr "推荐适用于您设备的版本为 {recVariant}。"
 msgid "{tagLength} Tags"
 msgstr "{tagLength} 个标签"
 
-#: src/components/content/settings.tsx:277
+#: src/components/content/settings.tsx:280
 msgid "About"
 msgstr "关于"
 
-#: src/app/(dialogs)/updateChecker.native.tsx:31
-#: src/app/(dialogs)/updateChecker.native.tsx:93
-#: src/app/(dialogs)/updateChecker.tsx:20
+#: src/app/(dialogs)/updateChecker.tsx:31
+#: src/app/(dialogs)/updateChecker.tsx:91
 msgid "App Update"
 msgstr "应用更新"
 
@@ -35,21 +34,21 @@ msgstr "应用更新"
 msgid "Artist"
 msgstr "画师"
 
-#: src/components/content/settings.tsx:245
+#: src/components/content/settings.tsx:248
 msgid "Auto inference"
 msgstr "自动推理"
 
-#: src/app/(dialogs)/config.tsx:54
+#: src/app/(dialogs)/config.tsx:110
 #: src/components/common/alert.android.tsx:38
 msgid "Cancel"
 msgstr "取消"
 
 #: src/app/categories.tsx:39
-#: src/components/content/settings.tsx:238
+#: src/components/content/settings.tsx:241
 msgid "Categories"
 msgstr "分类"
 
-#: src/components/content/settings.tsx:237
+#: src/components/content/settings.tsx:240
 msgid "Change model"
 msgstr "更换模型"
 
@@ -61,11 +60,11 @@ msgstr "更改模型目录"
 msgid "Character"
 msgstr "角色"
 
-#: src/components/content/settings.tsx:248
+#: src/components/content/settings.tsx:251
 msgid "Check for updates on startup"
 msgstr "启动时检查更新"
 
-#: src/app/(dialogs)/settings.tsx:13
+#: src/app/(dialogs)/settings.tsx:37
 msgid "Close"
 msgstr "关闭"
 
@@ -73,7 +72,7 @@ msgstr "关闭"
 msgid "Content"
 msgstr "内容"
 
-#: src/components/content/settings.tsx:266
+#: src/components/content/settings.tsx:269
 msgid "Contrast"
 msgstr "对比度"
 
@@ -97,7 +96,7 @@ msgstr "作品/版权"
 msgid "Created by KuzuLabz ❤️"
 msgstr "由 KuzuLabz 创建❤️"
 
-#: src/components/content/settings.tsx:254
+#: src/components/content/settings.tsx:257
 msgid "Dark mode"
 msgstr "深色模式"
 
@@ -109,7 +108,8 @@ msgstr "默认"
 msgid "Deselect"
 msgstr "取消选择"
 
-#: src/app/(dialogs)/stats.tsx:30
+#: src/app/(dialogs)/stats.tsx:47
+#: src/app/(dialogs)/stats.tsx:61
 #: src/app/(dialogs)/tag.tsx:32
 msgid "Done"
 msgstr "完成"
@@ -118,11 +118,11 @@ msgstr "完成"
 msgid "Download"
 msgstr "下载"
 
-#: src/utils/selector/index.tauri.ts:117
+#: src/utils/selector/index.tauri.ts:115
 msgid "Error loading URL"
 msgstr "加载 URL 出错"
 
-#: src/components/content/settings.tsx:240
+#: src/components/content/settings.tsx:243
 msgid "Execution Provider"
 msgstr "执行提供程序"
 
@@ -130,7 +130,7 @@ msgstr "执行提供程序"
 msgid "Expressive"
 msgstr "表现力"
 
-#: src/components/content/settings.tsx:255
+#: src/components/content/settings.tsx:258
 msgid "Expressive palette"
 msgstr "表现力调色板"
 
@@ -144,7 +144,7 @@ msgstr "模型下载失败！"
 
 #: src/onnx.tauri.ts:102
 #: src/onnx.tauri.ts:107
-#: src/onnx.ts:171
+#: src/onnx.ts:178
 msgid "Failed to inference!"
 msgstr "推理失败！"
 
@@ -164,7 +164,7 @@ msgstr "高保真"
 msgid "Fruit Salad"
 msgstr "水果沙拉"
 
-#: src/components/content/settings.tsx:243
+#: src/components/content/settings.tsx:246
 #: src/hooks/translations/useCategoryTitles.ts:11
 msgid "General"
 msgstr "常规"
@@ -211,7 +211,8 @@ msgid "Max General Tags"
 msgstr "常规标签最大数量"
 
 #: src/app/(dialogs)/config.native.tsx:76
-#: src/app/(dialogs)/config.tsx:64
+#: src/app/(dialogs)/config.tsx:67
+#: src/app/(dialogs)/config.tsx:120
 msgid "Max tags"
 msgstr "最大标签数"
 
@@ -228,7 +229,8 @@ msgid "Meta"
 msgstr "元数据"
 
 #: src/app/(dialogs)/config.native.tsx:88
-#: src/app/(dialogs)/config.tsx:75
+#: src/app/(dialogs)/config.tsx:79
+#: src/app/(dialogs)/config.tsx:131
 msgid "Minimum thresholds"
 msgstr "最小阈值"
 
@@ -240,7 +242,7 @@ msgstr "最小阈值"
 msgid "Model"
 msgstr "模型"
 
-#: src/onnx.ts:135
+#: src/onnx.ts:142
 msgid "Model is too large for this device."
 msgstr "模型对于此设备来说过大。"
 
@@ -249,17 +251,18 @@ msgid "Model Manager"
 msgstr "模型管理器"
 
 #: src/onnx.tauri.ts:31
-#: src/onnx.ts:109
+#: src/onnx.ts:110
 msgid "Model not found!"
 msgstr "未找到模型！"
 
 #: src/app/(dialogs)/config.native.tsx:59
 #: src/app/(dialogs)/config.native.tsx:112
-#: src/app/(dialogs)/config.tsx:46
+#: src/app/(dialogs)/config.tsx:51
+#: src/app/(dialogs)/config.tsx:102
 msgid "Model Settings"
 msgstr "模型设置"
 
-#: src/components/content/settings.tsx:235
+#: src/components/content/settings.tsx:238
 msgid "Models"
 msgstr "模型"
 
@@ -284,7 +287,7 @@ msgid "Open model directory"
 msgstr "打开模型目录"
 
 #: src/app/licenses.tsx:137
-#: src/components/content/settings.tsx:281
+#: src/components/content/settings.tsx:284
 msgid "Open source licenses"
 msgstr "开源许可证"
 
@@ -292,15 +295,19 @@ msgstr "开源许可证"
 msgid "Paste"
 msgstr "粘贴"
 
+#: src/components/imageSelector.tsx:86
+msgid "Paste Image from Clipboard"
+msgstr "从剪贴板粘贴图片"
+
 #: src/app/models.tsx:256
 msgid "Please download and select a model to get started!"
 msgstr "请先下载并选择一个模型以开始使用！"
 
-#: src/components/content/settings.tsx:239
+#: src/components/content/settings.tsx:242
 msgid "Prefer GPU"
 msgstr "优先使用 GPU"
 
-#: src/components/content/settings.tsx:282
+#: src/components/content/settings.tsx:285
 msgid "Privacy policy"
 msgstr "隐私政策"
 
@@ -308,7 +315,7 @@ msgstr "隐私政策"
 msgid "Probability"
 msgstr "概率"
 
-#: src/utils/selector/index.tauri.ts:126
+#: src/utils/selector/index.tauri.ts:124
 msgid "Processing image..."
 msgstr "正在处理图片..."
 
@@ -328,7 +335,7 @@ msgstr "内存 - 应用占用"
 msgid "Rank"
 msgstr "排名"
 
-#: src/components/content/settings.tsx:246
+#: src/components/content/settings.tsx:249
 msgid "Rank mode"
 msgstr "排名模式"
 
@@ -342,9 +349,11 @@ msgstr "低"
 
 #: src/app/(dialogs)/config.native.tsx:70
 #: src/app/(dialogs)/config.native.tsx:134
-#: src/app/(dialogs)/config.tsx:49
+#: src/app/(dialogs)/config.tsx:62
+#: src/app/(dialogs)/config.tsx:105
 #: src/app/(dialogs)/stats.native.tsx:25
-#: src/app/(dialogs)/stats.tsx:30
+#: src/app/(dialogs)/stats.tsx:47
+#: src/app/(dialogs)/stats.tsx:61
 #: src/components/header.tsx:89
 msgid "Reset"
 msgstr "重置"
@@ -353,13 +362,14 @@ msgstr "重置"
 msgid "Reset progress?"
 msgstr "重置进度？"
 
-#: src/app/(app)/index.tsx:124
+#: src/app/(app)/index.tsx:125
 msgid "Run Inference"
 msgstr "运行推理"
 
 #: src/app/(dialogs)/config.native.tsx:65
 #: src/app/(dialogs)/config.native.tsx:133
-#: src/app/(dialogs)/config.tsx:58
+#: src/app/(dialogs)/config.tsx:57
+#: src/app/(dialogs)/config.tsx:114
 msgid "Save"
 msgstr "保存"
 
@@ -368,7 +378,8 @@ msgid "Select"
 msgstr "选择"
 
 #: src/app/(dialogs)/settings.native.tsx:15
-#: src/app/(dialogs)/settings.tsx:12
+#: src/app/(dialogs)/settings.tsx:26
+#: src/app/(dialogs)/settings.tsx:36
 msgid "Settings"
 msgstr "设置"
 
@@ -376,9 +387,8 @@ msgstr "设置"
 msgid "Share"
 msgstr "分享"
 
-#: src/app/(dialogs)/updateChecker.native.tsx:44
-#: src/app/(dialogs)/updateChecker.native.tsx:107
-#: src/app/(dialogs)/updateChecker.tsx:22
+#: src/app/(dialogs)/updateChecker.tsx:44
+#: src/app/(dialogs)/updateChecker.tsx:105
 msgid "Skip"
 msgstr "跳过"
 
@@ -395,7 +405,8 @@ msgid "Space"
 msgstr "空格"
 
 #: src/app/(dialogs)/stats.native.tsx:19
-#: src/app/(dialogs)/stats.tsx:28
+#: src/app/(dialogs)/stats.tsx:44
+#: src/app/(dialogs)/stats.tsx:59
 msgid "Statistics"
 msgstr "统计数据"
 
@@ -415,11 +426,11 @@ msgstr "标签数量"
 msgid "Text"
 msgstr "文本"
 
-#: src/components/content/settings.tsx:252
+#: src/components/content/settings.tsx:255
 msgid "Theme"
 msgstr "主题"
 
-#: src/components/content/settings.tsx:257
+#: src/components/content/settings.tsx:260
 msgid "Theme mode"
 msgstr "主题模式"
 
@@ -447,21 +458,20 @@ msgstr "下划线"
 msgid "Unknown"
 msgstr "未知"
 
-#: src/app/(dialogs)/updateChecker.native.tsx:38
-#: src/app/(dialogs)/updateChecker.native.tsx:106
-#: src/app/(dialogs)/updateChecker.tsx:22
+#: src/app/(dialogs)/updateChecker.tsx:38
+#: src/app/(dialogs)/updateChecker.tsx:104
 msgid "Update"
 msgstr "更新"
 
-#: src/components/content/settings.tsx:280
+#: src/components/content/settings.tsx:283
 msgid "Update history"
 msgstr "更新历史"
 
-#: src/components/imageSelector.tsx:80
+#: src/components/imageSelector.tsx:82
 msgid "Upload Image"
 msgstr "上传图片"
 
-#: src/components/content/settings.tsx:247
+#: src/components/content/settings.tsx:250
 msgid "Use external browser"
 msgstr "使用外部浏览器"
 

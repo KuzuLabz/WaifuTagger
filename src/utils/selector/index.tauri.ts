@@ -41,7 +41,7 @@ const getClipboardImage = async (): Promise<SelectedImage | null> => {
             );
 
             // @ts-expect-error arraybuffers...
-            ctx.putImageData(new ImageData(clampedArray, width, height), 0, 0);
+            ctx.putImageData(new ImageData(clampedArray, size.width, size.height), 0, 0);
             const blob = await canvas.convertToBlob({ type: 'image/png' });
             const uri = URL.createObjectURL(blob);
             const hash = await getHash(await blob.arrayBuffer());

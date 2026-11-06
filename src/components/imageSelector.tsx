@@ -24,9 +24,10 @@ type ImageSelectorProps = {
 	image?: ImagePicker.ImagePickerAsset;
 	rank?: RankInfo;
 	onImagePick: () => void;
+	onPaste?: () => void;
 	isLoading?: boolean;
 };
-const ImageSelector = ({ rank, isLoading, onImagePick }: ImageSelectorProps) => {
+const ImageSelector = ({ rank, isLoading, onImagePick, onPaste }: ImageSelectorProps) => {
 	const { height, width } = useWindowDimensions();
     const imageUri = useImageStore(state => state.image?.uri);
 	const isEnabled = useStatsStore(state => state.isEnabled);
@@ -40,7 +41,7 @@ const ImageSelector = ({ rank, isLoading, onImagePick }: ImageSelectorProps) => 
 			onPress={onImagePick}
 			style={{
 				height: height / 3 + 16,
-                minHeight: Platform.OS === 'web' ? 400 : undefined,
+                minHeight: Platform.OS === 'web' ? 310 : undefined,
 				alignSelf: 'center',
 				width: '100%',
 				borderStyle: 'solid',
@@ -48,6 +49,7 @@ const ImageSelector = ({ rank, isLoading, onImagePick }: ImageSelectorProps) => 
 				justifyContent: 'center',
 				flexDirection: 'row',
 				overflow: 'hidden',
+				position: 'relative',
 			}}
 		>
 			{imageUri ? (
@@ -63,7 +65,7 @@ const ImageSelector = ({ rank, isLoading, onImagePick }: ImageSelectorProps) => 
 						contentFit="cover"
                         blurRadius={18}
                     />
-                    <View style={{height: '100%', width: '100%', paddingTop: 80, paddingBottom: 8,}}>
+                    <View style={{height: '100%', width: '100%', paddingTop: 8, paddingBottom: 8,}}>
                         <Image
                             source={{ uri: imageUri }}
                             style={{
@@ -73,12 +75,31 @@ const ImageSelector = ({ rank, isLoading, onImagePick }: ImageSelectorProps) => 
                             contentFit="contain"
                         />
                     </View>
+                    {onPaste && (
+						<View style={{
+							position: 'absolute',
+							left: 20,
+							bottom: 20,
+						}}>
+							<Button mode="text" icon="clipboard" onPress={onPaste} style={{marginTop: 0, ...(imageUri && { backgroundColor: colors.surfaceContainerHigh, opacity: 0.75 })}}
+								textStyle={{ color: imageUri ? colors.primary : undefined }}>
+								{t`Paste Image from Clipboard`}
+							</Button>
+						</View>
+					)}
 				</View>
 			) : (
 				<>
-					<Button mode="text" icon={'upload'} onPress={onImagePick} style={{marginTop: 80}}>
-						{t`Upload Image`}
-					</Button>
+					<View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 12, marginTop: 0}}>
+						<Button mode="text" icon={'upload'} onPress={onImagePick} style={{marginTop: 0}}>
+							{t`Upload Image`}
+						</Button>
+						{onPaste && (
+							<Button mode="text" icon="clipboard" onPress={onPaste} style={{marginTop: 0}}>
+								{t`Paste Image from Clipboard`}
+							</Button>
+						)}
+					</View>
 				</>
 			)}
 			{isLoading && (
