@@ -40,7 +40,6 @@ const getClipboardImage = async (): Promise<SelectedImage | null> => {
                 rgbaBytes.byteLength
             );
 
-            // @ts-expect-error arraybuffers...
             ctx.putImageData(new ImageData(clampedArray, size.width, size.height), 0, 0);
             const blob = await canvas.convertToBlob({ type: 'image/png' });
             const uri = URL.createObjectURL(blob);
