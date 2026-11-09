@@ -101,6 +101,12 @@ const App = () => {
                             )}
                             {Platform.OS === 'web' && (
                                 <IconButton
+                                    icon={"clipboard-outline"}
+                                    onPress={() => ImageController.fromPaste()}
+                                />
+                            )}
+                            {Platform.OS === 'web' && (
+                                <IconButton
                                     icon={"send"}
                                     onPress={() => ImageController.fromUrl(url)}
                                     disabled={!url || !url.startsWith('http')}
