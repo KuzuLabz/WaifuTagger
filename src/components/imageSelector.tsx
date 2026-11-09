@@ -75,18 +75,6 @@ const ImageSelector = ({ rank, isLoading, onImagePick, onPaste }: ImageSelectorP
                             contentFit="contain"
                         />
                     </View>
-                    {onPaste && (
-						<View style={{
-							position: 'absolute',
-							left: 20,
-							bottom: 20,
-						}}>
-							<Button mode="text" icon="clipboard" onPress={onPaste} style={{marginTop: 0, ...(imageUri && { backgroundColor: colors.surfaceContainerHigh, opacity: 0.75 })}}
-								textStyle={{ color: imageUri ? colors.primary : undefined }}>
-								{t`Paste Image from Clipboard`}
-							</Button>
-						</View>
-					)}
 				</View>
 			) : (
 				<>
