@@ -78,11 +78,11 @@ const ImageSelector = ({ rank, isLoading, onImagePick, onPaste }: ImageSelectorP
 				</View>
 			) : (
 				<>
-					<View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 12, marginTop: 0}}>
+					<View style={{alignItems: 'center', justifyContent: 'center', gap: 12, marginTop: 0}}>
 						<Button mode="text" icon={'upload'} onPress={onImagePick} style={{marginTop: 0}}>
 							{t`Upload Image`}
 						</Button>
-						{onPaste && (
+						{Platform.OS === 'web' && onPaste && (
 							<Button mode="text" icon="clipboard" onPress={onPaste} style={{marginTop: 0}}>
 								{t`Paste Image from Clipboard`}
 							</Button>
