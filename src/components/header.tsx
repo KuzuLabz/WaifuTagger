@@ -19,19 +19,7 @@ export const RootHeader = () => {
     const { isEnabled: isRankEnabled } = useStatsStore();
     return (
         <View style={{width: '100%', overflow: 'hidden'}}>
-            <Appbar.Header
-                mode="small"
-                style={[
-                    Platform.select<AppbarHeaderProps['style']>({
-                        web: {
-                            width: '100%',
-                            backgroundColor: dark ? 'rgba(11, 11, 11, 0.6)' : 'rgba(255,255,255, 1)',
-                            paddingRight: 12
-                        },
-                        native: undefined,
-                    }),
-                ]}
-            >
+            <Appbar.Header mode="small">
                 <Appbar.Content
                     title={
                         <View>

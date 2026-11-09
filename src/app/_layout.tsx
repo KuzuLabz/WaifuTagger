@@ -102,8 +102,8 @@ const RootLayout = () => {
                             </>
                         ) : null}
                     </React.Fragment>
-                    <Stack id="root" screenOptions={{ headerShown: false }}>
-                        <Stack.Screen name="(app)" options={{ headerShown: true, headerTransparent: false, header: () => <RootHeader /> }} />
+                    <Stack screenOptions={{ headerShown: false }}>
+                        <Stack.Screen name="(app)" options={{ headerShown: true, header: () => <RootHeader /> }} />
                         <Stack.Screen name="models" />
                         <Stack.Screen name="licenses" />
                         <Stack.Screen name="categories" options={{ headerShown: true }} />
