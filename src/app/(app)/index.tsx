@@ -62,7 +62,6 @@ const App = () => {
                     height: Platform.select({ web: '100vh', native: '100%' }),
                 }}
             >
-                <Stack.Screen options={{ headerShown: true }} />
                 <ScrollViewStyled
                     contentContainerStyle={{ flexGrow: 1, zIndex: 1 }}
                     keyboardDismissMode="on-drag"
@@ -70,6 +69,7 @@ const App = () => {
                     <View style={{ flex: 1 }}>
                         <ImageSelector
                             onImagePick={() => ImageController.fromImageDialog()}
+                            onPaste={() => ImageController.fromPaste()}
                             isLoading={isInferLoading}
                             rank={tags?.rank}
                         />
@@ -97,6 +97,12 @@ const App = () => {
                                 <IconButton 
                                     icon="camera" 
                                     onPress={ImageController.fromCamera} 
+                                />
+                            )}
+                            {Platform.OS === 'web' && (
+                                <IconButton
+                                    icon={"clipboard-outline"}
+                                    onPress={() => ImageController.fromPaste()}
                                 />
                             )}
                             {Platform.OS === 'web' && (

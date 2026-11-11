@@ -21,13 +21,12 @@ msgstr "{recVariant}이(가) 기기에 권장됩니다."
 msgid "{tagLength} Tags"
 msgstr "태그 {tagLength}개"
 
-#: src/components/content/settings.tsx:277
+#: src/components/content/settings.tsx:280
 msgid "About"
 msgstr "정보"
 
-#: src/app/(dialogs)/updateChecker.native.tsx:31
-#: src/app/(dialogs)/updateChecker.native.tsx:93
-#: src/app/(dialogs)/updateChecker.tsx:20
+#: src/app/(dialogs)/updateChecker.tsx:31
+#: src/app/(dialogs)/updateChecker.tsx:91
 msgid "App Update"
 msgstr "앱 업데이트"
 
@@ -35,21 +34,21 @@ msgstr "앱 업데이트"
 msgid "Artist"
 msgstr "작가"
 
-#: src/components/content/settings.tsx:245
+#: src/components/content/settings.tsx:248
 msgid "Auto inference"
 msgstr "자동 추론"
 
-#: src/app/(dialogs)/config.tsx:54
+#: src/app/(dialogs)/config.tsx:110
 #: src/components/common/alert.android.tsx:38
 msgid "Cancel"
 msgstr "취소"
 
 #: src/app/categories.tsx:39
-#: src/components/content/settings.tsx:238
+#: src/components/content/settings.tsx:241
 msgid "Categories"
 msgstr "카테고리"
 
-#: src/components/content/settings.tsx:237
+#: src/components/content/settings.tsx:240
 msgid "Change model"
 msgstr "모델 변경"
 
@@ -61,11 +60,11 @@ msgstr "모델 디렉터리 변경"
 msgid "Character"
 msgstr "캐릭터"
 
-#: src/components/content/settings.tsx:248
+#: src/components/content/settings.tsx:251
 msgid "Check for updates on startup"
 msgstr "시작 시 업데이트 확인"
 
-#: src/app/(dialogs)/settings.tsx:13
+#: src/app/(dialogs)/settings.tsx:37
 msgid "Close"
 msgstr "닫기"
 
@@ -73,7 +72,7 @@ msgstr "닫기"
 msgid "Content"
 msgstr "콘텐츠"
 
-#: src/components/content/settings.tsx:266
+#: src/components/content/settings.tsx:269
 msgid "Contrast"
 msgstr "대비"
 
@@ -97,7 +96,7 @@ msgstr "저작권 / 원작"
 msgid "Created by KuzuLabz ❤️"
 msgstr "KuzuLabz가 제작함 ❤️"
 
-#: src/components/content/settings.tsx:254
+#: src/components/content/settings.tsx:257
 msgid "Dark mode"
 msgstr "다크 모드"
 
@@ -109,7 +108,8 @@ msgstr "기본값"
 msgid "Deselect"
 msgstr "선택 해제"
 
-#: src/app/(dialogs)/stats.tsx:30
+#: src/app/(dialogs)/stats.tsx:47
+#: src/app/(dialogs)/stats.tsx:61
 #: src/app/(dialogs)/tag.tsx:32
 msgid "Done"
 msgstr "완료"
@@ -118,11 +118,11 @@ msgstr "완료"
 msgid "Download"
 msgstr "다운로드"
 
-#: src/utils/selector/index.tauri.ts:117
+#: src/utils/selector/index.tauri.ts:115
 msgid "Error loading URL"
 msgstr "URL을 로드하는 중 오류 발생"
 
-#: src/components/content/settings.tsx:240
+#: src/components/content/settings.tsx:243
 msgid "Execution Provider"
 msgstr "실행 공급자"
 
@@ -130,7 +130,7 @@ msgstr "실행 공급자"
 msgid "Expressive"
 msgstr "익스프레시브"
 
-#: src/components/content/settings.tsx:255
+#: src/components/content/settings.tsx:258
 msgid "Expressive palette"
 msgstr "표현력이 풍부한 팔레트"
 
@@ -144,7 +144,7 @@ msgstr "모델 다운로드에 실패했습니다!"
 
 #: src/onnx.tauri.ts:102
 #: src/onnx.tauri.ts:107
-#: src/onnx.ts:171
+#: src/onnx.ts:178
 msgid "Failed to inference!"
 msgstr "추론에 실패했습니다!"
 
@@ -164,7 +164,7 @@ msgstr "피델리티"
 msgid "Fruit Salad"
 msgstr "프루트 샐러드"
 
-#: src/components/content/settings.tsx:243
+#: src/components/content/settings.tsx:246
 #: src/hooks/translations/useCategoryTitles.ts:11
 msgid "General"
 msgstr "일반"
@@ -211,7 +211,8 @@ msgid "Max General Tags"
 msgstr "최대 일반 태그 수"
 
 #: src/app/(dialogs)/config.native.tsx:76
-#: src/app/(dialogs)/config.tsx:64
+#: src/app/(dialogs)/config.tsx:67
+#: src/app/(dialogs)/config.tsx:120
 msgid "Max tags"
 msgstr "최대 태그 수"
 
@@ -228,7 +229,8 @@ msgid "Meta"
 msgstr "메타"
 
 #: src/app/(dialogs)/config.native.tsx:88
-#: src/app/(dialogs)/config.tsx:75
+#: src/app/(dialogs)/config.tsx:79
+#: src/app/(dialogs)/config.tsx:131
 msgid "Minimum thresholds"
 msgstr "최소 임계값"
 
@@ -240,7 +242,7 @@ msgstr "최소 임계값"
 msgid "Model"
 msgstr "모델"
 
-#: src/onnx.ts:135
+#: src/onnx.ts:142
 msgid "Model is too large for this device."
 msgstr "모델이 이 기기에 너무 큽니다."
 
@@ -249,17 +251,18 @@ msgid "Model Manager"
 msgstr "모델 관리자"
 
 #: src/onnx.tauri.ts:31
-#: src/onnx.ts:109
+#: src/onnx.ts:110
 msgid "Model not found!"
 msgstr "모델을 찾을 수 없습니다!"
 
 #: src/app/(dialogs)/config.native.tsx:59
 #: src/app/(dialogs)/config.native.tsx:112
-#: src/app/(dialogs)/config.tsx:46
+#: src/app/(dialogs)/config.tsx:51
+#: src/app/(dialogs)/config.tsx:102
 msgid "Model Settings"
 msgstr "모델 설정"
 
-#: src/components/content/settings.tsx:235
+#: src/components/content/settings.tsx:238
 msgid "Models"
 msgstr "모델"
 
@@ -284,7 +287,7 @@ msgid "Open model directory"
 msgstr "모델 디렉터리 열기"
 
 #: src/app/licenses.tsx:137
-#: src/components/content/settings.tsx:281
+#: src/components/content/settings.tsx:284
 msgid "Open source licenses"
 msgstr "오픈 소스 라이선스"
 
@@ -292,15 +295,19 @@ msgstr "오픈 소스 라이선스"
 msgid "Paste"
 msgstr "붙여넣기"
 
+#: src/components/imageSelector.tsx:86
+msgid "Paste Image from Clipboard"
+msgstr "클립보드의 이미지 붙여넣기"
+
 #: src/app/models.tsx:256
 msgid "Please download and select a model to get started!"
 msgstr "시작하려면 모델을 다운로드하고 선택해 주세요!"
 
-#: src/components/content/settings.tsx:239
+#: src/components/content/settings.tsx:242
 msgid "Prefer GPU"
 msgstr "GPU 우선 사용"
 
-#: src/components/content/settings.tsx:282
+#: src/components/content/settings.tsx:285
 msgid "Privacy policy"
 msgstr "개인정보 처리방침"
 
@@ -308,7 +315,7 @@ msgstr "개인정보 처리방침"
 msgid "Probability"
 msgstr "확률"
 
-#: src/utils/selector/index.tauri.ts:126
+#: src/utils/selector/index.tauri.ts:124
 msgid "Processing image..."
 msgstr "이미지 처리 중..."
 
@@ -328,7 +335,7 @@ msgstr "RAM - 앱 사용량"
 msgid "Rank"
 msgstr "순위"
 
-#: src/components/content/settings.tsx:246
+#: src/components/content/settings.tsx:249
 msgid "Rank mode"
 msgstr "순위 모드"
 
@@ -342,9 +349,11 @@ msgstr "낮음"
 
 #: src/app/(dialogs)/config.native.tsx:70
 #: src/app/(dialogs)/config.native.tsx:134
-#: src/app/(dialogs)/config.tsx:49
+#: src/app/(dialogs)/config.tsx:62
+#: src/app/(dialogs)/config.tsx:105
 #: src/app/(dialogs)/stats.native.tsx:25
-#: src/app/(dialogs)/stats.tsx:30
+#: src/app/(dialogs)/stats.tsx:47
+#: src/app/(dialogs)/stats.tsx:61
 #: src/components/header.tsx:89
 msgid "Reset"
 msgstr "초기화"
@@ -353,13 +362,14 @@ msgstr "초기화"
 msgid "Reset progress?"
 msgstr "진행 상황을 초기화하시겠습니까?"
 
-#: src/app/(app)/index.tsx:124
+#: src/app/(app)/index.tsx:125
 msgid "Run Inference"
 msgstr "추론 실행"
 
 #: src/app/(dialogs)/config.native.tsx:65
 #: src/app/(dialogs)/config.native.tsx:133
-#: src/app/(dialogs)/config.tsx:58
+#: src/app/(dialogs)/config.tsx:57
+#: src/app/(dialogs)/config.tsx:114
 msgid "Save"
 msgstr "저장"
 
@@ -368,7 +378,8 @@ msgid "Select"
 msgstr "선택"
 
 #: src/app/(dialogs)/settings.native.tsx:15
-#: src/app/(dialogs)/settings.tsx:12
+#: src/app/(dialogs)/settings.tsx:26
+#: src/app/(dialogs)/settings.tsx:36
 msgid "Settings"
 msgstr "설정"
 
@@ -376,9 +387,8 @@ msgstr "설정"
 msgid "Share"
 msgstr "공유"
 
-#: src/app/(dialogs)/updateChecker.native.tsx:44
-#: src/app/(dialogs)/updateChecker.native.tsx:107
-#: src/app/(dialogs)/updateChecker.tsx:22
+#: src/app/(dialogs)/updateChecker.tsx:44
+#: src/app/(dialogs)/updateChecker.tsx:105
 msgid "Skip"
 msgstr "건너뛰기"
 
@@ -395,7 +405,8 @@ msgid "Space"
 msgstr "공백"
 
 #: src/app/(dialogs)/stats.native.tsx:19
-#: src/app/(dialogs)/stats.tsx:28
+#: src/app/(dialogs)/stats.tsx:44
+#: src/app/(dialogs)/stats.tsx:59
 msgid "Statistics"
 msgstr "통계"
 
@@ -415,11 +426,11 @@ msgstr "태그 개수"
 msgid "Text"
 msgstr "텍스트"
 
-#: src/components/content/settings.tsx:252
+#: src/components/content/settings.tsx:255
 msgid "Theme"
 msgstr "테마"
 
-#: src/components/content/settings.tsx:257
+#: src/components/content/settings.tsx:260
 msgid "Theme mode"
 msgstr "테마 모드"
 
@@ -447,21 +458,20 @@ msgstr "언더스코어"
 msgid "Unknown"
 msgstr "알 수 없음"
 
-#: src/app/(dialogs)/updateChecker.native.tsx:38
-#: src/app/(dialogs)/updateChecker.native.tsx:106
-#: src/app/(dialogs)/updateChecker.tsx:22
+#: src/app/(dialogs)/updateChecker.tsx:38
+#: src/app/(dialogs)/updateChecker.tsx:104
 msgid "Update"
 msgstr "업데이트"
 
-#: src/components/content/settings.tsx:280
+#: src/components/content/settings.tsx:283
 msgid "Update history"
 msgstr "업데이트 내역"
 
-#: src/components/imageSelector.tsx:80
+#: src/components/imageSelector.tsx:82
 msgid "Upload Image"
 msgstr "이미지 업로드"
 
-#: src/components/content/settings.tsx:247
+#: src/components/content/settings.tsx:250
 msgid "Use external browser"
 msgstr "외부 브라우저 사용"
 
