@@ -38,6 +38,10 @@ msgstr "絵師"
 msgid "Auto inference"
 msgstr "自動推論"
 
+#: src/components/content/settings.tsx:249
+msgid "Copy tags to clipboard after inference"
+msgstr "推論後にタグをクリップボードにコピーする"
+
 #: src/app/(dialogs)/config.tsx:110
 #: src/components/common/alert.android.tsx:38
 msgid "Cancel"

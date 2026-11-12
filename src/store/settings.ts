@@ -13,6 +13,7 @@ export type TextSettings = {
 export type SettingsState = TextSettings & {
     isNewUser: boolean;
     autoInfer: boolean;
+    copyTagsToClipboard: boolean;
     autoUpdate: boolean;
     preferGpu: boolean;
     executionProvider: string;
@@ -46,6 +47,7 @@ const initialState: SettingsState = {
         year: false,
     },
 	autoInfer: false,
+	copyTagsToClipboard: false,
 	lastOpenedDir: '',
     autoUpdate: true,
     extBrowser: true,

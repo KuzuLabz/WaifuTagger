@@ -1,6 +1,6 @@
 import { Button, Divider, IconButton } from 'react-native-paper';
 import { Platform, StatusBar, View } from 'react-native';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useShallow } from 'zustand/shallow';
 import { TextInputWrapper } from "expo-paste-input";
 import { useStatsStore } from '../../store/stats';
@@ -17,12 +17,14 @@ import ResultSection from '../../components/section';
 import Footer from '../../components/footer';
 import { router, Stack } from 'expo-router';
 import { ImageController } from '../../utils/selector';
+import { copyToClipboard } from '../../utils/utils';
 import { useImageStore } from '../../store/image';
 import { useAppTheme } from '../../providers/theme';
 import { WebThemeProvider } from '../../providers/webTheme';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSettingsStore } from '../../store/settings';
 import { UrlInput } from '../../components/input';
+import { useFormattedTags } from '../../hooks/useFormattedText';
 
 const App = () => {
     const { isEnabled: isRankEnabled } = useStatsStore();
@@ -43,10 +45,20 @@ const App = () => {
         isInferLoading
     } = useModel();
     const adjustedTags = useTags(tags);
+    const copyTagsToClipboard = useSettingsStore(state => state.copyTagsToClipboard);
+    const { text } = useFormattedTags(adjustedTags);
+    const lastCopiedText = useRef<string | null>(null);
 
     const onTagSelect = (tag: InferenceTag) => {
         router.navigate({ pathname: '/(dialogs)/tag', params: { tagJson: JSON.stringify(tag) } });
     };
+
+    useEffect(() => {
+        if (adjustedTags && copyTagsToClipboard && text && text !== lastCopiedText.current) {
+            lastCopiedText.current = text;
+            copyToClipboard(text);
+        }
+    }, [adjustedTags, copyTagsToClipboard, text]);
 
     return loading ? (
         <WebThemeProvider>

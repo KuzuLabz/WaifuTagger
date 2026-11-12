@@ -38,6 +38,10 @@ msgstr "Artista"
 msgid "Auto inference"
 msgstr "Inferencia automática"
 
+#: src/components/content/settings.tsx:249
+msgid "Copy tags to clipboard after inference"
+msgstr "Copiar etiquetas al portapapeles después de la inferencia"
+
 #: src/app/(dialogs)/config.tsx:110
 #: src/components/common/alert.android.tsx:38
 msgid "Cancel"

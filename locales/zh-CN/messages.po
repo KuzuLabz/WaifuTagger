@@ -38,6 +38,10 @@ msgstr "画师"
 msgid "Auto inference"
 msgstr "自动推理"
 
+#: src/components/content/settings.tsx:249
+msgid "Copy tags to clipboard after inference"
+msgstr "推理完成后将标签复制到剪贴板"
+
 #: src/app/(dialogs)/config.tsx:110
 #: src/components/common/alert.android.tsx:38
 msgid "Cancel"
