@@ -63,7 +63,7 @@ const RootLayout = () => {
             const selected = useModelsStore.getState().selected;
             const downloaded = useModelsStore.getState().downloaded;
             const modelDir = useModelsStore.getState().modelsDir;
-            verifyModels(modelDir, (downloads) => useModelsStore.setState((state) => ({downloaded: { ...state.downloaded, ...downloads}}))).then(() => {
+            modelDir && verifyModels(modelDir, (downloads) => useModelsStore.setState((state) => ({downloaded: { ...state.downloaded, ...downloads}}))).then(() => {
                 if (selected && !downloaded[getModelKey(selected)]) {
                     useModelsStore.setState({selected: null});
                 }
