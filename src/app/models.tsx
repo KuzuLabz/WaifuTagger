@@ -110,7 +110,8 @@ const ModelDescription = ({type, variant, fontSize, color}:  {type: SupportedMod
 };
 
 const ModelItem = ({ type }: {type: SupportedModels}) => {
-    const variantKeys = Object.keys(MODEL_CATALOG[type].variants) as VariantType[];
+    const allowMobileGlobal = MODEL_CATALOG[type].allowMobile;
+    const variantKeys = Object.keys(MODEL_CATALOG[type].variants).filter((v) => allowMobileGlobal || getCurrentPlatform() === 'desktop' ? true : MODEL_CATALOG[type].variants?.[v]?.["allowMobile"]) as VariantType[];
 
     const { colors } = useAppTheme();
     const { t } = useLingui();
@@ -215,6 +216,8 @@ const ModelsPage = () => {
     useModelWatch();
     const modelTypes = Object.keys(MODEL_CATALOG).filter((m) => m !== '$schema') as SupportedModels[];
 
+    const isMobile = getCurrentPlatform() === 'mobile';
+
     const [moveLoading, setMoveLoading] = useState<boolean>(false);
     const [storage, setStorage] = useState<StorageInfo | null>(null);
     
@@ -294,7 +297,7 @@ const ModelsPage = () => {
                         <View style={{gap: 12, paddingHorizontal: 12, paddingBottom: bottom}}>
                             {
                                 modelTypes.map((type, idx) => (
-                                    <ModelItem key={idx} type={type} />
+                                    isMobile && !MODEL_CATALOG[type].allowMobile ? null : <ModelItem key={idx} type={type} />
                                 ))
                             }
                         </View>
