@@ -16,7 +16,8 @@
       "properties": {
         "filename": { "type": "string" },
         "url": { "type": "string", "format": "uri" },
-        "size": { "type": "string" }
+        "size": { "type": "string" },
+        "allowMobile": { "type": "boolean" }
       },
       "required": ["filename", "url", "size"],
       "additionalProperties": false
@@ -26,7 +27,20 @@
       "properties": {
         "name": { "type": "string" },
         "creator": { "type": "string" },
-        "minThreshold": { "type": "number" },
+        "minThreshold": {
+          "anyOf": [
+            { "type": "number" },
+            {
+              "type": "object",
+              "propertyNames": {
+                "enum": ["artist", "character", "copyright", "general", "meta", "rating", "year"]
+              },
+              "additionalProperties": {
+                "type": "number"
+              }
+            }
+          ]
+        },
         "tags": { "type": "string", "format": "uri" },
         "categories": {
           "type": "array",
@@ -54,7 +68,8 @@
           "additionalProperties": {
             "$ref": "#/$defs/variant"
           }
-        }
+        },
+        "allowMobile": { "type": "boolean", "default": true }
       },
       "required": ["name", "creator", "license", "minThreshold", "tags", "categories", "links", "variants"],
       "additionalProperties": false

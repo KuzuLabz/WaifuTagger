@@ -6,6 +6,7 @@
         "license": "Apache 2.0",
         "categories": ["character", "general", "rating"],
         "minThreshold": 0.27,
+        "allowMobile": true,
         "tags": "https://huggingface.co/Smashinfries/wd-convnext-tagger-v3-mobile/resolve/main/tags.json",
         "links": {
             "mobileUrl": "https://huggingface.co/Smashinfries/wd-convnext-tagger-v3-onnx-mobile",
@@ -30,6 +31,7 @@
         "license": "Apache 2.0",
         "categories": ["character", "general", "rating"],
         "minThreshold": 0.27,
+        "allowMobile": true,
         "tags": "https://huggingface.co/Smashinfries/wd-swinv2-tagger-v3-onnx-mobile/resolve/main/tags.json",
         "links": {
             "mobileUrl": "https://huggingface.co/Smashinfries/wd-swinv2-tagger-v3-onnx-mobile",
@@ -53,7 +55,8 @@
         "creator": "Camais03",
         "license": "GPL 3.0",
         "categories": ["artist", "character", "copyright", "general", "meta", "rating", "year"],
-        "minThreshold": 0.49,
+        "minThreshold": 0.492,
+        "allowMobile": true,
         "tags": "https://huggingface.co/Smashinfries/camie-tagger-v2-onnx-quant/resolve/main/tags.json",
         "links": {
             "mobileUrl": "https://huggingface.co/Smashinfries/camie-tagger-v2-onnx-mobile",
@@ -69,6 +72,38 @@
                 "filename": "camie-tagger-v2-fp16-mobile.onnx",
                 "url": "https://huggingface.co/Smashinfries/camie-tagger-v2-onnx-mobile/resolve/main/camie-tagger-v2-fp16-mobile.onnx",
                 "size": "377 MB"
+            }
+        }
+    },
+    "pixai-tagger-v1.0": {
+        "name": "PixAI Tagger v1.0",
+        "creator": "PixAI Labs",
+        "license": "Apache 2.0",
+        "categories": [ "artist", "character", "copyright", "general", "meta", "rating"],
+        "minThreshold": {
+            "artist": 0.15,
+            "character": 0.27,
+            "copyright": 0.24,
+            "general": 0.17,
+            "meta": 0.17,
+            "rating": 0.41
+        },
+        "allowMobile": false,
+        "tags": "https://huggingface.co/Smashinfries/pixai-tagger-v1.0-onnx-mobile/resolve/main/tags.json",
+        "links": {
+            "mobileUrl": "https://huggingface.co/Smashinfries/pixai-tagger-v1.0-onnx-mobile",
+            "sourceUrl": "https://huggingface.co/pixai-labs/pixai-tagger-v1.0"
+        },
+        "variants": {
+            "QUINT8": {
+                "filename": "pixai-tagger-v1.0-quint8-mobile.onnx",
+                "url": "https://huggingface.co/Smashinfries/pixai-tagger-v1.0-onnx-mobile/resolve/main/pixai-tagger-v1.0-quint8-mobile.onnx",
+                "size": "548 MB"
+            },
+            "FP16": {
+                "filename": "pixai-tagger-v1.0-fp16-mobile.onnx",
+                "url": "https://huggingface.co/Smashinfries/pixai-tagger-v1.0-onnx-mobile/resolve/main/pixai-tagger-v1.0-fp16-mobile.onnx",
+                "size": "993 MB"
             }
         }
     }
