@@ -6,9 +6,9 @@ import { Directory, Paths } from 'expo-file-system';
 import { deleteModel, downloadModel, getDirectoryUri, moveModels, verifyModels } from '../utils/fs';
 import { INIT_THRESHOLDS, MAX_TAGS, MODEL_CATALOG } from '../constants';
 import { getModelKey } from '../utils/utils';
-import { ModelKey, SupportedModels, TagCategoryType, VariantType } from '../types';
+import { ModelKey, SupportedModels, TagCategories, TagCategoryType, VariantType } from '../types';
 
-export type ThresholdSettings = Record<TagCategoryType, number>;
+export type ThresholdSettings = Partial<Record<TagCategoryType, number>>;
 
 export type SelectedModel = { type: SupportedModels; variant: VariantType } | null;
 
@@ -37,6 +37,18 @@ type ModelsAction = {
 
 const getDefaultDir = () => Platform.OS === 'web' ? null : (new Directory(Paths.document.uri, 'models')).uri;
 
+const getDefaultThresholds = (type: SupportedModels): ThresholdSettings => {
+    if (typeof MODEL_CATALOG[type].minThreshold === "number") {
+        return Object.fromEntries(
+            Object.keys(TagCategories)
+                .filter((key) => isNaN(Number(key)))
+                .map((key) => [key, MODEL_CATALOG[type].minThreshold])
+        ) as ThresholdSettings
+    } else {
+        return {...MODEL_CATALOG[type].minThreshold}
+    }
+}
+
 export const useModelsStore = create<ModelsState & ModelsAction>()(
 	persist(
 		(set, get) => ({
@@ -52,10 +64,7 @@ export const useModelsStore = create<ModelsState & ModelsAction>()(
                 if (!settings[type]) {
                     set((state) => ({...state, settings: {...state.settings, [type]: {
                         maxTags: MAX_TAGS,
-                        thresholds: {
-                            ...INIT_THRESHOLDS, 
-                            general: MODEL_CATALOG[type].minThreshold
-                        }, 
+                        thresholds: getDefaultThresholds(type), 
                     }}}));
                 }
             },
@@ -69,10 +78,7 @@ export const useModelsStore = create<ModelsState & ModelsAction>()(
                             settings: { 
                                 ...state.settings,
                                 [type]: {
-                                    thresholds: {
-                                        ...INIT_THRESHOLDS, 
-                                        general: MODEL_CATALOG[type].minThreshold
-                                    }, 
+                                    thresholds: getDefaultThresholds(type), 
                                     maxTags: MAX_TAGS 
                                 }
                             }
