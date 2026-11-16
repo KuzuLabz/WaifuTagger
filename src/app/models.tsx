@@ -109,9 +109,20 @@ const ModelDescription = ({type, variant, fontSize, color}:  {type: SupportedMod
     );
 };
 
+const getVariantKeys = (type: SupportedModels) => {
+    const variants = MODEL_CATALOG[type].variants;
+    const variantKeys = (Object.keys(variants) as VariantType[]).filter((v) => {
+        if (MODEL_CATALOG[type].allowMobile || getCurrentPlatform() === 'desktop') {
+            return true;
+        }
+
+        const variant = variants[v];
+        return Boolean(variant && 'allowMobile' in variant && variant.allowMobile);
+    });
+    return variantKeys;
+};
 const ModelItem = ({ type }: {type: SupportedModels}) => {
-    const allowMobileGlobal = MODEL_CATALOG[type].allowMobile;
-    const variantKeys = Object.keys(MODEL_CATALOG[type].variants).filter((v) => allowMobileGlobal || getCurrentPlatform() === 'desktop' ? true : MODEL_CATALOG[type].variants?.[v]?.["allowMobile"]) as VariantType[];
+    const variantKeys = getVariantKeys(type)
 
     const { colors } = useAppTheme();
     const { t } = useLingui();
@@ -273,7 +284,7 @@ const ModelsPage = () => {
                             />}
                             {platform === 'desktop' && <ListItem
                                 title={t`Open model directory`}
-                                onPress={() => openModelsDir(modelDir)}
+                                onPress={() => modelDir && openModelsDir(modelDir)}
                                 trailing={<PaperIcon name="folder-open" slot="trailing" />}
                             />}
                             <ListItem
