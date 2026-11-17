@@ -445,11 +445,17 @@ async fn check_tags(
 
 #[tauri::command]
 async fn get_local_image(path: String) -> Result<Response, String> {
-    // let data = std::fs::read(path).unwrap();
-    // tauri::ipc::Response::new(data)
-    let data = tokio::fs::read(&path)
+    let clean_path = path
+        .strip_prefix("file://")
+        .unwrap_or(&path);
+  
+    let decoded_path = urlencoding::decode(clean_path)
+        .map(|c| c.into_owned())
+        .unwrap_or_else(|_| clean_path.to_string());
+
+    let data = tokio::fs::read(&decoded_path)
         .await
-        .map_err(|e| format!("Failed to read file '{path}': {e}"))?;
+        .map_err(|e| format!("Failed to read file '{decoded_path}': {e}"))?;
 
     Ok(tauri::ipc::Response::new(data))
 }
