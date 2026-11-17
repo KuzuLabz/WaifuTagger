@@ -3,8 +3,8 @@ import { Dialog } from "../../components/dialogs/dialog";
 import { useLingui } from "@lingui/react/macro";
 import { ListSlider } from "../../components/common/slider";
 import { ScrollView } from "react-native";
-import { ModelSettings, useModelsStore } from "../../store/models";
-import { INIT_THRESHOLDS, MAX_TAGS, MODEL_CATALOG } from "../../constants";
+import { getDefaultThresholds, ModelSettings, useModelsStore } from "../../store/models";
+import { MAX_TAGS, MODEL_CATALOG } from "../../constants";
 import { useSettingsStore } from "../../store/settings";
 import { List } from "../../components/common/list";
 import { List as PaperList } from 'react-native-paper'
@@ -12,7 +12,6 @@ import { useCategoryTitles } from "../../hooks/translations/useCategoryTitles";
 import { useWindowWidthClass, WindowWidthClass } from "../../hooks/useWindowWidthClass";
 import { SideSheet } from "../../components/dialogs/sidesheet";
 import { router } from "expo-router";
-import { WebThemeProvider } from "../../providers/webTheme";
 
 const ConfigDialog = () => {
     const { t } = useLingui();
@@ -42,7 +41,7 @@ const ConfigDialog = () => {
     };
 
     const onReset = () => {
-        setNewConfig({ thresholds: {...INIT_THRESHOLDS, general: MODEL_CATALOG[selected.type].minThreshold}, maxTags: MAX_TAGS });
+        setNewConfig({ thresholds: getDefaultThresholds(selected.type), maxTags: MAX_TAGS });
     };
 
     if (sizeClass !== WindowWidthClass.Compact) {
@@ -78,13 +77,13 @@ const ConfigDialog = () => {
                     </PaperList.Section>
                     <PaperList.Section title={t`Minimum thresholds`}>
                         <List>
-                            {categoryOrder.map((c, idx) => c.enabled && (
+                            {categoryOrder.filter((c) => MODEL_CATALOG[selected.type].categories.includes(c.category)).map((c, idx) => c.enabled && (
                                 <ListSlider
                                     key={idx}
                                     hosted
                                     title={cats[c.category]}
                                     value={newConfig.thresholds[c.category]}
-                                    min={0.25} max={1}
+                                    min={0.01} max={1}
                                     step={0.01}
                                     onValueChange={(val) => updateThreshold(c.category, parseFloat(val.toFixed(2)))}
                                 />
