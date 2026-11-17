@@ -4,11 +4,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
 import { Directory, Paths } from 'expo-file-system';
 import { deleteModel, downloadModel, getDirectoryUri, moveModels, verifyModels } from '../utils/fs';
-import { INIT_THRESHOLDS, MAX_TAGS, MODEL_CATALOG } from '../constants';
+import { MAX_TAGS, MODEL_CATALOG } from '../constants';
 import { getModelKey } from '../utils/utils';
 import { ModelKey, SupportedModels, TagCategories, TagCategoryType, VariantType } from '../types';
 
-export type ThresholdSettings = Partial<Record<TagCategoryType, number>>;
+export type ThresholdSettings = Record<TagCategoryType, number>;
 
 export type SelectedModel = { type: SupportedModels; variant: VariantType } | null;
 
@@ -37,16 +37,21 @@ type ModelsAction = {
 
 const getDefaultDir = () => Platform.OS === 'web' ? null : (new Directory(Paths.document.uri, 'models')).uri;
 
-const getDefaultThresholds = (type: SupportedModels): ThresholdSettings => {
-    if (typeof MODEL_CATALOG[type].minThreshold === "number") {
+export const getDefaultThresholds = (type: SupportedModels): ThresholdSettings => {
+    const minThreshold = MODEL_CATALOG[type].minThreshold as number | Partial<Record<TagCategoryType, number>> | undefined;
+
+    if (typeof minThreshold === "number") {
         return Object.fromEntries(
             Object.keys(TagCategories)
                 .filter((key) => isNaN(Number(key)))
-                .map((key) => [key, MODEL_CATALOG[type].minThreshold])
+                .map((key) => [key, minThreshold])
         ) as ThresholdSettings
-    } else {
-        return {...MODEL_CATALOG[type].minThreshold}
     }
+
+    return {
+        ...(minThreshold ?? {}),
+        year: typeof minThreshold?.year === 'number' ? minThreshold.year : 0,
+    } as ThresholdSettings;
 }
 
 export const useModelsStore = create<ModelsState & ModelsAction>()(
@@ -95,7 +100,7 @@ export const useModelsStore = create<ModelsState & ModelsAction>()(
                 set((state) => ({ downloaded: {...state.downloaded, [key]: false}}));
                 
                 if (selected && selected.type === type && selected.variant === variant) {
-                    set({selected: null});
+                    set((state) => ({selected: null, settings: {...state.settings, [type]: undefined}}));
                 }
             },
             changeDirectory: async (onBeforeMove) => {
@@ -128,7 +133,7 @@ export const useModelsStore = create<ModelsState & ModelsAction>()(
             },
             updateSettings(config) {
                 const type = get().selected?.type;
-                set(state => ({
+                type && set(state => ({
                     settings: {
                         ...state.settings,
                         [type]: {
