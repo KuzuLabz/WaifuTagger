@@ -75,6 +75,38 @@
             }
         }
     },
+    "haruka-tagger": {
+        "name": "Haruka Tagger",
+        "creator": "KaraKaraWitch",
+        "license": "Apache 2.0",
+        "categories": ["artist", "character", "copyright", "general", "rating", "year"],
+        "minThreshold": {
+            "artist": 0.15,
+            "character": 0.25,
+            "copyright": 0.35,
+            "general": 0.35,
+            "rating": 0.50,
+            "year": 0.25
+        },
+        "allowMobile": true,
+        "tags": "https://huggingface.co/Smashinfries/haruka-tagger-onnx-mobile/resolve/main/tags.json",
+        "links": {
+            "mobileUrl": "https://huggingface.co/Smashinfries/haruka-tagger-onnx-mobile",
+            "sourceUrl": "https://huggingface.co/KaraKaraWitch/haruka-tagger"
+        },
+        "variants": {
+            "QUINT8": {
+                "filename": "haruka-tagger-quint8-mobile.onnx",
+                "url": "https://huggingface.co/Smashinfries/haruka-tagger-onnx-mobile/resolve/main/haruka-tagger-quint8-mobile.onnx",
+                "size": "200 MB"
+            },
+            "FP16": {
+                "filename": "haruka-tagger-fp16-mobile.onnx",
+                "url": "https://huggingface.co/Smashinfries/haruka-tagger-onnx-mobile/resolve/main/haruka-tagger-fp16-mobile.onnx",
+                "size": "386 MB"
+            }
+        }
+    },
     "pixai-tagger-v1.0": {
         "name": "PixAI Tagger v1.0",
         "creator": "PixAI Labs",
