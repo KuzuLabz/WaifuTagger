@@ -109,8 +109,20 @@ const ModelDescription = ({type, variant, fontSize, color}:  {type: SupportedMod
     );
 };
 
+const getVariantKeys = (type: SupportedModels) => {
+    const variants = MODEL_CATALOG[type].variants;
+    const variantKeys = (Object.keys(variants) as VariantType[]).filter((v) => {
+        if (MODEL_CATALOG[type].allowMobile || getCurrentPlatform() === 'desktop') {
+            return true;
+        }
+
+        const variant = variants[v];
+        return Boolean(variant && 'allowMobile' in variant && variant.allowMobile);
+    });
+    return variantKeys;
+};
 const ModelItem = ({ type }: {type: SupportedModels}) => {
-    const variantKeys = Object.keys(MODEL_CATALOG[type].variants) as VariantType[];
+    const variantKeys = getVariantKeys(type)
 
     const { colors } = useAppTheme();
     const { t } = useLingui();
@@ -215,6 +227,8 @@ const ModelsPage = () => {
     useModelWatch();
     const modelTypes = Object.keys(MODEL_CATALOG).filter((m) => m !== '$schema') as SupportedModels[];
 
+    const isMobile = getCurrentPlatform() === 'mobile';
+
     const [moveLoading, setMoveLoading] = useState<boolean>(false);
     const [storage, setStorage] = useState<StorageInfo | null>(null);
     
@@ -270,7 +284,7 @@ const ModelsPage = () => {
                             />}
                             {platform === 'desktop' && <ListItem
                                 title={t`Open model directory`}
-                                onPress={() => openModelsDir(modelDir)}
+                                onPress={() => modelDir && openModelsDir(modelDir)}
                                 trailing={<PaperIcon name="folder-open" slot="trailing" />}
                             />}
                             <ListItem
@@ -294,7 +308,7 @@ const ModelsPage = () => {
                         <View style={{gap: 12, paddingHorizontal: 12, paddingBottom: bottom}}>
                             {
                                 modelTypes.map((type, idx) => (
-                                    <ModelItem key={idx} type={type} />
+                                    isMobile && !MODEL_CATALOG[type].allowMobile ? null : <ModelItem key={idx} type={type} />
                                 ))
                             }
                         </View>

@@ -8,7 +8,7 @@ import { getAllModelKeys, getFromModelKey } from './utils';
 
 export const downloadTags = async (type: SupportedModels, directory?: string) => {
     const tagsKey = `${type}:tags`;
-    const tagsFile = new File(directory, "tags.json");
+    const tagsFile = new File(directory as string, "tags.json");
     if (tagsFile.exists) {
         return tagsFile.uri;
     }
@@ -26,11 +26,11 @@ export const downloadTags = async (type: SupportedModels, directory?: string) =>
     return tagsFile.uri;
 };
 
-export const downloadModel = async (type: SupportedModels, variant: VariantType, directory: string, onProgress: (progress: number) => void, onComplete: () => void) => {
+export const downloadModel = async (type: SupportedModels, variant: VariantType, directory: string | null, onProgress: (progress: number) => void, onComplete: () => void) => {
     try {
         const modelKey = `${type}:${variant}` as ModelKey;
         const variantInfo = MODEL_CATALOG[type]['variants'][variant];
-        const rootDir = new Directory(directory);
+        const rootDir = new Directory(directory as string);
         const parentDir = new Directory(rootDir, type);
         parentDir.create({idempotent: true, intermediates: true});
 
@@ -90,9 +90,9 @@ export const syncDownloads = async (onComplete: (taskId: string) => void) => {
     }
 };
 
-export const getDirectoryUri = async (currentDir?: string) => {
+export const getDirectoryUri = async (currentDir?: string | null) => {
     try {
-        const dir = await Directory.pickDirectoryAsync(currentDir);
+        const dir = await Directory.pickDirectoryAsync(currentDir ?? undefined);
         if (dir) {
             const modelsDir = new Directory(dir);
             return (modelsDir.uri);
@@ -111,9 +111,9 @@ export const moveModels = async (currentDir: string | null | undefined, newDir: 
     return '';
 };
 
-export const deleteModel = async (modelKey: ModelKey, modelDir?: string) => {
+export const deleteModel = async (modelKey: ModelKey, modelDir?: string | null) => {
     const {type, variant} = getFromModelKey(modelKey);
-    const baseDir = new Directory(modelDir, type);
+    const baseDir = new Directory(modelDir as string, type);
     try {
         const model = new File(baseDir, MODEL_CATALOG[type].variants[variant].filename);
         if (model.exists) {
@@ -128,13 +128,13 @@ export const deleteModel = async (modelKey: ModelKey, modelDir?: string) => {
 };
 
 export const verifyModels = async (modelsDir: string | undefined, onUpdate: (downloads: Record<ModelKey, boolean>) => void, ) => {
-    const rootDir = new Directory(modelsDir);
+    const rootDir = new Directory(modelsDir as string);
     const modelKeys = getAllModelKeys();
 
     const updates: Record<string, boolean> = {}; 
     modelKeys.forEach((modelKey) => {
         const [type, variant] = modelKey.split(':');
-        const file = new File(rootDir, type, MODEL_CATALOG[type].variants[variant].filename);
+        const file = new File(rootDir, type, MODEL_CATALOG[type as SupportedModels].variants[variant as VariantType].filename);
         updates[modelKey] = file.exists;
     });
 
@@ -142,7 +142,7 @@ export const verifyModels = async (modelsDir: string | undefined, onUpdate: (dow
 };
 
 export const getModelUri = async (modelKey: ModelKey, baseUri?:string) => {
-    const baseDir = new Directory(baseUri);
+    const baseDir = new Directory(baseUri as string);
     const { type, variant } = getFromModelKey(modelKey);
     const tags = new File(baseDir, type, 'tags.json');
     const model = new File(baseDir, type, MODEL_CATALOG[type].variants[variant].filename);

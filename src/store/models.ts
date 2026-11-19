@@ -4,9 +4,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
 import { Directory, Paths } from 'expo-file-system';
 import { deleteModel, downloadModel, getDirectoryUri, moveModels, verifyModels } from '../utils/fs';
-import { INIT_THRESHOLDS, MAX_TAGS, MODEL_CATALOG } from '../constants';
+import { MAX_TAGS, MODEL_CATALOG } from '../constants';
 import { getModelKey } from '../utils/utils';
-import { ModelKey, SupportedModels, TagCategoryType, VariantType } from '../types';
+import { ModelKey, SupportedModels, TagCategories, TagCategoryType, VariantType } from '../types';
 
 export type ThresholdSettings = Record<TagCategoryType, number>;
 
@@ -37,6 +37,23 @@ type ModelsAction = {
 
 const getDefaultDir = () => Platform.OS === 'web' ? null : (new Directory(Paths.document.uri, 'models')).uri;
 
+export const getDefaultThresholds = (type: SupportedModels): ThresholdSettings => {
+    const minThreshold = MODEL_CATALOG[type].minThreshold as number | Partial<Record<TagCategoryType, number>> | undefined;
+
+    if (typeof minThreshold === "number") {
+        return Object.fromEntries(
+            Object.keys(TagCategories)
+                .filter((key) => isNaN(Number(key)))
+                .map((key) => [key, minThreshold])
+        ) as ThresholdSettings
+    }
+
+    return {
+        ...(minThreshold ?? {}),
+        year: typeof minThreshold?.year === 'number' ? minThreshold.year : 0,
+    } as ThresholdSettings;
+}
+
 export const useModelsStore = create<ModelsState & ModelsAction>()(
 	persist(
 		(set, get) => ({
@@ -52,10 +69,7 @@ export const useModelsStore = create<ModelsState & ModelsAction>()(
                 if (!settings[type]) {
                     set((state) => ({...state, settings: {...state.settings, [type]: {
                         maxTags: MAX_TAGS,
-                        thresholds: {
-                            ...INIT_THRESHOLDS, 
-                            general: MODEL_CATALOG[type].minThreshold
-                        }, 
+                        thresholds: getDefaultThresholds(type), 
                     }}}));
                 }
             },
@@ -69,10 +83,7 @@ export const useModelsStore = create<ModelsState & ModelsAction>()(
                             settings: { 
                                 ...state.settings,
                                 [type]: {
-                                    thresholds: {
-                                        ...INIT_THRESHOLDS, 
-                                        general: MODEL_CATALOG[type].minThreshold
-                                    }, 
+                                    thresholds: getDefaultThresholds(type), 
                                     maxTags: MAX_TAGS 
                                 }
                             }
@@ -89,7 +100,7 @@ export const useModelsStore = create<ModelsState & ModelsAction>()(
                 set((state) => ({ downloaded: {...state.downloaded, [key]: false}}));
                 
                 if (selected && selected.type === type && selected.variant === variant) {
-                    set({selected: null});
+                    set((state) => ({selected: null, settings: {...state.settings, [type]: undefined}}));
                 }
             },
             changeDirectory: async (onBeforeMove) => {
@@ -122,7 +133,7 @@ export const useModelsStore = create<ModelsState & ModelsAction>()(
             },
             updateSettings(config) {
                 const type = get().selected?.type;
-                set(state => ({
+                type && set(state => ({
                     settings: {
                         ...state.settings,
                         [type]: {

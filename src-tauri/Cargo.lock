@@ -32,6 +32,7 @@ dependencies = [
  "tauri-plugin-process",
  "tauri-plugin-vnidrop-share",
  "tokio",
+ "urlencoding",
 ]
 
 [[package]]

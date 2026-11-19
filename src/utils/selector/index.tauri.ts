@@ -11,7 +11,12 @@ import { getRemoteImage as getRemoteImageTauri } from '../commands'
 import { getHash } from "../hash";
 
 const getLocalImage = (path: string) => {
-    return invoke<ArrayBuffer>('get_local_image', {path: decodeURIComponent(path)});
+    try {
+        return invoke<ArrayBuffer>('get_local_image', {path: decodeURIComponent(path)});
+    } catch (e) {
+        console.warn(e);
+        sendToast({title: e})
+    }
 };
 
 const getRemoteImage = async (url: string) => {
@@ -141,9 +146,14 @@ export const ImageController: ImageControllerType = {
             }
 
             if (url) {
-                const img = await getRemoteImage(url);
-                const data = await getSelectedImageData(img, url.split('/').at(-1) ?? 'temp');
-                useImageStore.getState().setSelectedImage(data, url);
+                if (url.startsWith('file:')) {
+                    const data = await getImageFromLocalPath(url.trim());
+                    useImageStore.getState().setSelectedImage(data, url);
+                } else {
+                    const img = await getRemoteImage(url);
+                    const data = await getSelectedImageData(img, url.split('/').at(-1) ?? 'temp');
+                    useImageStore.getState().setSelectedImage(data, url);
+                }
                 return url;
             }
 

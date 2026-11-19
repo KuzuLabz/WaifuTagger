@@ -5,8 +5,8 @@ import { useLingui } from "@lingui/react/macro";
 import { BottomSheet } from "../../components/common/bottomsheet";
 import { useSettingsStore } from "../../store/settings";
 import { useState } from "react";
-import { ModelSettings, useModelsStore } from "../../store/models";
-import { INIT_THRESHOLDS, MAX_TAGS, MODEL_CATALOG } from "../../constants";
+import { getDefaultThresholds, ModelSettings, useModelsStore } from "../../store/models";
+import { MAX_TAGS, MODEL_CATALOG } from "../../constants";
 import { ListSlider, NativeSlider } from "../../components/common/slider";
 import { NativeButton } from "../../components/common/button";
 import { weight } from "@expo/ui/jetpack-compose/modifiers";
@@ -50,7 +50,7 @@ const ConfigSheet = () => {
     };
 
     const onReset = () => {
-        setNewConfig({ thresholds: {...INIT_THRESHOLDS, general: MODEL_CATALOG[selected.type].minThreshold}, maxTags: MAX_TAGS });
+        setNewConfig({ thresholds: getDefaultThresholds(selected.type), maxTags: MAX_TAGS });
     };
 
     if (sizeClass !== WindowWidthClass.Compact) {
@@ -87,13 +87,13 @@ const ConfigSheet = () => {
                 </PaperList.Section>
                 <PaperList.Section title={t`Minimum thresholds`}>
                     <List>
-                        {categoryOrder.map((c, idx) => c.enabled && (
+                        {categoryOrder.filter((c) => MODEL_CATALOG[selected.type].categories.includes(c.category)).map((c, idx) => c.enabled && (
                             <ListSlider
                                 key={idx}
                                 hosted
                                 title={cats[c.category]}
                                 value={newConfig.thresholds[c.category]}
-                                min={0.25} max={1}
+                                min={0.01} max={1}
                                 step={0.01}
                                 onValueChange={(val) => updateThreshold(c.category, parseFloat(val.toFixed(2)))}
                             />
@@ -115,12 +115,12 @@ const ConfigSheet = () => {
                         <NativeSlider value={newConfig.maxTags} min={20} max={80} fractionDigits={0} onValueChange={(v) => updateMaxTags(v)} />
                     </FieldGroup.Section>
                     <FieldGroup.Section title={t`Minimum Thresholds`}>
-                        {categoryOrder.map((c, idx) => (
+                        {categoryOrder.filter((c) => MODEL_CATALOG[selected.type].categories.includes(c.category)).map((c, idx) => (
                             <ListSlider
                                 key={idx}
                                 title={cats[c.category]}
                                 value={newConfig.thresholds[c.category]}
-                                min={0.25} max={1}
+                                min={0.01} max={1}
                                 step={0.01}
                                 onValueChange={(val) => updateThreshold(c.category, parseFloat(val.toFixed(2)))}
                             />

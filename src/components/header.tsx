@@ -33,7 +33,7 @@ export const RootHeader = () => {
                                     {Constants.expoConfig?.name}
                                 </Text>
                             </View>
-                            {MODEL_CATALOG[selected?.type] && 
+                            {selected && MODEL_CATALOG[selected?.type] && 
                                 <View style={{ flexDirection: 'row', gap: 6, alignItems: 'center' }}>
                                     <Text variant="labelMedium" style={{ paddingLeft: 12, color: colors.onSurfaceVariant}}>{MODEL_CATALOG[selected?.type].name}</Text>
                                     <Text variant="labelSmall" style={{paddingHorizontal: 6, borderRadius: 6, backgroundColor: colors.surfaceContainer}}>{selected.variant}</Text>
