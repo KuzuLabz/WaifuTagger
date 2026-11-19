@@ -23,6 +23,7 @@ import { useAppTheme } from '../../providers/theme';
 import { WebThemeProvider } from '../../providers/webTheme';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSettingsStore } from '../../store/settings';
+import { getCurrentPlatform } from '../../utils/platform';
 import { UrlInput } from '../../components/input';
 import { useFormattedTags } from '../../hooks/useFormattedText';
 
@@ -46,6 +47,8 @@ const App = () => {
     } = useModel();
     const adjustedTags = useTags(tags);
     const copyTagsToClipboard = useSettingsStore(state => state.copyTagsToClipboard);
+    const clipboardMonitor = useSettingsStore(state => state.clipboardMonitor);
+    const isMonitoring = getCurrentPlatform() === 'desktop' && clipboardMonitor;
     const { text } = useFormattedTags(adjustedTags);
     const lastCopiedText = useRef<string | null>(null);
 
@@ -115,6 +118,8 @@ const App = () => {
                                 <IconButton
                                     icon={"clipboard-outline"}
                                     onPress={() => ImageController.fromPaste()}
+                                    iconColor={isMonitoring ? colors.primary : undefined}
+                                    containerColor={isMonitoring ? colors.primaryContainer : undefined}
                                 />
                             )}
                             {Platform.OS === 'web' && (

@@ -57,3 +57,5 @@ latest.json
 
 # android
 android/
+/\!build.txt
+/AGENTS.md
