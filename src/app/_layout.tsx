@@ -16,6 +16,7 @@ import { ModelKey } from "../types";
 import { DeviceInfoModule } from "react-native-nitro-device-info";
 import { ImageController } from "../utils/selector";
 import { useGlobalDrop } from "../hooks/useGlobalDrop";
+import { useClipboardMonitor } from "../hooks/useClipboardMonitor";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { useThemeStore } from "../store/theme";
 
@@ -31,6 +32,7 @@ const RootLayout = () => {
     const [fontsLoaded] = useFonts({ RobotoFlex_400Regular });
     const [langLoaded, setLangLoaded] = useState(false);
     useGlobalDrop();
+    useClipboardMonitor();
 
     useEffect(() => {
         if (Platform.OS === 'web') {

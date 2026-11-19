@@ -22,6 +22,7 @@ export type SettingsState = TextSettings & {
     extBrowser: boolean;
     tagPlainText: boolean;
     language: string;
+    clipboardMonitor: boolean;
     categoryOrder: { category: keyof ModelSettings['thresholds']; enabled: boolean }[];
 };
 
@@ -54,6 +55,7 @@ const initialState: SettingsState = {
     preferGpu: true,
     executionProvider: 'CPU',
     hideEmptyCategory: false,
+    clipboardMonitor: false,
     categoryOrder: [
         {category: 'artist', enabled: true}, 
         {category: 'character', enabled: true}, 

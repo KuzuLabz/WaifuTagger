@@ -21,7 +21,7 @@ msgstr "{recVariant}이(가) 기기에 권장됩니다."
 msgid "{tagLength} Tags"
 msgstr "태그 {tagLength}개"
 
-#: src/components/content/settings.tsx:280
+#: src/components/content/settings.tsx:286
 msgid "About"
 msgstr "정보"
 
@@ -34,13 +34,9 @@ msgstr "앱 업데이트"
 msgid "Artist"
 msgstr "작가"
 
-#: src/components/content/settings.tsx:248
+#: src/components/content/settings.tsx:250
 msgid "Auto inference"
 msgstr "자동 추론"
-
-#: src/components/content/settings.tsx:249
-msgid "Copy tags to clipboard after inference"
-msgstr "추론이 끝나면 태그를 클립보드에 복사하세요"
 
 #: src/app/(dialogs)/config.tsx:110
 #: src/components/common/alert.android.tsx:38
@@ -48,11 +44,11 @@ msgid "Cancel"
 msgstr "취소"
 
 #: src/app/categories.tsx:39
-#: src/components/content/settings.tsx:241
+#: src/components/content/settings.tsx:243
 msgid "Categories"
 msgstr "카테고리"
 
-#: src/components/content/settings.tsx:240
+#: src/components/content/settings.tsx:242
 msgid "Change model"
 msgstr "모델 변경"
 
@@ -64,7 +60,7 @@ msgstr "모델 디렉터리 변경"
 msgid "Character"
 msgstr "캐릭터"
 
-#: src/components/content/settings.tsx:251
+#: src/components/content/settings.tsx:257
 msgid "Check for updates on startup"
 msgstr "시작 시 업데이트 확인"
 
@@ -76,7 +72,7 @@ msgstr "닫기"
 msgid "Content"
 msgstr "콘텐츠"
 
-#: src/components/content/settings.tsx:269
+#: src/components/content/settings.tsx:275
 msgid "Contrast"
 msgstr "대비"
 
@@ -87,6 +83,10 @@ msgstr "클립보드에 복사되었습니다"
 #: src/components/input.tsx:46
 msgid "Copy"
 msgstr "복사"
+
+#: src/components/content/settings.tsx:251
+msgid "Copy tags to clipboard after inference"
+msgstr "추론이 끝나면 태그를 클립보드에 복사하세요"
 
 #: src/components/tagText.tsx:165
 msgid "Copy text"
@@ -100,7 +100,7 @@ msgstr "저작권 / 원작"
 msgid "Created by KuzuLabz ❤️"
 msgstr "KuzuLabz가 제작함 ❤️"
 
-#: src/components/content/settings.tsx:257
+#: src/components/content/settings.tsx:263
 msgid "Dark mode"
 msgstr "다크 모드"
 
@@ -122,11 +122,11 @@ msgstr "완료"
 msgid "Download"
 msgstr "다운로드"
 
-#: src/utils/selector/index.tauri.ts:115
+#: src/utils/selector/index.tauri.ts:114
 msgid "Error loading URL"
 msgstr "URL을 로드하는 중 오류 발생"
 
-#: src/components/content/settings.tsx:243
+#: src/components/content/settings.tsx:245
 msgid "Execution Provider"
 msgstr "실행 공급자"
 
@@ -134,7 +134,7 @@ msgstr "실행 공급자"
 msgid "Expressive"
 msgstr "익스프레시브"
 
-#: src/components/content/settings.tsx:258
+#: src/components/content/settings.tsx:264
 msgid "Expressive palette"
 msgstr "표현력이 풍부한 팔레트"
 
@@ -168,7 +168,7 @@ msgstr "피델리티"
 msgid "Fruit Salad"
 msgstr "프루트 샐러드"
 
-#: src/components/content/settings.tsx:246
+#: src/components/content/settings.tsx:248
 #: src/hooks/translations/useCategoryTitles.ts:11
 msgid "General"
 msgstr "일반"
@@ -266,9 +266,13 @@ msgstr "모델을 찾을 수 없습니다!"
 msgid "Model Settings"
 msgstr "모델 설정"
 
-#: src/components/content/settings.tsx:238
+#: src/components/content/settings.tsx:240
 msgid "Models"
 msgstr "모델"
+
+#: src/components/content/settings.tsx:253
+msgid "Monitor clipboard for images"
+msgstr ""
 
 #: src/hooks/translations/useThemeVariantNames.ts:12
 msgid "Monochrome"
@@ -291,7 +295,7 @@ msgid "Open model directory"
 msgstr "모델 디렉터리 열기"
 
 #: src/app/licenses.tsx:137
-#: src/components/content/settings.tsx:284
+#: src/components/content/settings.tsx:290
 msgid "Open source licenses"
 msgstr "오픈 소스 라이선스"
 
@@ -299,7 +303,7 @@ msgstr "오픈 소스 라이선스"
 msgid "Paste"
 msgstr "붙여넣기"
 
-#: src/components/imageSelector.tsx:86
+#: src/components/imageSelector.tsx:87
 msgid "Paste Image from Clipboard"
 msgstr "클립보드의 이미지 붙여넣기"
 
@@ -307,11 +311,11 @@ msgstr "클립보드의 이미지 붙여넣기"
 msgid "Please download and select a model to get started!"
 msgstr "시작하려면 모델을 다운로드하고 선택해 주세요!"
 
-#: src/components/content/settings.tsx:242
+#: src/components/content/settings.tsx:244
 msgid "Prefer GPU"
 msgstr "GPU 우선 사용"
 
-#: src/components/content/settings.tsx:285
+#: src/components/content/settings.tsx:291
 msgid "Privacy policy"
 msgstr "개인정보 처리방침"
 
@@ -319,7 +323,7 @@ msgstr "개인정보 처리방침"
 msgid "Probability"
 msgstr "확률"
 
-#: src/utils/selector/index.tauri.ts:124
+#: src/utils/selector/index.tauri.ts:123
 msgid "Processing image..."
 msgstr "이미지 처리 중..."
 
@@ -339,7 +343,7 @@ msgstr "RAM - 앱 사용량"
 msgid "Rank"
 msgstr "순위"
 
-#: src/components/content/settings.tsx:249
+#: src/components/content/settings.tsx:255
 msgid "Rank mode"
 msgstr "순위 모드"
 
@@ -358,7 +362,7 @@ msgstr "낮음"
 #: src/app/(dialogs)/stats.native.tsx:25
 #: src/app/(dialogs)/stats.tsx:47
 #: src/app/(dialogs)/stats.tsx:61
-#: src/components/header.tsx:89
+#: src/components/header.tsx:77
 msgid "Reset"
 msgstr "초기화"
 
@@ -366,7 +370,7 @@ msgstr "초기화"
 msgid "Reset progress?"
 msgstr "진행 상황을 초기화하시겠습니까?"
 
-#: src/app/(app)/index.tsx:125
+#: src/app/(app)/index.tsx:142
 msgid "Run Inference"
 msgstr "추론 실행"
 
@@ -430,11 +434,11 @@ msgstr "태그 개수"
 msgid "Text"
 msgstr "텍스트"
 
-#: src/components/content/settings.tsx:255
+#: src/components/content/settings.tsx:261
 msgid "Theme"
 msgstr "테마"
 
-#: src/components/content/settings.tsx:260
+#: src/components/content/settings.tsx:266
 msgid "Theme mode"
 msgstr "테마 모드"
 
@@ -467,15 +471,15 @@ msgstr "알 수 없음"
 msgid "Update"
 msgstr "업데이트"
 
-#: src/components/content/settings.tsx:283
+#: src/components/content/settings.tsx:289
 msgid "Update history"
 msgstr "업데이트 내역"
 
-#: src/components/imageSelector.tsx:82
+#: src/components/imageSelector.tsx:83
 msgid "Upload Image"
 msgstr "이미지 업로드"
 
-#: src/components/content/settings.tsx:250
+#: src/components/content/settings.tsx:256
 msgid "Use external browser"
 msgstr "외부 브라우저 사용"
 

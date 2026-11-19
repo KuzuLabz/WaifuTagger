@@ -21,7 +21,7 @@ msgstr "Se recomienda {recVariant} para tu dispositivo."
 msgid "{tagLength} Tags"
 msgstr "{tagLength} etiquetas"
 
-#: src/components/content/settings.tsx:280
+#: src/components/content/settings.tsx:286
 msgid "About"
 msgstr "Acerca de"
 
@@ -34,13 +34,9 @@ msgstr "Actualización de la aplicación"
 msgid "Artist"
 msgstr "Artista"
 
-#: src/components/content/settings.tsx:248
+#: src/components/content/settings.tsx:250
 msgid "Auto inference"
 msgstr "Inferencia automática"
-
-#: src/components/content/settings.tsx:249
-msgid "Copy tags to clipboard after inference"
-msgstr "Copiar etiquetas al portapapeles después de la inferencia"
 
 #: src/app/(dialogs)/config.tsx:110
 #: src/components/common/alert.android.tsx:38
@@ -48,11 +44,11 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #: src/app/categories.tsx:39
-#: src/components/content/settings.tsx:241
+#: src/components/content/settings.tsx:243
 msgid "Categories"
 msgstr "Categorías"
 
-#: src/components/content/settings.tsx:240
+#: src/components/content/settings.tsx:242
 msgid "Change model"
 msgstr "Cambiar modelo"
 
@@ -64,7 +60,7 @@ msgstr "Cambiar directorio de modelos"
 msgid "Character"
 msgstr "Personaje"
 
-#: src/components/content/settings.tsx:251
+#: src/components/content/settings.tsx:257
 msgid "Check for updates on startup"
 msgstr "Buscar actualizaciones al iniciar"
 
@@ -76,7 +72,7 @@ msgstr "Cerrar"
 msgid "Content"
 msgstr "Contenido"
 
-#: src/components/content/settings.tsx:269
+#: src/components/content/settings.tsx:275
 msgid "Contrast"
 msgstr "Contraste"
 
@@ -87,6 +83,10 @@ msgstr "Copiado al portapapeles"
 #: src/components/input.tsx:46
 msgid "Copy"
 msgstr "Copiar"
+
+#: src/components/content/settings.tsx:251
+msgid "Copy tags to clipboard after inference"
+msgstr "Copiar etiquetas al portapapeles después de la inferencia"
 
 #: src/components/tagText.tsx:165
 msgid "Copy text"
@@ -100,7 +100,7 @@ msgstr "Derechos de autor"
 msgid "Created by KuzuLabz ❤️"
 msgstr "Creado por KuzuLabz ❤️"
 
-#: src/components/content/settings.tsx:257
+#: src/components/content/settings.tsx:263
 msgid "Dark mode"
 msgstr "Modo oscuro"
 
@@ -122,11 +122,11 @@ msgstr "Listo"
 msgid "Download"
 msgstr "Descargar"
 
-#: src/utils/selector/index.tauri.ts:115
+#: src/utils/selector/index.tauri.ts:114
 msgid "Error loading URL"
 msgstr "Error al cargar la URL"
 
-#: src/components/content/settings.tsx:243
+#: src/components/content/settings.tsx:245
 msgid "Execution Provider"
 msgstr "Proveedor de ejecución"
 
@@ -134,7 +134,7 @@ msgstr "Proveedor de ejecución"
 msgid "Expressive"
 msgstr "Expresivo"
 
-#: src/components/content/settings.tsx:258
+#: src/components/content/settings.tsx:264
 msgid "Expressive palette"
 msgstr "Paleta expresiva"
 
@@ -168,7 +168,7 @@ msgstr "Fidelidad"
 msgid "Fruit Salad"
 msgstr "Ensalada de frutas"
 
-#: src/components/content/settings.tsx:246
+#: src/components/content/settings.tsx:248
 #: src/hooks/translations/useCategoryTitles.ts:11
 msgid "General"
 msgstr "General"
@@ -266,9 +266,13 @@ msgstr "¡Modelo no encontrado!"
 msgid "Model Settings"
 msgstr "Configuración del modelo"
 
-#: src/components/content/settings.tsx:238
+#: src/components/content/settings.tsx:240
 msgid "Models"
 msgstr "Modelos"
+
+#: src/components/content/settings.tsx:253
+msgid "Monitor clipboard for images"
+msgstr ""
 
 #: src/hooks/translations/useThemeVariantNames.ts:12
 msgid "Monochrome"
@@ -291,7 +295,7 @@ msgid "Open model directory"
 msgstr "Abrir directorio de modelos"
 
 #: src/app/licenses.tsx:137
-#: src/components/content/settings.tsx:284
+#: src/components/content/settings.tsx:290
 msgid "Open source licenses"
 msgstr "Licencias de código abierto"
 
@@ -299,7 +303,7 @@ msgstr "Licencias de código abierto"
 msgid "Paste"
 msgstr "Pegar"
 
-#: src/components/imageSelector.tsx:86
+#: src/components/imageSelector.tsx:87
 msgid "Paste Image from Clipboard"
 msgstr "Insertar una imagen desde el portapapeles"
 
@@ -307,11 +311,11 @@ msgstr "Insertar una imagen desde el portapapeles"
 msgid "Please download and select a model to get started!"
 msgstr "¡Descarga y selecciona un modelo para comenzar!"
 
-#: src/components/content/settings.tsx:242
+#: src/components/content/settings.tsx:244
 msgid "Prefer GPU"
 msgstr "Preferir GPU"
 
-#: src/components/content/settings.tsx:285
+#: src/components/content/settings.tsx:291
 msgid "Privacy policy"
 msgstr "Política de privacidad"
 
@@ -319,7 +323,7 @@ msgstr "Política de privacidad"
 msgid "Probability"
 msgstr "Probabilidad"
 
-#: src/utils/selector/index.tauri.ts:124
+#: src/utils/selector/index.tauri.ts:123
 msgid "Processing image..."
 msgstr "Procesando imagen..."
 
@@ -339,7 +343,7 @@ msgstr "RAM - Uso de la aplicación"
 msgid "Rank"
 msgstr "Rango"
 
-#: src/components/content/settings.tsx:249
+#: src/components/content/settings.tsx:255
 msgid "Rank mode"
 msgstr "Modo de clasificación"
 
@@ -358,7 +362,7 @@ msgstr "Reducido"
 #: src/app/(dialogs)/stats.native.tsx:25
 #: src/app/(dialogs)/stats.tsx:47
 #: src/app/(dialogs)/stats.tsx:61
-#: src/components/header.tsx:89
+#: src/components/header.tsx:77
 msgid "Reset"
 msgstr "Restablecer"
 
@@ -366,7 +370,7 @@ msgstr "Restablecer"
 msgid "Reset progress?"
 msgstr "¿Restablecer progreso?"
 
-#: src/app/(app)/index.tsx:125
+#: src/app/(app)/index.tsx:142
 msgid "Run Inference"
 msgstr "Ejecutar inferencia"
 
@@ -430,11 +434,11 @@ msgstr "Cantidad de etiquetas"
 msgid "Text"
 msgstr "Texto"
 
-#: src/components/content/settings.tsx:255
+#: src/components/content/settings.tsx:261
 msgid "Theme"
 msgstr "Tema"
 
-#: src/components/content/settings.tsx:260
+#: src/components/content/settings.tsx:266
 msgid "Theme mode"
 msgstr "Modo del tema"
 
@@ -467,15 +471,15 @@ msgstr "Desconocido"
 msgid "Update"
 msgstr "Actualizar"
 
-#: src/components/content/settings.tsx:283
+#: src/components/content/settings.tsx:289
 msgid "Update history"
 msgstr "Historial de actualizaciones"
 
-#: src/components/imageSelector.tsx:82
+#: src/components/imageSelector.tsx:83
 msgid "Upload Image"
 msgstr "Subir imagen"
 
-#: src/components/content/settings.tsx:250
+#: src/components/content/settings.tsx:256
 msgid "Use external browser"
 msgstr "Usar navegador externo"
 

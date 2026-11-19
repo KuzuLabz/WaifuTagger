@@ -186,6 +186,7 @@ export const SettingsContent = () => {
 
     const autoInfer = useSettingsStore(state => state.autoInfer);
     const copyTagsToClipboard = useSettingsStore(state => state.copyTagsToClipboard);
+    const clipboardMonitor = useSettingsStore(state => state.clipboardMonitor);
     
     const execProvider = useSettingsStore(state => state.executionProvider);
     const extBrowser = useSettingsStore(state => state.extBrowser);
@@ -248,6 +249,9 @@ export const SettingsContent = () => {
                 <List>
                     <ListSwitch title={t`Auto inference`} value={autoInfer} onValueChange={(val) => updateSettings({autoInfer: val})} />
                     <ListSwitch title={t`Copy tags to clipboard after inference`} value={copyTagsToClipboard} onValueChange={(val) => updateSettings({copyTagsToClipboard: val})} />
+                    {getCurrentPlatform() === 'desktop' && (
+                        <ListSwitch title={t`Monitor clipboard for images`} value={clipboardMonitor} onValueChange={(val) => updateSettings({clipboardMonitor: val})} />
+                    )}
                     <ListSwitch title={t`Rank mode`} value={isRankEnabled} onValueChange={(val) => setIsRankEnabled(val)} />
                     <ListSwitch title={t`Use external browser`} value={extBrowser} onValueChange={(val) => updateSettings({extBrowser: val})} />
                     <ListSwitch title={t`Check for updates on startup`} value={autoUpdate} onValueChange={(val) => updateSettings({ autoUpdate: val })} />
