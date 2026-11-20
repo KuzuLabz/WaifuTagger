@@ -119,7 +119,7 @@ const App = () => {
                                     icon={"clipboard-outline"}
                                     onPress={() => ImageController.fromPaste()}
                                     iconColor={isMonitoring ? colors.primary : undefined}
-                                    containerColor={isMonitoring ? colors.primaryContainer : undefined}
+                                    containerColor={isMonitoring ? colors.surfaceContainerLow : undefined}
                                 />
                             )}
                             {Platform.OS === 'web' && (
