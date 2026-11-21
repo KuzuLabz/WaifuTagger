@@ -7,41 +7,40 @@ import { getHash } from "../utils/hash";
 
 const POLL_INTERVAL_MS = 3000;
 
+const checkClipboard = async (currentHash: string) => {
+    try {
+        const image = await readImage();
+        if (!image) {
+            return;
+        }
+        const rgbaBytes = await image.rgba();
+        const buffer = rgbaBytes.buffer.slice(
+            rgbaBytes.byteOffset,
+            rgbaBytes.byteOffset + rgbaBytes.byteLength
+        );
+        const hash = await getHash(buffer);
+        if (!hash || hash === currentHash) {
+            return;
+        }
+        await ImageController.fromPaste();
+    } catch (e) {
+        console.warn(e);
+    }
+};
+
 export const useClipboardMonitor = () => {
     const clipboardMonitor = useSettingsStore(state => state.clipboardMonitor);
+    const currentHash = useImageStore(state => state.currentHash);
 
     useEffect(() => {
-        if (getCurrentPlatform() !== 'desktop' || !clipboardMonitor) {
+        if (platform() === 'linux' || !clipboardMonitor) {
             return;
         }
 
-        let lastHash: string | null = null;
         let interval: ReturnType<typeof setInterval>;
 
-        const checkClipboard = async () => {
-            try {
-                const image = await readImage();
-                if (!image) {
-                    return;
-                }
-                const rgbaBytes = await image.rgba();
-                const buffer = rgbaBytes.buffer.slice(
-                    rgbaBytes.byteOffset,
-                    rgbaBytes.byteOffset + rgbaBytes.byteLength
-                );
-                const hash = await getHash(buffer);
-                if (!hash || hash === lastHash) {
-                    return;
-                }
-                lastHash = hash;
-                await ImageController.fromPaste();
-            } catch (e) {
-                console.warn(e);
-            }
-        };
-
         interval = setInterval(checkClipboard, POLL_INTERVAL_MS);
-        checkClipboard();
+        checkClipboard(currentHash);
         return () => clearInterval(interval);
     }, [clipboardMonitor]);
 };
