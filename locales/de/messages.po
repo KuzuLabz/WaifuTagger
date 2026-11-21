@@ -21,7 +21,7 @@ msgstr "{recVariant} wird für Ihr Gerät empfohlen."
 msgid "{tagLength} Tags"
 msgstr "{tagLength} Tags"
 
-#: src/components/content/settings.tsx:280
+#: src/components/content/settings.tsx:286
 msgid "About"
 msgstr "Über"
 
@@ -34,7 +34,7 @@ msgstr "App-Update"
 msgid "Artist"
 msgstr "Künstler"
 
-#: src/components/content/settings.tsx:248
+#: src/components/content/settings.tsx:250
 msgid "Auto inference"
 msgstr "Automatische Inferenz"
 
@@ -44,11 +44,11 @@ msgid "Cancel"
 msgstr "Abbrechen"
 
 #: src/app/categories.tsx:39
-#: src/components/content/settings.tsx:241
+#: src/components/content/settings.tsx:243
 msgid "Categories"
 msgstr "Kategorien"
 
-#: src/components/content/settings.tsx:240
+#: src/components/content/settings.tsx:242
 msgid "Change model"
 msgstr "Modell wechseln"
 
@@ -60,7 +60,7 @@ msgstr "Modellverzeichnis ändern"
 msgid "Character"
 msgstr "Charakter"
 
-#: src/components/content/settings.tsx:251
+#: src/components/content/settings.tsx:257
 msgid "Check for updates on startup"
 msgstr "Beim Start nach Updates suchen"
 
@@ -72,7 +72,7 @@ msgstr "Schließen"
 msgid "Content"
 msgstr "Inhalt"
 
-#: src/components/content/settings.tsx:269
+#: src/components/content/settings.tsx:275
 msgid "Contrast"
 msgstr "Kontrast"
 
@@ -83,6 +83,10 @@ msgstr "In die Zwischenablage kopiert"
 #: src/components/input.tsx:46
 msgid "Copy"
 msgstr "Kopieren"
+
+#: src/components/content/settings.tsx:251
+msgid "Copy tags to clipboard after inference"
+msgstr "Tags nach der Inferenz in die Zwischenablage kopieren"
 
 #: src/components/tagText.tsx:165
 msgid "Copy text"
@@ -96,7 +100,7 @@ msgstr "Urheberrecht"
 msgid "Created by KuzuLabz ❤️"
 msgstr "Erstellt von KuzuLabz ❤️"
 
-#: src/components/content/settings.tsx:257
+#: src/components/content/settings.tsx:263
 msgid "Dark mode"
 msgstr "Dunkelmodus"
 
@@ -118,11 +122,11 @@ msgstr "Fertig"
 msgid "Download"
 msgstr "Herunterladen"
 
-#: src/utils/selector/index.tauri.ts:115
+#: src/utils/selector/index.tauri.ts:114
 msgid "Error loading URL"
 msgstr "Fehler beim Laden der URL"
 
-#: src/components/content/settings.tsx:243
+#: src/components/content/settings.tsx:245
 msgid "Execution Provider"
 msgstr "Ausführungsanbieter"
 
@@ -130,7 +134,7 @@ msgstr "Ausführungsanbieter"
 msgid "Expressive"
 msgstr "Ausdrucksstark"
 
-#: src/components/content/settings.tsx:258
+#: src/components/content/settings.tsx:264
 msgid "Expressive palette"
 msgstr "Ausdrucksstarke Palette"
 
@@ -164,7 +168,7 @@ msgstr "Treue"
 msgid "Fruit Salad"
 msgstr "Obstsalat"
 
-#: src/components/content/settings.tsx:246
+#: src/components/content/settings.tsx:248
 #: src/hooks/translations/useCategoryTitles.ts:11
 msgid "General"
 msgstr "Allgemein"
@@ -262,9 +266,13 @@ msgstr "Modell nicht gefunden!"
 msgid "Model Settings"
 msgstr "Modell-Einstellungen"
 
-#: src/components/content/settings.tsx:238
+#: src/components/content/settings.tsx:240
 msgid "Models"
 msgstr "Modelle"
+
+#: src/components/content/settings.tsx:253
+msgid "Monitor clipboard for images"
+msgstr ""
 
 #: src/hooks/translations/useThemeVariantNames.ts:12
 msgid "Monochrome"
@@ -287,7 +295,7 @@ msgid "Open model directory"
 msgstr "Modellverzeichnis öffnen"
 
 #: src/app/licenses.tsx:137
-#: src/components/content/settings.tsx:284
+#: src/components/content/settings.tsx:290
 msgid "Open source licenses"
 msgstr "Open-Source-Lizenzen"
 
@@ -295,7 +303,7 @@ msgstr "Open-Source-Lizenzen"
 msgid "Paste"
 msgstr "Einfügen"
 
-#: src/components/imageSelector.tsx:86
+#: src/components/imageSelector.tsx:87
 msgid "Paste Image from Clipboard"
 msgstr "Bild aus der Zwischenablage einfügen"
 
@@ -303,11 +311,11 @@ msgstr "Bild aus der Zwischenablage einfügen"
 msgid "Please download and select a model to get started!"
 msgstr "Bitte laden Sie ein Modell herunter und wählen Sie es aus, um zu beginnen!"
 
-#: src/components/content/settings.tsx:242
+#: src/components/content/settings.tsx:244
 msgid "Prefer GPU"
 msgstr "GPU bevorzugen"
 
-#: src/components/content/settings.tsx:285
+#: src/components/content/settings.tsx:291
 msgid "Privacy policy"
 msgstr "Datenschutzerklärung"
 
@@ -315,7 +323,7 @@ msgstr "Datenschutzerklärung"
 msgid "Probability"
 msgstr "Wahrscheinlichkeit"
 
-#: src/utils/selector/index.tauri.ts:124
+#: src/utils/selector/index.tauri.ts:123
 msgid "Processing image..."
 msgstr "Bild wird verarbeitet..."
 
@@ -335,7 +343,7 @@ msgstr "RAM - App-Nutzung"
 msgid "Rank"
 msgstr "Rang"
 
-#: src/components/content/settings.tsx:249
+#: src/components/content/settings.tsx:255
 msgid "Rank mode"
 msgstr "Rang-Modus"
 
@@ -354,7 +362,7 @@ msgstr "Reduziert"
 #: src/app/(dialogs)/stats.native.tsx:25
 #: src/app/(dialogs)/stats.tsx:47
 #: src/app/(dialogs)/stats.tsx:61
-#: src/components/header.tsx:89
+#: src/components/header.tsx:77
 msgid "Reset"
 msgstr "Zurücksetzen"
 
@@ -362,7 +370,7 @@ msgstr "Zurücksetzen"
 msgid "Reset progress?"
 msgstr "Fortschritt zurücksetzen?"
 
-#: src/app/(app)/index.tsx:125
+#: src/app/(app)/index.tsx:142
 msgid "Run Inference"
 msgstr "Inferenz ausführen"
 
@@ -426,11 +434,11 @@ msgstr "Anzahl der Tags"
 msgid "Text"
 msgstr "Text"
 
-#: src/components/content/settings.tsx:255
+#: src/components/content/settings.tsx:261
 msgid "Theme"
 msgstr "Design"
 
-#: src/components/content/settings.tsx:260
+#: src/components/content/settings.tsx:266
 msgid "Theme mode"
 msgstr "Design-Modus"
 
@@ -463,15 +471,15 @@ msgstr "Unbekannt"
 msgid "Update"
 msgstr "Aktualisieren"
 
-#: src/components/content/settings.tsx:283
+#: src/components/content/settings.tsx:289
 msgid "Update history"
 msgstr "Versionsverlauf"
 
-#: src/components/imageSelector.tsx:82
+#: src/components/imageSelector.tsx:83
 msgid "Upload Image"
 msgstr "Bild hochladen"
 
-#: src/components/content/settings.tsx:250
+#: src/components/content/settings.tsx:256
 msgid "Use external browser"
 msgstr "Externen Browser verwenden"
 

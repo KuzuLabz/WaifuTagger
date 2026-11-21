@@ -21,7 +21,7 @@ msgstr "建議您的裝置使用 {recVariant}。"
 msgid "{tagLength} Tags"
 msgstr "{tagLength} 個標籤"
 
-#: src/components/content/settings.tsx:280
+#: src/components/content/settings.tsx:286
 msgid "About"
 msgstr "關於"
 
@@ -34,7 +34,7 @@ msgstr "應用程式更新"
 msgid "Artist"
 msgstr "繪師"
 
-#: src/components/content/settings.tsx:248
+#: src/components/content/settings.tsx:250
 msgid "Auto inference"
 msgstr "自動推論"
 
@@ -44,11 +44,11 @@ msgid "Cancel"
 msgstr "取消"
 
 #: src/app/categories.tsx:39
-#: src/components/content/settings.tsx:241
+#: src/components/content/settings.tsx:243
 msgid "Categories"
 msgstr "分類"
 
-#: src/components/content/settings.tsx:240
+#: src/components/content/settings.tsx:242
 msgid "Change model"
 msgstr "變更模型"
 
@@ -60,7 +60,7 @@ msgstr "變更模型目錄"
 msgid "Character"
 msgstr "角色"
 
-#: src/components/content/settings.tsx:251
+#: src/components/content/settings.tsx:257
 msgid "Check for updates on startup"
 msgstr "啟動時檢查更新"
 
@@ -72,7 +72,7 @@ msgstr "關閉"
 msgid "Content"
 msgstr "內容"
 
-#: src/components/content/settings.tsx:269
+#: src/components/content/settings.tsx:275
 msgid "Contrast"
 msgstr "對比度"
 
@@ -83,6 +83,10 @@ msgstr "已複製到剪貼簿"
 #: src/components/input.tsx:46
 msgid "Copy"
 msgstr "複製"
+
+#: src/components/content/settings.tsx:251
+msgid "Copy tags to clipboard after inference"
+msgstr "推論完成後將標籤複製到剪貼簿"
 
 #: src/components/tagText.tsx:165
 msgid "Copy text"
@@ -96,7 +100,7 @@ msgstr "作品"
 msgid "Created by KuzuLabz ❤️"
 msgstr "由 KuzuLabz 製作 ❤️"
 
-#: src/components/content/settings.tsx:257
+#: src/components/content/settings.tsx:263
 msgid "Dark mode"
 msgstr "深色模式"
 
@@ -118,11 +122,11 @@ msgstr "完成"
 msgid "Download"
 msgstr "下載"
 
-#: src/utils/selector/index.tauri.ts:115
+#: src/utils/selector/index.tauri.ts:114
 msgid "Error loading URL"
 msgstr "載入 URL 時發生錯誤"
 
-#: src/components/content/settings.tsx:243
+#: src/components/content/settings.tsx:245
 msgid "Execution Provider"
 msgstr "執行提供者"
 
@@ -130,7 +134,7 @@ msgstr "執行提供者"
 msgid "Expressive"
 msgstr "富有表現力"
 
-#: src/components/content/settings.tsx:258
+#: src/components/content/settings.tsx:264
 msgid "Expressive palette"
 msgstr "表現力調色板"
 
@@ -164,7 +168,7 @@ msgstr "高保真"
 msgid "Fruit Salad"
 msgstr "水果沙拉"
 
-#: src/components/content/settings.tsx:246
+#: src/components/content/settings.tsx:248
 #: src/hooks/translations/useCategoryTitles.ts:11
 msgid "General"
 msgstr "一般"
@@ -262,9 +266,13 @@ msgstr "找不到模型！"
 msgid "Model Settings"
 msgstr "模型設定"
 
-#: src/components/content/settings.tsx:238
+#: src/components/content/settings.tsx:240
 msgid "Models"
 msgstr "模型"
+
+#: src/components/content/settings.tsx:253
+msgid "Monitor clipboard for images"
+msgstr ""
 
 #: src/hooks/translations/useThemeVariantNames.ts:12
 msgid "Monochrome"
@@ -287,7 +295,7 @@ msgid "Open model directory"
 msgstr "開啟模型目錄"
 
 #: src/app/licenses.tsx:137
-#: src/components/content/settings.tsx:284
+#: src/components/content/settings.tsx:290
 msgid "Open source licenses"
 msgstr "開源授權"
 
@@ -295,7 +303,7 @@ msgstr "開源授權"
 msgid "Paste"
 msgstr "貼上"
 
-#: src/components/imageSelector.tsx:86
+#: src/components/imageSelector.tsx:87
 msgid "Paste Image from Clipboard"
 msgstr "从剪贴板粘贴图片"
 
@@ -303,11 +311,11 @@ msgstr "从剪贴板粘贴图片"
 msgid "Please download and select a model to get started!"
 msgstr "請下載並選擇一個模型以開始使用！"
 
-#: src/components/content/settings.tsx:242
+#: src/components/content/settings.tsx:244
 msgid "Prefer GPU"
 msgstr "優先使用 GPU"
 
-#: src/components/content/settings.tsx:285
+#: src/components/content/settings.tsx:291
 msgid "Privacy policy"
 msgstr "隱私權政策"
 
@@ -315,7 +323,7 @@ msgstr "隱私權政策"
 msgid "Probability"
 msgstr "機率"
 
-#: src/utils/selector/index.tauri.ts:124
+#: src/utils/selector/index.tauri.ts:123
 msgid "Processing image..."
 msgstr "正在處理圖片..."
 
@@ -335,7 +343,7 @@ msgstr "RAM - 應用程式用量"
 msgid "Rank"
 msgstr "排名"
 
-#: src/components/content/settings.tsx:249
+#: src/components/content/settings.tsx:255
 msgid "Rank mode"
 msgstr "排名模式"
 
@@ -354,7 +362,7 @@ msgstr "低"
 #: src/app/(dialogs)/stats.native.tsx:25
 #: src/app/(dialogs)/stats.tsx:47
 #: src/app/(dialogs)/stats.tsx:61
-#: src/components/header.tsx:89
+#: src/components/header.tsx:77
 msgid "Reset"
 msgstr "重設"
 
@@ -362,7 +370,7 @@ msgstr "重設"
 msgid "Reset progress?"
 msgstr "要重設進度嗎？"
 
-#: src/app/(app)/index.tsx:125
+#: src/app/(app)/index.tsx:142
 msgid "Run Inference"
 msgstr "執行推論"
 
@@ -426,11 +434,11 @@ msgstr "標籤計數"
 msgid "Text"
 msgstr "純文字"
 
-#: src/components/content/settings.tsx:255
+#: src/components/content/settings.tsx:261
 msgid "Theme"
 msgstr "主題"
 
-#: src/components/content/settings.tsx:260
+#: src/components/content/settings.tsx:266
 msgid "Theme mode"
 msgstr "主題模式"
 
@@ -463,15 +471,15 @@ msgstr "未知"
 msgid "Update"
 msgstr "更新"
 
-#: src/components/content/settings.tsx:283
+#: src/components/content/settings.tsx:289
 msgid "Update history"
 msgstr "更新歷史"
 
-#: src/components/imageSelector.tsx:82
+#: src/components/imageSelector.tsx:83
 msgid "Upload Image"
 msgstr "上傳圖片"
 
-#: src/components/content/settings.tsx:250
+#: src/components/content/settings.tsx:256
 msgid "Use external browser"
 msgstr "使用外部瀏覽器"
 

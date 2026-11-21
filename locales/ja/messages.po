@@ -21,7 +21,7 @@ msgstr "{recVariant} はお使いのデバイスに推奨されています。"
 msgid "{tagLength} Tags"
 msgstr "{tagLength} 個のタグ"
 
-#: src/components/content/settings.tsx:280
+#: src/components/content/settings.tsx:286
 msgid "About"
 msgstr "アプリについて"
 
@@ -34,7 +34,7 @@ msgstr "アプリのアップデート"
 msgid "Artist"
 msgstr "絵師"
 
-#: src/components/content/settings.tsx:248
+#: src/components/content/settings.tsx:250
 msgid "Auto inference"
 msgstr "自動推論"
 
@@ -44,11 +44,11 @@ msgid "Cancel"
 msgstr "キャンセル"
 
 #: src/app/categories.tsx:39
-#: src/components/content/settings.tsx:241
+#: src/components/content/settings.tsx:243
 msgid "Categories"
 msgstr "カテゴリ"
 
-#: src/components/content/settings.tsx:240
+#: src/components/content/settings.tsx:242
 msgid "Change model"
 msgstr "モデルを変更"
 
@@ -60,7 +60,7 @@ msgstr "モデルディレクトリを変更"
 msgid "Character"
 msgstr "キャラクター"
 
-#: src/components/content/settings.tsx:251
+#: src/components/content/settings.tsx:257
 msgid "Check for updates on startup"
 msgstr "起動時に更新を確認"
 
@@ -72,7 +72,7 @@ msgstr "閉じる"
 msgid "Content"
 msgstr "コンテンツ"
 
-#: src/components/content/settings.tsx:269
+#: src/components/content/settings.tsx:275
 msgid "Contrast"
 msgstr "コントラスト"
 
@@ -83,6 +83,10 @@ msgstr "クリップボードにコピーしました"
 #: src/components/input.tsx:46
 msgid "Copy"
 msgstr "コピー"
+
+#: src/components/content/settings.tsx:251
+msgid "Copy tags to clipboard after inference"
+msgstr "推論後にタグをクリップボードにコピーする"
 
 #: src/components/tagText.tsx:165
 msgid "Copy text"
@@ -96,7 +100,7 @@ msgstr "元ネタ・作品名"
 msgid "Created by KuzuLabz ❤️"
 msgstr "作成者: KuzuLabz ❤️"
 
-#: src/components/content/settings.tsx:257
+#: src/components/content/settings.tsx:263
 msgid "Dark mode"
 msgstr "ダークモード"
 
@@ -118,11 +122,11 @@ msgstr "完了"
 msgid "Download"
 msgstr "ダウンロード"
 
-#: src/utils/selector/index.tauri.ts:115
+#: src/utils/selector/index.tauri.ts:114
 msgid "Error loading URL"
 msgstr "URLの読み込みエラー"
 
-#: src/components/content/settings.tsx:243
+#: src/components/content/settings.tsx:245
 msgid "Execution Provider"
 msgstr "実行プロバイダー"
 
@@ -130,7 +134,7 @@ msgstr "実行プロバイダー"
 msgid "Expressive"
 msgstr "エクスプレッシブ"
 
-#: src/components/content/settings.tsx:258
+#: src/components/content/settings.tsx:264
 msgid "Expressive palette"
 msgstr "表現豊かなパレット"
 
@@ -164,7 +168,7 @@ msgstr "フィデリティ"
 msgid "Fruit Salad"
 msgstr "フルーツサラダ"
 
-#: src/components/content/settings.tsx:246
+#: src/components/content/settings.tsx:248
 #: src/hooks/translations/useCategoryTitles.ts:11
 msgid "General"
 msgstr "一般"
@@ -262,9 +266,13 @@ msgstr "モデルが見つかりません！"
 msgid "Model Settings"
 msgstr "モデル設定"
 
-#: src/components/content/settings.tsx:238
+#: src/components/content/settings.tsx:240
 msgid "Models"
 msgstr "モデル"
+
+#: src/components/content/settings.tsx:253
+msgid "Monitor clipboard for images"
+msgstr ""
 
 #: src/hooks/translations/useThemeVariantNames.ts:12
 msgid "Monochrome"
@@ -287,7 +295,7 @@ msgid "Open model directory"
 msgstr "モデルディレクトリを開く"
 
 #: src/app/licenses.tsx:137
-#: src/components/content/settings.tsx:284
+#: src/components/content/settings.tsx:290
 msgid "Open source licenses"
 msgstr "オープンソースライセンス"
 
@@ -295,7 +303,7 @@ msgstr "オープンソースライセンス"
 msgid "Paste"
 msgstr "貼り付け"
 
-#: src/components/imageSelector.tsx:86
+#: src/components/imageSelector.tsx:87
 msgid "Paste Image from Clipboard"
 msgstr "クリップボードから画像を貼り付ける"
 
@@ -303,11 +311,11 @@ msgstr "クリップボードから画像を貼り付ける"
 msgid "Please download and select a model to get started!"
 msgstr "開始するにはモデルをダウンロードして選択してください！"
 
-#: src/components/content/settings.tsx:242
+#: src/components/content/settings.tsx:244
 msgid "Prefer GPU"
 msgstr "GPUを優先"
 
-#: src/components/content/settings.tsx:285
+#: src/components/content/settings.tsx:291
 msgid "Privacy policy"
 msgstr "プライバシーポリシー"
 
@@ -315,7 +323,7 @@ msgstr "プライバシーポリシー"
 msgid "Probability"
 msgstr "確率"
 
-#: src/utils/selector/index.tauri.ts:124
+#: src/utils/selector/index.tauri.ts:123
 msgid "Processing image..."
 msgstr "画像を処理中..."
 
@@ -335,7 +343,7 @@ msgstr "RAM - アプリ使用量"
 msgid "Rank"
 msgstr "ランク"
 
-#: src/components/content/settings.tsx:249
+#: src/components/content/settings.tsx:255
 msgid "Rank mode"
 msgstr "ランクモード"
 
@@ -354,7 +362,7 @@ msgstr "低"
 #: src/app/(dialogs)/stats.native.tsx:25
 #: src/app/(dialogs)/stats.tsx:47
 #: src/app/(dialogs)/stats.tsx:61
-#: src/components/header.tsx:89
+#: src/components/header.tsx:77
 msgid "Reset"
 msgstr "リセット"
 
@@ -362,7 +370,7 @@ msgstr "リセット"
 msgid "Reset progress?"
 msgstr "進捗をリセットしますか？"
 
-#: src/app/(app)/index.tsx:125
+#: src/app/(app)/index.tsx:142
 msgid "Run Inference"
 msgstr "推論を実行"
 
@@ -426,11 +434,11 @@ msgstr "タグ数"
 msgid "Text"
 msgstr "テキスト"
 
-#: src/components/content/settings.tsx:255
+#: src/components/content/settings.tsx:261
 msgid "Theme"
 msgstr "テーマ"
 
-#: src/components/content/settings.tsx:260
+#: src/components/content/settings.tsx:266
 msgid "Theme mode"
 msgstr "テーマモード"
 
@@ -463,15 +471,15 @@ msgstr "不明"
 msgid "Update"
 msgstr "アップデート"
 
-#: src/components/content/settings.tsx:283
+#: src/components/content/settings.tsx:289
 msgid "Update history"
 msgstr "更新履歴"
 
-#: src/components/imageSelector.tsx:82
+#: src/components/imageSelector.tsx:83
 msgid "Upload Image"
 msgstr "画像をアップロード"
 
-#: src/components/content/settings.tsx:250
+#: src/components/content/settings.tsx:256
 msgid "Use external browser"
 msgstr "外部ブラウザを使用"
 

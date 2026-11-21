@@ -13,6 +13,7 @@ export type TextSettings = {
 export type SettingsState = TextSettings & {
     isNewUser: boolean;
     autoInfer: boolean;
+    copyTagsToClipboard: boolean;
     autoUpdate: boolean;
     preferGpu: boolean;
     executionProvider: string;
@@ -21,6 +22,7 @@ export type SettingsState = TextSettings & {
     extBrowser: boolean;
     tagPlainText: boolean;
     language: string;
+    clipboardMonitor: boolean;
     categoryOrder: { category: keyof ModelSettings['thresholds']; enabled: boolean }[];
 };
 
@@ -46,12 +48,14 @@ const initialState: SettingsState = {
         year: false,
     },
 	autoInfer: false,
+	copyTagsToClipboard: false,
 	lastOpenedDir: '',
     autoUpdate: true,
     extBrowser: true,
     preferGpu: true,
     executionProvider: 'CPU',
     hideEmptyCategory: false,
+    clipboardMonitor: false,
     categoryOrder: [
         {category: 'artist', enabled: true}, 
         {category: 'character', enabled: true}, 
