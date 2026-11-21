@@ -15,12 +15,14 @@ export type SelectedImage = {
 export type ImageState = {
     image: SelectedImage;
     currentHash: string | null;
+    clipboardHash: string | null;
     isInferDisabled: boolean;
 };
 
 type ImageAction = {
     setSelectedImage: (image: SelectedImage, colorCacheKey?: string) => void;
     setCurrentHash: () => void;
+    setClipboardHash: (hash: string | null) => void;
     clear: () => void;
 };
 
@@ -32,6 +34,7 @@ const initialState: ImageState = {
         hash: null,
     },
     currentHash: null,
+    clipboardHash: null,
     isInferDisabled: true,
 };
 
@@ -51,6 +54,9 @@ export const useImageStore = create<ImageState & ImageAction>(
         },
         setCurrentHash() {
             set({currentHash: get().image.hash});
+        },
+        setClipboardHash(hash) {
+            set({clipboardHash: hash});
         },
         clear() {
             set(initialState)
